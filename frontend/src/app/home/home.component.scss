@@ -1,0 +1,53 @@
+.home {
+  .home_welcome {
+    color: white;
+    background: #dddddd;
+    font-size: 120px;
+    text-align: center;
+    padding: 6.25rem 0;
+
+    span {
+      color: #0e3e52;
+    }
+  }
+
+  .home_about {
+    padding: 7.5rem 0 0 0;
+    .home_about_question {
+      color: rgba(0, 0, 0, 255);
+      text-align: center;
+      font-size: 2.5rem;
+      position: relative;
+      margin: 0 25vw;
+      margin-bottom: 2rem;
+      padding: 0;
+      display: inline-block;
+      span {
+        background: #b6c5cb;
+        position: absolute;
+        display: block;
+        width: 95%;
+        opacity: 0.5;
+        height: 30%;
+        bottom: 0;
+        left: 5%;
+      }
+    }
+
+    .home_about_answer {
+      padding: 0 18.75vw;
+      color: rgba(0, 0, 0, 255);
+    }
+
+    hr{
+      margin: 5.625rem 30vw;
+      border: 0.5px solid black;
+    }
+  }
+
+  .home_vision{
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+  }
+}

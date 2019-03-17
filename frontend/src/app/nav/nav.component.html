@@ -1,0 +1,26 @@
+<div class="nav">
+  <div class="nav-logo">
+    <a routerLink to="/">
+      <img alt="SMP Logo" src="assets/Header/logo.png" />
+    </a>
+  </div>
+  <div class="nav-brand">
+    <a routerLink to="/">
+      <span>
+        STUDENT MENTORSHIP PROGRAM
+      </span>
+      <br/>
+      <span>
+        IIT Roorkee
+      </span>
+    </a>
+  </div>
+
+  <div class="nav-items">
+    <a [routerLink]="['/mentors']" routerLinkActive="nav-items-active">Mentors</a>
+    <a [routerLink]="['/team']" routerLinkActive="nav-items-active">Team</a>
+    <a [routerLink]="['/events']" routerLinkActive="nav-items-active">Events</a>
+    <a [routerLink]="['/faq']" routerLinkActive="nav-items-active">FAQ</a>
+    <a [routerLink]="['/contact']" routerLinkActive="nav-items-active">Contact Us</a>
+  </div>
+</div>

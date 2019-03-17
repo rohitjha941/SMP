@@ -1,0 +1,38 @@
+.nav {
+  display: flex;
+  align-items: center;
+  background: #dddddd;
+  padding: 12px 90px;
+
+  div {
+    display: inline;
+  }
+
+  .nav-logo {
+    img {
+      height:5rem;
+    }
+  }
+
+  .nav-brand {
+    padding-left:1em;
+    span:first-child {
+      font-size: 1.5rem;
+      color: rgba(23, 23, 23, 255);
+    }
+
+    span:last-child{
+       opacity: 0.5;
+       color: black;
+    }
+  }
+
+  .nav-items {
+    margin-left: auto;
+    a{
+      color: rgba(23, 23, 23, 255);
+      font-size: 1.1875rem;
+      padding-left:4.5rem;
+    }
+  }
+}
