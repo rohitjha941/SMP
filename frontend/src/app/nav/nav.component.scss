@@ -1,7 +1,7 @@
 .nav {
   display: flex;
   align-items: center;
-  background: #dddddd;
+  background: white;
   padding: 12px 90px;
 
   div {
@@ -32,7 +32,13 @@
     a{
       color: rgba(23, 23, 23, 255);
       font-size: 1.1875rem;
-      padding-left:4.5rem;
+      padding: 0.8rem  2rem;
+      border-radius: 2px;
     }
   }
+}
+
+
+.nav-items-active{
+  background: #dddddd;
 }

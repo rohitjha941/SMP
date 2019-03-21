@@ -1,0 +1,35 @@
+.footer {
+  background: #0e3e52;
+  padding: 3.5rem 5.875rem;
+  display: grid;
+  grid-template-columns: 20% 15% 15% 50%;
+
+  img {
+    vertical-align: middle;
+  }
+
+  div {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto auto;
+  }
+}
+
+.footer_logo {
+  align-self: center;
+  justify-self: end;
+  float: right;
+}
+
+
+.footer_des {
+  color: white;
+  font-size: 1.0625rem;
+  font-weight: 300;
+}
+
+.footer_title {
+  color: white;
+  font-size: 1.0625rem;
+  font-weight: 500;
+}

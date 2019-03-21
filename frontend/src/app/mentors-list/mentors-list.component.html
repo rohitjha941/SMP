@@ -1,0 +1,18 @@
+<div class="mentors_list">
+    <div *ngIf="dept_mentors" class="team_array">
+        <div *ngFor="let items of dept_mentors" class="team_unit">
+            <span>
+                <img class="photo" [alt]="items.name" [src]="items.photo" />
+                <p class="team_name">{{items.name}}</p>
+                <a [href]="items.facebook">
+                  <img class="fb" src="assets/team/fb.jpeg" alt="" />
+                </a>
+
+                <a [href]="items.linkden">
+                  <img class="ln" src="assets/team/ln.jpeg" alt="" />
+                </a>
+              </span>
+        </div>
+      </div>
+</div>
+

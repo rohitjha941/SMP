@@ -1,0 +1,48 @@
+.team{
+  background: #dddddd;
+  padding: 11.125rem 11rem;
+
+}
+.team_inner{
+  background: white;
+  padding:1.6875rem 10vw;
+}
+
+.team_array{
+  display: grid;
+  grid-template-columns: repeat(4,22%);
+  grid-column-gap: 2vw;
+  grid-row-gap: 2em;
+  padding-top:2.625rem;
+
+
+
+}
+
+
+.team_unit{
+  text-align: center;
+  .photo{
+    width: 70%;
+    border-radius: 50%;
+  }
+  .team_name{
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .team_branch{
+    font-size: 1rem;
+    opacity: 0.5;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+  .fb , .ln{
+    border-radius:50%;
+    height:2rem;
+
+  }
+  .fb{
+    margin-right:5% !important;
+  }
+}

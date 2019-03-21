@@ -1,0 +1,25 @@
+<div *ngIf="faq" class="faq">
+
+
+  <div class="title">
+    <div style="font-size: 2.875rem;">
+    FAQ's
+    <span></span>
+    </div>
+
+  </div>
+
+
+  <div *ngFor="let items of faq" class="faq_unit">
+    <div class="question">
+      {{items.question}}
+    </div>
+
+    <div class="answer">
+      {{items.answer}}
+    </div>
+  </div>
+
+</div>
+
+

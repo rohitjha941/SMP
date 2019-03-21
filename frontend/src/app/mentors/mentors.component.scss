@@ -1,0 +1,38 @@
+.mentors {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  background: #dddddd;
+  padding-bottom: 5rem;
+
+  .mentors_sidebars {
+    padding: 8.3125rem 0 8.3125rem 5.3125rem;
+
+    ul {
+      list-style-type: none;
+    }
+
+    .branches_item {
+
+      width: 100%;
+      display: block;
+      padding: 0.5em 5%;
+      margin-left: -5%;
+
+
+        color: black;
+
+    }
+
+    .branches_array {
+      padding: 2.625rem 0;
+    }
+  }
+}
+
+.dept-items-active {
+  background: white;
+  width: 100%;
+  display: block;
+  padding: 0.5em 5%;
+  margin-left: -5%;
+}

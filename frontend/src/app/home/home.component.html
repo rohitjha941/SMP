@@ -8,15 +8,22 @@
       What is Student Mentorship Program (SMP) ?<span>&nbsp;</span>
     </div>
 
-    <div class= "home_about_answer">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
-
+    <div *ngIf="about_smp" class= "home_about_answer">
+       {{about_smp[0].smp_description}}
     </div>
     <hr />
 
   </div>
 
-  <div class=  "home_vision">
+  <div *ngIf="vision" class=  "home_vision">
+
+    <div *ngFor="let items of vision" class=  "home_vision_unit">
+
+      <img [src] = "items.image" />
+      <p class=  "home_vision_title">{{items.title}}</p>
+      <p class=  "home_vision_description">{{items.description}}</p>
+
+    </div>
 
 
   </div>

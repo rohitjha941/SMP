@@ -26,3 +26,44 @@ tr,
 td {
   font-family: "Roboto", sans-serif !important;
 }
+
+.title{
+
+  text-align: center;
+  div{
+    position: relative;
+    display: inline-block;
+    span{
+      position: absolute;
+      width: 93%;
+      background: #dfa7a9;
+      bottom: 0;
+      left:7%;
+      height:40%;
+      opacity: 0.5;
+    }
+  }
+
+}
+
+
+
+
+@media (min-width:1500px) and (max-width:1800px){
+  html{
+      font-size: 14px;
+  }
+}
+
+
+@media (min-width:1300px) and (max-width:1500px){
+ html{
+     font-size: 12px;
+ }
+}
+
+@media (min-width:900px) and (max-width:1300px){
+ html{
+     font-size: 10.5px;
+ }
+}
