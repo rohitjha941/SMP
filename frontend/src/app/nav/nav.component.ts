@@ -10,6 +10,10 @@ export class NavComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  //  var height = document.getElementById("nav").offsetHeight;
+//    height = height + "px";
+
+    //document.getElementById("body").style.paddingTop = height;
   }
 
 }

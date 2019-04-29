@@ -14,6 +14,7 @@ import { MentorsComponent } from './mentors/mentors.component';
 import { MentorsDetailsComponent } from './mentors-details/mentors-details.component';
 
 import { MentorsListComponent } from './mentors-list/mentors-list.component';
+import { SlidderComponent } from './slidder/slidder.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { MentorsListComponent } from './mentors-list/mentors-list.component';
     MentorsComponent,
     MentorsDetailsComponent,
 
-    MentorsListComponent
+    MentorsListComponent,
+
+    SlidderComponent
   ],
   imports: [
     BrowserModule,
