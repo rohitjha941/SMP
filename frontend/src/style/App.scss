@@ -1,0 +1,24 @@
+@import "./colors.scss";
+
+.logo-container {
+  margin: 5px;
+  display: flex;
+  
+  img.smp-logo {
+    margin: 5px;
+  }
+  div.logo-name-container{
+    margin: 5px;
+    span {
+      &.color-red {
+        color: $red;
+      }
+      &.color-grey {
+        color: $grey;
+      }
+      &.color-blue {
+        color: $blue;
+      }
+    }
+  }
+}
