@@ -123,12 +123,11 @@ class Mentor(models.Model):
         on_delete = models.CASCADE
     )
 
-    interest = models.ForeignKey(
+    interest = models.ManyToManyField(
         Interest,
         related_name = "interest",
-        on_delete = models.CASCADE,
         blank = True,
-        null = True,
+ 
     )
 
     name = models.CharField(
