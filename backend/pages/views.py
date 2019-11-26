@@ -28,10 +28,10 @@ class ContactDetailsView (generics.ListAPIView):
     queryset = ContactDetails.objects.all()
     serializer_class = ContactDetailsSerializer
 
-class MentorView (generics.ListAPIView):
+class MentorView (viewsets.ModelViewSet):
     queryset = Mentor.objects.all()
     serializer_class = MentorSerializer
 
-class InterestView (generics.ListAPIView):
+class InterestView (viewsets.ModelViewSet):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
