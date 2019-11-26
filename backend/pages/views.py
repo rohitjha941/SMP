@@ -31,3 +31,7 @@ class ContactDetailsView (generics.ListAPIView):
 class MentorView (generics.ListAPIView):
     queryset = Mentor.objects.all()
     serializer_class = MentorSerializer
+
+class InterestView (generics.ListAPIView):
+    queryset = Interest.objects.all()
+    serializer_class = InterestSerializer

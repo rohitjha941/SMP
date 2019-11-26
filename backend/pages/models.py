@@ -98,7 +98,22 @@ class branch(models.Model):
     def __str__(self):
         return self.branch_name
 
+class Interest(models.Model):
+    interest_name = models.CharField(
+        max_length = 100,
+        default = ""
+    )
+    def __str__(self):
+        return self.interest_name
 
+
+year_choices = (
+    ("1st Year", "1st Year"),
+    ("2nd Year", "2nd Year"),
+    ("3rd Year", "3rd Year"),
+    ("4th Year", "4th Year"),
+    ("5th Year", "5th Year")
+)
 
 
 class Mentor(models.Model):
@@ -107,6 +122,15 @@ class Mentor(models.Model):
         related_name = "mentors",
         on_delete = models.CASCADE
     )
+
+    interest = models.ForeignKey(
+        Interest,
+        related_name = "interest",
+        on_delete = models.CASCADE,
+        blank = True,
+        null = True,
+    )
+
     name = models.CharField(
         max_length=1000,
         blank=True, 
@@ -126,7 +150,13 @@ class Mentor(models.Model):
         max_length=1000, 
         db_index=True, 
         blank=True
-    ) 
+    )
+    year = models.CharField(
+        max_length = 100,
+        blank = True,
+        null = True,
+        choices = year_choices
+    )
 
     
 

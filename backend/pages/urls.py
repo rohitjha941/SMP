@@ -13,5 +13,6 @@ urlpatterns = [
  path("branch/", branchView.as_view()),
  path("contact_team/", ContactDetailsView.as_view()),
  path("mentors/", MentorView.as_view()),
+ path("interests/", InterestView.as_view()) 
     
 ]
