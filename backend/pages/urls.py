@@ -9,11 +9,11 @@ router.register(r'interests', InterestView)
 router.register(r'mentors', MentorView)
 
 urlpatterns = [
-    path('home_about/',  HomeView.as_view()),
-    path('home_vision/',  HomeVisionView.as_view()),
+    # path('home_about/',  HomeView.as_view()),
+    # path('home_vision/',  HomeVisionView.as_view()),
     path('faq/', faqView.as_view()),
     path("team/", StudentTeamView.as_view()),
     path("branch/", branchView.as_view()),
-    path("contact_team/", ContactDetailsView.as_view()),
+    # path("contact_team/", ContactDetailsView.as_view()),
 ]
 urlpatterns = urlpatterns + router.urls
