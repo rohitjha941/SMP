@@ -7,8 +7,8 @@ from django.conf.urls.static import static
 from django.conf.urls import url
 from rest_framework.documentation import include_docs_urls
 
-API_TITLE = 'API title'
-API_DESCRIPTION = '...'
+API_TITLE = 'SMP API Docs'
+API_DESCRIPTION = ''
 
 
 urlpatterns = [
