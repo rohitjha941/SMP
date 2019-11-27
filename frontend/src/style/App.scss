@@ -2,6 +2,19 @@
 @import "./colors.scss";
 @import "./fonts.scss";
 
+* {
+  font-family: $ibm-plex;
+}
+
+.color-red {
+  color: $red;
+}
+.color-grey {
+  color: $grey;
+}
+.color-blue {
+  color: $blue;
+}
 
 header {
   width: 100%;
@@ -23,24 +36,12 @@ div.logo-container {
   }
   div.logo-name-container{
     margin: 5px;
-    span {
-      &.color-red {
-        color: $red;
-      }
-      &.color-grey {
-        color: $grey;
-      }
-      &.color-blue {
-        color: $blue;
-      }
-    }
   }
 }
 
 div.route-container {
   ul.nav-links {
     display: flex;
-    font-family: $link-font;
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
@@ -53,5 +54,29 @@ div.route-container {
       }
     }
   }
+}
 
+.two-arms {
+  background-color: pink;
+}
+
+div.intro {
+  background-image: linear-gradient($light-blue, $white);
+  color: $grey-darker;
+  div {
+    width: fit-content;
+    margin: auto;
+    &.tagline {
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 36px;
+    }
+    &.description {
+      width: 60%;
+      text-align: center;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 150%;
+    }
+  }
 }
