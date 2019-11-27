@@ -1,14 +1,14 @@
 import React from 'react';
 import './style/App.scss';
-import Header from './components/Header/Header'
+import Header from './components/Header';
+import RouterView from './components/Router/RouterView';
 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Header></Header>
-      </header>
+      <Header />
+      <RouterView />
     </div>
   );
 }

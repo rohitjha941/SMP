@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import logo from '../../assets/images/logo.svg'
+import {Link} from "react-router-dom";
 
 export default class Header extends Component {
     render() {
@@ -13,6 +14,19 @@ export default class Header extends Component {
                             <span className="color-grey">-</span>
                             <span className="color-blue">IITR</span>
                         </div>
+                    </div>
+                    <div className="route-container">
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/about">About</Link>
+                            </li>
+                            <li>
+                                <Link to="/blog">Blog</Link>
+                            </li>
+                        </ul>
                     </div>
                 </header>
             </div>
