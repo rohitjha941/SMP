@@ -1,8 +1,21 @@
 @import "./reset.scss";
 @import "./colors.scss";
+@import "./fonts.scss";
 
-.logo-container {
-  margin: 5px;
+
+header {
+  width: 100%;
+  height: 100%;
+  div.header-items {
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+    padding: 5px;
+  }
+}
+
+div.logo-container {
+  width: fit-content;
   display: flex;
   
   img.smp-logo {
@@ -22,4 +35,23 @@
       }
     }
   }
+}
+
+div.route-container {
+  ul.nav-links {
+    display: flex;
+    font-family: $link-font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    color: $route-color;
+    li{
+      margin: 10px;
+      a.active-route{
+        color: $active-route-color;
+      }
+    }
+  }
+
 }

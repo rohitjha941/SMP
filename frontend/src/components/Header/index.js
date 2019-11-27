@@ -7,8 +7,10 @@ export default class Header extends Component {
         return (
             <div>
                 <header>
-                    <HeaderBranding />
-                    <HeaderRoutes />
+                    <div className="header-items">
+                        <HeaderBranding />
+                        <HeaderRoutes />
+                    </div>
                 </header>
             </div>
         )
