@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce import models as tinymce_models
 
 class Home(models.Model):
 
@@ -205,3 +206,29 @@ class ContactDetails(models.Model):
     )
    
  
+
+
+class Blogs(models.Model):
+    title = models.CharField(
+        default = "",
+        max_length = 100,
+    )
+
+    author = models.CharField(
+        default = "",
+        max_length = 100,
+    )
+
+    created_at = models.DateField(
+        blank=True,
+        null = True
+    )
+
+    thumbnail = models.ImageField(
+         upload_to="blogs/", 
+         max_length=200,
+         null = True,
+         blank= True
+    )
+
+    content = tinymce_models.HTMLField()

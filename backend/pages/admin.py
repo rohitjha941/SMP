@@ -31,3 +31,7 @@ class branchAdmin(ImportExportModelAdmin):
 @register(Mentor)
 class MentorAdmin(ImportExportModelAdmin):
     list_display =  ('branch', 'name', 'photo', 'facebook', 'linkden', )
+
+@register(Blogs)
+class BlogsAdmin(ImportExportModelAdmin):
+    list_display =  ('title', )
