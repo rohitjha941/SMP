@@ -34,4 +34,4 @@ class MentorAdmin(ImportExportModelAdmin):
 
 @register(Blogs)
 class BlogsAdmin(ImportExportModelAdmin):
-    list_display =  ('title', )
+    list_display =  ('title', 'author', 'created_at')

@@ -35,3 +35,8 @@ class MentorView (viewsets.ModelViewSet):
 class InterestView (viewsets.ModelViewSet):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
+
+
+class BlogsView (viewsets.ModelViewSet):
+    queryset = Blogs.objects.all()
+    serializer_class = BlogsSerializer

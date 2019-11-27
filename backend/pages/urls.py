@@ -7,6 +7,7 @@ from .views import *
 router = routers.DefaultRouter()
 router.register(r'interests', InterestView)
 router.register(r'mentors', MentorView)
+router.register(r'blogs', BlogsView)
 
 urlpatterns = [
     # path('home_about/',  HomeView.as_view()),

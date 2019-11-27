@@ -40,3 +40,9 @@ class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
         fields = "__all__"
+
+
+class BlogsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blogs
+        fields = "__all__"
