@@ -20,6 +20,10 @@
 div.router-view {
   position: absolute;
   top: 8%;
+  @media screen and (min-width: $break){
+    position: relative;
+    top: auto;
+  }
 }
 
 div.header-container{
@@ -29,10 +33,16 @@ div.header-container{
   display: flex;
   justify-items: center;
   z-index: 20;
+  @media screen and (min-width: $break){
+    position: relative;
+  }
 
   header {
     width: 95%;
     margin: auto;
+    @media screen and (min-width: $break){
+      width: 90%;
+    }
 
     div.header-items {
       display: flex;
@@ -66,6 +76,9 @@ div.header-container{
         justify-items: center;
         @media screen and (min-width: $break){
           display: flex;
+          position: relative;
+          width: 50%;
+          font-size: 0.7em;
         }
         &.active {
           display: flex;
@@ -107,20 +120,23 @@ div.intro {
   background-image: linear-gradient($light-blue, $white);
   color: $grey-darker;
   padding: 5%;
+  width: 100%;
+  font-size: 1rem;
+  @media screen and(min-width: $break) {
+    font-size: 1.2rem;
+  }
   div {
     width: fit-content;
     margin: auto;
     &.tagline {
-      font-weight: 500;
-      font-size: 28px;
-      line-height: 36px;
-      margin: 15% auto;
+      font-size: 2.2em;
+      line-height: 1.5em;
+      margin: 4rem auto;
     }
     &.description {
-      width: 60%;
+      width: 48%;
       text-align: center;
-      font-weight: 300;
-      font-size: 14px;
+      font-size: 0.9em;
       line-height: 150%;
     }
   }
