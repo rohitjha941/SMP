@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class Intro extends Component {
     render() {
         return (
-            <div className="intro two-arms">
+            <div className="intro">
                 <div className="tagline">
                     <div>
                         <span>We </span>
