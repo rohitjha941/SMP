@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html, body, div#root, div.App {
+    width: 100vw;
+    height: 100vh;
+}
+
 ul {
     list-style-type: none;
 }
