@@ -118,29 +118,71 @@ div.header-container{
     }
   }
 }
-
-div.intro {
-  background-image: linear-gradient($light-blue, $white);
-  color: $grey-darker;
-  padding: 5%;
-  width: 100%;
-  font-size: 1rem;
-  @media screen and(min-width: $break) {
-    font-size: 1.2rem;
-  }
+div.about {
   div {
-    width: fit-content;
     margin: auto;
-    &.tagline {
-      font-size: 2.2em;
-      line-height: 1.5em;
-      margin: 4rem auto;
+  }
+  div.intro {
+    background-image: linear-gradient($light-blue, $white);
+    color: $grey-darker;
+    padding: 5%;
+    width: 100%;
+    font-size: 1rem;
+    @media screen and(min-width: $break) {
+      font-size: 1.2rem;
     }
-    &.description {
-      width: 48%;
-      text-align: center;
-      font-size: 0.9em;
-      line-height: 150%;
+    div {
+      width: fit-content;
+      margin: auto;
+      &.tagline {
+        font-size: 2.2em;
+        line-height: 1.5em;
+        margin: 3.5rem auto;
+      }
+      &.description {
+        width: 75%;
+        text-align: center;
+        font-size: 0.9em;
+        line-height: 150%;
+        @media screen and(min-width: $break){
+          width: 48%;
+        }
+      }
+    }
+  }
+  div.stats {
+    width: 75%;
+    margin: 5% auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    div.item{
+      position: relative;
+      width: 100%;
+      height: 50%;
+      padding: 10%;
+      &:nth-child(2n+1){
+        &:after{
+          position: absolute;
+          top: 50%;
+          left: 0;
+          content: "";
+          width: 100%;
+          height: 50%;
+          border-right: 2px solid $blue-text;
+        }
+      }
+      div{
+        align-content: start;
+        text-align: center;
+        &.count{
+          color: $blue-text;
+          font-size: 1.8em;
+        }
+        &.label{
+          color: $grey-lighter;
+        }
+      }
     }
   }
 }
