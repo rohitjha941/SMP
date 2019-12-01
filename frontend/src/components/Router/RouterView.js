@@ -12,7 +12,7 @@ import Home from '../../routes/Home'
 export default class RouterView extends Component {
     render() {
         return (
-            <div>
+            <div className="router-view">
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
