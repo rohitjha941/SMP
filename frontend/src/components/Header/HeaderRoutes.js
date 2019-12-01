@@ -2,28 +2,47 @@ import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
 export default class HeaderRoutes extends Component {
-    render() {
+    headerRoute(to, display, key) {
         return (
-            <div className="route-container">
+            <li key={key}>
+                <NavLink activeClassName="active-route" to={to} onClick={this.props.hideMenu}>{display}</NavLink>
+            </li>
+        )
+    }
+    render() {
+        const routeData = [
+            {
+                to: "/freshers",
+                display: "Freshers Section",
+            },
+            {
+                to: "/mentors",
+                display: "Mentors",
+            },
+            {
+                to: "/blogs",
+                display: "Blogs",
+            },
+            {
+                to: "/events",
+                display: "Events",
+            },
+            {
+                to: "/queries",
+                display: "Queries",
+            },
+            {
+                to: "/about",
+                display: "About",
+            },
+        ]
+        return (
+            <div className={`route-container ${this.props.showMenu ? "active" : ""}`}>
                 <ul className="nav-links">
-                    <li>
-                        <NavLink activeClassName="active-route" to="/freshers">Freshers Section</NavLink>
-                    </li>
-                    <li>
-                        <NavLink activeClassName="active-route" to="/mentors">Mentors'19</NavLink>
-                    </li>
-                    <li>
-                        <NavLink activeClassName="active-route" to="/blogs">Blogs</NavLink>
-                    </li>
-                    <li>
-                        <NavLink activeClassName="active-route" to="/events">Events</NavLink>
-                    </li>
-                    <li>
-                        <NavLink activeClassName="active-route" to="/queries">Queries</NavLink>
-                    </li>
-                    <li>
-                        <NavLink activeClassName="active-route" to="/about">About</NavLink>
-                    </li>
+                    {routeData.map((value, index) => {
+                        return this.headerRoute(value.to, value.display, index)
+                    }
+                    )}
                 </ul>
             </div>
         )
