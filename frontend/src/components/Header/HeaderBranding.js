@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 export default class HeaderBranding extends Component {
     render() {
         return (
-            <div>
+            <div onClick={this.props.hideMenu}>
                 <Link to="/">
                     <div className="logo-container">
                         <img className="smp-logo" src={logo} alt='smp-logo'></img>
