@@ -77,8 +77,11 @@ div.header-container{
         @media screen and (min-width: $break){
           display: flex;
           position: relative;
-          width: 50%;
+          width: 80%;
           font-size: 0.7em;
+        }
+        @media screen and (min-width: $break-tablet){
+          width: 50%;
         }
         &.active {
           display: flex;
