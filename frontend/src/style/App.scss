@@ -32,12 +32,11 @@ div.header-container{
 
   header {
     width: 95%;
-    height: 80%;
     margin: auto;
 
     div.header-items {
       display: flex;
-      justify-items: center;
+      align-items: center;
       justify-content: space-between;
       padding: 5px;
 
@@ -55,11 +54,11 @@ div.header-container{
       }
 
       div.route-container {
-        position: absolute;
+        position: fixed;
         width: 10px;
         z-index: 10;
-        top: 8vh;
-        height: 90vh;
+        top: 8%;
+        height: 92%;
         left: 0;
         background-color: $white;
         width: 100%;
@@ -77,22 +76,23 @@ div.header-container{
           font-style: normal;
           font-weight: normal;
           font-size: 1.5em;
-          line-height: 1.3em;
           color: $route-color;
           display: flex;
           flex-direction: column;
           width: 100%;
-          height: fit-content;
+          height: 80%;
           margin: auto;
+          justify-content: space-between;
 
           @media screen and (min-width: $break){
             flex-direction: row;
           }
 
           li{
-            margin: 10%;
             text-align: center;
-
+            a {
+              color: $grey-darker;
+            }
             a.active-route{
               color: $active-route-color;
             }
@@ -135,7 +135,7 @@ div.hamburger {
   height: 10px;
   justify-content: space-between;
   div {
-    background-color: $hamburger-color;
+    background-color: $grey;
     height: 2px;
     width:15px;
     transition: all .2s ease-in-out;
