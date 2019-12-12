@@ -1,11 +1,15 @@
+.homeContainer {
+    & > * {
+        margin: 10% auto;
+    }
+}
+
 .titleContainer {
     width: 70%;
-    margin: 10% auto;
 }
 
 .illustration {
     width: 80%;
-    margin: auto;
     img {
         width: 100%;
     }
@@ -13,5 +17,8 @@
 
 .description  {
     width: 80%;
-    margin: 10% auto;
+}
+
+.button {
+    width: fit-content;
 }
