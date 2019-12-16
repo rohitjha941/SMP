@@ -1,0 +1,12 @@
+@import 'style/common.scss';
+
+.button {
+    color: $blue-text;
+    background-color: $white;
+    border: 1.2px solid $blue-text;
+    border-radius: 5px;
+    padding: 3px 10px;
+    &:focus {
+        outline: none;
+    }
+}
