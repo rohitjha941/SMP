@@ -193,6 +193,242 @@ div.about {
   }
 }
 
+//** Queries **//
+div.queries {
+  background-image: linear-gradient($light-blue, $white);
+  color: $grey-darker;
+  padding: 5%;
+  width: 100%;
+  font-size: 1rem;
+
+  div.heading {
+    div {
+      width: fit-content;
+      text-align: center;
+      margin: auto;
+      &.heading {
+        font-size: 50px;
+        line-height: 65px;
+        margin-top: 69px;
+      }
+      &.i-am-a{
+        width: 87px;
+        height:39px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 39px;
+        margin-top: 44px;
+      }
+    }
+    div{
+      margin-top:24px;
+      button.mentor-mentee-button{
+        /* Rectangle 2.1 */
+        width: 144.78px;
+        height: 41.95px;
+        background: #FFFFFF;
+        border: 0.822622px solid #178ABA;
+        box-sizing: border-box;
+        border-radius: 4.11311px;
+        font-family: $ibm-plex;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 31px;
+        text-align: center;
+        color: #178ABA;
+        margin: 0px 9px 0px 9px;
+        &.disabled{
+          background: rgba(0, 0, 0, 0.02);
+          color: rgba(0, 0, 0, 0.4);
+          border: 0.822622px solid rgba(0, 0, 0, 0.1);
+        }
+        &:hover{
+          color: #FFFFFF;
+          background: #178ABA;
+          border:none;
+        }
+      }
+      span.bar{
+        /* | */
+        width: 11px;
+        height: 39px;
+
+        font-family: $ibm-plex;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 39px;
+        /* identical to box height */
+
+        text-align: center;
+
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+  div.questions{
+    text-align: center;
+    div.questions-column-1{
+      display: inline-grid;
+      margin: 61.05px 29px 30px auto; 
+    }
+    div.questions-column-2{
+      display: inline-grid;
+      margin: 61.05px auto 30px 29px;
+    }
+    div div.questions-box{
+      width: 493px;
+      height: 93px;
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      border-radius: 5px;
+      margin-top: 55px;
+      div{
+        span.text-area{
+          display:inline-flex;
+          width: 375px;
+          height: 60px;
+          font-family:$ibm-plex;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 20px;
+          line-height: 150%;
+          /* or 30px */
+          color: rgba(0, 0, 0, 0.8);
+          margin: 17px 55px 16px 20px;
+        }
+        span.down-arrow{
+          /* Path */
+          display: inline-flex;
+          width:24px;
+          height: 24px;
+        }
+      }
+    }
+    button.view-more{
+      /* Rectangle 2.10 */
+      width: 181px;
+      height: 46px;
+      margin: 61px auto 0px auto;
+      display:block;
+      border: 1.5px solid #178ABA;
+      border-radius: 4px;
+      /* View More */
+      font-family: IBM Plex Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 26px;
+      /* identical to box height */
+      color: #178ABA;
+      background: #FFFFFF;
+      &:hover{
+        color: #FFFFFF;
+        background: #178ABA;
+        border:none;
+      }
+    }
+  }
+  div.contact{
+    
+    text-align:center;
+    div.contact-title{
+      display:inline-block;
+        /* Need More Help? Contact Us */
+        width: 622px;
+        height: 39px;
+        font-family: $ibm-plex;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 39px;
+        margin: 144px auto 77px auto;
+        /* identical to box height */
+        color: rgba(0, 0, 0, 0.7);
+    }
+    div.contact-form{
+      form{
+        display:inline-block;
+        label{
+          /* Name */
+          display:block;
+          // width: 171px;
+          height: 26px;
+          float:left;
+          font-family: $ibm-plex;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 26px;
+          /* identical to box height */
+
+          color: rgba(0, 0, 0, 0.8);
+        }
+        input{
+          width: 475px;
+          height: 46px;
+          font-family: $ibm-plex;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 17px;
+          line-height: 22px;
+          color: rgba(0, 0, 0, 0.5);
+          margin: 12px auto 38px auto;
+
+          background: rgba(0, 0, 0, 0.01);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-sizing: border-box;
+          border-radius: 5px;
+        }
+        textarea{
+          /* Rectangle 2.2 */
+          width: 475px;
+          height: 216px;
+          background: rgba(0, 0, 0, 0.01);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-sizing: border-box;
+          border-radius: 5px;
+          resize: none;
+          margin: 12px auto 38px auto;
+
+          font-family: $ibm-plex;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 17px;
+          line-height: 22px;
+          /* identical to box height */
+          color: rgba(0, 0, 0, 0.5);
+
+        }
+        button{
+          /* Rectangle 4 */
+          width: 189px;
+          height: 42px;
+          background: #178ABA;
+          border-radius: 5px;
+          border:none;
+          /* Get in touch */
+          font-family: $ibm-plex;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 26px;
+          /* identical to box height */
+          color: #FFFFFF;
+          &:hover{
+            color: #178ABA;
+            background: #FFFFFF;
+            border: 1.5px solid #178ABA;
+          }
+        }
+      }
+    } 
+  }
+}
+
 div.hamburger {
   display: flex;
   @media screen and (min-width: $break){
