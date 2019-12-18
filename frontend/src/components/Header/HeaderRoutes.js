@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+
+import styles from './Header.module.scss';
 
 export default class HeaderRoutes extends Component {
     headerRoute(to, display, key) {
@@ -36,9 +38,10 @@ export default class HeaderRoutes extends Component {
                 display: "About",
             },
         ]
+        const routeViewStyle = `${styles.routeContainer} ${this.props.showMenu ? styles.active : ""}`;
         return (
-            <div className={`route-container ${this.props.showMenu ? "active" : ""}`}>
-                <ul className="nav-links">
+            <div className={routeViewStyle}>
+                <ul className={styles.navLinks}>
                     {routeData.map((value, index) => {
                         return this.headerRoute(value.to, value.display, index)
                     }
