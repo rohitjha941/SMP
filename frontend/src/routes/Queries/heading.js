@@ -36,7 +36,7 @@ export default class Intro extends Component {
                     <p>I am a</p>
                 </div>
                 <div>
-                    <button onClick={() => this.toggleBtn('mentor')} className={this.state.classMentor}>Mentor</button><span className='bar'>|</span> <button className={this.state.classMentee} onClick={() => this.toggleBtn('mentee')}>Mentee</button>
+                    <button onClick={() => this.toggleBtn('mentor')} className={this.state.classMentor}>Mentor</button><span className='bar'></span> <button className={this.state.classMentee} onClick={() => this.toggleBtn('mentee')}>Mentee</button>
                 </div>
             </div>
         )

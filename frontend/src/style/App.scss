@@ -32,14 +32,16 @@ div.router-view {
 }
 
 div.header-container{
-  position: absolute;
+  position: fixed;
+  background: #FFFFFF;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);;
   width: 100%;
   height: 8%;
   display: flex;
   justify-items: center;
   z-index: 20;
   @media screen and (min-width: $break){
-    position: relative;
+    position: fixed;
   }
 
   header {
@@ -198,35 +200,46 @@ div.queries {
   background-image: linear-gradient($light-blue, $white);
   color: $grey-darker;
   padding: 5%;
-  width: 100%;
+  width: 100vw;
   font-size: 1rem;
 
   div.heading {
     div {
-      width: fit-content;
+      width: 100%;
       text-align: center;
       margin: auto;
       &.heading {
-        font-size: 50px;
-        line-height: 65px;
-        margin-top: 69px;
+        font-weight: 500;
+        font-size: 3.125rem;
+        line-height: 4.0625rem;
+        margin-top: 4.3125rem;
+        @media screen and (max-width: $break){
+          font-size: 1.75rem;
+          line-height: 2.25rem;
+          margin-top: 1.3125rem;
+        }
       }
       &.i-am-a{
-        width: 87px;
-        height:39px;
+        width: 100%;
+        height:2.4375rem;
         text-align: center;
-        font-size: 30px;
+        font-size: 1.875rem;
         font-weight: 500;
-        line-height: 39px;
-        margin-top: 44px;
+        line-height: 2.4375rem;
+        margin-top: 2.75rem;
+        @media screen and (max-width: $break){
+          font-size: 1rem;
+          line-height: 1.3125rem;
+          margin-top: 2.875rem;
+        }
       }
     }
     div{
       margin-top:24px;
       button.mentor-mentee-button{
         /* Rectangle 2.1 */
-        width: 144.78px;
-        height: 41.95px;
+        width: 9.04875rem;
+        height: 2.621875rem;
         background: #FFFFFF;
         border: 0.822622px solid #178ABA;
         box-sizing: border-box;
@@ -234,11 +247,11 @@ div.queries {
         font-family: $ibm-plex;
         font-style: normal;
         font-weight: normal;
-        font-size: 24px;
-        line-height: 31px;
+        font-size: 1.5rem;
+        line-height: 1.9375rem;
         text-align: center;
         color: #178ABA;
-        margin: 0px 9px 0px 9px;
+        margin: 0px 0.5625rem 0px 0.5625rem;
         &.disabled{
           background: rgba(0, 0, 0, 0.02);
           color: rgba(0, 0, 0, 0.4);
@@ -249,70 +262,109 @@ div.queries {
           background: #178ABA;
           border:none;
         }
+        @media screen and (max-width: $break){
+          width: 5.5625rem;
+          height: 1.8125rem;
+          border-width: 1px;
+          border-radius: 2px;
+
+          font-size: 1rem;
+          line-height: 1.3125rem;
+        }
       }
       span.bar{
-        /* | */
-        width: 11px;
-        height: 39px;
+        width: 1.9375rem;
+        height: 1.5px;
+        // background:rgba(0, 0, 0, 0.6);
+        border: 1.5px solid rgba(0, 0, 0, 0.6);
+        transform: rotate(90deg);
 
-        font-family: $ibm-plex;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 30px;
-        line-height: 39px;
-        /* identical to box height */
+        @media screen and (max-width: $break){
+          width: 1.625rem;
+          height: 0px;
 
-        text-align: center;
-
-        color: rgba(0, 0, 0, 0.6);
+          border: 0.5px solid rgba(0, 0, 0, 0.1);
+        }
       }
     }
   }
   div.questions{
     text-align: center;
-    div.questions-column-1{
-      display: inline-grid;
-      margin: 61.05px 29px 30px auto; 
-    }
-    div.questions-column-2{
-      display: inline-grid;
-      margin: 61.05px auto 30px 29px;
+    @media screen and (min-width: $break){
+      div.questions-column-1{
+        display: inline-grid;
+        margin: 3.815625rem 1.8125rem 1.875rem auto; 
+      }
+      div.questions-column-2{
+        display: inline-grid;
+        margin: 3.815625rem auto 1.875rem 1.8125rem;
+      }
     }
     div div.questions-box{
-      width: 493px;
-      height: 93px;
+      width: 30.8125rem;
+      height: 5.8125rem;
       background: #FFFFFF;
       border: 1px solid rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
       border-radius: 5px;
-      margin-top: 55px;
+      margin-top: 3.4375rem;
       div{
         span.text-area{
           display:inline-flex;
-          width: 375px;
-          height: 60px;
+          width: 23.4375rem;
+          height: 3.75rem;
           font-family:$ibm-plex;
           font-style: normal;
           font-weight: normal;
-          font-size: 20px;
+          font-size: 1.25rem;
           line-height: 150%;
           /* or 30px */
           color: rgba(0, 0, 0, 0.8);
-          margin: 17px 55px 16px 20px;
+          margin: 1.0625rem 3.4375rem 1rem 1.25rem;
         }
         span.down-arrow{
           /* Path */
           display: inline-flex;
-          width:24px;
-          height: 24px;
+          width:1.5rem;
+          height: 1.5rem;
+          vertical-align: center;
+        }
+      }
+      @media screen and (max-width: $break){
+        /* Rectangle 2 */
+        left: -0.74%;
+        right: -0.37%;
+        top: 0%;
+        bottom: 0%;
+        margin: 0.9375rem auto 0px auto;
+        border: 0.548387px solid rgba(0, 0, 0, 0.1);
+        border-radius: 2.74194px;
+        width: 17.0625rem;
+        height: fit-content;
+        div{
+          span.text-area{
+            width: 13.856875rem;
+            height: fit-content;
+            margin: 0.3125rem 0.624375rem 0.375rem 0.811875rem;
+            font-size: 0.875rem;
+            line-height: 140%;
+            /* or 20px */
+            color: rgba(0, 0, 0, 0.8);
+          }
+          span.down-arrow{
+            /* Path */
+            display: inline-flex;
+            width:1.5rem;
+            height: 1.5rem;
+          }
         }
       }
     }
     button.view-more{
       /* Rectangle 2.10 */
-      width: 181px;
-      height: 46px;
-      margin: 61px auto 0px auto;
+      width: 11.3125rem;
+      height: 2.875rem;
+      margin: 3.8125rem auto 0px auto;
       display:block;
       border: 1.5px solid #178ABA;
       border-radius: 4px;
@@ -320,8 +372,8 @@ div.queries {
       font-family: IBM Plex Sans;
       font-style: normal;
       font-weight: 500;
-      font-size: 20px;
-      line-height: 26px;
+      font-size: 1.25rem;
+      line-height: 1.625rem;
       /* identical to box height */
       color: #178ABA;
       background: #FFFFFF;
@@ -329,6 +381,16 @@ div.queries {
         color: #FFFFFF;
         background: #178ABA;
         border:none;
+      }
+      @media screen and (max-width : $break){
+        /* Rectangle 2.2 */
+        width: 6.25rem;
+        height: 1.75rem;
+        margin-top: 0.9375rem;
+        border-width : 0.850355px;
+        border-radius: 2.26761px;
+        font-size: 0.75rem;
+        line-height: 1rem;
       }
     }
   }
@@ -338,16 +400,23 @@ div.queries {
     div.contact-title{
       display:inline-block;
         /* Need More Help? Contact Us */
-        width: 622px;
-        height: 39px;
+        width: 38.875rem;
+        height: 2.4375rem;
         font-family: $ibm-plex;
         font-style: normal;
         font-weight: 500;
-        font-size: 30px;
-        line-height: 39px;
-        margin: 144px auto 77px auto;
+        font-size: 1.875rem;
+        line-height: 2.4375rem;
+        margin: 9rem auto 4.8125rem auto;
         /* identical to box height */
         color: rgba(0, 0, 0, 0.7);
+        @media screen and (max-width: $break){
+          font-size: 1rem;
+          line-height: 1.3125rem;
+          width: 13.0625rem;
+          height: 1.3125rem;
+          margin: 4.5rem auto 1.855625rem auto; 
+        }
     }
     div.contact-form{
       form{
@@ -355,58 +424,79 @@ div.queries {
         label{
           /* Name */
           display:block;
-          // width: 171px;
-          height: 26px;
+          width: fit-content;
+          height: 1.625rem;
           float:left;
           font-family: $ibm-plex;
           font-style: normal;
           font-weight: 500;
-          font-size: 20px;
-          line-height: 26px;
+          font-size: 1.25rem;
+          line-height: 1.625rem;
           /* identical to box height */
 
           color: rgba(0, 0, 0, 0.8);
+          @media screen and (max-width: $break){
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+            height: 1.125rem;
+          }
         }
         input{
-          width: 475px;
-          height: 46px;
+          width: 29.6875rem;
+          height: 2.875rem;
           font-family: $ibm-plex;
           font-style: normal;
           font-weight: normal;
-          font-size: 17px;
-          line-height: 22px;
+          font-size: 1.0625rem;
+          line-height: 1.375rem;
           color: rgba(0, 0, 0, 0.5);
-          margin: 12px auto 38px auto;
+          margin: 0.75rem auto 2.375rem auto;
 
           background: rgba(0, 0, 0, 0.01);
           border: 1px solid rgba(0, 0, 0, 0.1);
           box-sizing: border-box;
           border-radius: 5px;
+          @media screen and (max-width: $break){
+            width: 17.0625rem;
+            height: 2rem;
+            margin: 0px 0px 0.9375rem auto;
+            // float: left;
+            font-size: 0.75rem;
+            line-height: 1rem;
+          }
         }
         textarea{
           /* Rectangle 2.2 */
-          width: 475px;
-          height: 216px;
+          width: 29.6875rem;
+          height: 13.5rem;
           background: rgba(0, 0, 0, 0.01);
           border: 1px solid rgba(0, 0, 0, 0.1);
           box-sizing: border-box;
           border-radius: 5px;
           resize: none;
-          margin: 12px auto 38px auto;
+          margin: 0.75rem auto 2.375rem auto;
 
           font-family: $ibm-plex;
           font-style: normal;
           font-weight: normal;
-          font-size: 17px;
-          line-height: 22px;
+          font-size: 1.0625rem;
+          line-height: 1.375rem;
           /* identical to box height */
           color: rgba(0, 0, 0, 0.5);
+          @media screen and (max-width: $break){
+            width: 17.054375rem;
+            height: 7.755rem;
+            margin: 0px 0px 0.9375rem auto;
+            // float: left;
+            font-size: 0.75rem;
+            line-height: 1rem;
+          }
 
         }
         button{
           /* Rectangle 4 */
-          width: 189px;
-          height: 42px;
+          width: 11.8125rem;
+          height: 2.625rem;
           background: #178ABA;
           border-radius: 5px;
           border:none;
@@ -414,14 +504,20 @@ div.queries {
           font-family: $ibm-plex;
           font-style: normal;
           font-weight: 500;
-          font-size: 20px;
-          line-height: 26px;
+          font-size: 1.25rem;
+          line-height: 1.625rem;
           /* identical to box height */
           color: #FFFFFF;
           &:hover{
             color: #178ABA;
             background: #FFFFFF;
             border: 1.5px solid #178ABA;
+          }
+          @media screen and (max-width: $break){
+            font-size: 0.75rem;
+            line-height: 1rem;
+            width: 7.5rem;
+            height: 1.75rem;
           }
         }
       }
