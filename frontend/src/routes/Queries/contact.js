@@ -11,10 +11,6 @@ class Contact extends Component {
     onChange = (e) => {
         const name = e.target.name
         let value = e.target.value
-        if (name === 'contact' && value) {
-            value = value.trim()
-            value = value.substring(0, 10)
-        }
         this.setState({ [name]: value })
     }
     onSubmit = () => {
@@ -66,7 +62,7 @@ class Contact extends Component {
                         <label htmlFor='helpBox'>How can we help?</label>
                         <br/>
                         <textarea 
-                            name='helpBox' 
+                            name='query' 
                             placeholder='Hello I am John.'
                             id='inputQuery'
                             value={query}
