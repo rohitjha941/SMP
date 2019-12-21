@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import downArrow from './src/down-arrow.svg'
-import downArrow2 from './src/down-arrow-2.svg'
+import downArrow2 from '../../assets/images/down-arrow-2.svg'
 class QuestionsBox extends Component {
     state = {  }
     render() { 
