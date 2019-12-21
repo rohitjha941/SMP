@@ -1,0 +1,48 @@
+@import '../../style/common.scss';
+
+.container {
+    text-align:left;
+    width: 16.875rem;
+}
+
+.heading {
+    font-weight: bold;
+    font-size: 0.9375rem;
+    line-height: 1.1875rem;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 1.031825rem;
+}
+
+.metadata{
+    width: fit-content;
+    height: 1em;
+    
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-top: 0.4375rem;
+    /* identical to box height */
+    
+    
+    color: rgba(0, 0, 0, 0.8);
+    @media screen and (min-width:$break){
+        font-weight: 300;
+        font-size: 0.9375rem;
+        line-height: 1.1875rem;
+    }
+}
+
+.text {
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.75rem;
+    line-height: 150%;
+    margin-top: 0.4375rem;
+    /* or 18px */
+
+
+    color: rgba(0, 0, 0, 0.54);
+}

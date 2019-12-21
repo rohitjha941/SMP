@@ -16,7 +16,7 @@ export default class RouterView extends Component {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
-                    <Route path="/blog" component={Blog} />
+                    <Route path="/blogs" component={Blog} />
                     <Redirect to="/" />
                 </Switch>
             </div>

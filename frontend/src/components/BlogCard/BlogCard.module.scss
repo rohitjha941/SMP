@@ -1,0 +1,12 @@
+@import '../../style/common.scss';
+
+.container {
+    width: 17.125rem;
+}
+
+.blogImage{
+    width: 16.875rem;
+    display:inline-block;
+    border-radius: 5px;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
