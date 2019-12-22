@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import QuestionsBox from './QuestionsBox'
+import QuestionsBox from './QuestionsBox';
+import Button from '../../components/Button';
 
 var questionText1 = [
     'How much time should we devote to the mentorship program?',
@@ -22,7 +23,7 @@ class Questions extends Component {
         <div className='questions'>
             <div className='questions-column-1'>{questionText1.map((data,i) => <QuestionsBox key={i} text={data}/>)}</div>
             <div className='questions-column-2'>{questionText2.map((data,i) => <QuestionsBox key={i+4} text={data}/>)}</div>
-            <button className='view-more'>View More</button>
+            <Button className='view-more' text='View More' type='outline' />
         </div>
         );
     }

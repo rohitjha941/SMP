@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
-// import downArrow from './src/down-arrow.svg'
+import downArrow from '../../assets/images/down-arrow.svg'
 import downArrow2 from '../../assets/images/down-arrow-2.svg'
+
+let image;
+
+if(window.innerWidth<600){
+    image = downArrow2; 
+}else{
+    image = downArrow;
+}
 class QuestionsBox extends Component {
     state = {  }
+
     render() { 
         return ( 
             <div className='questions-box'>
-    <div><span className='text-area'>{this.props.text}</span><span className='down-arrow'><img src={downArrow2} alt='drop-down'/></span></div>
+                <div>
+                    <div className='text-area'>
+                        {this.props.text}
+                    </div>
+                    <div className='down-arrow'>
+                        <img src={image} alt='drop-down'/>
+                    </div>
+                </div>
             </div>
          );
     }

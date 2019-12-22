@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '../../components/Button';
 class Contact extends Component {
     constructor() {
         super()
@@ -73,7 +74,7 @@ class Contact extends Component {
                             spellCheck="off"
                             required />
                         <br/>
-                        <button type='submit' onClick={this.onSubmit()}>Get In Touch</button>
+                        <Button onClick={this.onSubmit()} text='Get In Touch' />
                     </form>
                 </div>
             </div>

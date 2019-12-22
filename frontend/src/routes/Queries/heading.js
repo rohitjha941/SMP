@@ -1,24 +1,29 @@
 import React, {Component} from 'react';
+import Button from '../../components/Button'
 
 export default class Intro extends Component {
     constructor(){
         super();
         this.state={
             activeTab: 'mentor',
-            classMentor: 'mentor-mentee-button',
-            classMentee: 'mentor-mentee-button disabled'
+            mentorActiveStatus : 'outline',
+            menteeActiveStatus : 'disabled',
         }
     }
 
     toggleBtn(value){
         if(this.state.activeTab !== value && value==='mentor'){
-            this.setState({activeTab:value,
-                            classMentee:'mentor-mentee-button disabled',
-                            classMentor:'mentor-mentee-button'})
+            this.setState({
+                activeTab:value,
+                menteeActiveStatus:'disabled',
+                mentorActiveStatus:'outline'
+            })
         }else if(this.state.activeTab !== value && value==='mentee'){
-            this.setState({activeTab:value,
-                classMentor:'mentor-mentee-button disabled',
-                classMentee:'mentor-mentee-button'})
+            this.setState({
+                activeTab:value,
+                menteeActiveStatus:'outline',
+                mentorActiveStatus:'disabled'
+            })
         }
     }
 
@@ -36,7 +41,9 @@ export default class Intro extends Component {
                     <p>I am a</p>
                 </div>
                 <div>
-                    <button onClick={() => this.toggleBtn('mentor')} className={this.state.classMentor}>Mentor</button><span className='bar'></span> <button className={this.state.classMentee} onClick={() => this.toggleBtn('mentee')}>Mentee</button>
+                    <Button onClick={() => this.toggleBtn('mentor')} className={'mentor-mentee-button'} text='Mentor' type={this.state.mentorActiveStatus} />
+                    <span className='bar'></span>
+                    <Button onClick={() => this.toggleBtn('mentee')} className={'mentor-mentee-button'} type={this.state.menteeActiveStatus} text='Mentee' />
                 </div>
             </div>
         )
