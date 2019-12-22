@@ -34,7 +34,7 @@ div.router-view {
 div.header-container{
   position: fixed;
   background: $white;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);;
+  border-bottom: 1px solid $grey-level-0_05;
   width: 100%;
   height: 8%;
   display: flex;
@@ -114,7 +114,7 @@ div.header-container{
           li{
             text-align: center;
             a {
-              color: $grey-darker;
+              color: $grey-level-0_7;
             }
             a.active-route{
               color: $active-route-color;
@@ -131,7 +131,7 @@ div.about {
   }
   div.intro {
     background-image: linear-gradient($light-blue, $white);
-    color: $grey-darker;
+    color: $grey-level-0_7;
     padding: 5%;
     width: 100%;
     font-size: 1rem;
@@ -188,7 +188,7 @@ div.about {
           font-size: 1.8em;
         }
         &.label{
-          color: $grey-lighter;
+          color: $grey-level-0_4;
         }
       }
     }
@@ -198,7 +198,7 @@ div.about {
 //** Queries **//
 div.queries {
   background-image: linear-gradient($light-blue, $white);
-  color: $grey-darker;
+  color: $grey-level-0_7;
   padding: 5%;
   width: 100vw;
   font-size: 1rem;
@@ -251,15 +251,14 @@ div.queries {
       span.bar{
         width: 1.9375rem;
         height: 1.5px;
-        // background:rgba(0, 0, 0, 0.6);
-        border: 1.5px solid rgba(0, 0, 0, 0.6);
+        border: 1.5px solid $grey-level-0_6;
         transform: rotate(90deg);
 
         @media screen and (max-width: $break){
           width: 1.625rem;
           height: 0px;
 
-          border: 0.5px solid rgba(0, 0, 0, 0.1);
+          border: 0.5px solid $grey-level-0_1;
         }
       }
     }
@@ -280,7 +279,7 @@ div.queries {
       width: 30.8125rem;
       height: 5.8125rem;
       background: $white;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      border: 1px solid $grey-level-0_1;
       box-sizing: border-box;
       border-radius: 5px;
       margin-top: 3.4375rem;
@@ -295,7 +294,7 @@ div.queries {
           line-height: 150%;
           float:left;
           /* or 30px */
-          color: rgba(0, 0, 0, 0.8);
+          color: $grey-level-0_8;
           margin: 1.0625rem 3.4375rem 1rem 1.25rem;
           @media screen and (max-width: $break){
             width: 13.856875rem;
@@ -303,8 +302,6 @@ div.queries {
             margin: 0.3125rem 0.624375rem 0.375rem 0.811875rem;
             font-size: 0.875rem;
             line-height: 140%;
-            /* or 20px */
-            color: rgba(0, 0, 0, 0.8);
           }
         }
         div.down-arrow{
@@ -328,7 +325,7 @@ div.queries {
       @media screen and (max-width: $break){
         /* Rectangle 2 */
         margin: 0.9375rem auto 0px auto;
-        border: 0.548387px solid rgba(0, 0, 0, 0.1);
+        border: 0.548387px solid $grey-level-0_1;
         border-radius: 2.74194px;
         width: 17.0625rem;
         height: 4.4375rem;
@@ -357,7 +354,7 @@ div.queries {
         line-height: 2.4375rem;
         margin: 9rem auto 4.8125rem auto;
         /* identical to box height */
-        color: rgba(0, 0, 0, 0.7);
+        color: $grey-level-0_7;
         @media screen and (max-width: $break){
           font-size: 1rem;
           line-height: 1.3125rem;
@@ -382,7 +379,7 @@ div.queries {
           line-height: 1.625rem;
           /* identical to box height */
 
-          color: rgba(0, 0, 0, 0.8);
+          color: $grey-level-0_8;
           @media screen and (max-width: $break){
             font-size: 0.875rem;
             line-height: 1.125rem;
@@ -397,11 +394,11 @@ div.queries {
           font-weight: normal;
           font-size: 1.0625rem;
           line-height: 1.375rem;
-          color: rgba(0, 0, 0, 0.5);
+          color: $grey-level-0_5;
           margin: 0.75rem auto 2.375rem auto;
 
-          background: rgba(0, 0, 0, 0.01);
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          background: $grey-level-0_01;
+          border: 1px solid $grey-level-0_1;
           box-sizing: border-box;
           border-radius: 5px;
           @media screen and (max-width: $break){
@@ -417,8 +414,8 @@ div.queries {
           /* Rectangle 2.2 */
           width: 29.6875rem;
           height: 13.5rem;
-          background: rgba(0, 0, 0, 0.01);
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          background: $grey-level-0_01;
+          border: 1px solid $grey-level-0_1;
           box-sizing: border-box;
           border-radius: 5px;
           resize: none;
@@ -430,7 +427,7 @@ div.queries {
           font-size: 1.0625rem;
           line-height: 1.375rem;
           /* identical to box height */
-          color: rgba(0, 0, 0, 0.5);
+          color: $grey-level-0_5;
           @media screen and (max-width: $break){
             width: 17.054375rem;
             height: 7.755rem;
