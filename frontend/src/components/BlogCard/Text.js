@@ -17,7 +17,10 @@ function WrappedComponent(props) {
                     null
             }
             <p className={styles.text}>
-                {props.text ? props.text : null}
+            {props.text ? props.text : null}
+                <a href={'/blogs/view/'+ props.blog_id} className={styles.readMore}>
+                    {props.text  ? '...Read More' : null }
+                </a>
             </p>
         </div>
     )

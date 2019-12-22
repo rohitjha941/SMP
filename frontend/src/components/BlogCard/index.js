@@ -1,19 +1,19 @@
 import React from 'react';
 import Text from './Text';
-
 import styles from './BlogCard.module.scss';
 
 function WrappedComponent(props) {
-    const imageSource = props.imgSrc;
-    const imageAlternativeText = (props.imgAlt) ? props.imgAlt : props.heading;
-    const heading = props.heading;
-    const text = props.text;
-    const metadata = props.metadata;
+    const blog_id = props.blogData.blog_id;
+    const imageSource = props.blogData.imgSrc;
+    const imageAlternativeText = (props.blogData.imgAlt) ? props.blogData.imgAlt : props.blogData.heading;
+    const heading = props.blogData.heading;
+    const text = props.blogData.text;
+    const metadata = props.blogData.metadata;
     return (
         <React.Fragment>
             <div className={styles.container+' '+props.className} >
                 <img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} />
-                <Text heading={heading} text={text} metadata={metadata} />
+                <Text heading={heading} text={text} metadata={metadata} blog_id={blog_id} />
             </div>
         </React.Fragment>
     )
