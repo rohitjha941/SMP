@@ -5,7 +5,7 @@
     right:0px;
     top: 116.1525rem;
     z-index: 10;
-    @media screen and (max-width: $break){
+    @media screen and (max-width: $break-tablet){
         display:none;
     }
 }
@@ -14,7 +14,7 @@
     left: 0px;
     top: 87.688125rem;
     z-index:10;
-    @media screen and (max-width: $break){
+    @media screen and (max-width: $break-tablet){
         display:none;
     }
 }

@@ -5,9 +5,7 @@
     background-color: $white;
     border: 0.850355px solid $blue-text;
     border-radius: 2.26761px;
-    
-    width: 6.25rem;
-    height: 1.75rem;
+    padding: 6px 20px 6px 22px;
 
     font-family : $ibm-plex;
     font-size: 0.75rem;
@@ -25,8 +23,7 @@
     @media screen and (min-width : $break){
         border-width: 1.5px;
         border-radius: 4px;
-        width: 11.3125rem;
-        height: 2.875rem;
+        padding: 10px 42px 10px 43px;
         font-size: 1.25rem;
         line-height: 1.625rem;
     }
@@ -37,10 +34,7 @@
     background-color: $blue-text;
     border:none;
     border-radius:5px;
-
-    width: 6.25rem;
-    height: 1.75rem;
-
+    padding: 6px 20px 6px 22px;
     font-family : $ibm-plex;
     font-size: 0.75rem;
     font-style: normal;
@@ -58,8 +52,7 @@
     @media screen and (min-width : $break){
         border-width: 1.5px;
         border-radius: 4px;
-        width: 11.3125rem;
-        height: 2.875rem;
+        padding: 10px 42px 10px 43px;
         font-size: 1.25rem;
         line-height: 1.625rem;
     }
@@ -69,10 +62,7 @@
     color: $grey-level-0_4;
     background: $grey-level-0_02;
     border: 0.822622px solid $grey-level-0_1;
-    
-    width: 6.25rem;
-    height: 1.75rem;
-
+    padding: 6px 20px 6px 22px;
     font-family : $ibm-plex;
     font-size: 0.75rem;
     font-style: normal;
@@ -89,8 +79,7 @@
     @media screen and (min-width : $break){
         border-width: 1.5px;
         border-radius: 4px;
-        width: 11.3125rem;
-        height: 2.875rem;
+        padding: 10px 42px 10px 43px;
         font-size: 1.25rem;
         line-height: 1.625rem;
     }
