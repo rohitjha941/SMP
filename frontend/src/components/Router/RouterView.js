@@ -7,6 +7,7 @@ import {
 import About from '../../routes/About';
 import Blog from '../../routes/Blog';
 import Home from '../../routes/Home'
+import Queries from '../../routes/Queries'
 
 
 export default class RouterView extends Component {
@@ -17,6 +18,7 @@ export default class RouterView extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
                     <Route path="/blog" component={Blog} />
+                    <Route path="/queries" component={Queries} />
                     <Redirect to="/" />
                 </Switch>
             </div>
