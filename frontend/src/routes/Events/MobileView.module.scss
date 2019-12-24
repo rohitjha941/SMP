@@ -1,0 +1,51 @@
+@import '../../style/common.scss';
+
+.heading{
+    margin: 1.9375rem auto 0px auto;
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.6875rem;
+    line-height: 2.1875rem;
+    text-align: center;
+    @media screen and (min-width:$break){
+        font-size: 3.125rem;
+        line-height: 4.0625rem;
+        margin-bottom: 2rem;
+    }
+}
+
+.categoryHeading{
+    font-family: $ibm-plex;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color:$blue-text;
+    width:274px;
+    margin: 2.375rem auto 1rem auto;
+    text-align: left;
+    @media screen and (min-width:$break){
+        font-size:1.6875rem;
+        line-height: 2.1875rem;
+        width: 582.36px;
+        }
+}
+
+.eventCardCommon{
+    margin: 0 auto 0px auto;
+}
+
+.hr{
+    margin: 20px auto 13px auto;
+    width: 270px;
+    height: 0px;
+    border: 0.5px solid $grey-level-0_1;
+    @media screen and (min-width: $break){
+        width : 582.36px;
+    }
+}
+
+.dashedWord{
+    display: inline-block;
+}
