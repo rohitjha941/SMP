@@ -8,36 +8,3 @@
     color: $grey-darker;
     padding: 5%;
 }
-
-.heading{
-    margin: 1.9375rem auto 0px auto;
-    font-family: IBM Plex Sans;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.6875rem;
-    line-height: 2.1875rem;
-    text-align: center;
-}
-
-.categoryHeading{
-    font-family: $ibm-plex;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    color:$blue-text;
-    width:274px;
-    margin: 25px auto 13px auto;
-    text-align: left;
-}
-
-.blogCardCommon{
-    margin: 0 auto 0px auto;
-}
-
-.hr{
-    margin: 20px auto 13px auto;
-    width: 270px;
-    height: 0px;
-    border: 0.5px solid $grey-level-0_1;
-}

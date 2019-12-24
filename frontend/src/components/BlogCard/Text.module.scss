@@ -2,19 +2,38 @@
 
 .container {
     text-align:left;
-    width: 16.875rem;
+    width: 0.9854em;
+    max-width: inherit;
 }
 
-.heading {
+.headingsm {
     font-weight: bold;
-    font-size: 0.9375rem;
-    line-height: 1.1875rem;
     color: rgba(0, 0, 0, 0.8);
     margin-top: 1.031825rem;
-    @media screen and (min-width: $break){
-        font-size: 20px;
-        line-height: 26px;
-    }
+        font-size: 0.9375rem;
+        line-height: 1.1875rem;
+}
+
+.headingmd {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 1.031825rem;
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+}
+.headinglg {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 1.031825rem;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+}
+.headingxl {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 1.031825rem;
+    font-size: 1.875rem;
+    line-height: 2.4375rem;
 }
 
 .metadata{
@@ -48,7 +67,7 @@
     /* or 18px */
     color: $grey;
     @media screen and (min-width: $break){
-        font-size: 16px;
+        font-size: 1rem;
         line-height: 150%;
     }
 }

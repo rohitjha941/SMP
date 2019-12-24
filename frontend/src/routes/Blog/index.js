@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import styles from './Blog.module.scss';
-import BlogCard from '../../components/BlogCard'
-import Button from '../../components/Button'
-
+import MobileView from './MobileView';
+import DesktopView from './DesktopView';
 export default class Blog extends Component {
 
     blogData = {
@@ -16,34 +15,11 @@ export default class Blog extends Component {
     render() {
         return (
             <div className={styles.mainDiv}>
-                <div className={styles.heading}><span className='color-red'>Read</span> what we do</div>
-                <div>
-                    <div className={styles.categoryHeading}>Featured Blogs</div>
-                    <BlogCard 
-                        className={styles.blogCardCommon} 
-                        blogData={this.blogData}
-                    />
-                    <hr className={styles.hr}/>
-                    <BlogCard 
-                        className={styles.blogCardCommon} 
-                        blogData={this.blogData}
-                    />
-                    <hr className={styles.hr}/>
-                </div>
-                <div>
-                    <div className={styles.categoryHeading}>Journey from Mentee to Mentor</div>
-                    <BlogCard 
-                        className={styles.blogCardCommon} 
-                        blogData={this.blogData}
-                    />
-                    <hr className={styles.hr}/>
-                    <BlogCard 
-                        className={styles.blogCardCommon} 
-                        blogData={this.blogData}
-                    />
-                    <hr className={styles.hr}/>
-                </div>
-                <Button type='outline' text='View More'/>
+                {window.innerWidth < 1000 ? 
+                    <MobileView blogData={this.blogData}/>
+                :
+                    <DesktopView />
+                }
             </div>
         )
     }
