@@ -40,6 +40,7 @@ div.header-container{
   display: flex;
   justify-items: center;
   z-index: 20;
+  top:0;
   @media screen and (min-width: $break){
     position: fixed;
   }
@@ -260,7 +261,7 @@ div.queries {
     }
   }
   div.questions{
-    // text-align: center;
+    text-align: center;
       
     @media screen and (min-width: 1180px){
       div.questions-column-1{
