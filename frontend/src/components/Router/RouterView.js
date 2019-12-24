@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 import About from '../../routes/About';
 import Blog from '../../routes/Blog';
-import Home from '../../routes/Home'
+import Home from '../../routes/Home';
+import Events from '../../routes/Events';
 
 
 export default class RouterView extends Component {
@@ -17,6 +18,7 @@ export default class RouterView extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
                     <Route path="/blog" component={Blog} />
+                    <Route path="/events" component={Events} />
                     <Redirect to="/" />
                 </Switch>
             </div>

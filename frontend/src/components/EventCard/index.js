@@ -1,6 +1,7 @@
 import React from 'react';
 import Text from './Text';
 import styles from './EventCard.module.scss';
+import ThisWeek from 'assets/images/ThisWeek.svg';
 
 function WrappedComponent(props) {
     const event_id = props.eventData.event_id;
@@ -9,7 +10,8 @@ function WrappedComponent(props) {
     const heading = props.heading === undefined ? props.eventData.heading : props.heading ? props.eventData.heading : null;
     const text = props.text === undefined ? props.eventData.text : props.text ? props.eventData.text : null;
     const metadata = props.metadata === undefined ? props.eventData.metadata : props.metadata ? props.eventData.metadata : null;
-    const headingTop = (window.innerWidth < 1000) ? true : props.headingTop ? true :  false;
+    const headingTop = props.headingTop ? true :  false;
+    // console.log(Date(Date.now()).toString().slice(4,15));
     return (
         <React.Fragment>
             <div className={
@@ -30,6 +32,7 @@ function WrappedComponent(props) {
                 </h3>
                 :
                 null}
+                <img className={styles.thisWeek} src={ThisWeek} alt='This Week'/>
                 <img className={styles.eventImage} src={imageSource} alt={imageAlternativeText} />
                 <Text heading={heading} text={text} metadata={metadata} event_id={event_id} headingTop={headingTop} type={props.type}/>
             </div>

@@ -37,6 +37,14 @@
     border-radius: 5px;
 }
 
+.thisWeek{
+    display:block;
+    position: absolute;
+    z-index:11;
+    margin-top:12px;
+    margin-left: -2px;
+}
+
 .headingsm {
     text-align:left;
     display:block;

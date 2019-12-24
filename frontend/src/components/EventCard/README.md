@@ -7,9 +7,9 @@
             heading = 'heading for event'
             text = 'text for event'
             metadata = {
-                        d1: name,
-                        d2: date,
-                        d3: time requried to read
+                        d1: date,
+                        d2: time,
+                        d3: venue
             }
             // or edit as and when required. Upto three fields.
         }
