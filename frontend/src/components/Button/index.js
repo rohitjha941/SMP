@@ -4,7 +4,12 @@ import styles from './Button.module.scss';
 
 function WrappedComponent(props) {
     return (
-        <button className={styles.button}>
+        <button 
+            className={ 
+                (props.type === 'disabled' ? (styles.disabled) : false || props.type ==='outline' ? (styles.outline) : false || (styles.solid) ) 
+                + ' ' + props.className
+            }
+            onClick = {props.onClick} >
             {props.text}
         </button>
     )
