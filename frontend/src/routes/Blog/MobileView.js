@@ -9,7 +9,7 @@ export default class MobileView extends Component {
             <React.Fragment>
                 <div className={styles.heading}><span className='color-red'>Read</span> what we do</div>
                 <div>
-                    <div className={styles.categoryHeading}>Featured Blogs</div>
+                    <div className={styles.categoryHeading}>Featured</div>
                     <BlogCard 
                         className={styles.blogCardCommon} 
                         blogData={this.props.blogData}
