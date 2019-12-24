@@ -33,5 +33,5 @@ function WrappedComponent(props) {
     )
 }
 
-const CompositeTextView = React.memo(WrappedComponent);
-export default CompositeTextView;
+const Text = React.memo(WrappedComponent);
+export default Text;

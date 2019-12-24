@@ -37,5 +37,5 @@ function WrappedComponent(props) {
     )
 }
 
-const ImageText = React.memo(WrappedComponent);
-export default ImageText;
+const BlogCard = React.memo(WrappedComponent);
+export default BlogCard;
