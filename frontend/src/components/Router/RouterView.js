@@ -9,7 +9,6 @@ import Blog from '../../routes/Blog';
 import Home from '../../routes/Home';
 import Events from '../../routes/Events';
 import Queries from '../../routes/Queries';
-import Slider from '../../routes/Home/Slider';
 
 
 export default class RouterView extends Component {
@@ -22,7 +21,6 @@ export default class RouterView extends Component {
                     <Route path="/events" component={Events} />
                     <Route path="/blogs" component={Blog} />
                     <Route path="/queries" component={Queries} />
-                    <Route path="/slider" component={Slider} />
                     <Redirect to="/" />
                 </Switch>
             </div>
