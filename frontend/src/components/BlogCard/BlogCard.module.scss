@@ -31,10 +31,13 @@
 
 
 .blogImage{
-    width: 0.9854em;
+    width: 1em;
+    left:-0.005em;
     max-width: 90vw;
     display:block;
     border-radius: 5px;
+    text-align:center;
+    position: relative;
 }
 
 .headingsm {

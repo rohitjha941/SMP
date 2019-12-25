@@ -1,0 +1,37 @@
+@import '../../style/common.scss';
+
+.eventParentDiv{
+    background: $blue-home;
+    min-height: 100vh;
+    text-align:center;
+    padding-top: 2.0625rem;
+    padding-bottom: 1.9325rem;
+}
+.sectionHeading{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.3125rem;
+    /* identical to box height */
+    color: $blue-text;
+    width:80vw;
+    margin: 0px auto 0px auto;
+    // float:left;
+    text-align: left;
+    padding-top: 2.0625rem;
+    @media screen and (min-width:$break){
+        font-size: 1.6875rem;
+        line-height: 2.1875rem;
+    }
+}
+
+.eventCardCommon{
+    max-width: 90vw;
+    margin: 2.75rem auto 0 auto;
+    // display:inline-block;
+}
+
+.eventsButton{
+    margin: 2.6875rem auto 0px auto;
+    // background: $blue-home;
+}
