@@ -1,8 +1,10 @@
 .mainImage{
-    width:90%;
+    width:400px;
+    max-width: 90%;
     padding-top:10%;
-    margin:10% auto 0 auto;
+    margin:0 auto 0 auto;
     text-align:center;
+    display: block;
 }
 .text{
     width:90%;
@@ -13,6 +15,6 @@
 }
 
 .mainDiv{
-    min-height:100vh;
-    padding-bottom:5%;
+    // min-height:100vh;
+    padding-bottom:20px;
 }
