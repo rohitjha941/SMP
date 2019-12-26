@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import styles from './Text.module.scss';
 
@@ -23,12 +24,12 @@ function WrappedComponent(props) {
                     :
                     null
             }
-            <p className={styles.text}>
+            <div className={styles.text}>
             {props.text ? props.text : null}
-                <a href={'/blogs/view/'+ props.blog_id} className={styles.readMore}>
+                <Link to="/blogs/view" ><p className={styles.readMore}>
                     {props.text  ? '...Read More' : null }
-                </a>
-            </p>
+                </p></Link>
+            </div>
         </div>
     )
 }

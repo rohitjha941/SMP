@@ -5,7 +5,8 @@ import {
     Redirect
 } from "react-router-dom";
 import Loadable from 'react-loadable';
-import Loader from '../Loader'
+import Loader from '../Loader';
+import BlogView from '../../routes/Blog/BlogFullView';
 
 const About = Loadable({
     loader: () => import('../../routes/About'),
@@ -52,6 +53,7 @@ export default class RouterView extends Component {
                     <Route path="/blogs" component={Blog} />
                     <Route path="/queries" component={Queries} />
                     <Route path="/mentors" component={Mentors} />
+                    <Route path="/blogView" component={BlogView} />
                     <Redirect to="/" />
                 </Switch>
             </div>
