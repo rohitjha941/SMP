@@ -9,7 +9,7 @@ import Blog from '../../routes/Blog';
 import Home from '../../routes/Home';
 import Events from '../../routes/Events';
 import Queries from '../../routes/Queries';
-
+import Mentors from '../../routes/Mentors';
 
 export default class RouterView extends Component {
     render() {
@@ -21,6 +21,7 @@ export default class RouterView extends Component {
                     <Route path="/events" component={Events} />
                     <Route path="/blogs" component={Blog} />
                     <Route path="/queries" component={Queries} />
+                    <Route path="/mentors" component={Mentors} />
                     <Redirect to="/" />
                 </Switch>
             </div>

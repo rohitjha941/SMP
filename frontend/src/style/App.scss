@@ -26,8 +26,8 @@ div.router-view {
   position: absolute;
   top: 8%;
   @media screen and (min-width: $break){
-    position: relative;
-    top: auto;
+    position: absolute;
+    top: 8%;
   }
 }
 
@@ -202,7 +202,7 @@ div.queries {
   background-image: linear-gradient($light-blue, $white);
   color: $grey-level-0_7;
   padding: 5%;
-  width: 100%;
+  width: 100vw;
   font-size: 1rem;
 
   div.heading {
