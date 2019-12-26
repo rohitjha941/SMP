@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import downArrow from '../../assets/images/down-arrow.svg'
 import downArrow2 from '../../assets/images/down-arrow-2.svg'
+import styles from './QuestionsBox.module.scss';
 
 let image;
 
@@ -14,12 +15,12 @@ class QuestionsBox extends Component {
 
     render() { 
         return ( 
-            <div className='questions-box'>
-                <div>
-                    <div className='text-area'>
+            <div className={styles.questionBox}>
+                <div className={styles.parentContentDiv}>
+                    <div className={styles.textArea}>
                         {this.props.text}
                     </div>
-                    <div className='down-arrow'>
+                    <div className={styles.downArrow}>
                         <img src={image} alt='drop-down'/>
                     </div>
                 </div>

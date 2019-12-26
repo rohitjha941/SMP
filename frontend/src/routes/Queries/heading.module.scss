@@ -1,0 +1,54 @@
+@import '../../style/common.scss';
+
+.heading {
+    text-align: center;
+    margin: auto;
+    font-weight: 500;
+    font-size: 3.125rem;
+    line-height: 4.0625rem;
+    margin-top: 4.3125rem;
+    @media screen and (max-width: $break){
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+        margin-top: 1.3125rem;
+    }
+}
+.bar{
+    width: 1.9375rem;
+    height: 1.5px;
+    border: 1.5px solid $grey-level-0_6;
+    transform: rotate(90deg);
+    @media screen and (max-width: $break){
+        width: 1.625rem;
+        height: 0px;
+        border: 0.5px solid $grey-level-0_1;
+    }
+}
+.mentorMenteeButton{
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    margin: 0px 0.5625rem 0px 0.5625rem;
+    @media screen and (max-width: $break){
+      font-size: 1rem;
+    }
+}
+.iAmA{
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    height:2.4375rem;
+    text-align: center;
+    font-size: 1.875rem;
+    font-weight: 500;
+    line-height: 2.4375rem;
+    margin-top: 2.75rem;
+    @media screen and (max-width: $break){
+      font-size: 1rem;
+      line-height: 1.3125rem;
+      margin-top: 2.875rem;
+    }
+}
+.toggleParentDiv{
+    text-align: center;
+    margin-top:24px;
+}

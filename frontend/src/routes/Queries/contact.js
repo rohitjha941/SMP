@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../../components/Button';
+import styles from './contact.module.scss';
 class Contact extends Component {
     constructor() {
         super()
@@ -26,9 +27,9 @@ class Contact extends Component {
         let name = this.state.name;
         let query = this.state.query; 
         return ( 
-            <div className='contact'>
-                <div className='contact-title'>Need More Help? <span className='color-red'>Contact Us</span></div>
-                <div className='contact-form'>
+            <div className={styles.contact}>
+                <div className={styles.contactTitle}>Need More Help? <span className='color-red'>Contact Us</span></div>
+                <div className={styles.contactForm}>
                     <form>
                         <label htmlFor='name'>Name</label>
                         <br/>

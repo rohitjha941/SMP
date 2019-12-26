@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QuestionsBox from './QuestionsBox';
 import Button from '../../components/Button';
+import styles from './questions.module.scss';
 
 var questionText1 = [
     'How much time should we devote to the mentorship program?',
@@ -20,10 +21,10 @@ class Questions extends Component {
     state = {  }
     render() { 
         return ( 
-        <div className='questions'>
-            <div className='questions-column-1'>{questionText1.map((data,i) => <QuestionsBox key={i} text={data}/>)}</div>
-            <div className='questions-column-2'>{questionText2.map((data,i) => <QuestionsBox key={i+4} text={data}/>)}</div>
-            <Button className='view-more' text='View More' type='outline' />
+        <div className={styles.questions}>
+            <div className={styles.questionsColumn1}>{questionText1.map((data,i) => <QuestionsBox key={i} text={data}/>)}</div>
+            <div className={styles.questionsColumn2}>{questionText2.map((data,i) => <QuestionsBox key={i+4} text={data}/>)}</div>
+            <Button className={styles.viewMore} text='View More' type='outline' />
         </div>
         );
     }
