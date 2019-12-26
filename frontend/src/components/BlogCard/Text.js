@@ -26,9 +26,9 @@ function WrappedComponent(props) {
             }
             <div className={styles.text}>
             {props.text ? props.text : null}
-                <Link to="/blogs/view" ><p className={styles.readMore}>
+                <Link to="/blogs/view" ><span className={styles.readMore}>
                     {props.text  ? '...Read More' : null }
-                </p></Link>
+                </span></Link>
             </div>
         </div>
     )
