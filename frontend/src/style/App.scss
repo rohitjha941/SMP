@@ -22,13 +22,10 @@
   font-weight: bold;
 }
 
-div.router-view {
+div.router-footer-container {
   position: absolute;
   top: 8%;
-  @media screen and (min-width: $break){
-    position: relative;
-    top: auto;
-  }
+  width: 100%;
 }
 
 div.about {
