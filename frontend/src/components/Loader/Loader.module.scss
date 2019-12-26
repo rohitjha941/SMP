@@ -1,0 +1,24 @@
+@import '../../style/variables.scss';
+@import '../../style/colors.scss';
+
+.loader{
+  position:fixed;
+  width:90px;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+  display:inline-block;
+  @media screen and (min-width: $break){
+    width:120px;
+  }
+}
+.mainDiv{
+  position:fixed;
+  width:100vw;
+  height:100vh;
+  background-image: linear-gradient($light-blue, $white);
+  z-index:100;
+  top:0;
+}

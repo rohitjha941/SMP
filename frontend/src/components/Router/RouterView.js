@@ -4,12 +4,34 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-import About from '../../routes/About';
-import Blog from '../../routes/Blog';
-import Home from '../../routes/Home';
-import Events from '../../routes/Events';
-import Queries from '../../routes/Queries';
 
+import Loadable from 'react-loadable';
+import Loader from '../Loader'
+
+const About = Loadable({
+    loader: () => import('../../routes/About'),
+    loading: () => <Loader />
+})
+
+const Blog = Loadable({
+    loader: () => import('../../routes/Blog'),
+    loading: () => <Loader />
+})
+
+const Home  = Loadable({
+    loader: () => import('../../routes/Home'),
+    loading: () => <Loader />
+})
+
+const Events  = Loadable({
+    loader: () => import('../../routes/Events'),
+    loading: () => <Loader />
+})
+
+const Queries  = Loadable({
+    loader: () => import('../../routes/Queries'),
+    loading: () => <Loader />
+})
 
 export default class RouterView extends Component {
     render() {
