@@ -12,9 +12,6 @@
   justify-items: center;
   z-index: 20;
   top:0;
-  @media screen and (min-width: $break){
-    position: relative;
-  }
 
   header {
     width: 95%;
