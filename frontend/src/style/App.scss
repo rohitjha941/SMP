@@ -25,10 +25,7 @@
 div.router-footer-container {
   position: absolute;
   top: 8%;
-  @media screen and (min-width: $break){
-    position: absolute;
-    top: 8%;
-  }
+  width: 100%;
 }
 
 div.header-container{
@@ -113,7 +110,7 @@ div.queries {
   background-image: linear-gradient($light-blue, $white);
   color: $grey-level-0_7;
   padding: 5%;
-  width: 100vw;
+  width: 100%;
   font-size: 1rem;
   @media screen and (max-width: $break){
     width: 100%;
