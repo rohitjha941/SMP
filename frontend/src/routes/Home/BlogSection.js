@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BlogCard from '../../components/BlogCard';
+// import BlogCard from '../../components/BlogCard';
 import Button from '../../components/Button';
 import styles from './BlogSection.module.scss';
 import Slider from './Slider';

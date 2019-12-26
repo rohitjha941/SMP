@@ -42,7 +42,7 @@ export default class MobileView extends Component {
                     />
                     <hr className={styles.hr}/>
                 </div>
-                <Button type='outline' text='View More'/>
+                <Button className={styles.viewMore} type='outline' text='View More'/>
             </React.Fragment>
         );
     }
