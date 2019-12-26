@@ -4,7 +4,6 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-
 import Loadable from 'react-loadable';
 import Loader from '../Loader'
 
@@ -32,11 +31,11 @@ const Queries  = Loadable({
     loader: () => import('../../routes/Queries'),
     loading: () => <Loader />
 })
+
 const Mentors = Loadable({
     loader:() => import('../../routes/Mentors'),
     loading:() => <Loader />
 })
-
 const ComingSoon = Loadable({
     loader: () => import('../../components/ComingSoon'),
     loading: () => <Loader />
