@@ -28,6 +28,13 @@ div.router-footer-container {
   width: 100%;
 }
 
+div.header-container{
+  position: fixed;
+  background: $white;
+  border-bottom: 1px solid $grey-level-0_05;
+  width: 100%;
+}
+
 div.about {
   div {
     margin: auto;
@@ -108,7 +115,6 @@ div.queries {
 
   div.heading {
     div {
-      // width: 100vw;
       text-align: center;
       margin: auto;
       &.heading {
@@ -345,7 +351,7 @@ div.queries {
     } 
   }
   @media screen and (max-width: $break){
-    width: 100vw;
+    width: 100%;
   }
 }
 

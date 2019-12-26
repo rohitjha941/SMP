@@ -4,7 +4,6 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-
 import Loadable from 'react-loadable';
 import Loader from '../Loader'
 
@@ -32,7 +31,10 @@ const Queries  = Loadable({
     loader: () => import('../../routes/Queries'),
     loading: () => <Loader />
 })
-
+const Mentors = Loadable({
+    loader:() => import('../../routes/Mentors'),
+    loading:() => <Loader />
+})
 export default class RouterView extends Component {
     render() {
         return (
@@ -43,6 +45,7 @@ export default class RouterView extends Component {
                     <Route path="/events" component={Events} />
                     <Route path="/blogs" component={Blog} />
                     <Route path="/queries" component={Queries} />
+                    <Route path="/mentors" component={Mentors} />
                     <Redirect to="/" />
                 </Switch>
             </div>
