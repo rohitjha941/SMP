@@ -4,6 +4,7 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
+<<<<<<< HEAD
 
 import Loadable from 'react-loadable';
 import Loader from '../Loader'
@@ -32,6 +33,14 @@ const Queries  = Loadable({
     loader: () => import('../../routes/Queries'),
     loading: () => <Loader />
 })
+=======
+import About from '../../routes/About';
+import Blog from '../../routes/Blog';
+import Home from '../../routes/Home';
+import Events from '../../routes/Events';
+import Queries from '../../routes/Queries';
+import Mentors from '../../routes/Mentors';
+>>>>>>> mentors page mobile view
 
 const ComingSoon = Loadable({
     loader: () => import('../../components/ComingSoon'),
@@ -48,6 +57,7 @@ export default class RouterView extends Component {
                     <Route path="/events" component={Events} />
                     <Route path="/blogs" component={Blog} />
                     <Route path="/queries" component={Queries} />
+                    <Route path="/mentors" component={Mentors} />
                     <Redirect to="/" />
                 </Switch>
             </div>

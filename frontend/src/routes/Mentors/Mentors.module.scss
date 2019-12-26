@@ -1,0 +1,108 @@
+@import '../../style/common.scss';
+
+.mainDiv{
+    position:relative;
+    background-image: linear-gradient($light-blue, $white);
+    color: $grey-level-0_7;
+    // padding: 5%;
+    width: 100vw;
+    font-size: 1rem;
+    // padding-top: 31px;
+    padding-top:8%;
+    // top:50px;
+}
+
+.mainHeading{
+    // position:relative;
+    // top:31px;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 35px;
+    /* identical to box height */
+    text-align: center;
+    color: $grey-level-0_7;
+    // margin-top: 31px;
+    @media screen and (min-width:$break){
+        // margin-top:8%;
+    }
+}
+
+.briefMentors{
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 150%;
+    /* or 21px */
+    text-align: center;
+    color: $grey;
+    margin: 26px auto 0 auto;
+    width:249px;
+    max-width: 90vw;
+}
+.viewMentorsButton{
+    display: block;
+    margin: 36px auto 154px auto;
+}
+.mentorImage{
+    width:81.435vw;
+    // height:100%;
+    position:relative;
+    // z-index:99;
+    top:-80px;
+    margin:auto;
+    display: block;
+}
+.secondSection{
+    min-height: 266px;
+    // padding-top: 113px; 
+    padding-bottom: 84px;
+    background:$light-blue-background;
+}
+.recruitHeading{
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    /* identical to box height */
+    text-align: center;
+    display:block;
+}
+.recruitText{
+    display:block;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 150%;
+    /* or 21px */
+    text-align: center;
+    color: $grey;
+    margin: 26px auto 0 auto;
+    width:249px;
+    max-width: 90vw;
+}
+
+.learnMore{
+    margin: 31px auto auto auto;
+    display: block;
+    background:$light-blue-background;
+}
+.resourceHeading{
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    /* identical to box height */
+    text-align: center;
+
+    color: $grey-level-0_6;
+    margin: 46px auto 31px auto;
+}
+.impLinks{
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+    text-align:center;
+    color: #0F1DA4;
+    margin-bottom:66px;
+}
+.links{
+    margin: 7.5px auto;
+    display: inline-block;
+    border-bottom: 1px solid #0F1DA4;
+}
