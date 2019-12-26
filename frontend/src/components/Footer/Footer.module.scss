@@ -2,4 +2,73 @@
 
 .container {
     position: relative;
+    width: 100%;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .brandingSitemapContainer {
+        width: 80%;
+        margin: 5% 0 0 0;
+    }
+
+    .branding {
+        width: 100%;
+        font-weight: 600;
+        font-size: 0.9em;
+        display: flex;
+        justify-content: space-between;
+        .brandingName {
+            .colorBlue {
+                color: $blue-text-footer;
+            }
+        }
+        .brandingLogo {
+            margin: 1%;
+        }
+    }
+    .sitemapContainer {
+        color: $grey-level-0_7;
+        width: 100%;
+        margin: 5% 0;
+        font-size: 0.95em;
+        ul {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            li{
+                padding: 5% 0;
+            }
+        }
+    }
+    .acknowledgementContainer {
+        text-align: center;
+        height: fit-content;
+        padding: 0;
+        background-color: $blue;
+        padding: 5%;
+        width: 100%;
+        .heart{
+            position: relative;
+            color: $red;
+            font-size: 1.2em;
+            top: 0.1em;
+        }
+    }
+
+
+    .scrollToTop {
+        position: relative;
+        width: 3em;
+        height: 3em;
+        border-radius: 50%;
+        border: 1px solid $grey-level-0_8;
+        background-color: transparent;
+        transform: rotate(-90deg);
+        font-weight: 700;
+        margin: 5%;
+        &:focus{
+            outline: none;
+        }
+    }
 }

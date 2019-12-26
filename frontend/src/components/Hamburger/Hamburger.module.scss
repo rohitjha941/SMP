@@ -1,0 +1,32 @@
+@import 'style/common.scss';
+
+.hamburger {
+  position: relative;
+  display: flex;
+  @media screen and (min-width: $break){
+    display: none;
+  }
+  flex-direction: column;
+  height: 10px;
+  justify-content: space-between;
+  div {
+    background-color: $grey;
+    height: 2px;
+    width:15px;
+    transition: all .2s ease-in-out;
+  }
+  &.cross{
+    div{
+      &:nth-child(1){
+        transform: rotate(45deg) translateY(5px);
+      }
+      &:nth-child(2){
+        opacity: 0;
+      }
+      &:nth-child(3){
+        transform: rotate(-45deg) translateY(-5px);
+
+      }
+    }
+  }
+}

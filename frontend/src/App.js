@@ -20,8 +20,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <RouterView />
-      <Footer />
+      <div className="router-footer-container">
+        <RouterView />
+        <Footer />
+      </div>
     </div>
   );
 }

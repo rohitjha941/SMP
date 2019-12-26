@@ -1,15 +1,18 @@
 .homeContainer {
     & > * {
-        margin: 10% auto;
+        margin: 0px auto;
+        padding: 5%;
     }
 }
 
 .titleContainer {
-    width: 70%;
+    width: 80%;
+    margin: 5% auto 0px auto;
 }
 
 .illustration {
     width: 80%;
+    margin : 5% auto 0px auto;
     img {
         width: 100%;
     }
@@ -17,8 +20,16 @@
 
 .description  {
     width: 80%;
+    font-size: 1rem;
+    line-height: 150%;
+    margin: 5.014% auto 0px auto;
 }
 
-.button {
-    width: fit-content;
+.learnMore{
+    margin : 5% auto 8.21% auto;
+    display:block; 
+}
+
+.InfoSection{
+    min-height:100vh;
 }

@@ -1,0 +1,10 @@
+@import '../../style/common.scss';
+
+.mainDiv{
+    font-size: 1rem;
+    width:100vw;
+    text-align:center;
+    background-image: linear-gradient($light-blue, $white);
+    color: $grey-level-0_8;
+    padding: 5%;
+}
