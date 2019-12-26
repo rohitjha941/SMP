@@ -35,12 +35,17 @@ const Mentors = Loadable({
     loader:() => import('../../routes/Mentors'),
     loading:() => <Loader />
 })
+const ComingSoon = Loadable({
+    loader: () => import('../../components/ComingSoon'),
+    loading: () => <Loader />
+})
 export default class RouterView extends Component {
     render() {
         return (
             <div className="router-view">
                 <Switch>
                     <Route exact path="/" component={Home} />
+                    <Route path ="/freshers" component={ComingSoon} />
                     <Route path="/about" component={About} />
                     <Route path="/events" component={Events} />
                     <Route path="/blogs" component={Blog} />
@@ -52,3 +57,4 @@ export default class RouterView extends Component {
         )
     }
 }
+
