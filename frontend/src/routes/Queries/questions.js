@@ -22,8 +22,13 @@ class Questions extends Component {
     render() { 
         return ( 
         <div className={styles.questions}>
+<<<<<<< HEAD
             <div className={styles.questionsColumn1}>{questionText1.map((data,i) => <QuestionsBox key={i} query={data}/>)}</div>
             <div className={styles.questionsColumn2}>{questionText2.map((data,i) => <QuestionsBox key={i+4} query={data}/>)}</div>
+=======
+            <div className={styles.questionsColumn1}>{questionText1.map((data,i) => <QuestionsBox key={i} text={data}/>)}</div>
+            <div className={styles.questionsColumn2}>{questionText2.map((data,i) => <QuestionsBox key={i+4} text={data}/>)}</div>
+>>>>>>> refactor css stylesheets
             <Button className={styles.viewMore} text='View More' type='outline' />
         </div>
         );
