@@ -1,18 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from '../../assets/images/logo.svg'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import styles from './Header.module.scss';
 
 export default class HeaderBranding extends Component {
     render() {
         return (
             <div onClick={this.props.hideMenu}>
                 <Link to="/">
-                    <div className="logo-container">
-                        <img className="smp-logo" src={logo} alt='smp-logo'></img>
-                        <div className="logo-name-container">
-                            <span className="color-red">SMP</span>
-                            <span className="color-grey">-</span>
-                            <span className="color-blue">IITR</span>
+                    <div className={styles.logoContainer}>
+                        <img src={logo} alt='smp-logo'></img>
+                        <div>
+                            <span className={styles.colorRed}>SMP</span>
+                            <span className={styles.colorGrey}>-</span>
+                            <span className={styles.colorBlue}>IITR</span>
                         </div>
                     </div>
                 </Link>
