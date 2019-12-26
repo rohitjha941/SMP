@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import RouterLink from 'components/RouteLink';
 
 import styles from './Header.module.scss';
 
 export default class HeaderRoutes extends Component {
-    headerRoute(to, display, key) {
-        return (
-            <li key={key}>
-                <NavLink activeClassName="active-route" to={to} onClick={this.props.hideMenu}>{display}</NavLink>
-            </li>
-        )
-    }
     render() {
         const routeData = [
             {
@@ -43,7 +36,7 @@ export default class HeaderRoutes extends Component {
             <div className={routeViewStyle}>
                 <ul className={styles.navLinks}>
                     {routeData.map((value, index) => {
-                        return this.headerRoute(value.to, value.display, index)
+                        return <RouterLink to={value.to} display={value.display} key={index} onClick={this.props.hideMenu}/>
                     }
                     )}
                 </ul>
