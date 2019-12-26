@@ -25,16 +25,6 @@
 div.router-footer-container {
   position: absolute;
   top: 8%;
-  @media screen and (min-width: $break){
-    position: absolute;
-    top: 8%;
-  }
-}
-
-div.header-container{
-  position: fixed;
-  background: $white;
-  border-bottom: 1px solid $grey-level-0_05;
   width: 100%;
 }
 
