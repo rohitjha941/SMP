@@ -12,7 +12,11 @@ class Mentors extends Component {
                     <div className={styles.briefMentors}>
                         SMP allows you to meet the mentors that will help you grow, and you can find mentors at SMP here and approach them. You can filter the mentors according to the field you are interested in or your branch.
                     </div>
+<<<<<<< HEAD
                     <Button className={styles.viewMentorsButton} text="View Mentors '19" type='outline' />
+=======
+                    <Button className={styles.viewMentorsButton} text="View Mentor's" type='outline' />
+>>>>>>> mentors page mobile view
                     
                     <div className={styles.secondSection}>
                         <div className={styles.imageDiv}>
