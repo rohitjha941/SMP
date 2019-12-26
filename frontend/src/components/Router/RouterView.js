@@ -4,7 +4,6 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-
 import Loadable from 'react-loadable';
 import Loader from '../Loader'
 
