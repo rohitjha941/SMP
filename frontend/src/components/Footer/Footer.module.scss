@@ -7,6 +7,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: $footer-background;
+    border-top: 1px solid $grey-level-0_05;
 
     .brandingSitemapContainer {
         width: 80%;
