@@ -58,6 +58,9 @@
   max-height:600px;
   overflow:hidden;
   transition:all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -webkit-transition: all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -moz-transition: all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -o-transition: all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   @media screen and (max-width:$break){
     font-size: 0.75rem;
     margin-top:0.5625rem;
