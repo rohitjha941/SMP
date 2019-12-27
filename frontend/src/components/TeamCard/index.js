@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './TeamCard.module.scss';
 import fb from 'assets/images/fb.svg';
 import call from 'assets/images/call.svg';

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function WrappedComponent(props) {
     return (
-        <li key={props.key}>
+        <li key={props.index}>
             <NavLink activeClassName="active-route" to={props.to} onClick={props.onClick}>{props.display}</NavLink>
         </li>
     )

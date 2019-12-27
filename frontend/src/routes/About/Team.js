@@ -44,7 +44,7 @@ class Team extends Component {
                     <ul>
                         {this.member.map((member,i) => {
                             return(
-                                <li><TeamCard key={i} member={member} /></li>
+                                <li key={i}><TeamCard key={i} member={member} /></li>
                             )
                         })}
                     </ul>
