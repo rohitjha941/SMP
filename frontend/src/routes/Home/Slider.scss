@@ -3,7 +3,7 @@
     box-sizing: border-box;
   } 
  .slider {
-    width: 90%;
+    // width: 90%;
     text-align: center;
     overflow: hidden;
   }
@@ -111,6 +111,7 @@
     color: $grey-level-0_8;
   }
   .blogCardCommon > img {
+    width:100%;
     border-radius: 5px 5px 0px 0px;
   }
   .blogCardCommon > div > p {

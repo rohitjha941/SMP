@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ComingSoon from '../../components/ComingSoon';
 // import styles from './DesktopView.module.scss';
 
 class DesktopView extends Component {
@@ -6,9 +7,7 @@ class DesktopView extends Component {
     render() { 
         return ( 
             <React.Fragment>
-                <div>
-                    Events
-                </div>
+                <ComingSoon />
             </React.Fragment>
          );
     }
