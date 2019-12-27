@@ -1,0 +1,35 @@
+@import '../../style/common.scss';
+
+.questions{
+    text-align: center;
+}
+
+.questionsColumn2{
+  display: block;
+  width:90%;
+  margin: auto;
+  @media screen and (min-width: $break-queries){
+    width:fit-content;
+    display: inline-grid;
+    margin: 3.815625rem auto 1.875rem 1.8125rem;
+  }  
+}
+
+.questionsColumn1{
+  display:block;
+  width:90%;
+  margin: auto;
+  @media screen and (min-width: $break-queries){
+    width:fit-content;
+    display: inline-grid;
+    margin: 3.815625rem 1.8125rem 1.875rem auto; 
+  } 
+}
+
+.viewMore{
+    margin: 3.8125rem auto 0px auto;
+    display:block;
+    @media screen and (max-width : $break){
+      margin-top: 0.9375rem;
+    }
+}
