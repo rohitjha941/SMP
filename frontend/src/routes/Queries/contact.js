@@ -15,11 +15,11 @@ class Contact extends Component {
         this.setState({ [name]: value })
     }
     onSubmit = () => {
-        let data = {
-            name: this.state.name,
-            email: this.state.email,
-            query: this.state.query
-        }
+        // let data = {
+        //     name: this.state.name,
+        //     email: this.state.email,
+        //     query: this.state.query
+        // }
     }
     render() {
         let email = this.state.email;

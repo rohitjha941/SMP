@@ -7,9 +7,6 @@ import blueArm from 'assets/images/blue-arm.svg'
 import styles from './Queries.module.scss'
 
 export default class Queries extends Component {
-    constructor(){
-        super();
-    }
 
     render() {
         return(
