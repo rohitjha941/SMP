@@ -1,9 +1,5 @@
 @import '../../style/common.scss';
 .questionBox{
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> add answers section in queries;
   width: fit-content;
   height:fit-content;
   background: $white;
@@ -19,7 +15,6 @@
       border-radius: 2.74194px;
       padding: 0.375rem 0.64625rem 0.3125rem 0.6875rem;
   }
-<<<<<<< HEAD
 }
 .textArea{
   width: 23.4375rem;
@@ -63,9 +58,6 @@
   max-height:600px;
   overflow:hidden;
   transition:all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  -webkit-transition: all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  -moz-transition: all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  -o-transition: all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   @media screen and (max-width:$break){
     font-size: 0.75rem;
     margin-top:0.5625rem;
@@ -77,99 +69,5 @@
   max-height: 0;
   margin:0;
   // display: none;
-=======
-    width: 30.8125rem;
-    height: 5.8125rem;
-    background: $white;
-    border: 1px solid $grey-level-0_1;
-    box-sizing: border-box;
-    border-radius: 5px;
-    margin-top: 3.4375rem;
-    @media screen and (max-width: $break){
-        /* Rectangle 2 */
-        margin: 0.9375rem auto 0px auto;
-        border: 0.548387px solid $grey-level-0_1;
-        border-radius: 2.74194px;
-        width: 17.0625rem;
-        height: 4.4375rem;
-    }
-    @media screen and (max-width:1180px){
-        margin: 3.4375rem auto 0 auto;
-    }
-=======
->>>>>>> add answers section in queries;
-}
-.textArea{
-  width: 23.4375rem;
-  height: fit-content;
-  text-align: left;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.25rem;
-  line-height: 150%;
-  float:left;
-  color: $grey-level-0_8;
-  @media screen and (max-width: $break){
-      width: 13.856875rem;
-      font-size: 0.875rem;
-      line-height: 140%;
-  }
-}
-.downArrow{
-<<<<<<< HEAD
-    /* Path */
-    vertical-align: center;
-    float:right;
-    margin:35px 21px auto auto;
-    img{
-      height:20px;
-      width:20px;
-    }
-    @media screen and (max-width:$break) {
-      margin:17px 10.34px auto auto;
-      img{
-        height:5.56px;
-        width:8.99px;
-      }
-    }
->>>>>>> refactor css stylesheets
-=======
-  float:right;
-  margin: 1rem auto auto 3.4375rem;
-  @media screen and (max-width:$break) {
-    margin: 0.5rem auto auto 0.625rem;
-  }
-}
-.arrow{
-  vertical-align: middle;
-  @media screen and (max-width:$break) {
-  }
-}
-.up{
-  -webkit-transform: scaleY(-1);
-  -moz-transform: scaleY(-1);
-  -o-transform: scaleY(-1);
-   transform: scaleY(-1);
-}
-
-//Answer
-.answer{
-  font-weight: 300;
-  font-size: 1.125rem;
-  max-height:600px;
-  overflow:hidden;
-  transition:all 0.15s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  @media screen and (max-width:$break){
-    font-size: 0.75rem;
-    margin-top:0.5625rem;
-    margin-bottom: 1.1875rem;
-  }
-}
-.hidden{
-
-  max-height: 0;
-  margin:0;
-  // display: none;
->>>>>>> add answers section in queries;
 }
   

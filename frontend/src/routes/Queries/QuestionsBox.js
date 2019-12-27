@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import downArrow from '../../assets/images/down-arrow.svg'
 import downArrow2 from '../../assets/images/down-arrow-2.svg'
 import styles from './QuestionsBox.module.scss';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Answer from './Answer';
-=======
->>>>>>> refactor css stylesheets
-=======
-import Answer from './Answer';
->>>>>>> add answers section in queries;
 
 let image;
 
@@ -38,26 +31,11 @@ class QuestionsBox extends Component {
             <div className={styles.questionBox}>
                 <div className={styles.parentContentDiv}>
                     <div className={styles.textArea}>
-<<<<<<< HEAD
-<<<<<<< HEAD
                         {this.props.query.question}
                         <Answer answer={this.props.query.answer} visibility={this.state.visibility}/>
                     </div>
                     <div onClick = {this.toggleAnswer} className={styles.downArrow}>
                         <img className={styles.arrow + ' ' +(this.state.visibility ? (styles.up) : null)} src={image} alt='drop-down'/>
-=======
-                        {this.props.text}
-                    </div>
-                    <div className={styles.downArrow}>
-                        <img src={image} alt='drop-down'/>
->>>>>>> refactor css stylesheets
-=======
-                        {this.props.query.question}
-                        <Answer answer={this.props.query.answer} visibility={this.state.visibility}/>
-                    </div>
-                    <div onClick = {this.toggleAnswer} className={styles.downArrow}>
-                        <img className={styles.arrow + ' ' +(this.state.visibility ? (styles.up) : null)} src={image} alt='drop-down'/>
->>>>>>> add answers section in queries;
                     </div>
                 </div>
             </div>
