@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Loadable from 'react-loadable';
 import Loader from '../../components/Loader';
 
@@ -20,8 +20,9 @@ class Mentors extends Component {
             <React.Fragment>
                 <Switch>
                     <Route exact path="/mentors" render={props => (<MentorIndex {...props} />)} />
-                    <Route exact path="/mentors/search" render={props => (<ComingSoon {...props} />)} />
-                    <Route exact path="/mentors/filter" render={props => (<ComingSoon {...porps} />)} />
+                    <Route exact path="/mentors/show" render={props => (<ComingSoon {...props} />)} /> {/*show all mentors or searched*/}
+                    <Route exact path="/mentors/filter" render={props => (<ComingSoon {...props} />)} /> {/* filter search */}
+                    <Route exact path="/mentors/becomeMentor" render={props => (<ComingSoon {...props} />)} /> {/* procedure to become mentor*/}
                     <Redirect to="/mentors" /> 
                 </Switch>
             </React.Fragment>
