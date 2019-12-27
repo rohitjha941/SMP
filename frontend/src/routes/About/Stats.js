@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import styles from './About.module.scss';
 
 export default class Stats extends Component {
     statItem(count, label, key) {
         return (
-            <div className="item" key={key}>
-                <div className="count">{count}</div>
-                <div className="label">{label}</div>
+            <div className={styles.item} key={key}>
+                <div className={styles.count}>{count}</div>
+                <div className={styles.label}>{label}</div>
             </div>
         )
     }
@@ -29,7 +30,7 @@ export default class Stats extends Component {
             },
         ]
         return (
-            <div className="stats">
+            <div className={styles.stats}>
                 {stats.map((value, index) => {
                     return this.statItem(value.count, value.label, index)
                 })}

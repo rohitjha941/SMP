@@ -17,7 +17,7 @@ class MentorIndex extends Component {
                     
                     <div className={styles.secondSection}>
                         <div className={styles.imageDiv}>
-                            <img className={styles.mentorImage} src={'https://images.unsplash.com/photo-1490111718993-d98654ce6cf7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'}/>
+                            <img className={styles.mentorImage} src={'https://images.unsplash.com/photo-1490111718993-d98654ce6cf7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'} alt={'mentorMenteeImage'}/>
                         </div>
                         <div className={styles.recruitHeading}>
                             <span className='color-red'>Become </span>a mentor with SMP

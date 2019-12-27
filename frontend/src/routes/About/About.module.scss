@@ -14,3 +14,119 @@
         z-index: -5;
     }
 }
+
+//Intro
+.intro {
+    background-image: linear-gradient($light-blue, $white);
+    color: $grey-level-0_7;
+    padding: 5%;
+    width: 100%;
+    font-size: 1rem;
+    @media screen and(min-width: $break) {
+      font-size: 1.2rem;
+    }
+}
+.tagline {
+    font-size: 2.2em;
+    line-height: 1.5em;
+    margin: 3.5rem auto;
+    width: fit-content;
+    margin: auto;
+    text-align:center;
+}
+.description {
+    width: 75%;
+    text-align: center;
+    font-size: 0.9em;
+    line-height: 150%;
+    width: fit-content;
+    margin: auto;
+    @media screen and(min-width: $break){
+        width: 48%;
+    }
+}
+
+//Stats
+.stats {
+    width: 75%;
+    margin: 5% auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    @media screen and (min-width: $break){
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+    }
+}
+
+.item{
+    position: relative;
+    width: 100%;
+    height: 50%;
+    padding: 10%;
+    &:nth-child(2n+1){
+      @include blue-border-on-right;
+    }
+    @media screen and (min-width: $break){
+      &:not(:last-child){
+        @include blue-border-on-right;
+      }
+    }
+}
+
+.count{
+    color: $blue-text;
+    font-size: 1.8em;
+    align-content: start;
+    text-align: center;
+}
+.label{
+    color: $grey-level-0_4;
+    align-content: start;
+    text-align: center;
+}
+
+//Team
+.teamHeading{
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  /* identical to box height */
+  text-align: center;
+  margin: 40px auto 20px auto;
+  color: $grey-level-0_7;
+}
+
+.teamCardContainer{
+  width: 100%;
+  padding: 5%;
+  margin: auto;
+  ul {
+    display: grid;
+    li{
+        margin: 0 auto 20px auto;
+    }
+  }
+  @media screen and (min-width: $break-team-section){
+    ul{
+      grid-template-columns: 50% 50%;
+    }
+  }
+  @media screen and (min-width:$break){
+    width: 90%;
+    ul{
+      grid-template-columns: 33.33% 33.33% 33.33%;
+    }
+  }
+  @media screen and (min-width: $break-tablet){
+    width : 67%;
+    ul{
+      grid-template-columns: 33.33% 33.33% 33.33%;
+    }
+  }
+}
+
+.viewMore{
+  display: block;
+  margin: 0 auto 44px auto;
+}

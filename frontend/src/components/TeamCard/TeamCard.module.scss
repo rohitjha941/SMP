@@ -1,0 +1,60 @@
+@import '../../style/common.scss';
+
+.container{
+    display: inline-block;
+    width: 148.82px;
+}
+.image{
+    height:148.82px;
+    width:148.82px;
+    border-radius: 3px 3px 0 0;
+}
+.name{
+    width:95%;
+    margin-top: 10.59px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    /* or 24px */
+    text-align: center;
+    color: $grey;
+}
+.designation{
+    font-size: 16px;
+    line-height: 150%;
+    /* or 24px */
+    text-align: center;
+
+    color: $grey;
+}
+.contact{
+    margin-top: 15px;
+    display: block;
+    // padding:auto;
+    text-align:center;
+}
+
+.fb{
+    height:28px;
+    width:28px;    
+    background: $white;
+    border: 0.714865px solid $grey-level-0_3;
+    box-sizing: border-box;
+    border-radius: 4.55727px;
+    display: inline-block;
+    margin: auto 8px auto auto;
+}
+.call{
+    height:28px;
+    width:28px;
+    background: $white;
+    border: 0.714865px solid $grey-level-0_3;
+    box-sizing: border-box;
+    border-radius: 4.55727px;
+    display: inline-block;
+    margin: auto auto auto 8px;
+}
+.commonIcon{
+    display: inline-block;
+    vertical-align: middle;
+}
