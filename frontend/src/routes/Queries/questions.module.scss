@@ -1,29 +1,22 @@
 @import '../../style/common.scss';
 
 .questions{
-    text-align: center;
-}
-
-.questionsColumn2{
-  display: block;
-  width:90%;
-  margin: auto;
-  @media screen and (min-width: $break-queries){
-    width:fit-content;
-    display: inline-grid;
-    margin: 3.815625rem auto 1.875rem 1.8125rem;
-  }  
-}
-
-.questionsColumn1{
-  display:block;
-  width:90%;
-  margin: auto;
-  @media screen and (min-width: $break-queries){
-    width:fit-content;
-    display: inline-grid;
-    margin: 3.815625rem 1.8125rem 1.875rem auto; 
-  } 
+  width: 90%;
+  margin: 5% auto;
+  font-size: 0.95em;
+  ul {
+      display: grid;
+      // grid-template-columns: 50% 50%;
+      li{
+          margin:0 auto 0 auto;
+          height:fit-content;
+      }
+  }
+  @media screen and (min-width:$break-queries){
+    ul{
+      grid-template-columns: 50% 50%;
+    }
+  }
 }
 
 .viewMore{
