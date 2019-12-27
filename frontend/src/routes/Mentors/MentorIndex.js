@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
-import Loadable from 'react-loadable';
-import Loader from '../../components/Loader';
+import styles from './MentorIndex.module.scss';
+import Button from '../../components/Button';
 
-const MentorIndex = Loadable({
-    loader: () => import('./MentorIndex'),
-    loading: () => <Loader />
-})
-
-const ComingSoon = Loadable({
-    loader: () => import('../../components/ComingSoon'),
-    loading: () => <Loader />
-})
-
-class Mentors extends Component {
+class MentorIndex extends Component {
     state = {  }
     render() { 
         return ( 
             <React.Fragment>
-<<<<<<< HEAD
                 <div className={styles.mainDiv}>
                     <div className={styles.mainHeading}>Know Your <span className='color-red'>Mentors</span></div>
                     <div className={styles.briefMentors}>
@@ -28,7 +16,7 @@ class Mentors extends Component {
                     
                     <div className={styles.secondSection}>
                         <div className={styles.imageDiv}>
-                            <img className={styles.mentorImage} src={'https://images.unsplash.com/photo-1490111718993-d98654ce6cf7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'} alt='Mentor with Mentees'/>
+                            <img className={styles.mentorImage} src={'https://images.unsplash.com/photo-1490111718993-d98654ce6cf7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'}/>
                         </div>
                         <div className={styles.recruitHeading}>
                             <span className='color-red'>Become </span>a mentor with SMP
@@ -40,22 +28,14 @@ class Mentors extends Component {
                     </div>
                     <div className={styles.resourceHeading}>Mentor Resources</div>
                     <div className={styles.impLinks}>
-                        <a className={styles.links} href='#top'>Mentors Guide.PDF</a>
+                        <a className={styles.links} href='#'>Mentors Guide.PDF</a>
                         <br/>
-                        <a className={styles.links} href='#top'>How to help mentees.PDF</a>
+                        <a className={styles.links} href='#'>How to help mentees.PDF</a>
                     </div>
                 </div>
-=======
-                <Switch>
-                    <Route exact path="/mentors" render={props => (<MentorIndex {...props} />)} />
-                    <Route exact path="/mentors/search" render={props => (<ComingSoon {...props} />)} />
-                    <Route exact path="/mentors/filter" render={props => (<ComingSoon {...porps} />)} />
-                    <Redirect to="/mentors" /> 
-                </Switch>
->>>>>>> update mentor routes
             </React.Fragment>
          );
     }
 }
  
-export default Mentors;
+export default MentorIndex;
