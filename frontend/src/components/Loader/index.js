@@ -8,7 +8,7 @@ class Loader extends Component {
         return (
             <React.Fragment>
                 <div className={styles.mainDiv}>
-                    <img className={styles.loader} src={LoaderImg}/>
+                    <img className={styles.loader} src={LoaderImg} alt='Loading..'/>
                 </div>
             </React.Fragment>
           );

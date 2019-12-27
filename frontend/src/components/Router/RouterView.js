@@ -5,7 +5,7 @@ import {
     Redirect
 } from "react-router-dom";
 import Loadable from 'react-loadable';
-import Loader from '../Loader'
+import Loader from '../Loader';
 
 const About = Loadable({
     loader: () => import('../../routes/About'),
@@ -36,10 +36,12 @@ const Mentors = Loadable({
     loader:() => import('../../routes/Mentors'),
     loading:() => <Loader />
 })
+
 const ComingSoon = Loadable({
     loader: () => import('../../components/ComingSoon'),
     loading: () => <Loader />
 })
+
 export default class RouterView extends Component {
     render() {
         return (

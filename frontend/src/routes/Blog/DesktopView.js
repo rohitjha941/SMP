@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './DesktopView.module.scss'
+// import styles from './DesktopView.module.scss'
 
 class DesktopView extends Component {
     state = {  }

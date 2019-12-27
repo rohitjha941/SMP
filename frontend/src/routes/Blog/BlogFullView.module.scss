@@ -1,0 +1,45 @@
+@import '../../style/common.scss';
+
+.mainImage{
+    width:100%;
+    margin-top: 17px;
+}
+.contentDiv{
+    padding:3.61%;
+}
+.blogHeading{
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 29px;
+
+    color: $grey-level-0_7;
+}
+.metadata{
+    font-size: 15px;
+    line-height: 19px;
+    /* identical to box height */
+
+    color: $grey-level-0_8;
+    margin: 17px auto 17px 0;
+}
+.blogText{
+    font-size: 15px;
+    line-height: 150%;
+    /* or 22px */
+
+    color: $grey-level-0_5;
+}
+.thanks{
+    font-size: 15px;
+    line-height: 19px;
+    /* identical to box height */
+
+    color: $grey-level-0_8;
+    margin-top: 17px;
+}
+.hr{
+    width: 92.77%;
+    // height: 0px;
+    margin: 15px auto 17px auto;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+}
