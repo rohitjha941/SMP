@@ -35,6 +35,13 @@ div.header-container{
   width: 100%;
 }
 
+div.header-container{
+  position: fixed;
+  background: $white;
+  border-bottom: 1px solid $grey-level-0_05;
+  width: 100%;
+}
+
 div.about {
   div {
     margin: auto;
