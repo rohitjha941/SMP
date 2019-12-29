@@ -1,4 +1,9 @@
 @import 'style/common.scss';
+.head{
+  @media screen and (min-width:$break-tablet){
+    min-height: 100vh; 
+  }
+}
 
 .infoContainer {
     position: relative;
@@ -12,6 +17,54 @@
         content: "";
         background-color: $light-blue-background;
         z-index: -5;
+    }
+    @media screen and (min-width:$break-tablet){
+      padding:0;
+      &:after{
+        width:56.59%;
+        right:0;
+        position: absolute;
+        top:0;
+        left:auto;
+        right:0;
+        height: 100%;
+      }
+      div{
+        div{
+          width:63.19%;
+          text-align:left;
+          display: inline-block;
+          margin-left:4rem;
+          h3{
+            font-weight: 500;
+            font-size: 30px;
+            line-height: 39px;
+            color:$grey-level-0_7;
+            margin-top: 18.9%;
+          }
+          p{
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 150%;
+            color: $grey;
+            margin: 5.04% auto 18.9% 0;
+          }
+        }
+      }
+    }
+    @media screen and (min-width:$break-queries){
+      div{
+        div{
+          h3{
+            font-size: 40px;
+            line-height: 52px;
+          }
+          p{
+            font-size: 24px;
+            line-height: 150%;
+          }
+        }
+      }
     }
 }
 
@@ -33,6 +86,11 @@
     width: fit-content;
     margin: auto;
     text-align:center;
+    @media screen and (min-width:$break-tablet){
+      font-weight: normal;
+      font-size: 70px;
+      line-height: 91px;
+    }
 }
 .description {
     width: 75%;
@@ -40,9 +98,15 @@
     font-size: 0.9em;
     line-height: 150%;
     width: fit-content;
-    margin: auto;
+    margin: 32px auto auto auto;
     @media screen and(min-width: $break){
         width: 48%;
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 150%;
+        text-align: center;
+        color: $grey;
+        margin-top: 39px;
     }
 }
 
@@ -79,11 +143,23 @@
     font-size: 1.8em;
     align-content: start;
     text-align: center;
+    @media screen and (min-width:$break-tablet){
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 52px;
+    }
 }
 .label{
     color: $grey-level-0_4;
     align-content: start;
     text-align: center;
+    @media screen and (min-width:$break-tablet){
+      font-weight: 300;
+      font-size: 24px;
+      line-height: 150%;
+      color: $grey;
+
+    }
 }
 
 //Team
@@ -95,16 +171,27 @@
   text-align: center;
   margin: 40px auto 20px auto;
   color: $grey-level-0_7;
+  @media screen and (min-width:$break){
+    font-size: 30px;
+    line-height: 39px;
+  }
+  @media screen and (min-width:$break-tablet){
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 52px;
+    margin-top: 165px;
+    margin-bottom: 4rem;
+  }
 }
 
 .teamCardContainer{
   width: 100%;
-  padding: 5%;
   margin: auto;
   ul {
     display: grid;
     li{
-        margin: 0 auto 20px auto;
+        margin-bottom: 20px;
+        text-align: center;
     }
   }
   @media screen and (min-width: $break-team-section){
@@ -113,15 +200,13 @@
     }
   }
   @media screen and (min-width:$break){
-    width: 90%;
+    width: 67%;
     ul{
-      grid-template-columns: 33.33% 33.33% 33.33%;
-    }
-  }
-  @media screen and (min-width: $break-tablet){
-    width : 67%;
-    ul{
-      grid-template-columns: 33.33% 33.33% 33.33%;
+      grid-template-columns: 1fr 1fr 1fr;
+      li{
+        margin-bottom: 58px;
+        padding-left: auto;
+      }
     }
   }
 }

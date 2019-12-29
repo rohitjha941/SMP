@@ -5,4 +5,13 @@
     & > * {
         width: 100%;
     }
+    @media screen and (min-width:$break-tablet){
+        display: grid;
+        grid-template-columns: 50% 50%;   
+    }
+}
+.image{
+    @media screen and (min-width:$break-tablet){
+        margin:auto 0 auto 0;
+    }
 }
