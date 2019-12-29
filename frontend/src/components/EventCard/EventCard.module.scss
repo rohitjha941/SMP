@@ -29,6 +29,16 @@
     // height:fit-content;
 }
 
+.containerSide{
+    // border: 1px solid $grey;
+    width:80%;
+    display:block;
+    text-align: left;
+    @media screen and (max-width: 1270px){
+        width:95%;
+    }
+}
+
 
 .eventImage{
     width: 0.9854em;
@@ -82,4 +92,13 @@
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }
+
+.sideViewImg{
+    width:41.63%;
+    display: inline-block;
+    vertical-align: top;
+    // margin-top:0;
+    // padding-top: 0;
+}
+
 

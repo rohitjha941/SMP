@@ -1,9 +1,9 @@
-@import '../../style/colors.scss';
+@import '../../style/common.scss';
 * {
     box-sizing: border-box;
   } 
  .slider {
-    width: 90%;
+    width: 100%;
     text-align: center;
     overflow: hidden;
   }
@@ -53,6 +53,9 @@
     justify-content: center;
     align-items: center;
     font-size: 100px;
+     @media screen and (min-width:$break-tablet){
+       margin-right: 44px;
+     }
   }
   // .slides > div:target {
   //   transform: scale(0.8);
@@ -109,6 +112,11 @@
     font-weight: normal;
     margin: 11.59px auto 0 8px;
     color: $grey-level-0_8;
+    @media screen and (min-width:$break-tablet){
+      font-size: 18px;
+      line-height: 23px;
+      margin: 24px auto 0 12px;
+    }
   }
   .blogCardCommon > img {
     border-radius: 5px 5px 0px 0px;
@@ -119,4 +127,9 @@
     font-size: 12px;
     line-height: 16px;
     color: $grey-level-0_8;
+    @media screen and (min-width:$break-tablet){
+      font-size: 15px;
+      line-height: 19px;
+      margin: 12px auto 24px 12px;
+    }
   }
