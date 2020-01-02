@@ -4,7 +4,7 @@ import styles from './Title.module.scss';
 
 function WrappedComponent(props) {
     return (
-        <p className={styles.text}>
+        <p className={styles.text  + ' ' + props.className}>
             {props.text}
         </p>
     )

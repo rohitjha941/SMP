@@ -38,7 +38,7 @@ class BlogSection extends Component {
             <React.Fragment>
                 <div className={styles.cardSection}>
                     <div className={styles.sectionHeading} >Featured Blogs</div>
-                    <Slider blogData={[blogData1,blogData2,blogData1,blogData2]} />
+                    <Slider blogData={[blogData1,blogData2,blogData1,blogData2,blogData1,blogData2,blogData1,blogData2,blogData1,blogData2,blogData1,blogData2,blogData1,blogData2,blogData1,blogData2,blogData1,blogData2,]} />
                     <Button text='View all Blogs' className={styles.viewBlogsButton} type={'outline'}/>
                 </div>  
             </React.Fragment>

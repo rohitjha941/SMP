@@ -29,9 +29,15 @@
     max-width: 90%;
     margin: 2.75rem auto 0 auto;
     // display:inline-block;
+    @media screen and (min-width:$break-tablet){
+        margin-top: 5.875rem;
+    }
 }
 
 .eventsButton{
     margin: 2.6875rem auto 0px auto;
-    // background: $blue-home;
+    background: $blue-home;
+    @media screen and (min-width:$break-tablet){
+        margin-top: 4rem;
+    }
 }
