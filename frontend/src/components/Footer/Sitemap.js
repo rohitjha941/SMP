@@ -59,7 +59,7 @@ function WrappedComponent(props) {
         <div className={styles.sitemapContainer}>
             <ul>
                 {routeData.map((value, index) => {
-                    return <RouteLink to={value.to} display={value.display} key={index} onClick={() => scrollToTop(250)}/>
+                    return <RouteLink to={value.to} display={value.display} index={index} key={index} onClick={() => scrollToTop(250)}/>
                 })}
             </ul>
         </div>

@@ -36,7 +36,7 @@ export default class HeaderRoutes extends Component {
             <div className={routeViewStyle}>
                 <ul className={styles.navLinks}>
                     {routeData.map((value, index) => {
-                        return <RouterLink to={value.to} display={value.display} key={index} onClick={this.props.hideMenu}/>
+                        return <RouterLink to={value.to} display={value.display} index={index} key={index} onClick={this.props.hideMenu}/>
                     }
                     )}
                 </ul>
