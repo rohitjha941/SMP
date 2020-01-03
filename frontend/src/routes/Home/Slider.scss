@@ -52,7 +52,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 100px;
+    font-size: 6.25rem;
   }
   // .slides > div:target {
   //   transform: scale(0.8);
@@ -104,8 +104,8 @@
   }
 
   .blogCardCommon > div > h3{
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1rem;
     font-weight: normal;
     margin: 11.59px auto 0 8px;
     color: $grey-level-0_8;
@@ -117,7 +117,7 @@
   .blogCardCommon > div > p {
     margin: 11.59px auto 0 8px;
     font-weight: 300;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1rem;
     color: $grey-level-0_8;
   }

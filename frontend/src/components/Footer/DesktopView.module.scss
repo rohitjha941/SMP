@@ -12,26 +12,26 @@
     flex-direction: column;
     bottom:0;
 
-    font-size: 18px;
-    line-height: 23px;
+    font-size: 1.125rem;
+    line-height: 1.4375rem;
     color: $grey;
     font-weight: normal;
     @media screen and (max-width:$break-tablet){
-        font-size: 16px;
-        line-height: 20px;
+        font-size: 1rem;
+        line-height: 1.25rem;
     }
 }
 .brand{
-    font-size: 20px;
-    line-height: 26px;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
     background: $white;
     width:320px;
     position:relative;
     top: -13px;
     left: -10px;
     @media screen and (max-width:$break-tablet){
-        font-size: 16px;
-        line-height: 20px;
+        font-size: 1rem;
+        line-height: 1.25rem;
         width: 250px;
         top:-10px;
         left:-5px;
