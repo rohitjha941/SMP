@@ -6,6 +6,7 @@ class Slider extends Component {
     state = {  }
     render() { 
         let blogData = this.props.blogData
+        // let width = window.innerWidth < 1000 ? ((blogData.length * 18.0625).toString() +'rem') : ((blogData.length * 23.1875).toString() +'rem') 
         return ( 
             <React.Fragment>
                 <div className="slider">
@@ -17,7 +18,7 @@ class Slider extends Component {
                         {blogData ? blogData.map((data,index) =>{
                             return(
                             <div key={index} id={'slide-'+index}>
-                                <BlogCard className='blogCardCommon' key={index} type='sm' blogData={data} headingTop={false} text={false}/>
+                                <BlogCard className='blogCardCommon' key={index} type={window.innerWidth < 1000 ? 'sm' : 'md'} blogData={data} headingTop={false} text={false}/>
                             </div>
                             )
                         })

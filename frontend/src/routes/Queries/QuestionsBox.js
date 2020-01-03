@@ -31,7 +31,7 @@ class QuestionsBox extends Component {
             <div className={styles.questionBox}>
                 <div className={styles.parentContentDiv}>
                     <div className={styles.textArea}>
-                        {this.props.query.question}
+                        <div onClick = {this.toggleAnswer}>{this.props.query.question}</div>
                         <Answer answer={this.props.query.answer} visibility={this.state.visibility}/>
                     </div>
                     <div onClick = {this.toggleAnswer} className={styles.downArrow}>

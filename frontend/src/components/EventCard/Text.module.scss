@@ -75,3 +75,34 @@
 .readMore{
     color: $blue-text;
 }
+
+.sideContainer{
+    width: 54.85%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 3%;
+}
+
+.headingSide{
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 39px;
+    color:$grey-level-0_8;
+}
+.metaSide{
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height */
+    display: inline-block;
+    color: #000000;
+    // position: absolute;
+    vertical-align: bottom;
+}
+.textSide{
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 147.6%;
+    color: $grey;
+    margin: 20px auto 74px 0;
+}

@@ -18,17 +18,17 @@ class EventSection extends Component {
     render() { 
         return ( 
             <React.Fragment>
-                <div className={styles.eventParentDiv}>
+                <div className={styles.eventParentDiv} id="events">
                     <div className={styles.sectionHeading}>Upcoming Events</div>
                     <EventCard 
                         className={styles.eventCardCommon} 
                         eventData={eventData} 
-                        type={window.innerWidth < 600 ? 'sm' : 'lg'}
+                        type={window.innerWidth < 600 ? 'sm' : window.innerWidth < 1000 ? 'lg' : 'side'}
                     />
                     <EventCard 
                         className={styles.eventCardCommon} 
                         eventData={eventData} 
-                        type={window.innerWidth < 600 ? 'sm' : 'lg'}
+                        type={window.innerWidth < 600 ? 'sm' : window.innerWidth < 1000 ? 'lg' : 'side'}
                     />
                     <Button className={styles.eventsButton} text='View More' type='outline'/>
                 </div>

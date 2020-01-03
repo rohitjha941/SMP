@@ -18,6 +18,7 @@ function WrappedComponent(props) {
                 (props.type === 'sm' ? styles.containersm : null ||
                  props.type === 'lg' ? styles.containerlg : null ||
                  props.type === 'xl' ? styles.containerxl : null ||
+                 props.type === 'side' ? styles.containerSide : null ||
                                        styles.containermd)
                 +' '+props.className
             } > 
@@ -33,7 +34,8 @@ function WrappedComponent(props) {
                 :
                 null}
                 <img className={styles.thisWeek} src={ThisWeek} alt='This Week'/>
-                <img className={styles.eventImage} src={imageSource} alt={imageAlternativeText} />
+                <img className={
+                    props.type==='side' ? styles.sideViewImg : styles.eventImage} src={imageSource} alt={imageAlternativeText} />
                 <Text heading={heading} text={text} metadata={metadata} event_id={event_id} headingTop={headingTop} type={props.type}/>
             </div>
         </React.Fragment>
