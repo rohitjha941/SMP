@@ -9,6 +9,16 @@ class Footer extends Component {
             mobileView : window.innerWidth < 600
         }
     }
+    resize  = () => {
+        let mobWidth =  window.innerWidth < 600;
+        this.setState({ mobileView : mobWidth})
+    }
+    componentDidMount() {
+        window.addEventListener('resize', this.resize);
+      }
+      componentWillUnmount() {
+        window.removeEventListener('resize', this.resize);
+    }
     render() { 
         return ( 
             <>
