@@ -13,6 +13,16 @@ const ComingSoon = Loadable({
     loading: () => <Loader />
 })
 
+const ShowMentors = Loadable({
+    loader: () => import('./ShowMentors'),
+    loading: () => <Loader />
+})
+
+const FilterMentors = Loadable({
+    loader: () => import('./FilterMentors'),
+    loading: () => <Loader />
+})
+
 class Mentors extends Component {
     state = {  }
     render() { 
@@ -20,8 +30,8 @@ class Mentors extends Component {
             <React.Fragment>
                 <Switch>
                     <Route exact path="/mentors" render={props => (<MentorIndex {...props} />)} />
-                    <Route exact path="/mentors/show" render={props => (<ComingSoon {...props} />)} /> {/*show all mentors or searched*/}
-                    <Route exact path="/mentors/filter" render={props => (<ComingSoon {...props} />)} /> {/* filter search */}
+                    <Route exact path="/mentors/show" render={props => (<ShowMentors {...props} />)} /> {/*show all mentors or searched*/}
+                    <Route exact path="/mentors/filter" render={props => (<FilterMentors {...props} />)} /> {/* filter search */}
                     <Route exact path="/mentors/becomeMentor" render={props => (<ComingSoon {...props} />)} /> {/* procedure to become mentor*/}
                     <Redirect to="/mentors" /> 
                 </Switch>

@@ -1,0 +1,21 @@
+@import '../../style/common.scss';
+.container{
+    padding:5%;
+    margin: 0;
+}
+
+.department{
+    font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+color:$blue-text;
+}
+
+.mentorCard{
+    margin: 18px auto 12px 0;
+}
+
+hr{
+    border: 0.5px solid $grey-level-0_1;
+    width:100%;
+}

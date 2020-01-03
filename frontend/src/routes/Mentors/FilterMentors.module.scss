@@ -1,0 +1,52 @@
+@import '../../style/common.scss';
+.container{
+    padding:3%;
+    height: fit-content;
+    min-height: 100vh;
+}
+.button{
+    background: white;
+    // float:left;
+    margin: 6px 12px 6px 0;
+}
+
+.section{
+    margin-top: 24px;
+}
+
+.sectionHeading{
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    color: $grey-level-0_6;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+hr{
+    width:100vw;
+    margin-left: -5%;
+    border: 1px solid $grey-level-0_05;
+    margin-top: 42px;
+}
+
+.apply{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin:auto;
+    padding:auto;
+    li{
+        margin: 11px auto;
+        width:100%;
+        button{
+            width:95%;
+            font-size: 14px;
+            line-height: 18px;
+        }
+    }
+}
+
+.counter{
+    color: $blue-text;
+}

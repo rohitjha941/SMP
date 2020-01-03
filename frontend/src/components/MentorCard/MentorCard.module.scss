@@ -1,0 +1,47 @@
+@import '../../style/common.scss';
+
+.container{
+    width:100%;
+    ul{
+        display:grid;
+        grid-template-columns: 25.32% 74.68%;
+    }
+}
+
+.arrow{
+    transform: rotate(-90deg);
+    // width: 9.72px;
+    height:8px;
+    position:absolute;
+    right:5%;
+    margin-top: 10.75px;
+}
+
+.image{
+    width:100%;
+}
+.mentorDetails{
+    margin-left:3.846%;
+}
+
+.name{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: $grey-level-0_7;
+    margin-bottom: 4px;
+}
+
+.meta{
+    font-size: 12px;
+    line-height: 16px;
+    /* identical to box height */
+    color:$grey-level-0_6;
+    margin-bottom: 12px;
+}
+.skills{
+    font-size: 12px;
+line-height: 16px;
+
+color: $grey-level-0_6;
+}
