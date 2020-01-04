@@ -1,0 +1,38 @@
+@import '../../style/common.scss';
+.container{
+    // position:fixed;
+    top:0;
+    height:8%;
+    width:100%;
+    ul{
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
+}
+.heading{
+    font-weight: 500;
+    font-size: 1.1875rem;
+    // margin-top: 16px;
+    line-height: 1.5625rem;
+}
+
+.cross {
+    margin-top: 8px;
+    right:6%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 14px;
+    justify-content: space-between;
+    span {
+      background-color: $grey;
+      height: 2.5px;
+      width:19.8px;
+      &:nth-child(1){
+        transform: rotate(45deg) translateY(8px);
+      }
+      &:nth-child(2){
+        transform: rotate(-45deg) translateY(-8px);
+      }
+    }
+}

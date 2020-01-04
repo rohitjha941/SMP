@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Button from '../../components/Button';
+import SearchHeader from '../../components/SearchHeader';
 import styles from './ShowMentors.module.scss';
 import MentorCard from '../../components/MentorCard';
 
@@ -13,42 +13,42 @@ const Data = [
         },
         {
             image:require('assets/images/profile.jfif'),
-            name:'Rakshit Kesarwani' ,
+            name:'Laksh Arora' ,
             branchShort:'Arch', 
             year:'3rd', 
             skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
         },
         {
             image:require('assets/images/profile.jfif'),
-            name:'Rakshit Kesarwani' ,
+            name:'Jayesh Chaudhary' ,
             branchShort:'Arch', 
             year:'3rd', 
             skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
         },
         {
             image:require('assets/images/profile.jfif'),
-            name:'Rakshit Kesarwani' ,
+            name:'Apan Jain' ,
             branchShort:'Arch', 
             year:'3rd', 
             skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
         },
         {
             image:require('assets/images/profile.jfif'),
-            name:'Rakshit Kesarwani' ,
+            name:'Harshit Maurya' ,
             branchShort:'Arch', 
             year:'3rd', 
             skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
         },
         {
             image:require('assets/images/profile.jfif'),
-            name:'Rakshit Kesarwani' ,
+            name:'Rohit Jha' ,
             branchShort:'Arch', 
             year:'3rd', 
             skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
         },
         {
             image:require('assets/images/profile.jfif'),
-            name:'Rakshit Kesarwani' ,
+            name:'Amit' ,
             branchShort:'Arch', 
             year:'3rd', 
             skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
@@ -67,19 +67,22 @@ class MentorShow extends Component {
         return ( 
             <>
                 <div className={styles.container}>
+                    <SearchHeader/>
                     <div className={styles.department}>Architecture & Planning</div>
-                    {Data.map((data,i) => {
-                        return(
-                        <>
-                            <MentorCard 
-                                className={styles.mentorCard}
-                                profile={data}
-                                key={i}
-                            />
-                            <hr/>
-                        </>
-                        )
-                    })}
+                    <ul id="mentors">
+                        {Data.map((data,i) => {
+                            return(
+                            <>
+                                <li className='mentor'><MentorCard 
+                                    className={styles.mentorCard}
+                                    profile={data}
+                                    key={i}
+                                />
+                                <hr/></li>
+                            </>
+                            )
+                        })}
+                    </ul>
                 </div>
             </>
          );

@@ -1,8 +1,12 @@
 @import '../../style/common.scss';
 .container{
-    padding:3%;
-    height: fit-content;
+    padding:5%;
     min-height: 100vh;
+    position: absolute;
+    width:100%;
+    background:$white;
+    z-index:100;
+    top:-8%;
 }
 .button{
     background: white;

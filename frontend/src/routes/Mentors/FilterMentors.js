@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './FilterMentors.module.scss';
 import Button from '../../components/Button';
+import FilterHeader from '../../components/FilterHeader';
 
 let branch = [
     { name : 'Architecture and Planning', value : 'Architecture and Planning', selected : false},
@@ -150,6 +151,7 @@ class FilterMentors extends Component {
         return ( 
             <>
                 <div className={styles.container}>
+                <FilterHeader/>
                     <div className={styles.section}>
                         <div className={styles.sectionHeading}>Select Branch<span className={styles.counter}>{this.state.selectedBranch.length ? (' ('+this.state.selectedBranch.length+')') : null }</span></div>
                         { branch.map((branch,i)=>{
