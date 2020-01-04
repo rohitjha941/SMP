@@ -14,9 +14,6 @@
 }
 
 .filterIcon{
-    // margin-top: 8px;
-    // right:10%;
-    // position: absolute;
     display: flex;
     flex-direction: column;
     height: 9.59px;
@@ -53,11 +50,10 @@
     padding: 8px auto 8px 10px;
     font-size: 12px;
     line-height: 16px;
-    // height: fit-content;
-    // width:auto;
-    /* identical to box height */
-
     color: $grey-level-0_5;
+    &:focus{
+      outline:none;
+    }
 }
 .backArrow{
     margin:10px auto;

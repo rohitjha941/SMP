@@ -45,20 +45,21 @@ class FilterMentors extends Component {
     handleYear = (value) => {
         let {selectedYear} = this.state;
         let flag = false
-        selectedYear.map((selected,index) => {
+        selectedYear.forEach((selected,index) => {
             if(selected===value){
                 flag = true;
-                year.map((year,i) => {
+                year.forEach((year,i) => {
                     if(year.value === value){
                         year.selected = false;
                         return(selectedYear.splice(index,1));
                     }
+                    // return(selectedYear);
                 })
             }
         })
         if(!flag){
             selectedYear.push(value)
-            year.map((year,i) => {
+            year.forEach((year,i) => {
                 if(year.value === value){
                     year.selected = true;
                 }
@@ -72,10 +73,10 @@ class FilterMentors extends Component {
     handleBranch = (value) => {
         let {selectedBranch} = this.state;
         let flag = false
-        selectedBranch.map((selected,index) => {
+        selectedBranch.forEach((selected,index) => {
             if(selected===value){
                 flag = true;
-                branch.map((branch,i) => {
+                branch.forEach((branch,i) => {
                     if(branch.value === value){
                         branch.selected = false;
                         return(selectedBranch.splice(index,1));
@@ -85,7 +86,7 @@ class FilterMentors extends Component {
         })
         if(!flag){
             selectedBranch.push(value)
-            branch.map((branch,i) => {
+            branch.forEach((branch,i) => {
                 if(branch.value === value){
                     branch.selected = true;
                 }
@@ -99,10 +100,10 @@ class FilterMentors extends Component {
     handleSkill = (value) => {
         let {selectedSkill} = this.state;
         let flag = false
-        selectedSkill.map((selected,index) => {
+        selectedSkill.forEach((selected,index) => {
             if(selected===value){
                 flag = true;
-                skills.map((skill,i) => {
+                skills.forEach((skill,i) => {
                     if(skill.value === value){
                         skill.selected = false;
                         return(selectedSkill.splice(index,1));
@@ -112,7 +113,7 @@ class FilterMentors extends Component {
         })
         if(!flag){
             selectedSkill.push(value)
-            skills.map((skill,i) => {
+            skills.forEach((skill,i) => {
                 if(skill.value === value){
                     skill.selected = true;
                 }
