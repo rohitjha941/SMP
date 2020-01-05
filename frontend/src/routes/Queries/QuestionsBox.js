@@ -31,7 +31,7 @@ class QuestionsBox extends Component {
             <div className={styles.questionBox}>
                 <div className={styles.parentContentDiv}>
                     <div className={styles.textArea}>
-                        <div onClick = {this.toggleAnswer}>{this.props.query.question}</div>
+                        <div onClick = {this.toggleAnswer}>{(this.props.query.question.length > 77 && !this.state.visibility) ? (this.props.query.question.slice(0,73)+'...'): this.props.query.question}</div>
                         <Answer answer={this.props.query.answer} visibility={this.state.visibility}/>
                     </div>
                     <div onClick = {this.toggleAnswer} className={styles.downArrow}>
