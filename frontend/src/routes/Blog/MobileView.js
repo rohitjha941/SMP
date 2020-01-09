@@ -5,44 +5,42 @@ import styles from './MobileView.module.scss';
 
 export default class MobileView extends Component {
     render() { 
+        const blogData = this.props.blogData? this.props.blogData : null;
         return (
             <React.Fragment>
                 <div className={styles.heading}><span className='color-red'>Read</span> what we do</div>
+                {blogData?
+                <>
                 <div>
                     <div className={styles.categoryHeading}>Featured</div>
-                    <BlogCard 
-                        className={styles.blogCardCommon} 
-                        blogData={this.props.blogData}
-                        type={window.innerWidth <600 ? 'sm' : 'lg'}
-                        // headingTop = {false}
-                    />
-                    <hr className={styles.hr}/>
-                    <BlogCard 
-                        className={styles.blogCardCommon} 
-                        blogData={this.props.blogData}
-                        type={window.innerWidth < 600 ? 'sm' : 'lg'}
-                        // heading = {false} 
-                    />
-                    <hr className={styles.hr}/>
+                    {blogData.map(value => (
+                        <div key={value.blog_id}>
+                            <BlogCard 
+                                className={styles.blogCardCommon} 
+                                blogData={value}
+                                type={window.innerWidth <600 ? 'sm' : 'lg'}
+                            />
+                            <hr className={styles.hr}/>
+                        </div>
+                    ))}
                 </div>
                 <div>
                     <div className={styles.categoryHeading}>Journey from Mentee to Mentor</div>
-                    <BlogCard 
-                        className={styles.blogCardCommon} 
-                        blogData={this.props.blogData}
-                        type={window.innerWidth < 600 ? 'sm' : 'lg'}
-                        // metadata = {false}
-                    />
-                    <hr className={styles.hr}/>
-                    <BlogCard 
-                        className={styles.blogCardCommon} 
-                        blogData={this.props.blogData}
-                        type={window.innerWidth < 600 ? 'sm' : 'lg'}
-                        // text = {false}
-                    />
-                    <hr className={styles.hr}/>
+                    {blogData.map(value => (
+                        <div key={value.blog_id}>
+                            <BlogCard 
+                                className={styles.blogCardCommon} 
+                                blogData={value}
+                                type={window.innerWidth <600 ? 'sm' : 'lg'}
+                            />
+                            <hr className={styles.hr}/>
+                        </div>
+                    ))}
                 </div>
                 <Button className={styles.viewMore} type='outline' text='View More'/>
+                </>
+                : null
+                }
             </React.Fragment>
         );
     }
