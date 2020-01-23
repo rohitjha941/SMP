@@ -1,24 +1,36 @@
-import React from 'react';
+import React ,{Component} from 'react';
+import MobileView from './MobileView';
+import DesktopView from './DesktopView';
 
-import Acknowledgement from './Acknowledgement';
-import Sitemap from './Sitemap';
-import ScrollToTop from './ScrollToTop';
-import Branding from './Branding';
-
-import styles from './Footer.module.scss';
-
-function WrappedComponent(props) {
-    return (
-        <div className={styles.container}>
-            <div className={styles.brandingSitemapContainer}>
-                <Branding/>
-                <Sitemap/>
-            </div>
-            <ScrollToTop/>
-            <Acknowledgement />
-        </div>
-    )
+class Footer extends Component {
+    constructor(){
+        super();
+        this.state ={
+            mobileView : window.innerWidth < 600
+        }
+    }
+    resize  = () => {
+        let mobWidth =  window.innerWidth < 600;
+        this.setState({ mobileView : mobWidth})
+    }
+    componentDidMount() {
+        window.addEventListener('resize', this.resize);
+      }
+      componentWillUnmount() {
+        window.removeEventListener('resize', this.resize);
+    }
+    render() { 
+        return ( 
+            <>
+                {
+                    this.state.mobileView ? 
+                        <MobileView />
+                    :
+                        <DesktopView />
+                }
+            </>
+         );
+    }
 }
-
-const Footer = React.memo(WrappedComponent);
+ 
 export default Footer;

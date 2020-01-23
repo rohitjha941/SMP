@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 // import styles from './DesktopView.module.scss'
+import ComingSoon from '../../components/ComingSoon';
 
 class DesktopView extends Component {
     state = {  }
     render() { 
         return ( 
             <React.Fragment>
-                <div>
-                    Desktop View
-                </div>
+                <ComingSoon />
             </React.Fragment>
          );
     }
