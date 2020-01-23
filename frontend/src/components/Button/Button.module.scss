@@ -15,10 +15,12 @@
     &:focus {
         outline: none;
     }
-    &:hover{
-        color: $white;
-        background: $blue-text;
-        border:none;
+    @media not all and (pointer: coarse){
+        &:hover{
+            color: $white;
+            background: $blue-text;
+            border:none;
+        }
     }
     @media screen and (min-width : $break){
         border-width: 1.5px;
@@ -32,8 +34,8 @@
 .solid {
     color: $white;
     background-color: $blue-text;
-    border:none;
-    border-radius:5px;
+    border: 0.850355px solid $blue-text;
+    border-radius:2px;
     padding: 6px 20px 6px 22px;
     font-family : $ibm-plex;
     font-size: 0.75rem;
@@ -43,15 +45,17 @@
     &:focus {
         outline: none;
     }
-    &:hover{
-        color: $blue-text;
-        background: $white;
-        border: 0.850355px solid $blue-text;
-        border-radius: 5px;
+    @media not all and (pointer : coarse){
+        &:hover{
+            color: $blue-text;
+            background: $white;
+            border: 0.850355px solid $blue-text;
+            border-radius: 2px;
+        }
     }
     @media screen and (min-width : $break){
         border-width: 1.5px;
-        border-radius: 4px;
+        border-radius: 2px;
         padding: 10px 42px 10px 43px;
         font-size: 1.25rem;
         line-height: 1.625rem;
@@ -60,7 +64,8 @@
 
 .disabled {
     color: $grey-level-0_4;
-    background: $grey-level-0_02;
+    background: white;
+    border-radius:2px;
     border: 0.822622px solid $grey-level-0_1;
     padding: 6px 20px 6px 22px;
     font-family : $ibm-plex;
@@ -71,10 +76,12 @@
     &:focus {
         outline: none;
     }
-    &:hover{
-        color: $white;
-        background: $blue-text;
-        border:none;
+    @media not all and (pointer:coarse){
+        &:hover{
+            color: $white;
+            background: $blue-text;
+            border-color: $blue-text;
+        }
     }
     @media screen and (min-width : $break){
         border-width: 1.5px;

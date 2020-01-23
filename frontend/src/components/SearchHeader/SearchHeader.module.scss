@@ -1,0 +1,60 @@
+@import '../../style/common.scss';
+.container{
+    top:0;
+    height:8%;
+    width:100%;
+    ul{
+        display: grid;
+        grid-template-columns: 10% 80% 10%;
+    }
+    border-bottom: 1px solid $grey-level-0_05;
+    margin-bottom: 13px;
+    margin-top:0;
+    padding-bottom:8px;
+}
+
+.filterIcon{
+    display: flex;
+    flex-direction: column;
+    height: 9.59px;
+    width:15px;
+    justify-content: space-between;
+    margin:8px auto;
+    span {
+      background-color: $grey;
+      height: 1.62px;
+      border-radius: 1px;
+      &:nth-child(1){
+        width:15px;
+      }
+      &:nth-child(2){
+        width:12px;
+        margin-right:0;
+        margin-left: auto;
+      }
+      &:nth-child(3){
+        width:8px;
+        margin-right:0;
+        margin-left: auto;
+      }
+    }
+}
+
+.searchBox{
+    background: rgba(0, 0, 0, 0.01);
+    border: 0.574457px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 2.87228px;
+    width:100%;
+    min-height: 32px;
+    padding: 8px auto 8px 10px;
+    font-size: 12px;
+    line-height: 16px;
+    color: $grey-level-0_5;
+    &:focus{
+      outline:none;
+    }
+}
+.backArrow{
+    margin:10px auto;
+}
