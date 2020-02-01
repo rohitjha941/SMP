@@ -35,7 +35,7 @@ export default class Home extends Component {
                     <div onClick={this.scrollTo} className={styles.navDown}><img src={navDown} className={styles.navDown} alt='down-arrow' /></div>
                 </div>
                     <EventSection id='events' className={styles.EventSection} />
-                    <BlogSection className={styles.BlogSection} />
+                    <BlogSection className={styles.BlogSection} blogs={this.props.blogs}/>
             </div>
         )
     }
