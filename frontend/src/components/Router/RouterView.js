@@ -45,11 +45,11 @@ export default class RouterView extends Component {
         return (
             <div className="router-view">
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" render={() => <Home blogs={this.props.blogs}/>} />
                     <Route path ="/freshers" component={ComingSoon} />
                     <Route path="/about" component={About} />
                     <Route path="/events" component={Events} />
-                    <Route path="/blogs" component={Blog} />
+                    <Route path="/blogs" render={() => <Blog blogs={this.props.blogs}/>} />
                     <Route path="/queries" component={Queries} />
                     <Route path="/mentors" component={Mentors} />
                     <Redirect to="/" />
