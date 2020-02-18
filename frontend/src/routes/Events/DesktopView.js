@@ -4,7 +4,22 @@ import styles from './DesktopView.module.scss';
 import EventCard from '../../components/EventCard';
 
 class DesktopView extends Component {
-    state = {  }
+    constructor(){
+        super();
+        this.state ={
+            break : window.innerWidth < 1470 ? true : false,
+        }
+    }
+    resize  = () => {
+        let mobWidth =  window.innerWidth < 1470;
+        this.setState({ break : mobWidth})
+    }
+    componentDidMount() {
+        window.addEventListener('resize', this.resize);
+        }
+        componentWillUnmount() {
+        window.removeEventListener('resize', this.resize);
+    }
     render() {
         const eventData = this.props.eventData; 
         return ( 
@@ -20,10 +35,10 @@ class DesktopView extends Component {
                <div className={styles.container2}>
                    <div className={styles.sectionHeading}>SMP Events</div>
                     <ul className={styles.ul2}>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type='lg'/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type='lg'/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type='lg'/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type='lg'/></li>
+                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type={this.state.break ? 'md' : 'lg'}/></li>
+                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type={this.state.break ? 'md' : 'lg'}/></li>
+                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type={this.state.break ? 'md' : 'lg'}/></li>
+                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type={this.state.break ? 'md' : 'lg'}/></li>
                     </ul>
                </div>
             </>

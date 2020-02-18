@@ -23,14 +23,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     li{
-        // margin: auto;
+        margin: auto;
         // margin-left:0;
         padding-right: 15%;
         padding-bottom: 15%;
-    }
-}
-.eventcardcommon{
-    img:nth-child(2){
-        width:100%;
     }
 }
