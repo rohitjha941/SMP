@@ -9,29 +9,32 @@
 
 .containermd{
     font-size:20.25rem;
-    width:20.25rem;
-    max-width: 90vw;
+    width:100%;
+    max-width: 20.25rem;
     // height:fit-content;
 }
 
 .containerlg{
     font-size: 36.9375rem;
-    width:36.9375rem;
+    width:36.975rem;
     max-width: 90vw;
+    @media screen and (max-width:1600px){
+        width: 100%;
+    }
     // height:fit-content;
 
 }
 
 .containerxl{
-    width:37.5rem;
-    width:37.5rem;
-    max-width: 90vw;
+    font-size:37.5rem;
+    // width:%;
+    max-width: 37.5rem;
     // height:fit-content;
 }
 
 
 .blogImage{
-    width: 1em;
+    width: 100%;
     display:block;
     border-radius: 5px;
     text-align:center;

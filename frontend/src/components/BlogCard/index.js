@@ -33,7 +33,7 @@ function WrappedComponent(props) {
                 </h3>
                 :
                 null}
-                <img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} />
+                <div id='imagediv'><img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} /></div>
                 <Text heading={heading} text={truncatedText} metadata={metadata} blog_id={blog_id} headingTop={headingTop} type={props.type}/>
             </div>
         </React.Fragment>
