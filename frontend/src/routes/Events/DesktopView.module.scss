@@ -7,10 +7,12 @@
     line-height: 2.4375;
     font-weight: 500;
     text-align: left;
-    margin-left: 5%;
+    margin-left: 8%;
     margin-top: 5%;
 }
 .ul1{
+    width:90%;
+    margin: auto;
     li{
         // width:80%;
         margin: auto;
@@ -24,8 +26,11 @@
     grid-template-columns: 1fr 1fr;
     li{
         margin: auto;
-        // margin-left:0;
-        padding-right: 15%;
-        padding-bottom: 15%;
+        padding:6%;
+        padding-left: 0%; 
+        margin-left:5% ;
     }
-}
+    @media screen and (max-width:1470px){
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}   

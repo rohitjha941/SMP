@@ -33,16 +33,16 @@
 }
 
 .eventCardCommon{
-    margin: 0 auto 0px auto;
+    margin: auto;
+    display: block;
 }
 
 .hr{
     margin: 20px auto 13px auto;
-    width: 270px;
+    width: 80%;
     height: 0px;
     border: 0.5px solid $grey-level-0_1;
     @media screen and (min-width: $break){
-        width : 582.36px;
     }
 }
 

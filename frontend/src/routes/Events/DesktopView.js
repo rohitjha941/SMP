@@ -25,7 +25,7 @@ class DesktopView extends Component {
         return ( 
             <>
                <div className={styles.mainHeading}>We Conduct <span className='color-red'>Events</span> year-round</div>
-               <div className={styles.conatiner1}>
+               <div className={styles.container1}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
                     <ul className={styles.ul1}>
                         <li><EventCard eventData={eventData} type='side'/></li>
