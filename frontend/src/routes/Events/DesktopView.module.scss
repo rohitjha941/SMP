@@ -1,0 +1,31 @@
+.mainHeading{
+    font-size: 3.125rem;
+    line-height: 4.0625rem;
+}
+.sectionHeading{
+    font-size: 1.875rem;
+    line-height: 2.4375;
+    font-weight: 500;
+    text-align: left;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+.ul1{
+    li{
+        // width:80%;
+        margin: auto;
+        padding:3%;
+    }
+}
+.ul2{
+    width:90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    li{
+        margin: auto;
+        // margin-left:0;
+        padding-right: 15%;
+        padding-bottom: 15%;
+    }
+}
