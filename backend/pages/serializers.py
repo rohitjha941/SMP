@@ -46,3 +46,7 @@ class BlogsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blogs
         fields = "__all__"
+class EventsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Events
+        fields = "__all__"

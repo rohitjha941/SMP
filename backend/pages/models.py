@@ -232,3 +232,31 @@ class Blogs(models.Model):
     )
 
     content = tinymce_models.HTMLField()
+
+class Events(models.Model):
+    title = models.CharField(
+        default = "",
+        max_length = 150,
+    )
+
+    date = models.DateField(
+        blank=True,
+        null = True
+    )
+    time = models.TimeField (
+        blank=True,
+        null = True
+    )
+    thumbnail = models.ImageField(
+        upload_to="events/",
+        max_length=200,
+        null = True,
+        blank = True
+    )
+    venue = models.CharField(
+        default="",
+        max_length=100
+    )
+    content = models.TextField(
+        default="",
+    )
