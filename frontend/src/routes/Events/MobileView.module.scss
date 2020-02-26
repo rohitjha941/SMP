@@ -1,7 +1,7 @@
 @import '../../style/common.scss';
 
 .heading{
-    margin: 1.9375rem auto 0px auto;
+    margin: 1.9375rem auto 0 auto;
     font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: 500;
@@ -22,13 +22,13 @@
     font-size: 0.75rem;
     line-height: 1rem;
     color:$blue-text;
-    width:274px;
+    widows: 17.125rem;
     margin: 2.375rem auto 1rem auto;
     text-align: left;
     @media screen and (min-width:$break){
         font-size:1.6875rem;
         line-height: 2.1875rem;
-        width: 582.36px;
+        width: 36.3975rem;
         }
 }
 
@@ -38,10 +38,10 @@
 }
 
 .hr{
-    margin: 20px auto 13px auto;
+    margin: 1.25rem auto 0.8175rem auto;
     width: 80%;
-    height: 0px;
-    border: 0.5px solid $grey-level-0_1;
+    height: 0;
+    border: 0.03125rem solid $grey-level-0_1;
     @media screen and (min-width: $break){
     }
 }

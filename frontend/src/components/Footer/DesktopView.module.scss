@@ -2,7 +2,7 @@
 
 .container{
     width:87.91%;
-    border-top: 1px solid $grey;
+    border-top: 0.0625rem solid $grey;
     background: white;
     left:0;
     right:0;
@@ -25,22 +25,22 @@
     font-size: 1.25rem;
     line-height: 1.625rem;
     background: $white;
-    width:320px;
+    width:20rem;
     position:relative;
-    top: -13px;
-    left: -10px;
+    top: -0.8125rem;
+    left: -0.625rem;
     @media screen and (max-width:$break-tablet){
         font-size: 1rem;
         line-height: 1.25rem;
-        width: 250px;
-        top:-10px;
-        left:-5px;
+        width: 15.625rem;
+        top:-0.625rem;
+        left:-0.3125rem;
     }
 }
 
 .logoContainer{
     display: grid;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 }
 
 .logo{
@@ -52,12 +52,12 @@
 }
 .instiLink{
     width:100%;
-    margin-top:4px;
+    margin-top:0.25rem;
     font-weight: normal;
 }
 .instiLinkHead{
     font-weight: 300;
-    margin-top:17px;
+    margin-top:1.0625rem;
 }
 .columns{
     display: grid;
@@ -65,11 +65,11 @@
     grid-template-columns: 29% 20% 20% 31%;
     li{
         margin:0 auto auto 0;
-        padding: 10px 2px;
+        padding: 0.625rem 0.125rem;
     }
     @media screen and (max-width:$break-tablet){
         li{
-            padding: 7px 2px;
+            padding: 0.4375rem 0.125rem;
         }
     }
 }

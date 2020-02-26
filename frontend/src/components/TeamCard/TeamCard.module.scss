@@ -10,65 +10,64 @@
 .image{
     height:100%;
     width:100%;
-    border-radius: 3px 3px 0 0;
+    border-radius: 0.1875rem 0.18875rem 0 0;
 }
 .name{
     width:95%;
-    margin-top: 10.59px;
+    margin-top: 0.662rem;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 150%;
-    /* or 24px */
     text-align: center;
     color: $grey;
     @media screen and (min-width:$break-tablet){
-        font-size: 24px;
+        font-size: 1.5rem;
         line-height: 150%;
     }
 }
 .designation{
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 150%;
     text-align: center;
     color: $grey;
     @media screen and (min-width:$break-tablet){
-        font-size: 24px;
+        font-size: 1.5rem;
         line-height: 150%;
     }
 }
 .contact{
-    margin-top: 15px;
+    margin-top: 0.9375rem;
     display: block;
     // padding:auto;
     text-align:center;
 }
 
 .fb{
-    height:28px;
-    width:28px;    
+    height:1.75rem;
+    width:1.75rem;    
     background: $white;
-    border: 0.714865px solid $grey-level-0_3;
+    border: 0.0446rem solid $grey-level-0_3;
     box-sizing: border-box;
-    border-radius: 4.55727px;
+    border-radius: 0.2848rem;
     display: inline-block;
-    margin: auto 8px auto auto;
+    margin: auto 0.5rem auto auto;
     @media screen and (min-width:$break-tablet) {
-        height:35px;
-        width:35px;
+        height:2.1875rem;
+        width:2.1875rem;
     }
 }
 .call{
-    height:28px;
-    width:28px;
+    height:1.75rem;
+    width:1.75rem;
     background: $white;
-    border: 0.714865px solid $grey-level-0_3;
+    border: 0.0446 solid $grey-level-0_3;
     box-sizing: border-box;
-    border-radius: 4.55727px;
+    border-radius: 0.2843em;
     display: inline-block;
-    margin: auto auto auto 8px;
+    margin: auto auto auto 0.5rem;
     @media screen and (min-width:$break-tablet) {
-        height:35px;
-        width:35px;
+        height:2.1875rem;
+        width:2.1875rem;
     }
 }
 .commonIcon{

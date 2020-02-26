@@ -1,19 +1,19 @@
 @import '../../style/common.scss';
 .homeContainer {
     & > * {
-        margin: 0px auto;
+        margin: 0 auto;
         padding: 5%;
     }
 }
 
 .titleContainer {
     width: 80%;
-    margin: 5% auto 0px auto;
+    margin: 5% auto 0 auto;
 }
 
 .illustration {
     width: 80%;
-    margin : 5% auto 0px auto;
+    margin : 5% auto 0 auto;
     img {
         width: 100%;
     }
@@ -29,7 +29,7 @@
     width: 80%;
     font-size: 1rem;
     line-height: 150%;
-    margin: 5.014% auto 0px auto;
+    margin: 5.014% auto 0 auto;
 }
 
 .learnMore{
@@ -54,7 +54,6 @@
         // position: absolute;
         text-align:left;
         // left: 9.86vw;
-        // top: 179px;
         width:50.42vw;
         font-weight: 600;
         font-size: 3.5rem;
@@ -64,12 +63,13 @@
 .learnMoreText{
     display: none;
     @media screen and (min-width:$break-tablet){
+        cursor:pointer; 
         display: block;
         color:$blue-text;
-        margin: 5% auto 0px auto;
+        margin: 5% auto 0 auto;
         font-weight: 500;
         font-size: 1.25rem;
-        line-height: 26px;
+        line-height: 1.625rem;
         width: 80%;
     }
 }
@@ -77,13 +77,14 @@
 .navDown{
     display: none;
     @media screen and (min-width:$break-tablet){
+        cursor:pointer;
         display: block;
         width: 80%;
         text-align: left;
-        margin: 5% auto 0px auto;
+        margin: 5% auto 0 auto;
         img{
-            height:28px;
-            width:28px;
+            height:1.75rem;
+            width:1.75rem;
             margin-left: 0;
             
         }
