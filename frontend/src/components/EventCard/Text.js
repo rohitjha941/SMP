@@ -2,8 +2,16 @@ import React from 'react';
 
 import styles from './Text.module.scss';
 
+var stringToHTML = function (str) {
+	var parser = new DOMParser();
+	var doc = parser.parseFromString(str, 'text/html');
+	return doc.body;
+};
+
 function WrappedComponent(props) {
     const metadata = props.metadata;
+    // console.log(props.text)
+    // console.log(stringToHTML(props.text))
     return (
         <div className={props.type==='side' ? styles.sideContainer : styles.container}>
             {props.headingTop ? null :
@@ -24,12 +32,12 @@ function WrappedComponent(props) {
                     :
                     null
             }
-            <p className={ props.type==='side' ? styles.textSide : styles.text}>
-            {props.text ? props.text : null}
+            <div className={ props.type==='side' ? styles.textSide : styles.text} >
+                <pre>{props.text}></pre>    
                 <a href={'/events/view/'+ props.event_id} className={styles.readMore}>
                     {props.text  ? '...Read More' : null }
                 </a>
-            </p>
+            </div>
             {
                 props.type==='side' && metadata ? 
                     (<p className={ props.type==='side' ? styles.metaSide : styles.metadata}>
