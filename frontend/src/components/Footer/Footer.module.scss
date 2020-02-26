@@ -8,7 +8,7 @@
     flex-direction: column;
     align-items: center;
     background: $footer-background;
-    border-top: 1px solid $grey-level-0_05;
+    border-top: 0.0625rem solid $grey-level-0_05;
 
     .brandingSitemapContainer {
         width: 80%;
@@ -64,7 +64,7 @@
         width: 3em;
         height: 3em;
         border-radius: 50%;
-        border: 1px solid $grey-level-0_8;
+        border: 0.0625rem solid $grey-level-0_8;
         background-color: transparent;
         transform: rotate(-90deg);
         font-weight: 700;

@@ -2,7 +2,7 @@
 
 .container {
     text-align:left;
-    width: 0.9854em;
+    width: 98.54%;
     max-width: inherit;
 }
 
@@ -64,7 +64,6 @@
     font-size: 0.75rem;
     line-height: 150%;
     margin-top: 0.4375rem;
-    /* or 18px */
     color: $grey;
     @media screen and (min-width: $break){
         font-size: 1rem;

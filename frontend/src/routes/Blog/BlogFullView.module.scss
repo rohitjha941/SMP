@@ -1,18 +1,45 @@
 @import '../../style/common.scss';
-
+.mainDiv{
+    margin-top: -5%;
+}
 .mainImage{
-    width:100%;
-    margin-top: 17px;
+    width:80%;
+    margin:auto;
+    display: block;
+    // margin-top: 1.0625rem;
+    @media screen and (min-width:$break-tablet){
+        width:60%;
+        height:55vh;
+        margin:auto;
+        padding-top: 0;
+        padding: auto;
+        display: block;
+        object-fit: cover;
+        // overflow-y: hidden;
+    }
 }
 .contentDiv{
-    padding:3.61%;
+    width:80%;
+    margin: auto;
+    @media screen and (min-width:$break){
+        width:60%;
+    }
 }
 .blogHeading{
     font-weight: 500;
     font-size: 1.375rem;
     line-height: 1.8125rem;
+    margin-top: 1rem;
 
     color: $grey-level-0_7;
+    @media screen and (min-width:$break){
+        font-size: 1.8rem;
+        margin-top: 1rem;
+    }
+    @media screen and (min-width:$break-tablet){
+        font-size: 2.2rem;
+        margin-top: 2.5rem;
+    }
 }
 .metadata{
     font-size: 0.9375rem;
@@ -20,14 +47,29 @@
     /* identical to box height */
 
     color: $grey-level-0_8;
-    margin: 17px auto 17px 0;
+    margin: 1.0625rem auto 1.0625rem 0;
+    @media screen and (min-width:$break){
+        font-size:1.2rem;
+        margin-top: 1.5rem;
+    }
+    @media screen and (min-width:$break-tablet){
+        font-size: 1.5rem;
+        margin-top: 2rem;
+    }
 }
 .blogText{
     font-size: 0.9375rem;
     line-height: 150%;
-    /* or 22px */
 
     color: $grey-level-0_5;
+    @media screen and (min-width:$break){
+        font-size:1.3rem;
+        margin-top: 1.5rem;
+    }
+    @media screen and (min-width:$break-tablet){
+        font-size:1.5rem;
+        margin-top: 2rem;
+    }
 }
 .thanks{
     font-size: 0.9375rem;
@@ -35,11 +77,19 @@
     /* identical to box height */
 
     color: $grey-level-0_8;
-    margin-top: 17px;
+    margin-top: 1.0625rem;
+    @media screen and (min-width:$break){
+        font-size:1.3rem;
+        margin-top: 1.5rem;
+    }
+    @media screen and (min-width:$break-tablet){
+        font-size:1.5rem;
+        margin-top: 2rem;
+    }
 }
 .hr{
     width: 92.77%;
-    // height: 0px;
-    margin: 15px auto 17px auto;
-    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    margin: 0.9375rem auto 1.0625rem auto;
+    border: 0.03125rem solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 10%;
 }

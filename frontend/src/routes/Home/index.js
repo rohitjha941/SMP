@@ -7,6 +7,7 @@ import people_plant_light from 'assets/images/people_plant_light.svg';
 // import Title from 'components/Title';
 import TextView from 'components/TextView';
 import Button from 'components//Button';
+import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
     scrollTo(delay=0) {
@@ -31,7 +32,7 @@ export default class Home extends Component {
                         <TextView text={description} />
                     </div>
                     <Button  className={styles.learnMore} text="Learn More" type='outline'/>
-                    <div className={styles.learnMoreText}>Learn More ></div>
+                    <Link to="/about"><div className={styles.learnMoreText}>Learn More ></div></Link>
                     <div onClick={this.scrollTo} className={styles.navDown}><img src={navDown} className={styles.navDown} alt='down-arrow' /></div>
                 </div>
                     <EventSection id='events' className={styles.EventSection} />

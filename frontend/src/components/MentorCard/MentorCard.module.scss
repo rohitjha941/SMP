@@ -10,11 +10,10 @@
 
 .arrow{
     transform: rotate(-90deg);
-    // width: 9.72px;
-    height:8px;
+    height:0.5rem;
     position:absolute;
     right:6%;
-    margin-top: 10.75px;
+    margin-top: 0.671875rem;
 }
 
 .image{
@@ -26,22 +25,22 @@
 
 .name{
     font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
     color: $grey-level-0_7;
-    margin-bottom: 4px;
+    margin-bottom: 0.25rem;
 }
 
 .meta{
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1rem;
     /* identical to box height */
     color:$grey-level-0_6;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
 }
 .skills{
-    font-size: 12px;
-line-height: 16px;
+    font-size: 0.75rem;
+line-height: 1rem;
 
 color: $grey-level-0_6;
 }
