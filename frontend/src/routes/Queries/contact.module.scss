@@ -54,16 +54,16 @@
             color: $grey-level-0_5;
             margin: 0.75rem auto 2.375rem auto;
             background: $grey-level-0_01;
-            border: 1px solid $grey-level-0_1;
+            border: 0.0625rem solid $grey-level-0_1;
             box-sizing: border-box;
-            border-radius: 5px;
+            border-radius: 0.3125rem;
             &:focus{
                 outline:none;
             }
             @media screen and (max-width: $break){
                 width: 17.0625rem;
                 height: 2rem;
-                margin: 0px 0px 0.9375rem auto;
+                margin: 0 0 0.9375rem auto;
                 font-size: 0.75rem;
                 line-height: 1rem;
             }
@@ -73,9 +73,9 @@
             width: 29.6875rem;
             height: 13.5rem;
             background: $grey-level-0_01;
-            border: 1px solid $grey-level-0_1;
+            border: 0.0625rem solid $grey-level-0_1;
             box-sizing: border-box;
-            border-radius: 5px;
+            border-radius: 0.3125rem;
             resize: none;
             margin: 0.75rem auto 2.375rem auto;
             font-style: normal;
@@ -90,7 +90,7 @@
             @media screen and (max-width: $break){
                 width: 17.054375rem;
                 height: 7.755rem;
-                margin: 0px 0px 0.9375rem auto;
+                margin: 0 0 0.9375rem auto;
                 // float: left;
                 font-size: 0.75rem;
                 line-height: 1rem;

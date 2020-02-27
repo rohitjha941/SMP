@@ -3,7 +3,7 @@
 
 .loader{
   position:fixed;
-  width:90px;
+  width:5.625rem;
   left:0;
   right:0;
   top:0;
@@ -11,7 +11,7 @@
   margin:auto;
   display:inline-block;
   @media screen and (min-width: $break){
-    width:120px;
+    width:7.5rem;
   }
 }
 .mainDiv{

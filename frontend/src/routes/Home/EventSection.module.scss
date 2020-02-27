@@ -15,7 +15,7 @@
     /* identical to box height */
     color: $blue-text;
     width:80%;
-    margin: 0px auto 0px auto;
+    margin: 0 auto 0 auto;
     // float:left;
     text-align: left;
     padding-top: 2.0625rem;
@@ -35,7 +35,7 @@
 }
 
 .eventsButton{
-    margin: 2.6875rem auto 0px auto;
+    margin: 2.6875rem auto 0 auto;
     background: $blue-home;
     @media screen and (min-width:$break-tablet){
         margin-top: 4rem;

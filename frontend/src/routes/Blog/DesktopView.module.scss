@@ -1,0 +1,84 @@
+.mainDiv{
+    padding: 5%;
+}
+.headingContainer{
+    font-size: 3.125rem;
+    line-height: 4.0625rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.blogcardXl{
+    div:nth-child(1){
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding-top: 75%;
+        position: relative;
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+.blogcardlg{
+    div:nth-child(1){
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding-top: 56.25%;
+        position: relative;
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+.ul1{
+    width: 80%;
+    display: grid;
+    margin: auto;
+    grid-template-columns: 50% 50%;
+    li{
+        margin-left:auto;
+        margin-right:auto;
+        padding-top: -3.125rem;
+        // vertical-align: top;
+    }
+}
+.ul2{
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-top:1.5rem;
+    li{
+        margin:auto;
+        padding-bottom:1rem;
+    }
+}
+.sectionHeading{
+    font-weight: 500;
+    font-size: 1.875rem;
+    line-height: 2.4375rem;
+    margin-left: 10%;
+    margin-top: 2rem;
+}
+.ul3{
+    width: 80%;
+    margin: auto;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 3.125rem;
+    li{
+        margin: auto;
+        padding: 3%;
+        padding-left: 0;
+        margin-left: 0;
+    }
+}

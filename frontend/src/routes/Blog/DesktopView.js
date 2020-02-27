@@ -1,14 +1,46 @@
 import React, { Component } from 'react';
-// import styles from './DesktopView.module.scss'
-import ComingSoon from '../../components/ComingSoon';
+import styles from './DesktopView.module.scss';
+import Blogcard from '../../components/BlogCard';
+// import ComingSoon from '../../components/ComingSoon';
 
 class DesktopView extends Component {
     state = {  }
     render() { 
+        const blogData = this.props.blogData? this.props.blogData : null;
         return ( 
-            <React.Fragment>
-                <ComingSoon />
-            </React.Fragment>
+            <>
+            <div className={styles.container1}>
+                <div className={styles.headingContainer}>
+                     <span className='color-red'>Read</span> What We Do
+                </div>
+                <ul className={styles.ul1}>
+                    <li>
+                        <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl}/>
+                    </li>
+                    <li>
+                        <ul className={styles.ul2}>
+                            <li>
+                                <Blogcard blogData={blogData[1]} type='lg' className={styles.blogcardlg} text={false}/>
+                            </li>
+                            <li>
+                                <Blogcard blogData={blogData[2]} type='lg' className={styles.blogcardlg} text={false}/>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>    
+            </div>
+            <div className={styles.container2}>  
+                <div className={styles.sectionHeading}>Journey from a Mentee to a Mentor</div>
+                <ul className={styles.ul3}>
+                    {blogData.map((value,i) =>{
+                        // console.log(i)
+                        return(
+                            <li><Blogcard blogData={value} type='md' heading={false}/></li>
+                        )
+                    })}
+                </ul>
+            </div>   
+            </>
          );
     }
 }

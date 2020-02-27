@@ -4,9 +4,9 @@
 .headerContainer{
   position: fixed;
   background: $white;
-  border-bottom: 1px solid $grey-level-0_05;
+  border-bottom: 0.0625rem solid $grey-level-0_05;
   width: 100%;
-  min-height: 50px;
+  min-height: 3.125rem;
   height: 8%;
   display: flex;
   justify-items: center;
@@ -24,11 +24,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 5px;
+      padding: 0.3125rem;
 
       .routeContainer {
         position: fixed;
-        width: 10px;
+        width: 0.625rem;
         z-index: 10;
         top: 8%;
         height: 92%;
@@ -87,10 +87,10 @@
     display: flex;
     
     img {
-        margin: 5px;
+        margin: 0.3125rem;
     }
 
     div{
-        margin: 5px;
+        margin: 0.3125rem;
     }
 }

@@ -7,33 +7,33 @@
         display: grid;
         grid-template-columns: 10% 80% 10%;
     }
-    border-bottom: 1px solid $grey-level-0_05;
-    margin-bottom: 13px;
+    border-bottom: 0.0625rem solid $grey-level-0_05;
+    margin-bottom: 0.8125rem;
     margin-top:0;
-    padding-bottom:8px;
+    padding-bottom:0.5rem;
 }
 
 .filterIcon{
     display: flex;
     flex-direction: column;
-    height: 9.59px;
-    width:15px;
+    height: 0.6rem;
+    width:0.9375rem;
     justify-content: space-between;
-    margin:8px auto;
+    margin:0.5rem auto;
     span {
       background-color: $grey;
-      height: 1.62px;
-      border-radius: 1px;
+      height: 0.10125rem;
+      border-radius: 0.0625rem;
       &:nth-child(1){
-        width:15px;
+        width:0.9375rem;
       }
       &:nth-child(2){
-        width:12px;
+        width:0.75rem;
         margin-right:0;
         margin-left: auto;
       }
       &:nth-child(3){
-        width:8px;
+        width:0.5rem;
         margin-right:0;
         margin-left: auto;
       }
@@ -42,19 +42,19 @@
 
 .searchBox{
     background: rgba(0, 0, 0, 0.01);
-    border: 0.574457px solid rgba(0, 0, 0, 0.1);
+    border: 0.036rem solid rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    border-radius: 2.87228px;
+    border-radius: 0.18rem;
     width:100%;
-    min-height: 32px;
-    padding: 8px auto 8px 10px;
-    font-size: 12px;
-    line-height: 16px;
+    min-height: 2rem;
+    padding: 0.5rem auto 0.5rem 0.625rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
     color: $grey-level-0_5;
     &:focus{
       outline:none;
     }
 }
 .backArrow{
-    margin:10px auto;
+    margin:0.625rem auto;
 }
