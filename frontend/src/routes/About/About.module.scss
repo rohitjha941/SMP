@@ -37,14 +37,14 @@
           margin-left:4rem;
           h3{
             font-weight: 500;
-            font-size: 30px;
-            line-height: 39px;
+            font-size: 1.875rem;
+            line-height: 2.4375rem;
             color:$grey-level-0_7;
             margin-top: 18.9%;
           }
           p{
             font-weight: 300;
-            font-size: 20px;
+            font-size: 1.25rem;
             line-height: 150%;
             color: $grey;
             margin: 5.04% auto 18.9% 0;
@@ -56,11 +56,11 @@
       div{
         div{
           h3{
-            font-size: 40px;
-            line-height: 52px;
+            font-size: 2.5rem;
+            line-height: 3.25rem;
           }
           p{
-            font-size: 24px;
+            font-size: 1.5rem;
             line-height: 150%;
           }
         }
@@ -88,8 +88,8 @@
     text-align:center;
     @media screen and (min-width:$break-tablet){
       font-weight: normal;
-      font-size: 70px;
-      line-height: 91px;
+      font-size: 4.375rem;
+      line-height: 5.6875rem;
     }
 }
 .description {
@@ -98,15 +98,15 @@
     font-size: 0.9em;
     line-height: 150%;
     width: fit-content;
-    margin: 32px auto auto auto;
+    margin: 2rem auto auto auto;
     @media screen and(min-width: $break){
         width: 48%;
         font-weight: 300;
-        font-size: 24px;
+        font-size: 1.5rem;
         line-height: 150%;
         text-align: center;
         color: $grey;
-        margin-top: 39px;
+        margin-top: 2.4375rem;
     }
 }
 
@@ -145,8 +145,8 @@
     text-align: center;
     @media screen and (min-width:$break-tablet){
       font-weight: 500;
-      font-size: 40px;
-      line-height: 52px;
+      font-size: 2.5rem;
+      line-height: 3.25rem;
     }
 }
 .label{
@@ -155,7 +155,7 @@
     text-align: center;
     @media screen and (min-width:$break-tablet){
       font-weight: 300;
-      font-size: 24px;
+      font-size: 1.5rem;
       line-height: 150%;
       color: $grey;
 
@@ -165,21 +165,21 @@
 //Team
 .teamHeading{
   font-weight: 500;
-  font-size: 16px;
-  line-height: 21px;
+  font-size: 1rem;
+  line-height: 1.3125rem;
   /* identical to box height */
   text-align: center;
-  margin: 40px auto 20px auto;
+  margin: 2.5rem auto 1.25rem auto;
   color: $grey-level-0_7;
   @media screen and (min-width:$break){
-    font-size: 30px;
-    line-height: 39px;
+    font-size: 1.875rem;
+    line-height: 2.4375rem;
   }
   @media screen and (min-width:$break-tablet){
     font-weight: 500;
-    font-size: 40px;
-    line-height: 52px;
-    margin-top: 165px;
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+    margin-top: 10.3125rem;
     margin-bottom: 4rem;
   }
 }
@@ -190,7 +190,7 @@
   ul {
     display: grid;
     li{
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
         text-align: center;
     }
   }
@@ -204,7 +204,7 @@
     ul{
       grid-template-columns: 1fr 1fr 1fr;
       li{
-        margin-bottom: 58px;
+        margin-bottom: 3.625rem;
         padding-left: auto;
       }
     }
@@ -213,5 +213,5 @@
 
 .viewMore{
   display: block;
-  margin: 0 auto 44px auto;
+  margin: 0 auto 2.75rem auto;
 }

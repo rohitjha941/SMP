@@ -64,8 +64,6 @@
     font-size: 0.75rem;
     line-height: 150%;
     margin-top: 0.4375rem;
-    /* or 18px */
-    width:100%;
     color: $grey;
     @media screen and (min-width: $break){
         font-size: 1rem;
@@ -86,14 +84,14 @@
 
 .headingSide{
     font-weight: 500;
-    font-size: 30px;
-    line-height: 39px;
+    font-size: 1.875rem;
+    line-height: 2.4375rem;
     color:$grey-level-0_8;
 }
 .metaSide{
     font-weight: normal;
-    font-size: 20px;
-    line-height: 26px;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
     /* identical to box height */
     display: inline-block;
     color: #000000;
@@ -102,8 +100,8 @@
 }
 .textSide{
     font-weight: 300;
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 147.6%;
     color: $grey;
-    margin: 20px auto 74px 0;
+    margin: 1.25rem auto 4.625rem 0;
 }

@@ -2,7 +2,7 @@
 
 .redArm{
     position: absolute;
-    right:0px;
+    right:0;
     top: 116.1525rem;
     z-index: 10;
     @media screen and (max-width: $break-tablet){
@@ -11,7 +11,7 @@
 }
 .blueArm{
     position: absolute;
-    left: 0px;
+    left: 0;
     top: 87.688125rem;
     z-index:10;
     @media screen and (max-width: $break-tablet){

@@ -16,7 +16,7 @@
 
 .containerlg{
     font-size: 36.9375rem;
-    width:36.9375rem;
+    widows: 80%;
     max-width: 90vw;
     // height:fit-content;
 
@@ -30,11 +30,10 @@
 }
 
 .containerSide{
-    // border: 1px solid $grey;
     width:80%;
     display:block;
     text-align: left;
-    @media screen and (max-width: 1270px){
+    @media screen and (max-width: $break-events-side-container){
         width:95%;
     }
 }
@@ -44,15 +43,15 @@
     width: 0.9854em;
     max-width: 90vw;
     display:block;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
 }
 
 .thisWeek{
     display:block;
     position: absolute;
     z-index:11;
-    margin-top:12px;
-    margin-left: -2px;
+    margin-top:0.75rem;
+    margin-left: -0.125rem;
 }
 
 .headingsm {
@@ -60,7 +59,7 @@
     display:block;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0px;
+    margin: 0.625rem auto 0.625rem 0;
     font-size: 0.9375rem;
     line-height: 1.1875rem;
 }
@@ -70,7 +69,7 @@
     display:block;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0px;
+    margin: 0.625rem auto 0.625rem 0;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
@@ -79,7 +78,7 @@
     display:block;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0px;
+    margin: 0.625rem auto 0.625rem 0;
     font-size: 1.25rem;
     line-height: 1.625rem;
 }
@@ -88,7 +87,7 @@
     display:block;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0px;
+    margin: 0.625rem auto 0.625rem 0;
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }

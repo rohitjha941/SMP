@@ -18,20 +18,13 @@
     
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    
-    
-    /* scroll-snap-points-x: repeat(300px);
-    scroll-snap-type: mandatory; */
    
   }
   .slides::-webkit-scrollbar {
-    // width: 1px;
-    // height: 1px;
     display: none;
   }
   // .slides::-webkit-scrollbar-thumb {
   //   background: $blue-text;
-  //   border-radius: 10px;
   // }
   // .slides::-webkit-scrollbar-track {
   //   background: transparent;
@@ -39,10 +32,8 @@
   .slides > div {
     scroll-snap-align: start;
     flex-shrink: 0;
-    /* width: 300px; */
-    /* height: 300px; */
-    margin-right: 15px;
-    border-radius: 10px;
+    margin-right: 0.9375rem;
+    border-radius: 0.625rem;
     background:transparent;
     transform-origin: center center;
     transform: scale(1);
@@ -54,7 +45,7 @@
     align-items: center;
     font-size: 6.25rem;
      @media screen and (min-width:$break-tablet){
-       margin-right: 44px;
+       margin-right: 2.75rem;
      }
   }
   // .slides > div:target {
@@ -88,7 +79,7 @@
     position: relative;
   }
   .slider > a:active {
-    top: 1px;
+    top: 0.0625rem;
   }
   .slider > a:focus {
     background: #000;
@@ -102,35 +93,35 @@
   }
 
   .blogCardCommon{
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.3125rem;
   }
 
   .blogCardCommon > div > h3{
     font-size: 0.75rem;
     line-height: 1rem;
     font-weight: normal;
-    margin: 11.59px auto 0 8px;
+    margin: 0.724375rem auto 0 0.5rem;
     color: $grey-level-0_8;
     @media screen and (min-width:$break-tablet){
-      font-size: 18px;
-      line-height: 23px;
-      margin: 24px auto 0 12px;
+      font-size: 1.1875rem;
+      line-height: 1.4375rem;
+      margin: 1.5rem auto 0 0.75rem;
     }
   }
   .blogCardCommon > img {
     width:100%;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 0.3125rem 0.3125rem 0 0;
   }
   .blogCardCommon > div > p {
-    margin: 11.59px auto 0 8px;
+    margin: 0.724375rem auto 0 0.5rem;
     font-weight: 300;
     font-size: 0.75rem;
     line-height: 1rem;
     color: $grey-level-0_8;
     @media screen and (min-width:$break-tablet){
-      font-size: 15px;
-      line-height: 19px;
-      margin: 12px auto 24px 12px;
+      font-size: 0.9375rem;
+      line-height: 1.1875rem;
+      margin: 0.75rem auto 1.5rem 0.75rem;
     }
   }

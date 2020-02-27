@@ -7,24 +7,24 @@
     display: none;
   }
   flex-direction: column;
-  height: 10px;
+  height: 0.625rem;
   justify-content: space-between;
   div {
     background-color: $grey;
-    height: 2px;
-    width:15px;
+    height: 0.125rem;
+    width:0.9375rem;
     transition: all .2s ease-in-out;
   }
   &.cross{
     div{
       &:nth-child(1){
-        transform: rotate(45deg) translateY(5px);
+        transform: rotate(45deg) translateY(0.3125rem);
       }
       &:nth-child(2){
         opacity: 0;
       }
       &:nth-child(3){
-        transform: rotate(-45deg) translateY(-5px);
+        transform: rotate(-45deg) translateY(-0.3125rem);
 
       }
     }

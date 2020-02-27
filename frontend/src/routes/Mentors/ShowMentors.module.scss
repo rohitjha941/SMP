@@ -12,16 +12,16 @@
 
 .department{
     font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
     color:$blue-text;
 }
 
 .mentorCard{
-    margin: 18px auto 12px 0;
+    margin: 1.125rem auto 0.75rem 0;
 }
 
 hr{
-    border: 0.5px solid $grey-level-0_1;
+    border: 0.03125rem solid $grey-level-0_1;
     width:100%;
 }

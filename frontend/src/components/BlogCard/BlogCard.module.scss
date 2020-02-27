@@ -9,31 +9,34 @@
 
 .containermd{
     font-size:20.25rem;
-    width:20.25rem;
-    max-width: 90vw;
+    width:100%;
+    max-width: 20.25rem;
     // height:fit-content;
 }
 
 .containerlg{
     font-size: 36.9375rem;
-    width:36.9375rem;
+    width:36.975rem;
     max-width: 90vw;
+    @media screen and (max-width:$break-blogs){
+        width: 100%;
+    }
     // height:fit-content;
 
 }
 
 .containerxl{
-    width:37.5rem;
-    width:37.5rem;
-    max-width: 90vw;
+    font-size:37.5rem;
+    // width:%;
+    max-width: 37.5rem;
     // height:fit-content;
 }
 
 
 .blogImage{
-    width: 1em;
+    width: 100%;
     display:block;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     text-align:center;
     position: relative;
 }
@@ -43,7 +46,7 @@
     display:block;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0px;
+    margin: 0.625rem auto 0.625rem 0;
     font-size: 0.9375rem;
     line-height: 1.1875rem;
 }
@@ -53,7 +56,7 @@
     display:block;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0px;
+    margin: 0.625rem auto 0.625rem 0;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
@@ -62,7 +65,7 @@
     display:block;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0px;
+    margin: 0.625rem auto 0.625rem 0;
     font-size: 1.25rem;
     line-height: 1.625rem;
 }
@@ -71,7 +74,7 @@
     display:block;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0px;
+    margin: 0.625rem auto 0.625rem 0;
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }
