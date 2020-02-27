@@ -33,7 +33,7 @@ function WrappedComponent(props) {
                     null
             }
             <div className={ props.type==='side' ? styles.textSide : styles.text} >
-                <pre>{props.text}></pre>    
+                <div dangerouslySetInnerHTML={{__html:props.text}}></div>
                 <a href={'/events/view/'+ props.event_id} className={styles.readMore}>
                     {props.text  ? '...Read More' : null }
                 </a>

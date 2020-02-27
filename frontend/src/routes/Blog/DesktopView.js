@@ -6,7 +6,7 @@ import Blogcard from '../../components/BlogCard';
 class DesktopView extends Component {
     state = {  }
     render() { 
-        const blogData = this.props.blogData? this.props.blogData : null;
+        const blogData = this.props.blogData;
         return ( 
             <>
             <div className={styles.container1}>
@@ -23,7 +23,7 @@ class DesktopView extends Component {
                                 <Blogcard blogData={blogData[1]} type='lg' className={styles.blogcardlg} text={false}/>
                             </li>
                             <li>
-                                <Blogcard blogData={blogData[2]} type='lg' className={styles.blogcardlg} text={false}/>
+                                <Blogcard blogData={blogData[0]} type='lg' className={styles.blogcardlg} text={false}/>
                             </li>
                         </ul>
                     </li>
@@ -33,9 +33,8 @@ class DesktopView extends Component {
                 <div className={styles.sectionHeading}>Journey from a Mentee to a Mentor</div>
                 <ul className={styles.ul3}>
                     {blogData.map((value,i) =>{
-                        // console.log(i)
                         return(
-                            <li><Blogcard blogData={value} type='md' heading={false}/></li>
+                            <li><Blogcard key={i} blogData={value} type='md' heading={false}/></li>
                         )
                     })}
                 </ul>

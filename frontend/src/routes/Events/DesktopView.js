@@ -28,17 +28,17 @@ class DesktopView extends Component {
                <div className={styles.container1}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
                     <ul className={styles.ul1}>
-                        <li><EventCard eventData={eventData} type='side'/></li>
-                        <li><EventCard eventData={eventData} type='side'/></li>
+                        <li><EventCard eventData={eventData[0]} type='side'/></li>
+                        <li><EventCard eventData={eventData[1]} type='side'/></li>
                     </ul>
                </div>
                <div className={styles.container2}>
                    <div className={styles.sectionHeading}>SMP Events</div>
                     <ul className={styles.ul2}>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type={this.state.break ? 'md' : 'lg'}/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type={this.state.break ? 'md' : 'lg'}/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type={this.state.break ? 'md' : 'lg'}/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData} type={this.state.break ? 'md' : 'lg'}/></li>
+                        <li><EventCard className={styles.eventcardcommon} eventData={eventData[0]} type={this.state.break ? 'md' : 'lg'}/></li>
+                        <li><EventCard className={styles.eventcardcommon} eventData={eventData[1]} type={this.state.break ? 'md' : 'lg'}/></li>
+                        <li><EventCard className={styles.eventcardcommon} eventData={eventData[1]} type={this.state.break ? 'md' : 'lg'}/></li>
+                        <li><EventCard className={styles.eventcardcommon} eventData={eventData[0]} type={this.state.break ? 'md' : 'lg'}/></li>
                     </ul>
                </div>
             </>

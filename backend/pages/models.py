@@ -90,6 +90,19 @@ class StudentTeam(models.Model):
         
     )
 
+    position = models.CharField(
+        default = "",
+        max_length = 100,
+    )
+    mobile = models.CharField(
+        default = "",
+        max_length = 100,
+    )
+    email = models.CharField(
+        default = "",
+        max_length = 100,
+    )
+
 
 class branch(models.Model):
     branch_name = models.CharField(
@@ -257,6 +270,4 @@ class Events(models.Model):
         default="",
         max_length=100
     )
-    content = models.TextField(
-        default="",
-    )
+    content = tinymce_models.HTMLField()

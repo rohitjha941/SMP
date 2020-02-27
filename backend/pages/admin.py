@@ -18,7 +18,7 @@ class faqVisionAdmin(ImportExportModelAdmin):
 
 @register(StudentTeam)
 class StudentTeamAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'photo', 'facebook', 'linkden', 'branch', 'year', 'is_coordinator', ) 
+    list_display = ('name', 'photo', 'facebook', 'linkden', 'branch', 'year', 'is_coordinator','position',) 
 
 @register(branch)
 class branchAdmin(ImportExportModelAdmin):
@@ -35,6 +35,7 @@ class MentorAdmin(ImportExportModelAdmin):
 @register(Blogs)
 class BlogsAdmin(ImportExportModelAdmin):
     list_display =  ('title', 'author', 'created_at')
+
 @register(Events)
 class EventsAdmin(ImportExportModelAdmin):
     list_display =  ('title', 'venue', 'date')

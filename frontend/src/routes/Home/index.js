@@ -35,7 +35,7 @@ export default class Home extends Component {
                     <Link to="/about"><div className={styles.learnMoreText}>Learn More ></div></Link>
                     <div onClick={this.scrollTo} className={styles.navDown}><img src={navDown} className={styles.navDown} alt='down-arrow' /></div>
                 </div>
-                    <EventSection id='events' className={styles.EventSection} />
+                    <EventSection className={styles.EventSection} events={this.props.events}/>
                     <BlogSection className={styles.BlogSection} blogs={this.props.blogs}/>
             </div>
         )

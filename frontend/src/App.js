@@ -49,9 +49,10 @@ function App() {
   useEffect(() => {
     fetchBlogsIfEmpty();
     fetchEventsIfEmpty();
-    // fetchTeamIfEmpty();
+    fetchTeamIfEmpty();
     // fetchMentorsIfEmpty();
   });
+  // console.log(team);
 
   return (
     <div className="App">

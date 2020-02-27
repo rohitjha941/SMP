@@ -25,7 +25,7 @@ function WrappedComponent(props) {
                     null
             }
             <div className={styles.text}>
-            {props.text ? props.text : null}
+            <div dangerouslySetInnerHTML={{__html:props.text}}></div>
                 <Link to="/blogs/view" ><span className={styles.readMore}>
                     {props.text  ? '...Read More' : null }
                 </span></Link>

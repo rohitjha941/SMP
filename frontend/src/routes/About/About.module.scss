@@ -202,9 +202,9 @@
   @media screen and (min-width:$break){
     width: 67%;
     ul{
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 33.33% 33.33% 33.33%;
       li{
-        margin-bottom: 3.625rem;
+        margin-bottom: 3.625rem;  
         padding-left: auto;
       }
     }
