@@ -2,16 +2,8 @@ import React from 'react';
 
 import styles from './Text.module.scss';
 
-var stringToHTML = function (str) {
-	var parser = new DOMParser();
-	var doc = parser.parseFromString(str, 'text/html');
-	return doc.body;
-};
-
 function WrappedComponent(props) {
     const metadata = props.metadata;
-    // console.log(props.text)
-    // console.log(stringToHTML(props.text))
     return (
         <div className={props.type==='side' ? styles.sideContainer : styles.container}>
             {props.headingTop ? null :

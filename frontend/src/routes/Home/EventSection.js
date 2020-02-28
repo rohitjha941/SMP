@@ -6,6 +6,25 @@ import Button from '../../components/Button';
 import styles from './EventSection.module.scss';
 
 class EventSection extends Component {
+    constructor(){
+        super();
+        this.state ={
+            mobView : window.innerWidth < 600,
+            tabView: window.innerWidth<1000
+        }
+        }
+        resize  = () => {
+            let tabWidth =  window.innerWidth < 1000;
+            this.setState({ tabView : tabWidth});
+            let mobWidth = window.innerWidth < 600;
+            this.setState({mobView:mobWidth});
+        }
+        componentDidMount() {
+            window.addEventListener('resize', this.resize);
+          }
+          componentWillUnmount() {
+            window.removeEventListener('resize', this.resize);
+        }
     render() { 
         const eventData = this.props.events.map(value => {
             return {
@@ -28,7 +47,7 @@ class EventSection extends Component {
                     <EventCard 
                         className={styles.eventCardCommon} 
                         eventData={eventData[0]} 
-                        type={window.innerWidth < 600 ? 'sm' : window.innerWidth < 1000 ? 'lg' : 'side'}
+                        type={this.state.mobView ? 'sm' : this.state.tabView ? 'lg' : 'side'}
                     />
                     <EventCard 
                         className={styles.eventCardCommon} 

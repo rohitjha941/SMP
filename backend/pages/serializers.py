@@ -50,3 +50,7 @@ class EventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
         fields = "__all__"
+class MentorDocsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MentorDocs
+        fields = "__all__"

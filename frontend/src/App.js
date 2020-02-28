@@ -24,6 +24,8 @@ function App() {
   const [events, setEvents] = useState([]);
   const [team,setTeam] = useState([]);
   const [mentors,setMentors] = useState([]);
+  const [mentorsDocs,setMentorsDocs] = useState([]);
+  const [faqs,setFaqs] = useState([]);
 
   const fetchBlogsIfEmpty = () => {
     if (!blogs || blogs.length === 0) {
@@ -45,20 +47,39 @@ function App() {
         methods.getMentors().then(data => setMentors(data));
     }
   }
+  const fetchMentorsDocsIfEmpty = () => {
+    if (!mentorsDocs || mentorsDocs.length === 0) {
+        methods.getMentorsDocs().then(data => setMentorsDocs(data));
+    }
+  }
+  const fetchFAQsIfEmpty = () => {
+    if (!faqs || faqs.length === 0) {
+        methods.getFAQs().then(data => setFaqs(data));
+    }
+  }
 
   useEffect(() => {
     fetchBlogsIfEmpty();
     fetchEventsIfEmpty();
     fetchTeamIfEmpty();
     // fetchMentorsIfEmpty();
+    fetchMentorsDocsIfEmpty();
+    fetchFAQsIfEmpty();
   });
-  // console.log(team);
+  // console.log(mentorsDocs);
 
   return (
     <div className="App">
       <Header />
       <div className="router-footer-container">
-        <RouterView blogs={blogs} events={events} team={team} mentors={mentors}/>
+        <RouterView 
+          blogs={blogs} 
+          events={events} 
+          team={team} 
+          mentors={mentors} 
+          mentorsDocs={mentorsDocs}
+          faqs={faqs}
+        />
         <Footer />
       </div>
     </div>

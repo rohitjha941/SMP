@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styles from './About.module.scss';
+import data from './statsdata';
 
 export default class Stats extends Component {
     statItem(count, label, key) {
@@ -13,19 +14,19 @@ export default class Stats extends Component {
     render() {
         const stats = [
             {
-                count: "1000+",
+                count: data.freshers,
                 label: "Freshers"
             },
             {
-                count: "150",
+                count: data.Mentors,
                 label: "Mentors"
             },
             {
-                count: "35+",
+                count: data.Team,
                 label: "Team"
             },
             {
-                count: "4",
+                count: data.years,
                 label: "Years"
             },
         ]

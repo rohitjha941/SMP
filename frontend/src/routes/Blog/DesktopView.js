@@ -15,7 +15,7 @@ class DesktopView extends Component {
                 </div>
                 <ul className={styles.ul1}>
                     <li>
-                        <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl}/>
+                        <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl} text={false}/>
                     </li>
                     <li>
                         <ul className={styles.ul2}>
@@ -34,7 +34,7 @@ class DesktopView extends Component {
                 <ul className={styles.ul3}>
                     {blogData.map((value,i) =>{
                         return(
-                            <li><Blogcard key={i} blogData={value} type='md' heading={false}/></li>
+                            <li><Blogcard key={i} blogData={value} type='md' heading={false} text={false}/></li>
                         )
                     })}
                 </ul>

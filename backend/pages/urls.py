@@ -9,6 +9,7 @@ router.register(r'interests', InterestView)
 router.register(r'mentors', MentorView)
 router.register(r'blogs', BlogsView)
 router.register(r'events',EventsView)
+router.register(r'mentorsDocs',MentorDocsView)
 
 urlpatterns = [
     # path('home_about/',  HomeView.as_view()),

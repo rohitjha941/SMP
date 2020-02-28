@@ -37,7 +37,17 @@ class faq(models.Model):
         max_length=1000,
         default= "",
     )
-
+    _for_choices = ( 
+        ('mentor',"MENTOR"),
+        ('mentee', "MENTEE")
+    ) 
+    _for = models.CharField(
+        max_length = 100,
+        blank = True,
+        null = True,
+        choices = _for_choices, 
+        default = 'mentor'
+    )
     def __str__(self):
         return self.question
 
@@ -271,3 +281,14 @@ class Events(models.Model):
         max_length=100
     )
     content = tinymce_models.HTMLField()
+
+class MentorDocs(models.Model):
+    name = models.CharField(
+        default="",
+        max_length=100, 
+    )
+    document = models.FileField(
+        upload_to = "mentorDocs/",
+        null = True,
+        blank = True
+    )

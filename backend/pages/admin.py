@@ -13,7 +13,7 @@ class HomeVisionAdmin(ImportExportModelAdmin):
     list_display = ('title', 'description', 'image', ) 
 @register(faq)
 class faqVisionAdmin(ImportExportModelAdmin):
-    list_display = ('question', 'answer', )
+    list_display = ('_for','question', 'answer', )
 
 
 @register(StudentTeam)
@@ -39,3 +39,7 @@ class BlogsAdmin(ImportExportModelAdmin):
 @register(Events)
 class EventsAdmin(ImportExportModelAdmin):
     list_display =  ('title', 'venue', 'date')
+
+@register(MentorDocs)
+class MentorDocsAdmin(ImportExportModelAdmin):
+    list_display = ('name','document')

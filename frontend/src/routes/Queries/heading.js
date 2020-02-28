@@ -19,12 +19,14 @@ export default class Intro extends Component {
                 menteeActiveStatus:'disabled',
                 mentorActiveStatus:'outline'
             })
+            this.props.changeTab('mentor');
         }else if(this.state.activeTab !== value && value==='mentee'){
             this.setState({
                 activeTab:value,
                 menteeActiveStatus:'outline',
                 mentorActiveStatus:'disabled'
             })
+            this.props.changeTab('mentee');
         }
     }
 

@@ -10,7 +10,7 @@ function WrappedComponent(props) {
     const imageAlternativeText = (props.blogData.imgAlt) ? props.blogData.imgAlt : props.blogData.heading;
     const heading = props.heading === undefined ? props.blogData.heading : props.heading ? props.blogData.heading : null;
     const text = props.text === undefined ? props.blogData.text : props.text ? props.blogData.text : null;
-    const truncatedText = text? text.substring(0, blogCardContentCharacterLimit):"";
+    const truncatedText = text? text:"";
     const metadata = props.metadata === undefined ? props.blogData.metadata : props.metadata ? props.blogData.metadata : null;
     const headingTop = props.headingTop === false ? false : (window.innerWidth < 1000) ? true : props.headingTop ? true :  false;
     return (

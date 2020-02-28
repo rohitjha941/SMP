@@ -24,12 +24,12 @@ function WrappedComponent(props) {
                     :
                     null
             }
-            <div className={styles.text}>
-            <div dangerouslySetInnerHTML={{__html:props.text}}></div>
+            { props.text ? <div className={styles.text} >   
+            <div dangerouslySetInnerHTML={{__html:props.text}}></div>   
                 <Link to="/blogs/view" ><span className={styles.readMore}>
                     {props.text  ? '...Read More' : null }
                 </span></Link>
-            </div>
+            </div>: null}
         </div>
     )
 }
