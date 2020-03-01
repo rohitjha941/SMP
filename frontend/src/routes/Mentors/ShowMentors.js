@@ -2,87 +2,148 @@ import React, { Component } from 'react';
 import SearchHeader from '../../components/SearchHeader';
 import styles from './ShowMentors.module.scss';
 import MentorCard from '../../components/MentorCard';
-
-const Data = [
-        {
-            image:require('assets/images/profile.jfif'),
-            name:'Rakshit Kesarwani' ,
-            branchShort:'Arch', 
-            year:'3rd', 
-            skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
-        },
-        {
-            image:require('assets/images/profile.jfif'),
-            name:'Laksh Arora' ,
-            branchShort:'Arch', 
-            year:'3rd', 
-            skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
-        },
-        {
-            image:require('assets/images/profile.jfif'),
-            name:'Jayesh Chaudhary' ,
-            branchShort:'Arch', 
-            year:'3rd', 
-            skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
-        },
-        {
-            image:require('assets/images/profile.jfif'),
-            name:'Apan Jain' ,
-            branchShort:'Arch', 
-            year:'3rd', 
-            skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
-        },
-        {
-            image:require('assets/images/profile.jfif'),
-            name:'Harshit Maurya' ,
-            branchShort:'Arch', 
-            year:'3rd', 
-            skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
-        },
-        {
-            image:require('assets/images/profile.jfif'),
-            name:'Rohit Jha' ,
-            branchShort:'Arch', 
-            year:'3rd', 
-            skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
-        },
-        {
-            image:require('assets/images/profile.jfif'),
-            name:'Amit' ,
-            branchShort:'Arch', 
-            year:'3rd', 
-            skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
-        },
-        {
-            image:require('assets/images/profile.jfif'),
-            name:'Rakshit Kesarwani' ,
-            branchShort:'Arch', 
-            year:'3rd', 
-            skills:['UI Design','UX Design','Interaction Design', 'Illustrator'],
-        }
-]
 class MentorShow extends Component {
-    state = {  }
+    constructor(props){
+        super(props);
+        this.state={
+            filteryear : this.props.filter.year,
+            filterbranches : this.props.filter.branches,
+            filterinterests : this.props.filter.interests,
+            allbranches: [],
+            allinterests: this.props.interests,
+            mentors : [],
+            filteredmentors:[]
+        }
+    }
+    componentDidMount(){
+        let mentors = this.props.mentors.map(value => {
+            let interests = [];
+            value.interest.forEach(interestID =>{
+                this.props.interests.forEach(interest =>{
+                    if(interest.id === interestID){
+                        return(
+                            interests.push(interest.interest_name)
+                        )
+                    }
+                })
+            })
+            let branch_name = this.props.branches.find((element) => {
+                return(element.id === value.branch)
+            });
+            return({    
+                image : value.photo,
+                name : value.name,
+                branch: value.branch,
+                branch_name : branch_name.branch_name,
+                year : value.year,
+                skills : interests,
+                interests : value.interest
+            })
+        })
+        this.setState({mentors : mentors},this.filterMentors(mentors));
+    }
+    
+    updateBranches = (mentors) =>{
+        let availablebranches = [];
+        mentors.forEach(value => {
+            var isAvailable = false;
+            availablebranches.forEach(branch =>{
+                if(branch === value.branch){
+                    isAvailable = true;
+                }
+            })
+            if(!isAvailable){
+                availablebranches.push(value.branch);
+            }
+        })
+        let allbranches=[];
+        this.props.branches.forEach(value =>{
+            availablebranches.forEach(branchID =>{
+                if(branchID === value.id){
+                    return(
+                        allbranches.push(value)
+                    )
+                }
+            })
+        })
+        this.setState({allbranches:allbranches});
+    }
+    
+    filterMentors = (mentors) => {
+        let {filteryear,filterbranches,filterinterests} = this.state;
+        if((!filteryear||filteryear.length===0)&&(!filterbranches||filterbranches.length===0)&&(!filterinterests||filterinterests.length===0)){
+            this.setState({filteredmentors:mentors},this.updateBranches(mentors));
+        }
+        else{
+            
+            let branchFiltered = [];
+            (filterbranches.length>0 ? 
+                filterbranches.map(filterbranch => {
+                    branchFiltered = (mentors.filter(({branch}) =>  branch === filterbranch));
+                })
+                :
+                branchFiltered = mentors
+            )
+            let yearFiltered =[];
+            (filteryear.length > 0 ?
+                filteryear.map(filteryear => {
+                    return(yearFiltered = (branchFiltered.filter(({year}) =>  year === filteryear)))
+                })
+                :
+                yearFiltered = branchFiltered
+            )
+            let interestFiltered = [];
+            (filterinterests.length > 0 ?
+                yearFiltered.map(mentor => {
+                    mentor.interests.map(interest =>{
+                        if(filterinterests.indexOf(interest) > -1){
+                            return(interestFiltered.push(mentor))
+                        }
+                    })
+                })
+                :
+                interestFiltered = yearFiltered
+            )
+            this.setState({filteredmentors:interestFiltered},this.updateBranches(interestFiltered));
+        }
+
+    }
     render() { 
+        let {allbranches} = this.state;
         return ( 
             <>
                 <div className={styles.container}>
                     <SearchHeader/>
-                    <div className={styles.department}>Architecture & Planning</div>
-                    <ul id="mentors">
-                        {Data.map((data,i) => {
+                    {
+                        allbranches.map(value =>{
                             return(
-                            <>
-                                <li className='mentor'><MentorCard 
-                                    className={styles.mentorCard}
-                                    profile={data}
-                                    key={i}
-                                />
-                                <hr/></li>
+                                <>
+                            <div className={styles.department}>{value.branch_name}</div>
+                            <ul className="mentors">
+                                {
+                                    this.state.filteredmentors.map((mentor,i) => {
+                                        if(mentor.branch === value.id){
+                                            return(
+                                            <>
+                                            <li className='mentor-li'>
+                                                <MentorCard 
+                                                    className={styles.mentorCard}
+                                                    profile={mentor}
+                                                    key={i}
+                                                />
+                                                <hr/>
+                                            </li>
+                                            </>
+                                            )
+                                        }
+                                    })
+                                }
+                            </ul>
+                            <hr/>
                             </>
                             )
-                        })}
-                    </ul>
+                        })
+                    }
                 </div>
             </>
          );

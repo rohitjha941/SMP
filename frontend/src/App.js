@@ -26,6 +26,8 @@ function App() {
   const [mentors,setMentors] = useState([]);
   const [mentorsDocs,setMentorsDocs] = useState([]);
   const [faqs,setFaqs] = useState([]);
+  const [branches,setBranches] = useState([]);
+  const [interests,setInterests] = useState([]);
 
   const fetchBlogsIfEmpty = () => {
     if (!blogs || blogs.length === 0) {
@@ -57,16 +59,28 @@ function App() {
         methods.getFAQs().then(data => setFaqs(data));
     }
   }
+  const fetchBranchesIfEmpty = () => {
+    if (!branches || branches.length === 0) {
+        methods.getBranch().then(data => setBranches(data));
+    }
+  }
+  const fetchInterestsIfEmpty = () => {
+    if (!branches || branches.length === 0) {
+        methods.getInterests().then(data => setInterests(data));
+    }
+  }
+
 
   useEffect(() => {
     fetchBlogsIfEmpty();
     fetchEventsIfEmpty();
     fetchTeamIfEmpty();
-    // fetchMentorsIfEmpty();
+    fetchMentorsIfEmpty();
     fetchMentorsDocsIfEmpty();
     fetchFAQsIfEmpty();
+    fetchBranchesIfEmpty();
+    fetchInterestsIfEmpty();
   });
-  // console.log(mentorsDocs);
 
   return (
     <div className="App">
@@ -79,6 +93,8 @@ function App() {
           mentors={mentors} 
           mentorsDocs={mentorsDocs}
           faqs={faqs}
+          branches={branches}
+          interests={interests}
         />
         <Footer />
       </div>

@@ -36,10 +36,10 @@ class MentorIndex extends Component {
                     <div className={styles.impLinks}>
                         {
                             docs ? 
-                                docs.map((value) =>{
+                                docs.map((value,i) =>{
                                     return( 
                                     <>
-                                        <a className={styles.links} href={value.doc} target='_new'>{value.name}</a>
+                                        <a key={i} className={styles.links} href={value.doc} target='_new'>{value.name}</a>
                                         <br/>
                                     </>
                                     )

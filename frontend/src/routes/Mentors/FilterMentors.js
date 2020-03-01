@@ -3,53 +3,54 @@ import styles from './FilterMentors.module.scss';
 import Button from '../../components/Button';
 import FilterHeader from '../../components/FilterHeader';
 
-let branch = [
-    { name : 'Architecture and Planning', value : 'Architecture and Planning', selected : false},
-    { name : 'Electrical', value : 'Electrical Engineering', selected : false},
-    { name : 'Biotechnology', value :'Biotechnology', selected : false },
-    { name : 'Civil', value : 'Civil Engineering', selected : false},
-    { name : 'ECE' , value: 'Electronics and Communication Engineering', selected : false},
-    { name : 'Chemical', value : 'Chemical Engineering', selected : false},
-    { name : 'Metallurgy and Materials' , value : 'Metallurgy and Materials Engineering', selected : false},
-    { name : 'Geological Technology(GT)' , value : 'Geological Technology(GT)', selected : false},
-    { name : 'Mechanical' , value : ' Mechanical Engineering', selected : false},
-]
-
-let skills = [
-    {value : 'Software Development', selected : false},
-    {value : 'Design', selected : false},
-    {value : 'Product Management', selected : false},
-    {value : 'ML/AI', selected : false},
-    {value : 'Finance', selected : false},
-    {value : 'Research', selected : false},
-    {value : 'Data Science', selected : false},
-    {value : 'Development', selected : false},
-]
-
-let year = [
-    {value : '3rd', selected : false},
-    {value : '4th', selected : false},
-    {value : '5th', selected : false},
-]
-
 class FilterMentors extends Component {
     constructor(){
         super();
         this.state={
+            allinterests:[],
+            allbranches:[],
+            allyear:[],
             selectedBranch:[],
             selectedYear:[],
-            selectedSkill:[]
+            selectedSkill:[],
         }
     }
 
+    componentDidMount(){
+        const allinterests = this.props.interests.map(value =>{
+                return({
+                    id: value.id,
+                    name : value.interest_name,
+                    selected: false
+                })
+        })
+        const allbranches = this.props.branches.map(value =>{
+            return({
+                id: value.id,
+                name: value.branch_name,
+                selected: false
+            })
+        })
+        const allyear = [
+            {name : '3rd', selected : false},
+            {name : '4th', selected : false},
+            {name : '5th', selected : false},
+        ]
+        this.setState({
+            allinterests:allinterests,
+            allbranches:allbranches,
+            allyear:allyear
+        });
+    }
+
     handleYear = (value) => {
-        let {selectedYear} = this.state;
+        let {selectedYear,allyear} = this.state;
         let flag = false
         selectedYear.forEach((selected,index) => {
             if(selected===value){
                 flag = true;
-                year.forEach((year,i) => {
-                    if(year.value === value){
+                allyear.forEach((year,i) => {
+                    if(year.name === value){
                         year.selected = false;
                         return(selectedYear.splice(index,1));
                     }
@@ -59,25 +60,26 @@ class FilterMentors extends Component {
         })
         if(!flag){
             selectedYear.push(value)
-            year.forEach((year,i) => {
-                if(year.value === value){
+            allyear.forEach((year,i) => {
+                if(year.name === value){
                     year.selected = true;
                 }
             })
         }
         this.setState({
-            selectedYear : selectedYear
+            selectedYear : selectedYear,
+            allyear : allyear
         })
     }
 
     handleBranch = (value) => {
-        let {selectedBranch} = this.state;
+        let {selectedBranch,allbranches} = this.state;
         let flag = false
         selectedBranch.forEach((selected,index) => {
             if(selected===value){
                 flag = true;
-                branch.forEach((branch,i) => {
-                    if(branch.value === value){
+                allbranches.forEach((branch,i) => {
+                    if(branch.id === value){
                         branch.selected = false;
                         return(selectedBranch.splice(index,1));
                     }
@@ -86,8 +88,8 @@ class FilterMentors extends Component {
         })
         if(!flag){
             selectedBranch.push(value)
-            branch.forEach((branch,i) => {
-                if(branch.value === value){
+            allbranches.forEach((branch,i) => {
+                if(branch.id === value){
                     branch.selected = true;
                 }
             })
@@ -98,13 +100,13 @@ class FilterMentors extends Component {
     }
 
     handleSkill = (value) => {
-        let {selectedSkill} = this.state;
+        let {selectedSkill,allinterests} = this.state;
         let flag = false
         selectedSkill.forEach((selected,index) => {
             if(selected===value){
                 flag = true;
-                skills.forEach((skill,i) => {
-                    if(skill.value === value){
+                allinterests.forEach((skill,i) => {
+                    if(skill.id === value){
                         skill.selected = false;
                         return(selectedSkill.splice(index,1));
                     }
@@ -113,40 +115,53 @@ class FilterMentors extends Component {
         })
         if(!flag){
             selectedSkill.push(value)
-            skills.forEach((skill,i) => {
-                if(skill.value === value){
+            allinterests.forEach((skill,i) => {
+                if(skill.id === value){
                     skill.selected = true;
                 }
             })
         }
         this.setState({
-            selectedSkill : selectedSkill
+            selectedSkill : selectedSkill,
+            allinterests : allinterests 
         })
     }
 
     onClear = () => {
+        const year = this.state.year.map((value) => {
+            return(value.selected = false)
+        })
+        const allbranches = this.state.allbranches.map((value) => {
+            return(value.selected = false)
+        })
+        const allinterests = this.state.allinterests.map((value) => {
+            return(value.selected = false)
+        })
         this.setState({
             selectedBranch : [],
             selectedYear: [],
-            selectedSkill: []
+            selectedSkill: [],
+            allbranches:allbranches,
+            allinterests:allinterests,
+            year:year
         });
-        year.map((year) => {
-            return(year.selected = false)
-        })
-        branch.map((branch) => {
-            return(branch.selected = false)
-        })
-        skills.map((skill) => {
-            return(skill.selected = false)
-        })
     }
 
     onApply = (e) => {
         e.preventDefault();
-        console.log(this.state.selectedBranch);
-        console.log(this.state.selectedYear);
-        console.log(this.state.selectedSkill);
-        console.log('*****')
+        const branch = this.state.selectedBranch;
+        const year = this.state.selectedYear;
+        const skill = this.state.selectedSkill;
+        var filterData = {
+            branch : branch,
+            year : year,
+            skill : skill
+        }
+
+        this.props.updateFilter(filterData);
+        this.props.history.push('/mentors/show');
+        
+        
     }
     render() { 
         return ( 
@@ -155,25 +170,25 @@ class FilterMentors extends Component {
                 <FilterHeader/>
                     <div className={styles.section}>
                         <div className={styles.sectionHeading}>Select Branch<span className={styles.counter}>{this.state.selectedBranch.length ? (' ('+this.state.selectedBranch.length+')') : null }</span></div>
-                        { branch.map((branch,i)=>{
+                        { this.state.allbranches.map((value,i)=>{
                             return(
-                                <Button key={i} onClick={() => this.handleBranch(branch.value)} text={branch.name} type={branch.selected ? 'outline' : 'disabled'} className={styles.button}/>
+                                <Button key={i} onClick={() => this.handleBranch(value.id)} text={value.name} type={value.selected ? 'outline' : 'disabled'} className={styles.button}/>
                             )
                         })}
                     </div>
                     <div className={styles.section}>
                         <div className={styles.sectionHeading}>Year of Study<span className={styles.counter}>{this.state.selectedYear.length ? (' ('+this.state.selectedYear.length+')') : null }</span></div>
-                        { year.map((year,i) => {
+                        { this.state.allyear.map((value,i) => {
                             return(
-                                <Button key={i} className={styles.button} text={year.value + ' Year'} value={year.value} type={year.selected ? 'outline' : 'disabled'} onClick={() => this.handleYear(year.value)}/>
+                                <Button key={i} className={styles.button} text={value.name + ' Year'} type={value.selected ? 'outline' : 'disabled'} onClick={() => this.handleYear(value.name)}/>
                             )
                         })}
                     </div>
                     <div className={styles.section}>
                         <div className={styles.sectionHeading}>Areas of Interest<span className={styles.counter}>{this.state.selectedSkill.length ? (' ('+this.state.selectedSkill.length+')') : null }</span></div>
-                        {skills.map((skill,i) => {
+                        {this.state.allinterests.map((value,i) => {
                             return(
-                                <Button key={i} className={styles.button} text={skill.value} type={skill.selected ? 'outline' : 'disabled'} onClick={() => this.handleSkill(skill.value)} />
+                                <Button key={i} className={styles.button} text={value.name} type={value.selected ? 'outline' : 'disabled'} onClick={() => this.handleSkill(value.id)} />
                             )
                         })}
                     </div>

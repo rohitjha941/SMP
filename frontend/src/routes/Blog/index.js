@@ -47,7 +47,6 @@ export default class Blog extends Component {
                 }
             }
         })
-        console.log(blogData);
         return (
             <React.Fragment>
                 <div className={styles.mainDiv}>

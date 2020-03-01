@@ -132,11 +132,9 @@ class Interest(models.Model):
 
 
 year_choices = (
-    ("1st Year", "1st Year"),
-    ("2nd Year", "2nd Year"),
-    ("3rd Year", "3rd Year"),
-    ("4th Year", "4th Year"),
-    ("5th Year", "5th Year")
+    ("3rd", "3rd Year"),
+    ("4th", "4th Year"),
+    ("5th", "5th Year")
 )
 
 

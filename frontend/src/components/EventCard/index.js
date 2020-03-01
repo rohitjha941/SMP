@@ -11,7 +11,6 @@ function WrappedComponent(props) {
     const text = props.text === undefined ? props.eventData.text : props.text ? props.eventData.text : null;
     const metadata = props.metadata === undefined ? props.eventData.metadata : props.metadata ? props.eventData.metadata : null;
     const headingTop = props.headingTop ? true :  false;
-    // console.log(Date(Date.now()).toString().slice(4,15));
     return (
         <React.Fragment>
             <div className={

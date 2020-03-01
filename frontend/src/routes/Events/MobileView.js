@@ -6,7 +6,6 @@ import EventCard from '../../components/EventCard';
 class MobileView extends Component {
     state = {  }
     render() { 
-        // console.log(this.props.eventData);
         return ( 
             <React.Fragment>
                 <div className={styles.heading}>We conduct <span className='color-red'>Events </span><span className={styles.dashedWord}>year-round</span></div>

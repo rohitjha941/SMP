@@ -22,17 +22,37 @@ const FilterMentors = Loadable({
     loader: () => import('./FilterMentors'),
     loading: () => <Loader />
 })
-// console.log(this.props.docs);
 
 class Mentors extends Component {
-    state = {  }
+    constructor(){
+        super();
+        this.state={
+            filterData : {
+                branches:[],
+                interests:[],
+                year:[]
+            }
+        }
+    }
+
+    updateFilter = (value) =>{
+        const newBranches = value.branch;
+        const newYear = value.year;
+        const newInterests = value.skill;
+        const filterData = {
+            branches:newBranches,
+            interests:newInterests,
+            year:newYear,
+        }
+        this.setState({filterData:filterData})
+    }
     render() { 
         return ( 
             <React.Fragment>
                 <Switch>
                     <Route exact path="/mentors" render={() => <MentorIndex docs={this.props.docs}/>} />
-                    <Route exact path="/mentors/show" render={() => <ShowMentors />} /> {/*show all mentors or searched*/}
-                    <Route exact path="/mentors/filter" render={() => <FilterMentors/>} /> {/* filter search */}
+                    <Route exact path="/mentors/show" render={() => <ShowMentors branches={this.props.branches} interests={this.props.interests} mentors={this.props.mentors} filter={this.state.filterData}/>} /> {/*show all mentors or searched*/}
+                    <Route exact path="/mentors/filter" render={(props) => <FilterMentors {...props} branches={this.props.branches} interests={this.props.interests} updateFilter={this.updateFilter}/>} /> {/* filter search */}
                     <Route exact path="/mentors/becomeMentor" render={() => <ComingSoon />} /> {/* procedure to become mentor*/}
                     <Redirect to="/mentors" /> 
                 </Switch>
