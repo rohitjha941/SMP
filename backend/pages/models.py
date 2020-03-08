@@ -51,6 +51,22 @@ class faq(models.Model):
     def __str__(self):
         return self.question
 
+class branch(models.Model):
+    branch_name = models.CharField(
+        max_length = 100,
+        default = ""
+    )
+    def __str__(self):
+        return self.branch_name
+
+year_choices_team = (
+    ("1st", "1st Year"),
+    ("2nd", "2nd Year"),
+    ("3rd", "3rd Year"),
+    ("4th", "4th Year"),
+    ("5th", "5th Year"),
+)
+
 
 class StudentTeam(models.Model):
 
@@ -86,14 +102,17 @@ class StudentTeam(models.Model):
         blank=True
     ) 
 
-    branch = models.CharField(
-        default = "",
-        max_length = 100,
+    branch = models.ForeignKey(
+        branch,
+        related_name = "teams",
+        on_delete = models.CASCADE,
     )
 
     year = models.CharField(
-        default = "",
         max_length = 100,
+        blank = True,
+        null = True,
+        choices = year_choices_team
     )
 
     is_coordinator = models.BooleanField(
@@ -114,13 +133,6 @@ class StudentTeam(models.Model):
     )
 
 
-class branch(models.Model):
-    branch_name = models.CharField(
-        max_length = 100,
-        default = ""
-    )
-    def __str__(self):
-        return self.branch_name
 
 class Interest(models.Model):
     interest_name = models.CharField(

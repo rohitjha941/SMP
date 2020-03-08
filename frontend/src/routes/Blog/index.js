@@ -54,13 +54,13 @@ export default class Blog extends Component {
                 {this.state.mobileView ? 
                     <Switch>
                         <Route exact path = "/blogs" render={props => (<MobileView {...props} blogData={blogData}/>)} />
-                        <Route path = "/blogs/view" render={props => (<BlogFullView {...props} blogData={blogData}/>)} />
+                        <Route path = "/blogs/view/:blogID/" render={props => (<BlogFullView {...props} blogData={blogData}/>)} />
                         <Redirect to="/" />
                     </Switch>
                 :
                 <Switch>
                     <Route exact path = "/blogs" render={props => (<DesktopView {...props} blogData={blogData}/>)} />
-                    <Route path = "/blogs/view" render={props => (<BlogFullView {...props} blogData={blogData}/>)} />
+                    <Route path = "/blogs/view/:blogID/" render={props => (<BlogFullView {...props} blogData={blogData}/>)} />
                     <Redirect to="/" />
                 </Switch>
                 }

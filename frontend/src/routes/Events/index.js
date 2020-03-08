@@ -17,8 +17,8 @@ class Events extends Component {
     }
     componentDidMount() {
         window.addEventListener('resize', this.resize);
-        }
-        componentWillUnmount() {
+    }
+    componentWillUnmount() {
         window.removeEventListener('resize', this.resize);
     }
 

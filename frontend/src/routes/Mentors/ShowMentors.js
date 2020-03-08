@@ -79,7 +79,7 @@ class MentorShow extends Component {
             let branchFiltered = [];
             (filterbranches.length>0 ? 
                 filterbranches.map(filterbranch => {
-                    branchFiltered = (mentors.filter(({branch}) =>  branch === filterbranch));
+                    return(branchFiltered = (mentors.filter(({branch}) =>  branch === filterbranch)));
                 })
                 :
                 branchFiltered = mentors
@@ -93,13 +93,23 @@ class MentorShow extends Component {
                 yearFiltered = branchFiltered
             )
             let interestFiltered = [];
+
+            //to compare interest
+            let filterinterestsNum=[];
+            //..
+
+            filterinterests.forEach((value) => {
+                return(filterinterestsNum[value] = 1);
+            });
             (filterinterests.length > 0 ?
                 yearFiltered.map(mentor => {
-                    mentor.interests.map(interest =>{
-                        if(filterinterests.indexOf(interest) > -1){
-                            return(interestFiltered.push(mentor))
+                    for(var i=0;i<mentor.interests.length;i++){
+                        if(filterinterestsNum[mentor.interests[i]]){
+                            interestFiltered.push(mentor);
+                            break;
                         }
-                    })
+                    }
+                    return 0;
                 })
                 :
                 interestFiltered = yearFiltered
@@ -136,6 +146,7 @@ class MentorShow extends Component {
                                             </>
                                             )
                                         }
+                                        return 0;
                                     })
                                 }
                             </ul>
