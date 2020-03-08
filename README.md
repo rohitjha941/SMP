@@ -36,13 +36,13 @@ Official Portal of SMP IIT Roorkee
 ```
 # Frontend
 - Setup Frontend
-In a new shell
+- In a new shell
 ```sh
 - cd frontend/
 - yarn install
 ```
 - Make a .env file as .env.sample
-run frontend server
+- run frontend server
 ```sh
 - yarn start
 ```
