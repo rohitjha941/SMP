@@ -12,7 +12,7 @@ class BlogFullView extends Component {
     }
     componentDidMount(){
         const blogID = this.props.match.params.blogID;
-        axios.get(process.env.REACT_APP_API_BASE+`blogs/${blogID}`)
+        axios.get(process.env.REACT_APP_API_BASE+`blogs/${blogID}/`)
         .then(res => {
             const blogData = 
                 {

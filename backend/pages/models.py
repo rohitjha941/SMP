@@ -302,3 +302,13 @@ class MentorDocs(models.Model):
         null = True,
         blank = True
     )
+
+class RaisedQuery(models.Model):
+    name = models.CharField(
+        default="",
+        max_length=100
+    )
+    email = models.EmailField(
+        max_length=254,
+    )
+    query = models.TextField()

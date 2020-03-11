@@ -9,6 +9,7 @@ function WrappedComponent(props) {
                 (props.type === 'disabled' ? (styles.disabled) : false || props.type ==='outline' ? (styles.outline) : false || (styles.solid) ) 
                 + ' ' + props.className
             }
+            type={props.type}
             onClick = {props.onClick} >
             {props.text}
         </button>

@@ -147,3 +147,13 @@ REST_FRAMEWORK = {
  
   'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
+
+#raise_query_email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'host user here'
+EMAIL_HOST_PASSWORD = 'host password here'
+
+EMAIL_SEND_TO_ADMIN = 'admin mail here(i.e. recipient)'

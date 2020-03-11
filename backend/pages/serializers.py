@@ -54,3 +54,8 @@ class MentorDocsSerializer(serializers.ModelSerializer):
     class Meta:
         model = MentorDocs
         fields = "__all__"
+
+class RaisedQuerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RaisedQuery
+        fields = "__all__"

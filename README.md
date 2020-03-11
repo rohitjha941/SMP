@@ -22,7 +22,7 @@ Official Portal of SMP IIT Roorkee
 ```
 - Install requirements
 ```sh
-- python manage.py -r r.txt
+- pip3 install -r r.txt
 ```
 - Create Admin
 ```sh
@@ -30,6 +30,7 @@ Official Portal of SMP IIT Roorkee
 ```
 
 - Import all the sample databases ( from /backend/SampleDatabase ) into your local database [localhost:8000/backend/admin]
+- Configure your username and password for sending mail in backend/bankend/settings.py
 - Run the backend server
 ```sh
 - python manage.py runserver
