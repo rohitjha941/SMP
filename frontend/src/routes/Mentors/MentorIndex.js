@@ -8,12 +8,12 @@ import ImageText from 'components/ImageText';
 class MentorIndex extends Component {
     state = {  }
     render() { 
-        const docs = this.props.docs.map(value => {
+        const docs = this.props.interests ? (this.props.docs.map(value => {
             return{
                 name:value.name,
                 doc:value.document,
             }
-        })
+        })) : null;
         return ( 
             <React.Fragment>
                 <div className={styles.mainDiv}>

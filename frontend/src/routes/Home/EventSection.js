@@ -10,22 +10,18 @@ class EventSection extends Component {
         super();
         this.state ={
             mobView : window.innerWidth < 600,
-            tabView: window.innerWidth<1000
+            tabView: window.innerWidth<1000,
+            eventData:[]
         }
-        }
-        resize  = () => {
-            let tabWidth =  window.innerWidth < 1000;
-            this.setState({ tabView : tabWidth});
-            let mobWidth = window.innerWidth < 600;
-            this.setState({mobView:mobWidth});
-        }
-        componentDidMount() {
-            window.addEventListener('resize', this.resize);
-          }
-          componentWillUnmount() {
-            window.removeEventListener('resize', this.resize);
-        }
-    render() { 
+    }
+    resize  = () => {
+        let tabWidth =  window.innerWidth < 1000;
+        this.setState({ tabView : tabWidth});
+        let mobWidth = window.innerWidth < 600;
+        this.setState({mobView:mobWidth});
+    }
+    componentDidMount() {
+        window.addEventListener('resize', this.resize);
         const eventData = this.props.events.map(value => {
             return {
                 event_id: value.id,
@@ -39,11 +35,20 @@ class EventSection extends Component {
                     d3: value.venue,
                 }
             }
-        })
+        });
+        this.setState({eventData: eventData});
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.resize);
+    }
+    render() { 
+        let eventData = this.state.eventData;
         return ( 
             <React.Fragment>
                 <div className={styles.eventParentDiv}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
+                    {eventData.length > 0 ?(
+                    <>
                     <EventCard 
                         className={styles.eventCardCommon} 
                         eventData={eventData[0]} 
@@ -54,6 +59,7 @@ class EventSection extends Component {
                         eventData={eventData[1]} 
                         type={window.innerWidth < 600 ? 'sm' : window.innerWidth < 1000 ? 'lg' : 'side'}
                     />
+                    </>) :null}
                     <Link to='/events'><Button className={styles.eventsButton} text='View More' type='outline'/></Link>
                 </div>
             </React.Fragment>

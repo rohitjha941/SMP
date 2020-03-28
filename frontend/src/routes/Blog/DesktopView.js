@@ -32,11 +32,11 @@ class DesktopView extends Component {
             <div className={styles.container2}>  
                 <div className={styles.sectionHeading}>Journey from a Mentee to a Mentor</div>
                 <ul className={styles.ul3}>
-                    {blogData.map((value,i) =>{
+                    {(blogData&& blogData.length>0)? blogData.map((value,i) =>{
                         return(
                             <li><Blogcard key={i} blogData={value} type='md' heading={false}/></li>
                         )
-                    })}
+                    }) : null}
                 </ul>
             </div>   
             </>

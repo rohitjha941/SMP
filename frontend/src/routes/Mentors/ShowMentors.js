@@ -10,7 +10,7 @@ class MentorShow extends Component {
             filterbranches : this.props.filter.branches,
             filterinterests : this.props.filter.interests,
             allbranches: [],
-            allinterests: this.props.interests,
+            allinterests: this.props.interests ? this.props.interests : null,
             mentors : [],
             filteredmentors:[]
         }

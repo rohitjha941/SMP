@@ -17,20 +17,22 @@ class FilterMentors extends Component {
     }
 
     componentDidMount(){
-        const allinterests = this.props.interests.map(value =>{
+        const allinterests = this.props.interests ? 
+        (this.props.interests.map(value =>{
                 return({
                     id: value.id,
                     name : value.interest_name,
                     selected: false
                 })
-        })
-        const allbranches = this.props.branches.map(value =>{
+        }))
+        :null;
+        const allbranches = this.props.branches ? (this.props.branches.map(value =>{
             return({
                 id: value.id,
                 name: value.branch_name,
                 selected: false
             })
-        })
+        })) : null;
         const allyear = [
             {name : '3rd', selected : false},
             {name : '4th', selected : false},

@@ -22,11 +22,11 @@ class Team extends Component {
                 </div>
                 <div className={styles.teamCardContainer}>
                     <ul>
-                        {member.map((member,i) => {
+                        {(member && member.length >0) ? (member.map((member,i) => {
                             return(
                                 <li key={i}><TeamCard key={i} member={member} /></li>
                             )
-                        })}
+                        })) : null}
                     </ul>
                 </div>
                 <Button className={styles.viewMore} text='View More' type='outline'/>

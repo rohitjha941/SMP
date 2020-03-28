@@ -18,13 +18,15 @@ class Questions extends Component {
     componentDidMount(){
         var MentorQuestions = [];
         var MenteeQuestions = [];
-        this.props.faqs.forEach(value => {
+        if(this.props.faqs){
+            this.props.faqs.forEach(value => {
                 var dat = {
                     question : value.question,
                     answer : value.answer
                 };
                 value._for === 'mentor' ? MentorQuestions.push(dat)  : MenteeQuestions.push(dat);
-        });
+          })
+        };
         this.setState({MenteeQuestions:MenteeQuestions, MentorQuestions:MentorQuestions})
     }
     handlequerychange = () =>{

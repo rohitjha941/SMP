@@ -22,7 +22,11 @@ export default class Queries extends Component {
         return(
             <div className='queries'>
                 <Heading changeTab={this.changeTab}/>
-                <Questions faqs={this.props.faqs} activeTab={this.state.activeTab}/>
+                {
+                    this.props.faqs ?
+                    <Questions faqs={this.props.faqs} activeTab={this.state.activeTab}/>
+                    :null
+                }
                 <img className={styles.redArm} src = {redArm} alt='arm' />
                 <img className={styles.blueArm} src = {blueArm} alt='arm' />
                 <Contact />
