@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     
     "pages",
 
-
+    'dbbackup',
     'rest_framework',
     'corsheaders',
     'import_export',
@@ -147,3 +147,7 @@ REST_FRAMEWORK = {
  
   'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
+
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR, 'backups')}
