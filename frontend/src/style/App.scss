@@ -7,7 +7,14 @@
 * {
   font-family: $ibm-plex;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 
+/* Hide scrollbar for IE and Edge */
+body {
+  -ms-overflow-style: none;
+}
 .color-red {
   color: $red;
 }
