@@ -17,7 +17,7 @@ export default class Home extends Component {
     }
     render() {
         // const title = "Fostering Senior Junior Relationship"
-        const description = "Student Mentorship Program or the SMP assigns one mentor for a group of 5-9 facchas, a third or fourth yearite from their respective branches who can guide the incoming freshmen.";
+        const description = "Student Mentorship Program is one of the largest on-campus student body initiative which assigns a mentor(a pre-final or final year student) to all the freshmen within the same branch. It ensures bridging the communication gap between senior and first-year students by providing a dynamic environment for healthy discussion, guidance and one to one counseling.";
         return (
             <div className={styles.homeContainer}>
                 <div className={styles.InfoSection}>
