@@ -27,7 +27,7 @@ class DesktopView extends Component {
                <div className={styles.mainHeading}>We Conduct <span className='color-red'>Events</span> year-round</div>
                <div className={styles.container1}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
-                    { eventData ? 
+                    { eventData.length>0 ? 
                     <ul className={styles.ul1}>
                         <li><EventCard eventData={eventData[0]} type='side'/></li>
                         <li><EventCard eventData={eventData[1]} type='side'/></li>
@@ -36,7 +36,7 @@ class DesktopView extends Component {
                </div>
                <div className={styles.container2}>
                    <div className={styles.sectionHeading}>SMP Events</div>
-                    { eventData ? 
+                    { eventData.length>0 ? 
                         <ul className={styles.ul2}>
                         <li><EventCard className={styles.eventcardcommon} eventData={eventData[0]} type={this.state.break ? 'md' : 'lg'}/></li>
                         <li><EventCard className={styles.eventcardcommon} eventData={eventData[1]} type={this.state.break ? 'md' : 'lg'}/></li>

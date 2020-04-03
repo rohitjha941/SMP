@@ -6,13 +6,16 @@ import Blogcard from '../../components/BlogCard';
 class DesktopView extends Component {
     state = {  }
     render() { 
-        const blogData = this.props.blogData;
+        const blogData = this.props.blogData ? this.props.blogData : null;
         return ( 
             <>
             <div className={styles.container1}>
                 <div className={styles.headingContainer}>
                      <span className='color-red'>Read</span> What We Do
                 </div>
+                {
+                    (blogData && blogData.length>0) ? 
+                <>
                 <ul className={styles.ul1}>
                     <li>
                         <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl} textlimit={500}/>
@@ -27,7 +30,9 @@ class DesktopView extends Component {
                             </li>
                         </ul>
                     </li>
-                </ul>    
+                </ul>
+                </>
+                :null }    
             </div>
             <div className={styles.container2}>  
                 <div className={styles.sectionHeading}>Journey from a Mentee to a Mentor</div>

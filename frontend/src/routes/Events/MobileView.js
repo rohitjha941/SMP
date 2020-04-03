@@ -12,7 +12,7 @@ class MobileView extends Component {
                 <div className={styles.heading}>We conduct <span className='color-red'>Events </span><span className={styles.dashedWord}>year-round</span></div>
                 <div>
                     <div className={styles.categoryHeading}>Upcoming Events</div>
-                    {eventData ? 
+                    {eventData.length>0 ? 
                     <>
                     <EventCard 
                         className={styles.eventCardCommon} 
@@ -33,7 +33,7 @@ class MobileView extends Component {
                 </div>
                 <div>
                     <div className={styles.categoryHeading}>SMP Events</div>
-                    {eventData ? 
+                    {eventData.length>0 ? 
                     <>
                     <EventCard 
                         className={styles.eventCardCommon} 
