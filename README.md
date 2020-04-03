@@ -28,6 +28,7 @@ Official Portal of SMP IIT Roorkee
 ```sh
 - python manage.py createsuperuser
 ```
+- Create Config File named config.yml file and populate it as config.sample
 
 - Import all the sample databases ( from /backend/SampleDatabase ) into your local database [localhost:8000/backend/admin]
 - Configure your username and password for sending mail in backend/bankend/settings.py

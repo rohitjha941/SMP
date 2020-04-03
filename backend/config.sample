@@ -1,0 +1,4 @@
+email:
+  sender_email : (sender's email here)
+  password : (password)   
+  admin_email : (admin, who recieve the query)
