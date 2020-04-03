@@ -10,10 +10,6 @@ class Slider extends Component {
         return ( 
             <React.Fragment>
                 <div className="slider">
-                    {/* {blogData ? blogData.map((data,i) => {
-                        return(<a key={i} href={'#slide-'+i}>{i}</a>)
-                    }):null} */}
-
                     <div className="slides">
                         {blogData ? blogData.map((data,index) =>{
                             return(

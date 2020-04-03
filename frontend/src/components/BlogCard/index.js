@@ -1,16 +1,24 @@
 import React from 'react';
 import Text from './Text';
 import styles from './BlogCard.module.scss';
+import {Link} from 'react-router-dom';
 
-const blogCardContentCharacterLimit = 100;
+
 
 function WrappedComponent(props) {
+    var blogCardContentCharacterLimit = props.textlimit ? props.textlimit : 100;
+
+    var markup = props.blogData.text;
+    var el = document.createElement('div');
+    el.innerHTML = markup;  
+    var textedited = (el.getElementsByTagName("p")[0].innerHTML+el.getElementsByTagName("p")[1].innerHTML+el.getElementsByTagName("p")[2].innerHTML).substr(0,blogCardContentCharacterLimit).trim()
+
     const blog_id = props.blogData.blog_id;
     const imageSource = props.blogData.imgSrc;
     const imageAlternativeText = (props.blogData.imgAlt) ? props.blogData.imgAlt : props.blogData.heading;
     const heading = props.heading === undefined ? props.blogData.heading : props.heading ? props.blogData.heading : null;
-    const text = props.text === undefined ? props.blogData.text : props.text ? props.blogData.text : null;
-    const truncatedText = text? text.substring(0, blogCardContentCharacterLimit):"";
+    const text = props.text === undefined ? textedited : props.text ? textedited : null;
+    const truncatedText = text? text:"";
     const metadata = props.metadata === undefined ? props.blogData.metadata : props.metadata ? props.blogData.metadata : null;
     const headingTop = props.headingTop === false ? false : (window.innerWidth < 1000) ? true : props.headingTop ? true :  false;
     return (
@@ -33,7 +41,9 @@ function WrappedComponent(props) {
                 </h3>
                 :
                 null}
-                <div id='imagediv'><img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} /></div>
+                <Link to={'/blogs/view/'+blog_id+'/'} >
+                    <div id='imagediv'><img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} /></div>
+                </Link>
                 <Text heading={heading} text={truncatedText} metadata={metadata} blog_id={blog_id} headingTop={headingTop} type={props.type}/>
             </div>
         </React.Fragment>

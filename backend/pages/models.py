@@ -37,9 +37,35 @@ class faq(models.Model):
         max_length=1000,
         default= "",
     )
-
+    _for_choices = ( 
+        ('mentor',"MENTOR"),
+        ('mentee', "MENTEE")
+    ) 
+    _for = models.CharField(
+        max_length = 100,
+        blank = True,
+        null = True,
+        choices = _for_choices, 
+        default = 'mentor'
+    )
     def __str__(self):
         return self.question
+
+class branch(models.Model):
+    branch_name = models.CharField(
+        max_length = 100,
+        default = ""
+    )
+    def __str__(self):
+        return self.branch_name
+
+year_choices_team = (
+    ("1st", "1st Year"),
+    ("2nd", "2nd Year"),
+    ("3rd", "3rd Year"),
+    ("4th", "4th Year"),
+    ("5th", "5th Year"),
+)
 
 
 class StudentTeam(models.Model):
@@ -76,28 +102,37 @@ class StudentTeam(models.Model):
         blank=True
     ) 
 
-    branch = models.CharField(
-        default = "",
-        max_length = 100,
+    branch = models.ForeignKey(
+        branch,
+        related_name = "teams",
+        on_delete = models.CASCADE,
     )
 
     year = models.CharField(
-        default = "",
         max_length = 100,
+        blank = True,
+        null = True,
+        choices = year_choices_team
     )
 
     is_coordinator = models.BooleanField(
         
     )
 
-
-class branch(models.Model):
-    branch_name = models.CharField(
+    position = models.CharField(
+        default = "",
         max_length = 100,
-        default = ""
     )
-    def __str__(self):
-        return self.branch_name
+    mobile = models.CharField(
+        default = "",
+        max_length = 100,
+    )
+    email = models.CharField(
+        default = "",
+        max_length = 100,
+    )
+
+
 
 class Interest(models.Model):
     interest_name = models.CharField(
@@ -109,11 +144,9 @@ class Interest(models.Model):
 
 
 year_choices = (
-    ("1st Year", "1st Year"),
-    ("2nd Year", "2nd Year"),
-    ("3rd Year", "3rd Year"),
-    ("4th Year", "4th Year"),
-    ("5th Year", "5th Year")
+    ("3rd", "3rd Year"),
+    ("4th", "4th Year"),
+    ("5th", "5th Year")
 )
 
 
@@ -232,3 +265,50 @@ class Blogs(models.Model):
     )
 
     content = tinymce_models.HTMLField()
+
+class Events(models.Model):
+    title = models.CharField(
+        default = "",
+        max_length = 150,
+    )
+
+    date = models.DateField(
+        blank=True,
+        null = True
+    )
+    time = models.TimeField (
+        blank=True,
+        null = True
+    )
+    thumbnail = models.ImageField(
+        upload_to="events/",
+        max_length=200,
+        null = True,
+        blank = True
+    )
+    venue = models.CharField(
+        default="",
+        max_length=100
+    )
+    content = tinymce_models.HTMLField()
+
+class MentorDocs(models.Model):
+    name = models.CharField(
+        default="",
+        max_length=100, 
+    )
+    document = models.FileField(
+        upload_to = "mentorDocs/",
+        null = True,
+        blank = True
+    )
+
+class RaisedQuery(models.Model):
+    name = models.CharField(
+        default="",
+        max_length=100
+    )
+    email = models.EmailField(
+        max_length=254,
+    )
+    query = models.TextField()

@@ -3,38 +3,18 @@ import styles from './About.module.scss';
 import TeamCard from '../../components/TeamCard';
 import Button from '../../components/Button';
 class Team extends Component {
-    member=[
-        {
-            name:'Apan Jain' ,
-            image:require('assets/images/profile.jfif'), 
-            designation:'Developer',
-            fb:'https://www.facebook.com/apan.jain.75', 
-            contact:'9166134565'
-        },
-        {
-            name:'Apan Jain' ,
-            image:require('assets/images/profile.jfif'), 
-            designation:'Developer',
-            fb:'https://www.facebook.com/apan.jain.75', 
-            contact:'9166134565'
-        },
-        {
-            name:'Apan Jain' ,
-            image:require('assets/images/profile.jfif'), 
-            designation:'Developer',
-            fb:'https://www.facebook.com/apan.jain.75', 
-            contact:'9166134565'
-        },
-        {
-            name:'Apan Jain' ,
-            image:require('assets/images/profile.jfif'), 
-            designation:'Developer',
-            fb:'https://www.facebook.com/apan.jain.75', 
-            contact:'9166134565'
-        }
-    ]
 
-    render() { 
+    render() {
+        const member = this.props.team.map((value) => {
+            return {
+                name : value.name,
+                image : value.photo,
+                designation: value.position,
+                fb: value.facebook,
+                linkedin: value.linkeden,
+                contact: value.mobile,
+            }
+        })
         return ( 
             <>
                 <div className={styles.teamHeading}>
@@ -42,11 +22,11 @@ class Team extends Component {
                 </div>
                 <div className={styles.teamCardContainer}>
                     <ul>
-                        {this.member.map((member,i) => {
+                        {(member && member.length >0) ? (member.map((member,i) => {
                             return(
                                 <li key={i}><TeamCard key={i} member={member} /></li>
                             )
-                        })}
+                        })) : null}
                     </ul>
                 </div>
                 <Button className={styles.viewMore} text='View More' type='outline'/>

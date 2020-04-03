@@ -8,14 +8,14 @@ function WrappedComponent(props) {
     return (
         <div className={styles.container}>
             {props.headingTop ? null :
-                <h3 className={
+                <Link to={'/blogs/view/'+props.blog_id+'/'} ><h3 className={
                     props.type === 'xl' ? styles.headingxl : null ||
                     props.type === 'lg' ? styles.headinglg : null ||
                     props.type === 'sm' ? styles.headingsm : null ||
                                         styles.headingmd
                     }>
                     {props.heading ? props.heading : null}
-                </h3>
+                </h3></Link>
             }
             {metadata ? 
                     (<p className={styles.metadata}>
@@ -24,12 +24,12 @@ function WrappedComponent(props) {
                     :
                     null
             }
-            <div className={styles.text}>
-            {props.text ? props.text : null}
-                <Link to="/blogs/view" ><span className={styles.readMore}>
+            { props.text ? <div className={styles.text} >   
+            <span dangerouslySetInnerHTML={{__html:props.text}}></span>   
+                <Link to={'/blogs/view/'+props.blog_id+'/'} ><span className={styles.readMore}>
                     {props.text  ? '...Read More' : null }
                 </span></Link>
-            </div>
+            </div>: null}
         </div>
     )
 }

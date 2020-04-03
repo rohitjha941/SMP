@@ -45,9 +45,10 @@
     margin: auto;
     grid-template-columns: 50% 50%;
     li{
-        margin-left:auto;
-        margin-right:auto;
+        // margin-left:auto;
+        // margin-right:auto;
         padding-top: -3.125rem;
+        padding: 2%;
         // vertical-align: top;
     }
 }
@@ -57,7 +58,8 @@
     grid-template-columns: 1fr;
     padding-top:1.5rem;
     li{
-        margin:auto;
+        // margin:auto;
+        // padding: 2%;
         padding-bottom:1rem;
     }
 }
@@ -77,6 +79,7 @@
     margin-bottom: 3.125rem;
     li{
         margin: auto;
+        margin-top: 0;
         padding: 3%;
         padding-left: 0;
         margin-left: 0;

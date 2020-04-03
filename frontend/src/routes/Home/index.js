@@ -22,7 +22,6 @@ export default class Home extends Component {
             <div className={styles.homeContainer}>
                 <div className={styles.InfoSection}>
                     <div className={styles.titleContainer}>
-                        {/* <Title className={styles.title} text={title} /> */}
                         <div className={styles.title}><p>Fostering Senior</p><p>Junior Relationship</p></div>
                     </div>
                     <div className={styles.illustration}>
@@ -31,11 +30,11 @@ export default class Home extends Component {
                     <div className={styles.description}>
                         <TextView text={description} />
                     </div>
-                    <Button  className={styles.learnMore} text="Learn More" type='outline'/>
+                    <Link to="/about"><Button  className={styles.learnMore} text="Learn More" type='outline'/></Link>
                     <Link to="/about"><div className={styles.learnMoreText}>Learn More ></div></Link>
                     <div onClick={this.scrollTo} className={styles.navDown}><img src={navDown} className={styles.navDown} alt='down-arrow' /></div>
                 </div>
-                    <EventSection id='events' className={styles.EventSection} />
+                    <EventSection className={styles.EventSection} events={this.props.events}/>
                     <BlogSection className={styles.BlogSection} blogs={this.props.blogs}/>
             </div>
         )

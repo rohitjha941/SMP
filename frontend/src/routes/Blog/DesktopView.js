@@ -6,7 +6,7 @@ import Blogcard from '../../components/BlogCard';
 class DesktopView extends Component {
     state = {  }
     render() { 
-        const blogData = this.props.blogData? this.props.blogData : null;
+        const blogData = this.props.blogData;
         return ( 
             <>
             <div className={styles.container1}>
@@ -15,7 +15,7 @@ class DesktopView extends Component {
                 </div>
                 <ul className={styles.ul1}>
                     <li>
-                        <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl}/>
+                        <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl} textlimit={500}/>
                     </li>
                     <li>
                         <ul className={styles.ul2}>
@@ -23,7 +23,7 @@ class DesktopView extends Component {
                                 <Blogcard blogData={blogData[1]} type='lg' className={styles.blogcardlg} text={false}/>
                             </li>
                             <li>
-                                <Blogcard blogData={blogData[2]} type='lg' className={styles.blogcardlg} text={false}/>
+                                <Blogcard blogData={blogData[0]} type='lg' className={styles.blogcardlg} text={false}/>
                             </li>
                         </ul>
                     </li>
@@ -32,12 +32,11 @@ class DesktopView extends Component {
             <div className={styles.container2}>  
                 <div className={styles.sectionHeading}>Journey from a Mentee to a Mentor</div>
                 <ul className={styles.ul3}>
-                    {blogData.map((value,i) =>{
-                        // console.log(i)
+                    {(blogData&& blogData.length>0)? blogData.map((value,i) =>{
                         return(
-                            <li><Blogcard blogData={value} type='md' heading={false}/></li>
+                            <li><Blogcard key={i} blogData={value} type='md' heading={false}/></li>
                         )
-                    })}
+                    }) : null}
                 </ul>
             </div>   
             </>

@@ -6,11 +6,10 @@ import back from 'assets/images/back-arrow.svg';
 class SearchHeader extends Component {
     state = {  }
     handleFilter(e) {
-        var input, filter, ul, li, p, i, txtValue;
+        var input, filter, li, p, i, txtValue;
         input = document.getElementById('search-input');
         filter = input.value.toLowerCase();
-        ul = document.getElementById('mentors');
-        li = ul.getElementsByClassName('mentor');
+        li = document.getElementsByClassName('mentor-li');
 
         for (i = 0; i < li.length; i++) {
           p = li[i].getElementsByTagName("p")[0];

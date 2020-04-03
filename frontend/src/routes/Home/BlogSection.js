@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import BlogCard from '../../components/BlogCard';
+import {Link} from 'react-router-dom';
 import Button from '../../components/Button';
 import styles from './BlogSection.module.scss';
 import Slider from './Slider';
@@ -38,7 +38,7 @@ class BlogSection extends Component {
                 <div className={styles.cardSection}>
                     <div className={styles.sectionHeading} >Featured Blogs</div>
                     <Slider blogData={blogData} />
-                    <Button text='View all Blogs' className={styles.viewBlogsButton} type={'outline'}/>
+                    <Link to='/blogs'><Button text='View all Blogs' className={styles.viewBlogsButton} type={'outline'}/></Link>
                 </div>  
             </React.Fragment>
         );

@@ -1,36 +1,66 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import EventCard from '../../components/EventCard';
 import Button from '../../components/Button';
 
 import styles from './EventSection.module.scss';
 
-let eventData = {
-    event_id : 'event_id',
-    imgSrc : 'https://images.unsplash.com/photo-1503428593586-e225b39bddfe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
-    imgAlt : 'students',
-    heading : 'Open Talk on Data Science ', 
-    text : 'The Student Mentorship Program recently hosted the first talk of the series on Data Science, Artificial Intelligence and Research. We would like to thank our speakers Karan Desai and Hardik Chauhan for their enriching inputs and the students who showed up for this discussion.', 
-    metadata : {d1:'21 Dec\'19' , d2:'6:15 pm', d3:'MAC Audi'}
-}
-
 class EventSection extends Component {
-    state = {  }
+    constructor(){
+        super();
+        this.state ={
+            mobView : window.innerWidth < 600,
+            tabView: window.innerWidth<1000,
+            eventData:[]
+        }
+    }
+    resize  = () => {
+        let tabWidth =  window.innerWidth < 1000;
+        this.setState({ tabView : tabWidth});
+        let mobWidth = window.innerWidth < 600;
+        this.setState({mobView:mobWidth});
+    }
+    componentDidMount() {
+        window.addEventListener('resize', this.resize);
+        const eventData = this.props.events.map(value => {
+            return {
+                event_id: value.id,
+                imgSrc: value.thumbnail,
+                imgAlt: value.title,
+                heading: value.title,
+                text: value.content,
+                metadata: {
+                    d1: value.date,
+                    d2: value.time + ' hrs',
+                    d3: value.venue,
+                }
+            }
+        });
+        this.setState({eventData: eventData});
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.resize);
+    }
     render() { 
+        let eventData = this.state.eventData;
         return ( 
             <React.Fragment>
-                <div className={styles.eventParentDiv} id="events">
+                <div className={styles.eventParentDiv}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
+                    {eventData.length > 0 ?(
+                    <>
                     <EventCard 
                         className={styles.eventCardCommon} 
-                        eventData={eventData} 
-                        type={window.innerWidth < 600 ? 'sm' : window.innerWidth < 1000 ? 'lg' : 'side'}
+                        eventData={eventData[0]} 
+                        type={this.state.mobView ? 'sm' : this.state.tabView ? 'lg' : 'side'}
                     />
                     <EventCard 
                         className={styles.eventCardCommon} 
-                        eventData={eventData} 
+                        eventData={eventData[1]} 
                         type={window.innerWidth < 600 ? 'sm' : window.innerWidth < 1000 ? 'lg' : 'side'}
                     />
-                    <Button className={styles.eventsButton} text='View More' type='outline'/>
+                    </>) :null}
+                    <Link to='/events'><Button className={styles.eventsButton} text='View More' type='outline'/></Link>
                 </div>
             </React.Fragment>
          );

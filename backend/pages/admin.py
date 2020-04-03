@@ -13,12 +13,12 @@ class HomeVisionAdmin(ImportExportModelAdmin):
     list_display = ('title', 'description', 'image', ) 
 @register(faq)
 class faqVisionAdmin(ImportExportModelAdmin):
-    list_display = ('question', 'answer', )
+    list_display = ('_for','question', 'answer', )
 
 
 @register(StudentTeam)
 class StudentTeamAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'photo', 'facebook', 'linkden', 'branch', 'year', 'is_coordinator', ) 
+    list_display = ('name', 'photo', 'facebook', 'linkden', 'branch', 'year', 'is_coordinator','position',) 
 
 @register(branch)
 class branchAdmin(ImportExportModelAdmin):
@@ -35,3 +35,15 @@ class MentorAdmin(ImportExportModelAdmin):
 @register(Blogs)
 class BlogsAdmin(ImportExportModelAdmin):
     list_display =  ('title', 'author', 'created_at')
+
+@register(Events)
+class EventsAdmin(ImportExportModelAdmin):
+    list_display =  ('title', 'venue', 'date')
+
+@register(MentorDocs)
+class MentorDocsAdmin(ImportExportModelAdmin):
+    list_display = ('name','document')
+
+@register(Interest)
+class InterestsAdmin(ImportExportModelAdmin):
+    list_display = ('interest_name',)

@@ -24,15 +24,36 @@ const FilterMentors = Loadable({
 })
 
 class Mentors extends Component {
-    state = {  }
+    constructor(){
+        super();
+        this.state={
+            filterData : {
+                branches:[],
+                interests:[],
+                year:[]
+            }
+        }
+    }
+
+    updateFilter = (value) =>{
+        const newBranches = value.branch;
+        const newYear = value.year;
+        const newInterests = value.skill;
+        const filterData = {
+            branches:newBranches,
+            interests:newInterests,
+            year:newYear,
+        }
+        this.setState({filterData:filterData})
+    }
     render() { 
         return ( 
             <React.Fragment>
                 <Switch>
-                    <Route exact path="/mentors" render={props => (<MentorIndex {...props} />)} />
-                    <Route exact path="/mentors/show" render={props => (<ShowMentors {...props} />)} /> {/*show all mentors or searched*/}
-                    <Route exact path="/mentors/filter" render={props => (<FilterMentors {...props} />)} /> {/* filter search */}
-                    <Route exact path="/mentors/becomeMentor" render={props => (<ComingSoon {...props} />)} /> {/* procedure to become mentor*/}
+                    <Route exact path="/mentors" render={() => <MentorIndex docs={this.props.docs}/>} />
+                    <Route exact path="/mentors/show" render={() => <ShowMentors branches={this.props.branches} interests={this.props.interests} mentors={this.props.mentors} filter={this.state.filterData}/>} /> {/*show all mentors or searched*/}
+                    <Route exact path="/mentors/filter" render={(props) => <FilterMentors {...props} branches={this.props.branches} interests={this.props.interests} updateFilter={this.updateFilter}/>} /> {/* filter search */}
+                    <Route exact path="/mentors/becomeMentor" render={() => <ComingSoon />} /> {/* procedure to become mentor*/}
                     <Redirect to="/mentors" /> 
                 </Switch>
             </React.Fragment>

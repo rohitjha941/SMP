@@ -3,10 +3,11 @@ import styles from './TeamCard.module.scss';
 import fb from 'assets/images/fb.svg';
 import call from 'assets/images/call.svg';
 
+
 function WrappedComponent(props) {
     return (
         <div className={styles.container}>
-            <img className={styles.image} src={props.member.image} alt={props.name} />
+            <div className={styles.imageparent}><img className={styles.image} id='profile' src={props.member.image} alt={props.name} /></div>
             <div className={styles.name}>{props.member.name}</div>
             <div className={styles.designation}>{'(' + (props.member.designation) + ')'}</div>
             <div className={styles.contact}>
