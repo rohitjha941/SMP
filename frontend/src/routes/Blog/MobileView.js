@@ -11,6 +11,7 @@ export default class MobileView extends Component {
                 <div className={styles.heading}><span className='color-red'>Read</span> what we do</div>
                 {blogData?
                 <>
+                <div className={styles.mainWrapper}>
                 <div>
                     <div className={styles.categoryHeading}>Featured</div>
                     {blogData.map(value => (
@@ -38,6 +39,7 @@ export default class MobileView extends Component {
                     ))}
                 </div>
                 <Button className={styles.viewMore} type='outline' text='View More'/>
+                </div>
                 </>
                 : null
                 }

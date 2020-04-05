@@ -1,5 +1,8 @@
 @import '../../style/common.scss';
-
+.mainWrapper{
+    width:64%;
+    margin: auto;
+}
 .heading{
     margin: 1.9375rem auto 0 auto;
     font-family: IBM Plex Sans;
@@ -22,28 +25,24 @@
     font-size: 0.75rem;
     line-height: 1rem;
     color:$blue-text;
-    width:17.125rem;
     margin: 1.5625rem auto 0.8125rem auto;
     text-align: left;
     @media screen and (min-width:$break){
         font-size:1.6875rem;
         line-height: 2.1875rem;
-        width: 36.3975rem;
         }
 }
 
 .blogCardCommon{
     margin: 0 auto 0 auto;
+    width: 100%;
 }
 
 .hr{
     margin: 1.25rem auto 0.8125rem auto;
-    width: 16.875rem;
+    width: 100%;  
     height: 0;
     border: 0.03125rem solid $grey-level-0_1;
-    @media screen and (min-width: $break){
-        width : 36.3975rem;
-    }
 }
 
 .viewMore{
