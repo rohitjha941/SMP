@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 import Button from '../../components/Button';
 import styles from './contact.module.scss';
+
+const recaptchaRef = React.createRef();
 class Contact extends Component {
     constructor() {
         super()
@@ -10,6 +13,8 @@ class Contact extends Component {
             email: '',
             query:'',
             errmsg:'',
+            captcha: true,
+            'g-recaptcha-response':'',
         }
     }
     onChange = (e) => {
@@ -18,27 +23,43 @@ class Contact extends Component {
         this.setState({ [name]: value })
     }
 
-
+    handleCaptcha = (key) => {
+        this.setState({
+            captcha: true,
+            'g-recaptcha-response' : key
+        })
+    }
     handleSubmit = (e) => {
         e.preventDefault(); 
-        let data = {
-            name: this.state.name,
-            email: this.state.email,
-            query: this.state.query
+        if(this.state.captcha){
+            let data = {
+                name: this.state.name,
+                email: this.state.email,
+                query: this.state.query,
+                'g-recaptcha-response' : this.state['g-recaptcha-response']
+            }
+            axios.post((process.env.REACT_APP_API_BASE+'raise-query/'),data)
+            .then((response) => {
+                console.log(response);
+                this.setState({
+                    errmsg:"<div>Your query has been raised<br/>We'll get back to you soon.</div>",
+                    email:'',
+                    query:'',
+                    name:'',
+                });
+            })
+            .catch((error) => {
+                // console.log(error);
+                this.setState({
+                    errmsg:"<div>There was a problem sending your query<br/>Please try again later.</div>"
+                });
+            })
         }
-        axios.post((process.env.REACT_APP_API_BASE+'raise-query/'),data)
-        .then((response) => {
-            // console.log(response);
-            this.setState({
-                errmsg:"<div>Your query has been raised<br/>We'll get back to you soon.</div>"
-            });
-        })
-        .catch((error) => {
-            // console.log(error);
-            this.setState({
-                errmsg:"<div>There was a problem sending your query<br/>Please try again later.</div>"
-            });
-        })
+        //reset captcha
+        recaptchaRef.current.reset();
+    }
+    componentDidMount(){
+        console.log(process.env.RECAPTCHA_SITE_KEY);
     }
     render() {
         let email = this.state.email;
@@ -93,6 +114,11 @@ class Contact extends Component {
                             spellCheck="off"
                             required />
                         <br/>
+                        <ReCAPTCHA
+                            onChange={this.handleCaptcha}
+                            ref={recaptchaRef}
+                            sitekey="6LdXNOYUAAAAAGpGBOm2gTInTY_V34axHyQafHeg"
+                        />
                         <Button type='submit' text='Get In Touch' />
                     </form>
                 </div>
