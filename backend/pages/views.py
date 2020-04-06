@@ -47,6 +47,9 @@ class InterestView (viewsets.ModelViewSet):
     queryset = Interest.objects.all()
     serializer_class = InterestSerializer
 
+class BlogCategoryView (viewsets.ModelViewSet):
+    queryset = BlogCategory.objects.all()
+    serializer_class = BlogCategorySerializer
 
 class BlogsView (viewsets.ModelViewSet):
     queryset = Blogs.objects.all()
