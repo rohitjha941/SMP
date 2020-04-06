@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './style/App.scss';
 import Loadable from 'react-loadable';
 import Loader from './components/Loader';
+import {updateEvents} from 'utils';
 
 var methods = require('./api/methods/');
 
@@ -21,7 +22,7 @@ const Footer = Loadable({
 function App() {
 
   const [blogs, setBlogs] = useState([]);
-  const [events, setEvents] = useState([]);
+  let [events, setEvents] = useState([]);
   const [team,setTeam] = useState([]);
   const [mentors,setMentors] = useState([]);
   const [mentorsDocs,setMentorsDocs] = useState([]);
@@ -81,6 +82,8 @@ function App() {
     fetchBranchesIfEmpty();
     fetchInterestsIfEmpty();
   });
+
+  events = updateEvents(events);
 
   return (
     <div className="App">

@@ -34,7 +34,9 @@ class Events extends Component {
                     d1: value.date,
                     d2: value.time + ' hrs',
                     d3: value.venue,
-                }
+                },
+                isUpcoming: value.isUpcoming,
+                isThisWeek: value.isThisWeek
             }
         })
         return ( 

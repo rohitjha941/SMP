@@ -8,6 +8,8 @@ class DesktopView extends Component {
         super();
         this.state ={
             break : window.innerWidth < 1470 ? true : false,
+            upcomingEvents : [],
+            pastEvents : []
         }
     }
     resize  = () => {
@@ -16,33 +18,59 @@ class DesktopView extends Component {
     }
     componentDidMount() {
         window.addEventListener('resize', this.resize);
-        }
-        componentWillUnmount() {
+        var upcomingEvents = [];
+        var pastEvents = [];
+        this.props.eventData.map(event=>{
+            if(event.isThisWeek){
+                return upcomingEvents.unshift(event);
+            }else if(event.isUpcoming){
+                return upcomingEvents.push(event);
+            }
+            return pastEvents.push(event);
+        })
+        this.setState({upcomingEvents:upcomingEvents,pastEvents:pastEvents});
+    }
+    componentWillUnmount() {
         window.removeEventListener('resize', this.resize);
     }
     render() {
-        const eventData = this.props.eventData ? this.props.eventData : null; 
+        const upcomingEvents = this.state.upcomingEvents ;
+        const pastEvents = this.state.pastEvents;
         return ( 
             <>
                <div className={styles.mainHeading}>We Conduct <span className='color-red'>Events</span> year-round</div>
+               { upcomingEvents.length>0 ? 
                <div className={styles.container1}>
-                    <div className={styles.sectionHeading}>Upcoming Events</div>
-                    { eventData ? 
+                    <div className={styles.sectionHeading}>Upcoming Events</div> 
                     <ul className={styles.ul1}>
-                        <li><EventCard eventData={eventData[0]} type='side'/></li>
-                        <li><EventCard eventData={eventData[1]} type='side'/></li>
+                        {upcomingEvents.map((event,index)=>{
+                            return(
+                            <li key={index}>
+                                <EventCard 
+                                    eventData={event} 
+                                    type='side'
+                                />
+                            </li>
+                            );
+                        })}
                     </ul>
-                    :null}
                </div>
+               :null}
                <div className={styles.container2}>
                    <div className={styles.sectionHeading}>SMP Events</div>
-                    { eventData ? 
+                    { pastEvents.length>0 ? 
                         <ul className={styles.ul2}>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData[0]} type={this.state.break ? 'md' : 'lg'}/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData[1]} type={this.state.break ? 'md' : 'lg'}/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData[1]} type={this.state.break ? 'md' : 'lg'}/></li>
-                        <li><EventCard className={styles.eventcardcommon} eventData={eventData[0]} type={this.state.break ? 'md' : 'lg'}/></li>
-                    </ul>
+                            {pastEvents.map((event,index) => {
+                                return(
+                                <li key={index}>
+                                    <EventCard 
+                                        className={styles.eventcardcommon} 
+                                        eventData={event} 
+                                        type={this.state.break ? 'md' : 'lg'}
+                                    />
+                                </li>)
+                            })}
+                        </ul>
                     :null
                     }   
                </div>

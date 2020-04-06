@@ -4,51 +4,71 @@ import Button from '../../components/Button';
 import EventCard from '../../components/EventCard';
 
 class MobileView extends Component {
-    state = {  }
+    constructor(){
+        super();
+        this.state = {
+            upcomingEvents : [],
+            pastEvents : []
+        }
+    }
+    componentDidMount(){
+        var upcomingEvents = [];
+        var pastEvents = [];
+        this.props.eventData.map(event=>{
+            if(event.isThisWeek){
+                return upcomingEvents.unshift(event);
+            }else if(event.isUpcoming){
+                return upcomingEvents.push(event);
+            }
+            return pastEvents.push(event);
+        })
+        this.setState({pastEvents:pastEvents,upcomingEvents:upcomingEvents})
+    }
     render() { 
-        const eventData = this.props.eventData ? this.props.eventData : null; 
+        const upcomingEvents = this.state.upcomingEvents;
+        const pastEvents = this.state.pastEvents;
         return ( 
             <React.Fragment>
                 <div className={styles.heading}>We conduct <span className='color-red'>Events </span><span className={styles.dashedWord}>year-round</span></div>
                 <div>
-                    <div className={styles.categoryHeading}>Upcoming Events</div>
-                    {eventData ? 
+                {upcomingEvents.length>0? 
                     <>
-                    <EventCard 
-                        className={styles.eventCardCommon} 
-                        eventData={eventData[0]}
-                        type={window.innerWidth <600 ? 'sm' : 'lg'}
-                        // headingTop = {false}
-                    />
-                    <hr className={styles.hr}/>
-                    <EventCard 
-                        className={styles.eventCardCommon} 
-                        eventData={eventData[1]}
-                        type={window.innerWidth < 600 ? 'sm' : 'lg'}
-                        // heading = {false} 
-                    />
-                    <hr className={styles.hr}/>
+                    <div className={styles.categoryHeading}>Upcoming Events</div>
+                    {upcomingEvents.map((event,index)=>{
+                        return(
+                            <>
+                            <EventCard 
+                                className={styles.eventCardCommon} 
+                                eventData={event}
+                                type={window.innerWidth <600 ? 'sm' : 'lg'}
+                                key = {index}
+                                headingTop = {false}
+                            />
+                            <hr className={styles.hr}/>
+                            </>
+                        )
+                    })}
                     </>
-                : null}   
+                    : null}   
                 </div>
                 <div>
                     <div className={styles.categoryHeading}>SMP Events</div>
-                    {eventData ? 
+                    {pastEvents.length>0 ? 
                     <>
-                    <EventCard 
-                        className={styles.eventCardCommon} 
-                        eventData={eventData[1]}
-                        type={window.innerWidth < 600 ? 'sm' : 'lg'}
-                        // metadata = {false}
-                    />
-                    <hr className={styles.hr}/>
-                    <EventCard 
-                        className={styles.eventCardCommon} 
-                        eventData={eventData[0]}
-                        type={window.innerWidth < 600 ? 'sm' : 'lg'}
-                        // text = {false}
-                    />
-                    <hr className={styles.hr}/>
+                    {pastEvents.map((event,index)=>{
+                        return(
+                            <>
+                            <EventCard 
+                                className={styles.eventCardCommon} 
+                                eventData={event}
+                                type={window.innerWidth <600 ? 'sm' : 'lg'}
+                                key = {index}
+                                headingTop = {false}
+                            />
+                            <hr className={styles.hr}/>
+                            </>
+                        )
+                    })}
                     </>
                     :null}
                 </div>

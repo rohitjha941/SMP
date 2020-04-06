@@ -33,7 +33,9 @@ class EventSection extends Component {
                     d1: value.date,
                     d2: value.time + ' hrs',
                     d3: value.venue,
-                }
+                },
+                isUpcoming: value.isUpcoming,
+                isThisWeek: value.isThisWeek
             }
         });
         this.setState({eventData: eventData});
@@ -61,7 +63,7 @@ class EventSection extends Component {
                     />
                     </>) :null}
                     <Link to='/events'><Button className={styles.eventsButton} text='View More' type='outline'/></Link>
-                </div>
+                    </div>
             </React.Fragment>
          );
     }
