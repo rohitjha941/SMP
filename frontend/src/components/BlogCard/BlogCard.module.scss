@@ -2,7 +2,7 @@
 
 .containersm {
     width: 17.125rem;
-    div:nth-child(1){
+    .ImageWrapperDiv{
         width:100%;
         overflow: hidden;
         margin: 0;
@@ -19,7 +19,7 @@
 }
 
 .containermd{
-    div:nth-child(1){
+    .ImageWrapperDiv{
         width: 100%;
         overflow: hidden;
         margin: 0;
@@ -37,16 +37,39 @@
 }
 
 .containerlg{
-    width:36.975rem;
     max-width: 90vw;
-    @media screen and (max-width:$break-blogs){
-        width: 100%;
+    .ImageWrapperDiv{
+        width:100%;
+        overflow: hidden;
+        margin: 0;
+        padding-top: 75%;
+        position: relative;
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+        }
     }
-
 }
 
 .containerxl{
     max-width: 37.5rem;
+    .ImageWrapperDiv{
+        width:100%;
+        overflow: hidden;
+        margin: 0;
+        padding-top: 75%;
+        position: relative;
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+        }
+    }
 }
 
 .blogImage{
