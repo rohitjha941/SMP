@@ -42,6 +42,7 @@ class Contact extends Component {
             }
             axios.post((process.env.REACT_APP_API_BASE+'raise-query/'),data)
             .then((response) => {
+                // console.log(response);
                 this.setState({
                     errmsg:"<div>Your query has been raised<br/>We'll get back to you soon.</div>",
                     email:'',
@@ -50,6 +51,7 @@ class Contact extends Component {
                 });
             })
             .catch((error) => {
+                // console.log(error)
                 this.setState({
                     errmsg:"<div>There was a problem sending your query<br/>Please try again later.</div>"
                 });
