@@ -4,6 +4,8 @@ import axios from 'axios';
 import Button from '../../components/Button';
 import styles from './contact.module.scss';
 
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 const recaptchaRef = React.createRef();
 class Contact extends Component {
     constructor() {
@@ -40,7 +42,6 @@ class Contact extends Component {
             }
             axios.post((process.env.REACT_APP_API_BASE+'raise-query/'),data)
             .then((response) => {
-                console.log(response);
                 this.setState({
                     errmsg:"<div>Your query has been raised<br/>We'll get back to you soon.</div>",
                     email:'',
@@ -49,7 +50,6 @@ class Contact extends Component {
                 });
             })
             .catch((error) => {
-                // console.log(error);
                 this.setState({
                     errmsg:"<div>There was a problem sending your query<br/>Please try again later.</div>"
                 });
@@ -57,9 +57,7 @@ class Contact extends Component {
         }
         //reset captcha
         recaptchaRef.current.reset();
-    }
-    componentDidMount(){
-        console.log(process.env.RECAPTCHA_SITE_KEY);
+        this.setState({captcha:false});
     }
     render() {
         let email = this.state.email;
@@ -117,7 +115,7 @@ class Contact extends Component {
                         <ReCAPTCHA
                             onChange={this.handleCaptcha}
                             ref={recaptchaRef}
-                            sitekey="6LdXNOYUAAAAAGpGBOm2gTInTY_V34axHyQafHeg"
+                            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                         />
                         <Button type='submit' text='Get In Touch' />
                     </form>

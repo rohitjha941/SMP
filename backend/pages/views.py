@@ -11,6 +11,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import JSONParser
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from .models import *
 from .serializers import *
@@ -63,45 +66,45 @@ class MentorDocsView (viewsets.ModelViewSet):
     serializer_class = MentorDocsSerializer
 
 
-def send_email():
-    query_id =RaisedQuerySerializer.query_id
-    query_content = RaisedQuerySerializer.query
-    query_name = RaisedQuerySerializer.name
-    query_email = RaisedQuerySerializer.email
-    subject=('#'+str(query_id)+' Query raised from smp.iitr.ac.in')
-    message = ''
-    recepient = EMAIL_SEND_TO_ADMIN
+def send_email(request):
+    serializer  = RaisedQuerySerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        query_id = serializer.data['id']
+        query_content = serializer.data['query']
+        query_name = serializer.data['name']
+        query_email = serializer.data['email']
+        subject=('#'+str(query_id)+' Query raised from smp.iitr.ac.in')
+        message = ''
+        recepient = EMAIL_SEND_TO_ADMIN
+        
+        html_message = loader.render_to_string(
+            'mail_template/raise_query.html',
+            {
+                'reciever_name': 'Laksh',
+                'query_name':  query_name,
+                'query_content': query_content,
+                'query_email': query_email,
+                'query_id' : query_id
+            }
+        )
+        send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False,html_message=html_message)
 
-    html_message = loader.render_to_string(
-        'mail_template/raise_query.html',
-        {
-            'reciever_name': 'Laksh',
-            'query_name':  query_name,
-            'query_content': query_content,
-            'query_email': query_email,
-            'query_id' : query_id
-        }
-    )
-    send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False,html_message=html_message)
-
-class RaisedQueryView (viewsets.ModelViewSet):
-    queryset = RaisedQuery.objects.all()
-    serializer_class = RaisedQuerySerializer
-
-    def post(self, request, format=None):
+@api_view(('POST',))
+@ensure_csrf_cookie
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
+def raisedQuery (request):
+    if request.method == 'POST' :
         r = requests.post(
             'https://www.google.com/recaptcha/api/siteverify',
             data={
                 'secret': RECAPTCHA_SECRET_KEY,
                 'response': request.data['g-recaptcha-response'],
-                'remoteip': get_client_ip(self.request),
+                'remoteip': get_client_ip(request),
             }
         )
         if r.json()['success']:
-            return self.create(request)
+            send_email(request)
+            return Response(data={'post':'post'},status=status.HTTP_200_OK)
         return Response(data={'error':'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-
-    def create(self,request,format=None):
-        response = super(RaisedQueryView, self).create(request)
-        send_email()
-        return response
+    return Response(data={'post':'post'},status=status.HTTP_303_SEE_OTHER)

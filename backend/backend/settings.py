@@ -163,4 +163,4 @@ EMAIL_HOST_PASSWORD = cfg["email"]["password"]
 
 EMAIL_SEND_TO_ADMIN = cfg["email"]["admin_email"]
 
-RECAPTCHA_SECRET_KEY = '6LdXNOYUAAAAANdkk0S7fmxZtOHy7H8Hqfhn6koC'
+RECAPTCHA_SECRET_KEY = cfg["recaptcha"]["recaptcha_secret_key"]

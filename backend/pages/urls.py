@@ -17,7 +17,7 @@ urlpatterns = [
     path('faq/', faqView.as_view()),
     path("team/", StudentTeamView.as_view()),
     path("branch/", branchView.as_view()),
-    path('raise-query/',RaisedQueryView),    
+    path('raise-query/', raisedQuery, name='raise_query'),    
     # path("contact_team/", ContactDetailsView.as_view()),
 ]
 urlpatterns = urlpatterns + router.urls
