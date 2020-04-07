@@ -4,12 +4,12 @@ import Button from '../../components/Button';
 import FilterHeader from '../../components/FilterHeader';
 
 class FilterMentors extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             allinterests:[],
             allbranches:[],
-            allyear:[],
+            allyears:[],
             selectedBranch:[],
             selectedYear:[],
             selectedSkill:[],
@@ -17,41 +17,23 @@ class FilterMentors extends Component {
     }
 
     componentDidMount(){
-        const allinterests = this.props.interests ? 
-        (this.props.interests.map(value =>{
-                return({
-                    id: value.id,
-                    name : value.interest_name,
-                    selected: false
-                })
-        }))
-        :null;
-        const allbranches = this.props.branches ? (this.props.branches.map(value =>{
-            return({
-                id: value.id,
-                name: value.branch_name,
-                selected: false
-            })
-        })) : null;
-        const allyear = [
-            {name : '3rd', selected : false},
-            {name : '4th', selected : false},
-            {name : '5th', selected : false},
-        ]
         this.setState({
-            allinterests:allinterests,
-            allbranches:allbranches,
-            allyear:allyear
+            allinterests:this.props.filterData.allinterests,
+            allbranches:this.props.filterData.allbranches,
+            allyears:this.props.filterData.allyears,
+            selectedBranch:this.props.filterData.selectedBranch,
+            selectedYear:this.props.filterData.selectedYear,
+            selectedSkill:this.props.filterData.selectedSkill,
         });
     }
 
     handleYear = (value) => {
-        let {selectedYear,allyear} = this.state;
+        let {selectedYear,allyears} = this.state;
         let flag = false
         selectedYear.forEach((selected,index) => {
             if(selected===value){
                 flag = true;
-                allyear.forEach((year,i) => {
+                allyears.forEach((year,i) => {
                     if(year.name === value){
                         year.selected = false;
                         return(selectedYear.splice(index,1));
@@ -62,7 +44,7 @@ class FilterMentors extends Component {
         })
         if(!flag){
             selectedYear.push(value)
-            allyear.forEach((year,i) => {
+            allyears.forEach((year,i) => {
                 if(year.name === value){
                     year.selected = true;
                 }
@@ -70,7 +52,7 @@ class FilterMentors extends Component {
         }
         this.setState({
             selectedYear : selectedYear,
-            allyear : allyear
+            allyears : allyears
         })
     }
 
@@ -130,14 +112,17 @@ class FilterMentors extends Component {
     }
 
     onClear = () => {
-        const year = this.state.year.map((value) => {
-            return(value.selected = false)
+        const allyears = this.state.allyears.concat((value) => {
+            value.selected = false
+            return(value)
         })
         const allbranches = this.state.allbranches.map((value) => {
-            return(value.selected = false)
+            value.selected = false
+            return(value)
         })
         const allinterests = this.state.allinterests.map((value) => {
-            return(value.selected = false)
+            value.selected = false
+            return(value)
         })
         this.setState({
             selectedBranch : [],
@@ -145,8 +130,14 @@ class FilterMentors extends Component {
             selectedSkill: [],
             allbranches:allbranches,
             allinterests:allinterests,
-            year:year
+            allyears:allyears
         });
+        var filterData = {
+            branch : [],
+            year:[],
+            skill:[]
+        }
+        this.props.updateFilter(filterData)
     }
 
     onApply = (e) => {
@@ -161,7 +152,7 @@ class FilterMentors extends Component {
         }
 
         this.props.updateFilter(filterData);
-        this.props.history.push('/mentors/show');
+        this.props.handleToggle();
         
         
     }
@@ -169,7 +160,7 @@ class FilterMentors extends Component {
         return ( 
             <>
                 <div className={styles.container}>
-                <FilterHeader/>
+                <FilterHeader handleToggle={this.props.handleToggle}/>
                     <div className={styles.section}>
                         <div className={styles.sectionHeading}>Select Branch<span className={styles.counter}>{this.state.selectedBranch.length ? (' ('+this.state.selectedBranch.length+')') : null }</span></div>
                         { this.state.allbranches.map((value,i)=>{
@@ -180,7 +171,7 @@ class FilterMentors extends Component {
                     </div>
                     <div className={styles.section}>
                         <div className={styles.sectionHeading}>Year of Study<span className={styles.counter}>{this.state.selectedYear.length ? (' ('+this.state.selectedYear.length+')') : null }</span></div>
-                        { this.state.allyear.map((value,i) => {
+                        { this.state.allyears.map((value,i) => {
                             return(
                                 <Button key={i} className={styles.button} text={value.name + ' Year'} type={value.selected ? 'outline' : 'disabled'} onClick={() => this.handleYear(value.name)}/>
                             )

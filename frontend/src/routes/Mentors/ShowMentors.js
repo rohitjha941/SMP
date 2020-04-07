@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import SearchHeader from '../../components/SearchHeader';
 import styles from './ShowMentors.module.scss';
 import MentorCard from '../../components/MentorCard';
+import FilterMentors from './FilterMentors';
 class MentorShow extends Component {
     constructor(props){
         super(props);
         this.state={
-            filteryear : this.props.filter.year,
-            filterbranches : this.props.filter.branches,
-            filterinterests : this.props.filter.interests,
+            filteryear : [],
+            filterbranches : [],
+            filterinterests : [],
             allbranches: [],
             allinterests: this.props.interests ? this.props.interests : null,
             mentors : [],
-            filteredmentors:[]
+            filteredmentors:[],
+            filterToggle:false,
+            filterComponentData:{},
         }
     }
     componentDidMount(){
@@ -40,7 +43,51 @@ class MentorShow extends Component {
                 interests : value.interest
             })
         })
-        this.setState({mentors : mentors},this.filterMentors(mentors));
+        const allinterests = this.props.interests ? 
+        (this.props.interests.map(value =>{
+                return({
+                    id: value.id,
+                    name : value.interest_name,
+                    selected: false
+                })
+        }))
+        :[];
+        const allbranches = this.props.branches ? (this.props.branches.map(value =>{
+            return({
+                id: value.id,
+                name: value.branch_name,
+                selected: false
+            })
+        })) : [];
+        const allyears = [
+            {name : '3rd', selected : false},
+            {name : '4th', selected : false},
+            {name : '5th', selected : false},
+        ]
+        let filterComponentData = {
+            allbranches : allbranches,
+            allyears : allyears,
+            allinterests: allinterests,
+            selectedSkill:[],
+            selectedBranch:[],
+            selectedYear:[]  
+        }
+        this.setState({mentors : mentors,filterComponentData:filterComponentData},()=>{this.filterMentors(this.state.mentors)});
+    }
+    updateFilter = (value) =>{
+        const newBranches = value.branch;
+        const newYear = value.year;
+        const newInterests = value.skill;
+        let {filterComponentData} = this.state;
+        filterComponentData.selectedBranch  = newBranches;
+        filterComponentData.selectedYear = newYear;
+        filterComponentData.selectedSkill = newInterests;
+        this.setState({
+            filteryear:newYear,
+            filterbranches:newBranches,
+            filterinterests:newInterests,
+            filterComponentData:filterComponentData
+        },() => {this.filterMentors(this.state.mentors)});
     }
     
     updateBranches = (mentors) =>{
@@ -72,14 +119,14 @@ class MentorShow extends Component {
     filterMentors = (mentors) => {
         let {filteryear,filterbranches,filterinterests} = this.state;
         if((!filteryear||filteryear.length===0)&&(!filterbranches||filterbranches.length===0)&&(!filterinterests||filterinterests.length===0)){
-            this.setState({filteredmentors:mentors},this.updateBranches(mentors));
+            this.setState({filteredmentors:mentors},()=>{this.updateBranches(mentors)});
         }
         else{
             
             let branchFiltered = [];
             (filterbranches.length>0 ? 
                 filterbranches.map(filterbranch => {
-                    return(branchFiltered = (mentors.filter(({branch}) =>  branch === filterbranch)));
+                    return(branchFiltered.push(...(mentors.filter(({branch}) =>  branch === filterbranch))));
                 })
                 :
                 branchFiltered = mentors
@@ -87,7 +134,7 @@ class MentorShow extends Component {
             let yearFiltered =[];
             (filteryear.length > 0 ?
                 filteryear.map(filteryear => {
-                    return(yearFiltered = (branchFiltered.filter(({year}) =>  year === filteryear)))
+                    return(yearFiltered.push(...(branchFiltered.filter(({year}) =>  year === filteryear))));
                 })
                 :
                 yearFiltered = branchFiltered
@@ -114,48 +161,58 @@ class MentorShow extends Component {
                 :
                 interestFiltered = yearFiltered
             )
-            this.setState({filteredmentors:interestFiltered},this.updateBranches(interestFiltered));
+            this.setState({filteredmentors:interestFiltered},()=>{this.updateBranches(interestFiltered)});
         }
 
     }
+    handleToggle = () => {
+        var filterToggle = !this.state.filterToggle;
+        this.setState({filterToggle:filterToggle});
+    }
     render() { 
         let {allbranches} = this.state;
-        return ( 
-            <>
-                <div className={styles.container}>
-                    <SearchHeader/>
-                    {
-                        allbranches.map(value =>{
-                            return(
-                                <>
-                            <div className={styles.department}>{value.branch_name}</div>
-                            <ul className="mentors">
-                                {
-                                    this.state.filteredmentors.map((mentor,i) => {
-                                        if(mentor.branch === value.id){
-                                            return(
-                                            <>
-                                            <li className='mentor-li'>
-                                                <MentorCard 
-                                                    className={styles.mentorCard}
-                                                    profile={mentor}
-                                                    key={i}
-                                                />
-                                                <hr/>
-                                            </li>
-                                            </>
-                                            )
-                                        }
-                                        return 0;
-                                    })
-                                }
-                            </ul>
-                            <hr/>
-                            </>
-                            )
-                        })
-                    }
-                </div>
+        return (
+            <> 
+            {this.state.filterToggle ? 
+                <FilterMentors filterData={this.state.filterComponentData} updateFilter={this.updateFilter} handleToggle={this.handleToggle}/>
+                :
+                <>
+                    <div className={styles.container}>
+                        <SearchHeader handleToggle={this.handleToggle}/>
+                        {
+                            allbranches.map(value =>{
+                                return(
+                                    <>
+                                <div className={styles.department}>{value.branch_name}</div>
+                                <ul className="mentors">
+                                    {
+                                        this.state.filteredmentors.map((mentor,i) => {
+                                            if(mentor.branch === value.id){
+                                                return(
+                                                <>
+                                                <li className='mentor-li'>
+                                                    <MentorCard 
+                                                        className={styles.mentorCard}
+                                                        profile={mentor}
+                                                        key={i}
+                                                    />
+                                                    {/* {i>0? <hr/> : null} */}
+                                                </li>
+                                                </>
+                                                )
+                                            }
+                                            return null;
+                                        })
+                                    }
+                                </ul>
+                                <hr/>
+                                </>
+                                )
+                            })
+                        }
+                    </div>
+                </>
+            }
             </>
          );
     }
