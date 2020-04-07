@@ -271,6 +271,9 @@ class Blogs(models.Model):
          null = True,
          blank= True
     )
+    is_featured = models.BooleanField(
+        default=False,
+    )
     category = models.ForeignKey(
         BlogCategory,
         related_name="blogs_category",
