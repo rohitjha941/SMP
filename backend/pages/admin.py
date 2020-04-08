@@ -47,3 +47,7 @@ class MentorDocsAdmin(ImportExportModelAdmin):
 @register(Interest)
 class InterestsAdmin(ImportExportModelAdmin):
     list_display = ('interest_name',)
+
+@register(CampusGroups)
+class CampusGroupsAdmin(ImportExportModelAdmin):
+    list_display=('group_name',)

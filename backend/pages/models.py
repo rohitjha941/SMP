@@ -67,6 +67,20 @@ year_choices_team = (
     ("5th", "5th Year"),
 )
 
+position_choices = (
+    ('Manager', "Manager"),
+    ('Coordinator','Coordinator')
+)
+
+vertical_choices = (
+    ('Admin','Admin'),
+    ('Operations','Operations'),
+    ('WebD','WebD'),
+    ('Eventts','Events'),
+    ('Content','Content'),
+    ('Design','Design'),
+)
+
 
 class StudentTeam(models.Model):
 
@@ -102,6 +116,20 @@ class StudentTeam(models.Model):
         blank=True
     ) 
 
+    position = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        choices=position_choices
+    )
+
+    vertical = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        choices=vertical_choices
+    )
+
     branch = models.ForeignKey(
         branch,
         related_name = "teams",
@@ -118,11 +146,6 @@ class StudentTeam(models.Model):
     is_coordinator = models.BooleanField(
         
     )
-
-    position = models.CharField(
-        default = "",
-        max_length = 100,
-    )
     mobile = models.CharField(
         default = "",
         max_length = 100,
@@ -133,7 +156,14 @@ class StudentTeam(models.Model):
     )
 
 
-
+class CampusGroups(models.Model):
+    group_name = models.CharField(
+        max_length=300,
+        default=""
+    )
+    def __str__(self):
+        return self.group_name
+        
 class Interest(models.Model):
     interest_name = models.CharField(
         max_length = 100,
@@ -190,10 +220,11 @@ class Mentor(models.Model):
         null = True,
         choices = year_choices
     )
-
-    
-
-     
+    groups = models.ManyToManyField(
+        CampusGroups,
+        related_name="campus_groups_mentor",
+        blank=True
+    )
 
 
 class ContactDetails(models.Model):

@@ -59,3 +59,9 @@ class RaisedQuerySerializer(serializers.ModelSerializer):
     class Meta:
         model = RaisedQuery
         fields = "__all__"
+
+class CampusGroupsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CampusGroups
+        fields = "__all__"

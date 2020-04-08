@@ -27,7 +27,7 @@ class faqView (generics.ListAPIView):
     queryset = faq.objects.all()
     serializer_class = faqSerializer
 
-class StudentTeamView (generics.ListAPIView):
+class StudentTeamView (viewsets.ModelViewSet):
     queryset = StudentTeam.objects.all()
     serializer_class = StudentTeamSerializer
 
@@ -47,6 +47,9 @@ class InterestView (viewsets.ModelViewSet):
     queryset = Interest.objects.all().order_by('interest_name')
     serializer_class = InterestSerializer
 
+class CampusGroupsView (generics.ListAPIView):
+    queryset = CampusGroups.objects.all().order_by('group_name')
+    serializer_class = CampusGroupsSerializer
 
 class BlogsView (viewsets.ModelViewSet):
     queryset = Blogs.objects.all()

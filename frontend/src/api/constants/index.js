@@ -10,6 +10,7 @@ const apiConstants = {
     faqs:'faq',
     branch:'branch',
     interests:'interests',
+    groups:'campusGroups',
 }
 
 
@@ -21,3 +22,4 @@ export const MENTORSDOCS = apiConstants.base + apiConstants.mentorsDocs;
 export const FAQS = apiConstants.base + apiConstants.faqs;
 export const BRANCH = apiConstants.base + apiConstants.branch;
 export const INTERESTS = apiConstants.base + apiConstants.interests;
+export const GROUPS = apiConstants.base + apiConstants.groups;

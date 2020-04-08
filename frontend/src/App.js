@@ -28,6 +28,7 @@ function App() {
   const [faqs,setFaqs] = useState([]);
   const [branches,setBranches] = useState([]);
   const [interests,setInterests] = useState([]);
+  const [groups,setGroups] = useState([]);
 
   const fetchBlogsIfEmpty = () => {
     if (!blogs || blogs.length === 0) {
@@ -69,6 +70,11 @@ function App() {
         methods.getInterests().then(data => setInterests(data));
     }
   }
+  const fetchGroupsIfEmpty = () => {
+    if (!groups || groups.length === 0) {
+        methods.getGroups().then(data => setGroups(data));
+    }
+  }
 
 
   useEffect(() => {
@@ -80,6 +86,7 @@ function App() {
     fetchFAQsIfEmpty();
     fetchBranchesIfEmpty();
     fetchInterestsIfEmpty();
+    fetchGroupsIfEmpty();
   });
 
   return (
@@ -95,6 +102,7 @@ function App() {
           faqs={faqs}
           branches={branches}
           interests={interests}
+          groups={groups}
         />
         <Footer />
       </div>

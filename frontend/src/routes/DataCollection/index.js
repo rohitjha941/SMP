@@ -22,7 +22,7 @@ class DataCollection extends Component {
             <>
             <Switch>
                 <Route exact path="/datacollection/studentteam" render={() => <StudentTeamForm branches={this.props.branches} interests={this.props.interests}/>} />
-                <Route exact path="/datacollection/mentors" render={() => <MentorForm branches={this.props.branches} interests={this.props.interests}/>} />
+                <Route exact path="/datacollection/mentors" render={() => <MentorForm groups={this.props.groups} branches={this.props.branches} interests={this.props.interests}/>} />
                 {/* <Route to="*" component={PageNotFound} />  */}
             </Switch>
             </>
