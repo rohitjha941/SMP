@@ -56,7 +56,7 @@ export default class RouterView extends Component {
                     <Route path="/blogs" render={() => <Blog blogs={this.props.blogs}/>} />
                     <Route path="/queries" render={() => <Queries faqs={this.props.faqs} />}/>
                     <Route path="/mentors" render={() => <Mentors mentors={this.props.mentors} branches={this.props.branches} interests={this.props.interests} docs={this.props.mentorsDocs}/>} />
-                    <Route path="/datacollection" render={()=><DataCollection />}/>
+                    <Route path="/datacollection" render={()=><DataCollection branches={this.props.branches} interests={this.props.interests} />}/>
                     <Redirect to="/" />
                 </Switch>
             </div>

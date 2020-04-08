@@ -32,7 +32,7 @@ class StudentTeamView (generics.ListAPIView):
     serializer_class = StudentTeamSerializer
 
 class branchView (generics.ListAPIView):
-    queryset = branch.objects.all()
+    queryset = branch.objects.all().order_by('branch_name')
     serializer_class = branchSerializer
 
 class ContactDetailsView (generics.ListAPIView):
@@ -44,7 +44,7 @@ class MentorView (viewsets.ModelViewSet):
     serializer_class = MentorSerializer
 
 class InterestView (viewsets.ModelViewSet):
-    queryset = Interest.objects.all()
+    queryset = Interest.objects.all().order_by('interest_name')
     serializer_class = InterestSerializer
 
 

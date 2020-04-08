@@ -1,6 +1,26 @@
 import React, { Component } from 'react';
 import Button from '../../components/Button';
 import styles from './MentorForm.module.scss';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import CreatableSelect from 'react-select/creatable';
+import axios from 'axios';
+
+const animatedComponents = makeAnimated();
+const yearOptions = [
+    {
+        label:'3rd Year',
+        value:'3rd',
+    },
+    {
+        label:'4th Year',
+        value:'4th',
+    },
+    {
+        label:'5th Year',
+        value:'5th',
+    },
+]
 class MentorForm extends Component {
     constructor(){
         super();
@@ -8,9 +28,13 @@ class MentorForm extends Component {
             name:'',
             year:undefined,
             branch:undefined,
+            intertest:[],
             email:'',
             facebook:undefined,
             linkden:undefined,
+            branchOptions:[],
+            interestOptions:[],
+            createdInterest:[],
         }
     }
     handleChange = (e) => {
@@ -21,18 +45,68 @@ class MentorForm extends Component {
         },()=>{console.log(this.state.email)});
         
     }
+    handleChangeBranch = (option) => {
+        const value = option.value;
+        this.setState({
+            branch:value,
+        });
+    }
+    handleChangeYear = (option) => {
+        const value = option.value;
+        this.setState({
+            year:value,
+        });
+    }
+    handleChangeCreatable = (option) => {
+        const value = option.map(interest=>{
+            return interest.value;
+        })
+        this.setState({
+            interest : value,
+        })
+    }
+    handleCreate = (inputValue) => {
+        const {createOptions} = this.state;
+        this.setState({
+            createOptions : [...createOptions,inputValue]
+        })
+    };
     handleSubmit = (e) => {
         e.preventDefault();
-        const {name,year,branch,email,facebook,linkden} = this.state;
+        const {name,year,branch,interest,email,facebook,linkden} = this.state;
         const data = {
             name:name,
             year:year,
             branch:branch,
+            interest:interest,
             email:email,
             facebook:facebook,
             linkden:linkden
         }
-        console.log(data);
+        const {createdInterest} = this.state;
+        axios.post(process.env.REACT_APP_API_BASE+'interests/',createdInterest)
+        .then((response)=>{
+            console.log(response);
+        })
+        
+    }
+    componentDidMount(){
+        let branchOptions=[], interestOptions=[];
+        branchOptions =  this.props.branches.length>0 ? this.props.branches.map((branch)=>{
+            const option = {
+                value : branch.id,
+                label : branch.branch_name
+            }
+            return (option);
+        }) : [] ;
+        interestOptions = this.props.interests.length>0 ? this.props.interests.map(interest => {
+            const option = {
+                value : interest.id,
+                label : interest.interest_name
+            }
+            return (option);
+        }) : [];
+        this.setState({branchOptions:branchOptions,interestOptions:interestOptions});
     }
     render() { 
         return (  
@@ -46,15 +120,22 @@ class MentorForm extends Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="year">Year<span className='color-red'>*</span></label>
-                        <select className="form-control" name="year" value={this.state.year} id="year" onChange={this.handleChange}>
-                            <option>Default select</option>
-                        </select>
+                        <Select id="year" onChange={this.handleChangeYear} options={yearOptions}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="branch">Branch<span className='color-red'>*</span></label>
-                        <select className="form-control" name="branch" value={this.state.branch} id="branch" onChange={this.handleChange}>
-                            <option>Default select</option>
-                        </select>
+                        <Select id="branch" onChange={this.handleChangeBranch} options={this.state.branchOptions}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="interests">Interests<span className='color-red'>*</span></label>
+                        <CreatableSelect 
+                            id="interests" 
+                            options={this.state.interestOptions} 
+                            closeMenuOnSelect={false}
+                            isMulti 
+                            onChange={this.handleChangeCreatable}
+                            components={animatedComponents}
+                        />
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email address <span className='color-red'>*</span></label>
