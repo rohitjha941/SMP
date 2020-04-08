@@ -106,7 +106,9 @@ class StudentTeam(models.Model):
        
         blank=True
     ) 
-
+    enrollno = models.IntegerField(
+        null = True
+    )
     #Field Containing Linkden URL
 
     linkden = models.URLField(
@@ -142,13 +144,8 @@ class StudentTeam(models.Model):
         null = True,
         choices = year_choices_team
     )
-
-    is_coordinator = models.BooleanField(
-        
-    )
-    mobile = models.CharField(
-        default = "",
-        max_length = 100,
+    mobile = models.IntegerField(
+        null = True
     )
     email = models.CharField(
         default = "",
@@ -200,10 +197,23 @@ class Mentor(models.Model):
         null=True
     )
     photo = models.ImageField(
-         upload_to="mentors/", 
+         upload_to="mentors/images", 
          max_length=200
     )
-
+    resume = models.FileField(
+        upload_to="mentors/resume",
+        null=True
+    )
+    email = models.EmailField(
+        max_length=200,
+        default="",
+    )
+    mobile = models.IntegerField(
+        null=True
+    )
+    enrollno = models.IntegerField(
+        null=True
+    )
     facebook = models.URLField(
         max_length=1000, 
         db_index=True,        
