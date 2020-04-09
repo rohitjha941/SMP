@@ -49,7 +49,7 @@ export default class RouterView extends Component {
                     <Route path ="/freshers" component={ComingSoon} />
                     <Route path="/about" render={() => <About team={this.props.team}/>} />
                     <Route path="/events" render={() => <Events events={this.props.events}/>} />
-                    <Route path="/blogs" render={() => <Blog blogs={this.props.blogs}/>} />
+                    <Route path="/blogs" render={() => <Blog blogs={this.props.blogs} blogCategory={this.props.blogCategory}/>} />
                     <Route path="/queries" render={() => <Queries faqs={this.props.faqs} />}/>
                     <Route path="/mentors" render={() => <Mentors mentors={this.props.mentors} branches={this.props.branches} interests={this.props.interests} docs={this.props.mentorsDocs}/>} />
                     <Redirect to="/" />
