@@ -107,4 +107,4 @@ def raisedQuery (request):
             send_email(request)
             return Response(data={'post':'post'},status=status.HTTP_201_CREATED)
         return Response(data={'error':'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-    return Response(data={'post':'post'},status=status.HTTP_404_NOT_FOUND)
+    return Response(data={'post':'post'},status=status.HTTP_405_METHOD_NOT_ALLOWED)
