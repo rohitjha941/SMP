@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {
     Switch,
-    Route,
-    Redirect
+    Route
 } from "react-router-dom";
 import Loadable from 'react-loadable';
 import Loader from '../Loader';
@@ -40,6 +39,10 @@ const ComingSoon = Loadable({
     loader: () => import('../../components/ComingSoon'),
     loading: () => <Loader />
 })
+const PageNotFound = Loadable({
+    loader: () => import('../404/Index'),
+    loading: () => <Loader />
+})
 export default class RouterView extends Component {
     render() {
         return (
@@ -52,7 +55,7 @@ export default class RouterView extends Component {
                     <Route path="/blogs" render={() => <Blog blogs={this.props.blogs} blogCategory={this.props.blogCategory}/>} />
                     <Route path="/queries" render={() => <Queries faqs={this.props.faqs} />}/>
                     <Route path="/mentors" render={() => <Mentors mentors={this.props.mentors} branches={this.props.branches} interests={this.props.interests} docs={this.props.mentorsDocs}/>} />
-                    <Redirect to="/" />
+                    <Route path="*"  component={PageNotFound}/>
                 </Switch>
             </div>
         )

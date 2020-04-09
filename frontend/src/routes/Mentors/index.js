@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Loadable from 'react-loadable';
 import Loader from '../../components/Loader';
 
@@ -23,6 +23,10 @@ const FilterMentors = Loadable({
     loading: () => <Loader />
 })
 
+const PageNotFound = Loadable({
+    loader: () => import('../../components/404/Index'),
+    loading: () => <Loader />
+})
 class Mentors extends Component {
     constructor(){
         super();
@@ -54,7 +58,7 @@ class Mentors extends Component {
                     <Route exact path="/mentors/show" render={() => <ShowMentors branches={this.props.branches} interests={this.props.interests} mentors={this.props.mentors} filter={this.state.filterData}/>} /> {/*show all mentors or searched*/}
                     <Route exact path="/mentors/filter" render={(props) => <FilterMentors {...props} branches={this.props.branches} interests={this.props.interests} updateFilter={this.updateFilter}/>} /> {/* filter search */}
                     <Route exact path="/mentors/becomeMentor" render={() => <ComingSoon />} /> {/* procedure to become mentor*/}
-                    <Redirect to="/mentors" /> 
+                    <Route to="*" component={PageNotFound}/> 
                 </Switch>
             </React.Fragment>
          );
