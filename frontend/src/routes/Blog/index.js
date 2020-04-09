@@ -45,7 +45,9 @@ export default class Blog extends Component {
                     d1: value.author,
                     d2: value.created_at,
                     d3: calculateReadingTime(value.content),
-                }
+                },
+                category:value.category,
+                is_featured:value.is_featured
             }
         })
         return (
@@ -53,17 +55,17 @@ export default class Blog extends Component {
                 <div className={styles.mainDiv}>
                 
                 {this.state.mobileView ? 
-                    <Switch>
-                        <Route exact path = "/blogs" render={props => (<MobileView {...props} blogData={blogData}/>)} />
-                        <Route exact path = "/blogs/view/:blogID/" render={props => (<BlogFullView {...props} blogData={blogData}/>)} />
-                        <Route to="*" component={PageNotFound} />
-                    </Switch>
+                  <Switch>
+                      <Route exact path = "/blogs" render={props => (<MobileView {...props} blogData={blogData}/>)} />
+                      <Route exact path = "/blogs/view/:blogID/" render={props => (<BlogFullView {...props} blogData={blogData}/>)} />
+                      <Route to="*" component={PageNotFound} />
+                  </Switch>
                 :
-                <Switch>
-                    <Route exact path = "/blogs" render={props => (<DesktopView {...props} blogData={blogData}/>)} />
-                    <Route path = "/blogs/view/:blogID/" render={props => (<BlogFullView {...props} blogData={blogData}/>)} />
-                    <Route to="*" component={PageNotFound} />
-                </Switch>
+                  <Switch>
+                      <Route exact path = "/blogs" render={props => (<DesktopView {...props} blogData={blogData} blogCategory={this.props.blogCategory}/>)} />
+                      <Route path = "/blogs/view/:blogID/" render={props => (<BlogFullView {...props} blogData={blogData}/>)} />
+                      <Route to="*" component={PageNotFound} />
+                  </Switch>
                 }
             </div>
             </React.Fragment>
