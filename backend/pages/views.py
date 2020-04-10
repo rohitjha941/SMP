@@ -74,6 +74,25 @@ class MentorAchievementView(APIView):
             )
         return Response(status=status.HTTP_201_CREATED)
 
+class MentorInternView(APIView):
+    def post(self, request):
+        mentor_id = ""
+        interns = []
+        try:
+            mentor_id = request.data["mentor_id"]
+            interns = request.data["interns"]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        mentor = get_object_or_404(Mentor, id=mentor_id)
+        for intern in interns:
+            MentorIntern.objects.create(
+                mentor=mentor,
+                company = intern['company'],
+                duration = intern['duration'],
+                domain = intern['domain']
+            )
+        return Response(status=status.HTTP_201_CREATED)
 
 class InterestView (generics.ListCreateAPIView):
     queryset = Interest.objects.all().order_by('interest_name')

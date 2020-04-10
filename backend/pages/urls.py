@@ -19,4 +19,6 @@ urlpatterns = [
     path("interests/", InterestView.as_view()),
     path("mentors/", MentorView.as_view()),
     path("mentors/achievements/", MentorAchievementView.as_view()),
+    path("mentors/intern/", MentorInternView.as_view()),
+
 ]

@@ -244,7 +244,7 @@ class Mentor(models.Model):
 
 class MentorAchievement(models.Model):
     mentor = models.ForeignKey(
-        Mentor,        
+        Mentor,
         related_name="mentor_achievement",
         on_delete=models.CASCADE
     )
@@ -253,6 +253,32 @@ class MentorAchievement(models.Model):
         max_length=100,
         blank=True,
         null=True,
+    )
+
+
+class MentorIntern(models.Model):
+    mentor = models.ForeignKey(
+        Mentor,
+        related_name="mentor_intern",
+        on_delete=models.CASCADE
+    )
+
+    company = models.TextField(
+        max_length=500,
+        blank=True,
+        null=True
+    )
+
+    duration = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True
+    )
+
+    domain = models.TextField(
+        max_length=500,
+        blank=True,
+        null=True
     )
 
 
