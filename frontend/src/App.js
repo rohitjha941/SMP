@@ -22,6 +22,7 @@ const Footer = Loadable({
 function App() {
 
   const [blogs, setBlogs] = useState([]);
+  const [blogCategory,setBlogCategory] = useState([]);
   const [events, setEvents] = useState([]);
   const [team,setTeam] = useState([]);
   const [mentors,setMentors] = useState([]);
@@ -70,17 +71,23 @@ function App() {
         methods.getInterests().then(data => setInterests(data));
     }
   }
+  const fetchBlogCategoryIfEmpty = () => {
+    if (!blogCategory || blogCategory.length === 0) {
+        methods.getBlogCategory().then(data => setBlogCategory(data));
+    }
+  }
 
 
   useEffect(() => {
     fetchBlogsIfEmpty();
     fetchEventsIfEmpty();
-    // fetchTeamIfEmpty();
+    fetchTeamIfEmpty();
     fetchMentorsIfEmpty();
     fetchMentorsDocsIfEmpty();
     fetchFAQsIfEmpty();
     fetchBranchesIfEmpty();
     fetchInterestsIfEmpty();
+    fetchBlogCategoryIfEmpty();
   });
 
   const uevents = updateEvents(events);
@@ -90,6 +97,8 @@ function App() {
       <div className="router-footer-container">
         <RouterView 
           blogs={blogs} 
+          events={uevents} 
+          blogCategory={blogCategory}
           events={uevents} 
           team={team} 
           mentors={mentors} 

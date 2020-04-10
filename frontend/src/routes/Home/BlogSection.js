@@ -30,14 +30,15 @@ class BlogSection extends Component {
                     d1: value.author,
                     d2: value.created_at,
                     d3: calculateReadingTime(value.content),
-                }
+                },
+                is_featured  : value.is_featured
             }
         })
         return (  
             <React.Fragment>
                 <div className={styles.cardSection}>
                     <div className={styles.sectionHeading} >Featured Blogs</div>
-                    <Slider blogData={blogData} />
+                    <Slider blogData={blogData}/>
                     <Link to='/blogs'><Button text='View all Blogs' className={styles.viewBlogsButton} type={'outline'}/></Link>
                 </div>  
             </React.Fragment>

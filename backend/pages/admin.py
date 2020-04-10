@@ -32,13 +32,17 @@ class branchAdmin(ImportExportModelAdmin):
 class MentorAdmin(ImportExportModelAdmin):
     list_display =  ('branch', 'name', 'photo', 'facebook', 'linkden', )
 
+@register(BlogCategory)
+class BlogCategoryAdmin(ImportExportModelAdmin):
+    list_display = ('category_name',)
+
 @register(Blogs)
 class BlogsAdmin(ImportExportModelAdmin):
-    list_display =  ('title', 'author', 'created_at')
+    list_display =  ('created_at', 'title','author',)
 
 @register(Events)
 class EventsAdmin(ImportExportModelAdmin):
-    list_display =  ('title', 'venue', 'date')
+    list_display =  ('date','title', 'venue',)
 
 @register(MentorDocs)
 class MentorDocsAdmin(ImportExportModelAdmin):
@@ -47,3 +51,7 @@ class MentorDocsAdmin(ImportExportModelAdmin):
 @register(Interest)
 class InterestsAdmin(ImportExportModelAdmin):
     list_display = ('interest_name',)
+
+@register(RaisedQuery)
+class RaisedQuery(ImportExportModelAdmin):
+    list_display = ('id','name','email','query')
