@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.core.mail import send_mail
 from django.template import loader
 import requests
-from pages.utils  import get_client_ip
+from pages.utils import get_client_ip
 
 from backend.settings import EMAIL_HOST_USER
 from backend.settings import EMAIL_SEND_TO_ADMIN
@@ -20,52 +20,85 @@ from .serializers import *
 from rest_framework import viewsets
 from rest_framework import generics
 
+
 class HomeView (generics.ListAPIView):
     queryset = Home.objects.all()
     serializer_class = HomeSerializer
+
 
 class HomeVisionView (generics.ListAPIView):
     queryset = HomeVision.objects.all()
     serializer_class = HomeVisionSerializer
 
+
 class faqView (generics.ListAPIView):
     queryset = faq.objects.all()
     serializer_class = faqSerializer
+
 
 class StudentTeamView (generics.ListCreateAPIView):
     queryset = StudentTeam.objects.all()
     serializer_class = StudentTeamSerializer
 
+
 class branchView (generics.ListAPIView):
     queryset = branch.objects.all().order_by('branch_name')
     serializer_class = branchSerializer
+
 
 class ContactDetailsView (generics.ListAPIView):
     queryset = ContactDetails.objects.all()
     serializer_class = ContactDetailsSerializer
 
+
 class MentorView (generics.ListCreateAPIView):
     queryset = Mentor.objects.all()
     serializer_class = MentorSerializer
+
+
+class MentorAchievementView(APIView):
+    def post(self, request):
+        mentor_id = ""
+        achievements = []
+        try:
+            mentor_id = request.data["mentor_id"]
+            achievements = request.data["achievements"]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        mentor = get_object_or_404(Mentor, id=mentor_id)
+        for achievement in achievements:
+            MentorAchievement.objects.create(
+                mentor=mentor,
+                achievement_name=achievement
+            )
+        return Response(status=status.HTTP_201_CREATED)
+
 
 class InterestView (generics.ListCreateAPIView):
     queryset = Interest.objects.all().order_by('interest_name')
     serializer_class = InterestSerializer
 
+
 class CampusGroupsView (generics.ListAPIView):
     queryset = CampusGroups.objects.all().order_by('group_name')
     serializer_class = CampusGroupsSerializer
+
+
 class BlogCategoryView (generics.ListCreateAPIView):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
+
 
 class BlogsView (generics.ListCreateAPIView):
     queryset = Blogs.objects.all()
     serializer_class = BlogsSerializer
 
+
 class EventsView (generics.ListCreateAPIView):
     queryset = Events.objects.all()
     serializer_class = EventsSerializer
+
 
 class MentorDocsView (generics.ListCreateAPIView):
     queryset = MentorDocs.objects.all()
@@ -73,17 +106,17 @@ class MentorDocsView (generics.ListCreateAPIView):
 
 
 def send_email(request):
-    serializer  = RaisedQuerySerializer(data=request.data)
+    serializer = RaisedQuerySerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         query_id = serializer.data['id']
         query_content = serializer.data['query']
         query_name = serializer.data['name']
         query_email = serializer.data['email']
-        subject=('#'+str(query_id)+' Query raised from smp.iitr.ac.in')
+        subject = ('#'+str(query_id)+' Query raised from smp.iitr.ac.in')
         message = ''
         recepient = EMAIL_SEND_TO_ADMIN
-        
+
         html_message = loader.render_to_string(
             'mail_template/raise_query.html',
             {
@@ -91,16 +124,18 @@ def send_email(request):
                 'query_name':  query_name,
                 'query_content': query_content,
                 'query_email': query_email,
-                'query_id' : query_id
+                'query_id': query_id
             }
         )
-        send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False,html_message=html_message)
+        send_mail(subject, message, EMAIL_HOST_USER, [
+                  recepient], fail_silently=False, html_message=html_message)
+
 
 @api_view(('POST',))
 @ensure_csrf_cookie
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
-def raisedQuery (request):
-    if request.method == 'POST' :
+def raisedQuery(request):
+    if request.method == 'POST':
         r = requests.post(
             'https://www.google.com/recaptcha/api/siteverify',
             data={
@@ -111,6 +146,6 @@ def raisedQuery (request):
         )
         if r.json()['success']:
             send_email(request)
-            return Response(data={'post':'post'},status=status.HTTP_201_CREATED)
-        return Response(data={'error':'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-    return Response(data={'post':'post'},status=status.HTTP_405_METHOD_NOT_ALLOWED)
+            return Response(data={'post': 'post'}, status=status.HTTP_201_CREATED)
+        return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+    return Response(data={'post': 'post'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

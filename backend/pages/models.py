@@ -1,27 +1,28 @@
 from django.db import models
 from tinymce import models as tinymce_models
 
+
 class Home(models.Model):
 
     smp_description = models.TextField(
-        max_length=1000, 
-        default = ""
+        max_length=1000,
+        default=""
     )
 
 
 class HomeVision(models.Model):
     title = models.CharField(
-        max_length=1000, 
-        default = ""
+        max_length=1000,
+        default=""
     )
 
     description = models.TextField(
-        max_length=1000, 
-        default = ""
+        max_length=1000,
+        default=""
     )
-    image = models.ImageField( 
+    image = models.ImageField(
         upload_to="home/",
-        blank=True, 
+        blank=True,
         null=True
     )
 
@@ -29,35 +30,39 @@ class HomeVision(models.Model):
 class faq(models.Model):
 
     question = models.CharField(
-         max_length=300,
-         default = "",
+        max_length=300,
+        default="",
     )
 
-    answer  = models.CharField(
+    answer = models.CharField(
         max_length=1000,
-        default= "",
+        default="",
     )
-    _for_choices = ( 
-        ('mentor',"MENTOR"),
+    _for_choices = (
+        ('mentor', "MENTOR"),
         ('mentee', "MENTEE")
-    ) 
-    _for = models.CharField(
-        max_length = 100,
-        blank = True,
-        null = True,
-        choices = _for_choices, 
-        default = 'mentor'
     )
+    _for = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        choices=_for_choices,
+        default='mentor'
+    )
+
     def __str__(self):
         return self.question
 
+
 class branch(models.Model):
     branch_name = models.CharField(
-        max_length = 100,
-        default = ""
+        max_length=100,
+        default=""
     )
+
     def __str__(self):
         return self.branch_name
+
 
 year_choices_team = (
     ("1st", "1st Year"),
@@ -69,54 +74,51 @@ year_choices_team = (
 
 position_choices = (
     ('Manager', "Manager"),
-    ('Coordinator','Coordinator')
+    ('Coordinator', 'Coordinator')
 )
 
 vertical_choices = (
-    ('Admin','Admin'),
-    ('Operations','Operations'),
-    ('WebD','WebD'),
-    ('Eventts','Events'),
-    ('Content','Content'),
-    ('Design','Design'),
+    ('Admin', 'Admin'),
+    ('Operations', 'Operations'),
+    ('WebD', 'WebD'),
+    ('Eventts', 'Events'),
+    ('Content', 'Content'),
+    ('Design', 'Design'),
 )
 
 
 class StudentTeam(models.Model):
 
-    #Field Containing name. 
+    # Field Containing name.
     name = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
-    
- 
 
-    #Field Containing Images of members 
+    # Field Containing Images of members
     photo = models.ImageField(
-         upload_to="members/", 
-         max_length=200
-         )
-
-
-    #Field Containing Facebook URL
-    facebook = models.URLField(
-         max_length=1000, 
-        db_index=True, 
-       
-        blank=True
-    ) 
-    enrollno = models.IntegerField(
-        null = True
+        upload_to="members/",
+        max_length=200
     )
-    #Field Containing Linkden URL
+
+    # Field Containing Facebook URL
+    facebook = models.URLField(
+        max_length=1000,
+        db_index=True,
+
+        blank=True
+    )
+    enrollno = models.IntegerField(
+        null=True
+    )
+    # Field Containing Linkden URL
 
     linkden = models.URLField(
-         max_length=1000, 
-        db_index=True, 
-        
+        max_length=1000,
+        db_index=True,
+
         blank=True
-    ) 
+    )
 
     position = models.CharField(
         max_length=100,
@@ -134,22 +136,22 @@ class StudentTeam(models.Model):
 
     branch = models.ForeignKey(
         branch,
-        related_name = "teams",
-        on_delete = models.CASCADE,
+        related_name="teams",
+        on_delete=models.CASCADE,
     )
 
     year = models.CharField(
-        max_length = 100,
-        blank = True,
-        null = True,
-        choices = year_choices_team
+        max_length=100,
+        blank=True,
+        null=True,
+        choices=year_choices_team
     )
     mobile = models.IntegerField(
-        null = True
+        null=True
     )
     email = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
 
 
@@ -158,14 +160,17 @@ class CampusGroups(models.Model):
         max_length=300,
         default=""
     )
+
     def __str__(self):
         return self.group_name
-        
+
+
 class Interest(models.Model):
     interest_name = models.CharField(
-        max_length = 100,
-        default = ""
+        max_length=100,
+        default=""
     )
+
     def __str__(self):
         return self.interest_name
 
@@ -180,25 +185,25 @@ year_choices = (
 class Mentor(models.Model):
     branch = models.ForeignKey(
         branch,
-        related_name = "mentors",
-        on_delete = models.CASCADE
+        related_name="mentors",
+        on_delete=models.CASCADE
     )
 
     interest = models.ManyToManyField(
         Interest,
-        related_name = "interest",
-        blank = True,
- 
+        related_name="interest",
+        blank=True,
+
     )
 
     name = models.CharField(
         max_length=1000,
-        blank=True, 
+        blank=True,
         null=True
     )
     photo = models.ImageField(
-         upload_to="mentors/images", 
-         max_length=200
+        upload_to="mentors/images",
+        max_length=200
     )
     resume = models.FileField(
         upload_to="mentors/resume",
@@ -215,20 +220,20 @@ class Mentor(models.Model):
         null=True
     )
     facebook = models.URLField(
-        max_length=1000, 
-        db_index=True,        
+        max_length=1000,
+        db_index=True,
         blank=True
-    ) 
+    )
     linkden = models.URLField(
-        max_length=1000, 
-        db_index=True, 
+        max_length=1000,
+        db_index=True,
         blank=True
     )
     year = models.CharField(
-        max_length = 100,
-        blank = True,
-        null = True,
-        choices = year_choices
+        max_length=100,
+        blank=True,
+        null=True,
+        choices=year_choices
     )
     groups = models.ManyToManyField(
         CampusGroups,
@@ -237,80 +242,96 @@ class Mentor(models.Model):
     )
 
 
+class MentorAchievement(models.Model):
+    mentor = models.ForeignKey(
+        Mentor,        
+        related_name="mentor_achievement",
+        on_delete=models.CASCADE
+    )
+
+    achievement_name = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+
+
 class ContactDetails(models.Model):
     name = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
     photo = models.ImageField(
-         upload_to="members/", 
-         max_length=200
-         )
- 
+        upload_to="members/",
+        max_length=200
+    )
+
     facebook = models.URLField(
-         max_length=1000, 
-        db_index=True, 
-       
+        max_length=1000,
+        db_index=True,
+
         blank=True
-    ) 
+    )
     linkden = models.URLField(
-         max_length=1000, 
-        db_index=True, 
-        
+        max_length=1000,
+        db_index=True,
+
         blank=True
-    ) 
+    )
     branch = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
 
     year = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
 
     mobile = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
 
     email = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
-   
- 
+
+
 class BlogCategory(models.Model):
     category_name = models.CharField(
-        max_length = 100,
+        max_length=100,
         default="",
         blank=True,
         null=True
     )
+
     def __str__(self):
         return self.category_name
 
+
 class Blogs(models.Model):
     title = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
 
     author = models.CharField(
-        default = "",
-        max_length = 100,
+        default="",
+        max_length=100,
     )
 
     created_at = models.DateField(
         blank=True,
-        null = True
+        null=True
     )
 
     thumbnail = models.ImageField(
-         upload_to="blogs/", 
-         max_length=200,
-         null = True,
-         blank= True
+        upload_to="blogs/",
+        max_length=200,
+        null=True,
+        blank=True
     )
     is_featured = models.BooleanField(
         default=False,
@@ -325,25 +346,26 @@ class Blogs(models.Model):
 
     content = tinymce_models.HTMLField()
 
+
 class Events(models.Model):
     title = models.CharField(
-        default = "",
-        max_length = 150,
+        default="",
+        max_length=150,
     )
 
     date = models.DateField(
         blank=True,
-        null = True
+        null=True
     )
-    time = models.TimeField (
+    time = models.TimeField(
         blank=True,
-        null = True
+        null=True
     )
     thumbnail = models.ImageField(
         upload_to="events/",
         max_length=200,
-        null = True,
-        blank = True
+        null=True,
+        blank=True
     )
     venue = models.CharField(
         default="",
@@ -351,16 +373,18 @@ class Events(models.Model):
     )
     content = tinymce_models.HTMLField()
 
+
 class MentorDocs(models.Model):
     name = models.CharField(
         default="",
-        max_length=100, 
+        max_length=100,
     )
     document = models.FileField(
-        upload_to = "mentorDocs/",
-        null = True,
-        blank = True
+        upload_to="mentorDocs/",
+        null=True,
+        blank=True
     )
+
 
 class RaisedQuery(models.Model):
     name = models.CharField(
