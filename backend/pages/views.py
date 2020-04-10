@@ -32,7 +32,7 @@ class faqView (generics.ListAPIView):
     queryset = faq.objects.all()
     serializer_class = faqSerializer
 
-class StudentTeamView (viewsets.ModelViewSet):
+class StudentTeamView (generics.ListCreateAPIView):
     queryset = StudentTeam.objects.all()
     serializer_class = StudentTeamSerializer
 
@@ -44,30 +44,30 @@ class ContactDetailsView (generics.ListAPIView):
     queryset = ContactDetails.objects.all()
     serializer_class = ContactDetailsSerializer
 
-class MentorView (viewsets.ModelViewSet):
+class MentorView (generics.ListCreateAPIView):
     queryset = Mentor.objects.all()
     serializer_class = MentorSerializer
 
-class InterestView (viewsets.ModelViewSet):
+class InterestView (generics.ListCreateAPIView):
     queryset = Interest.objects.all().order_by('interest_name')
     serializer_class = InterestSerializer
 
 class CampusGroupsView (generics.ListAPIView):
     queryset = CampusGroups.objects.all().order_by('group_name')
     serializer_class = CampusGroupsSerializer
-class BlogCategoryView (viewsets.ModelViewSet):
+class BlogCategoryView (generics.ListCreateAPIView):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
 
-class BlogsView (viewsets.ModelViewSet):
+class BlogsView (generics.ListCreateAPIView):
     queryset = Blogs.objects.all()
     serializer_class = BlogsSerializer
 
-class EventsView (viewsets.ModelViewSet):
+class EventsView (generics.ListCreateAPIView):
     queryset = Events.objects.all()
     serializer_class = EventsSerializer
 
-class MentorDocsView (viewsets.ModelViewSet):
+class MentorDocsView (generics.ListCreateAPIView):
     queryset = MentorDocs.objects.all()
     serializer_class = MentorDocsSerializer
 
