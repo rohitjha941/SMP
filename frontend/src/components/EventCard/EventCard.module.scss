@@ -1,32 +1,20 @@
 @import '../../style/common.scss';
 
 .containersm {
-    // font-size: 17.125rem;
-    // width: 17.125rem;
     max-width: 90vw;
-    // height:fit-content;
 }
 
 .containermd{
-    // font-size:20.25rem;
-    // width:20.25rem;
     max-width: 90vw;
-    // height:fit-content;
 }
 
 .containerlg{
-    // font-size: 36.9375rem;
-    // widows: 80%;
     max-width: 90vw;
-    // height:fit-content;
 
 }
 
 .containerxl{
-    // width:37.5rem;
-    // width:37.5rem;
     max-width: 90vw;
-    // height:fit-content;
 }
 
 .containerSide{
@@ -55,40 +43,31 @@
     margin-left: -0.125rem;
 }
 
-.headingsm {
+@mixin heading-mixin{
     text-align:left;
     display:block;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
+    color: $grey-level-0_8;
     margin: 0.625rem auto 0.625rem 0;
+}
+.headingsm {
+    @include heading-mixin;
     font-size: 0.9375rem;
     line-height: 1.1875rem;
 }
 
 .headingmd {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @include heading-mixin;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
 .headinglg {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @include heading-mixin;
     font-size: 1.25rem;
     line-height: 1.625rem;
 }
 .headingxl {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @include heading-mixin;
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }
@@ -97,8 +76,6 @@
     width:41.63%;
     display: inline-block;
     vertical-align: top;
-    // margin-top:0;
-    // padding-top: 0;
 }
 
 
