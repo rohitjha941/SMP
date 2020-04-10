@@ -280,7 +280,15 @@ class ContactDetails(models.Model):
     )
    
  
-
+class BlogCategory(models.Model):
+    category_name = models.CharField(
+        max_length = 100,
+        default="",
+        blank=True,
+        null=True
+    )
+    def __str__(self):
+        return self.category_name
 
 class Blogs(models.Model):
     title = models.CharField(
@@ -303,6 +311,16 @@ class Blogs(models.Model):
          max_length=200,
          null = True,
          blank= True
+    )
+    is_featured = models.BooleanField(
+        default=False,
+    )
+    category = models.ForeignKey(
+        BlogCategory,
+        related_name="blogs_category",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
 
     content = tinymce_models.HTMLField()

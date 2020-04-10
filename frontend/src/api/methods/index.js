@@ -1,8 +1,16 @@
-import {BLOGS,EVENTS,TEAM,MENTORS, MENTORSDOCS,FAQS,BRANCH,INTERESTS,GROUPS} from 'api/constants';
+import {BLOGS,EVENTS,TEAM,MENTORS, MENTORSDOCS,FAQS,BRANCH,INTERESTS,GROUPS,BLOGCATEGORY} from 'api/constants';
 
 const Blogs = function() {
     return new Promise((resolve, reject) => {
         fetch(BLOGS)
+        .then(data => data.json())
+        .then(jsonData => resolve(jsonData))
+        .catch(e => reject(e))
+    })
+};
+const BlogCategory = function() {
+    return new Promise((resolve, reject) => {
+        fetch(BLOGCATEGORY)
         .then(data => data.json())
         .then(jsonData => resolve(jsonData))
         .catch(e => reject(e))
@@ -83,4 +91,5 @@ export const getFAQs = Faqs;
 export const getBranch = Branch;
 export const getInterests = Interests;
 export const getGroups = Groups ;
+export const getBlogCategory = BlogCategory;
 

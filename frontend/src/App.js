@@ -21,6 +21,7 @@ const Footer = Loadable({
 function App() {
 
   const [blogs, setBlogs] = useState([]);
+  const [blogCategory,setBlogCategory] = useState([]);
   const [events, setEvents] = useState([]);
   const [team,setTeam] = useState([]);
   const [mentors,setMentors] = useState([]);
@@ -75,6 +76,11 @@ function App() {
         methods.getGroups().then(data => setGroups(data));
     }
   }
+  const fetchBlogCategoryIfEmpty = () => {
+    if (!blogCategory || blogCategory.length === 0) {
+        methods.getBlogCategory().then(data => setBlogCategory(data));
+    }
+  }
 
 
   useEffect(() => {
@@ -87,6 +93,7 @@ function App() {
     fetchBranchesIfEmpty();
     fetchInterestsIfEmpty();
     fetchGroupsIfEmpty();
+    fetchBlogCategoryIfEmpty();
   });
 
   return (
@@ -95,6 +102,7 @@ function App() {
       <div className="router-footer-container">
         <RouterView 
           blogs={blogs} 
+          blogCategory={blogCategory}
           events={events} 
           team={team} 
           mentors={mentors} 

@@ -11,10 +11,12 @@ const apiConstants = {
     branch:'branch',
     interests:'interests',
     groups:'campusGroups',
+    blogcategory:'blogCategory',
 }
 
 
 export const BLOGS   = apiConstants.base + apiConstants.blogs;
+export const BLOGCATEGORY   = apiConstants.base + apiConstants.blogcategory;
 export const EVENTS  = apiConstants.base + apiConstants.events;
 export const TEAM    = apiConstants.base + apiConstants.team;
 export const MENTORS = apiConstants.base + apiConstants.mentors;

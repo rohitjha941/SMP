@@ -20,6 +20,9 @@ with open("config.yml","r") as ymlfile:
      cfg = yaml.safe_load(ymlfile)
 
 
+with open("config.yml","r") as ymlfile:
+     cfg = yaml.safe_load(ymlfile)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -160,4 +163,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = cfg["email"]["sender_email"]
 EMAIL_HOST_PASSWORD = cfg["email"]["password"]
 
+
 EMAIL_SEND_TO_ADMIN = cfg["email"]["admin_email"]
+
+RECAPTCHA_SECRET_KEY = cfg["recaptcha"]["recaptcha_secret_key"]
