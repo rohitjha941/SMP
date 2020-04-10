@@ -40,98 +40,74 @@
                 selectedYear:syear,
                 selectedSkill:sskill,
                 prevSelected:prevSelected,
-            },()=>{console.log(this.state.prevSelected)});
+            })
         }
 
         handleYear = (value) => {
-            let selectedYear = this.state.selectedYear;
-            let allyears = this.state.allyears;
-            let flag = false
-            selectedYear.forEach((selected,index) => {
-                if(selected===value){
-                    flag = true;
-                    allyears.forEach((year,i) => {
-                        if(year.name === value){
-                            year.selected = false;
-                            return(selectedYear.splice(index,1));
-                        }
-                        // return(selectedYear);
-                    })
-                }
-            })
-            if(!flag){
-                selectedYear.push(value)
-                allyears.forEach((year,i) => {
-                    if(year.name === value){
-                        year.selected = true;
-                    }
+            const selectedYear = this.state.selectedYear;
+            const allyears = this.state.allyears;
+            const flag = selectedYear.find(el => el===value);
+            const index = allyears.findIndex(el => el.name === value);
+            var {selected,...obj} = allyears[index];
+            if(flag){
+                obj.selected = false;
+                this.setState({
+                    selectedYear:  this.state.selectedYear.filter(item => item!=value),
+                    allyears : this.state.allyears.map((item)=> item.name === value ? obj : item)
+                })
+            }else{
+                obj.selected = true;
+                this.setState({
+                    selectedYear:[...this.state.selectedYear,value],
+                    allyears : this.state.allyears.map((item)=> item.name === value ? obj : item)
                 })
             }
-            this.setState({
-                selectedYear : selectedYear,
-                allyears : allyears
-            })
         }
 
         handleBranch = (value) => {
-            let selectedBranch = this.state.selectedBranch;
-            let allbranches = this.state.allbranches;
-            let flag = false
-            selectedBranch.forEach((selected,index) => {
-                if(selected===value){
-                    flag = true;
-                    allbranches.forEach((branch,i) => {
-                        if(branch.id === value){
-                            branch.selected = false;
-                            return(selectedBranch.splice(index,1));
-                        }
-                    })
-                }
-            })
-            if(!flag){
-                selectedBranch.push(value)
-                allbranches.forEach((branch,i) => {
-                    if(branch.id === value){
-                        branch.selected = true;
-                    }
+            const selectedBranch = this.state.selectedBranch;
+            const allbranches = this.state.allbranches;
+            const flag = selectedBranch.find(el => el===value);
+            const index = allbranches.findIndex(el => el.id === value);
+            var {selected, ...obj} = allbranches[index];
+            if(flag){
+                obj.selected = false;
+                this.setState({
+                    selectedBranch : this.state.selectedBranch.filter(item => item!=value),
+                    allbranches : this.state.allbranches.map((item)=> item.id===value ? obj : item)
+                })
+            }else{
+                obj.selected = true;
+                this.setState({
+                    selectedBranch:[...this.state.selectedBranch,value],
+                    allbranches : this.state.allbranches.map((item)=> item.id===value ? obj : item)
                 })
             }
-            this.setState({
-                selectedBranch : selectedBranch
-            })
         }
 
         handleSkill = (value) => {
-            let selectedSkill = this.state.selectedSkill;
-            let allinterests = this.state.allinterests;
-            let flag = false
-            selectedSkill.forEach((selected,index) => {
-                if(selected===value){
-                    flag = true;
-                    allinterests.forEach((skill,i) => {
-                        if(skill.id === value){
-                            skill.selected = false;
-                            return(selectedSkill.splice(index,1));
-                        }
-                    })
-                }
-            })
-            if(!flag){
-                selectedSkill.push(value)
-                allinterests.forEach((skill,i) => {
-                    if(skill.id === value){
-                        skill.selected = true;
-                    }
+            const selectedSkill = this.state.selectedSkill;
+            const allinterests = this.state.allinterests;
+            const flag = selectedSkill.find(el => el ===value);
+            const index = allinterests.findIndex(el => el.id === value);
+            var {selected, ...obj} = allinterests[index];
+            if(flag){
+                obj.selected = false;
+                this.setState({
+                    selectedSkill : this.state.selectedSkill.filter(item => item!=value),
+                    allinterests : this.state.allinterests.map((item)=> item.id === value ? obj : item)
+                })
+            }else{
+                obj.selected = true;
+                this.setState({
+                    selectedSkill:[...this.state.selectedSkill,value],
+                    allinterests : this.state.allinterests.map((item)=> item.id===value ? obj : item)
                 })
             }
-            this.setState({
-                selectedSkill : selectedSkill,
-                allinterests : allinterests 
-            })
         }
 
         onClear = () => {
-            const allyears = this.state.allyears.concat((value) => {
+            const allyears = this.state.allyears.map((value) => {
                 value.selected = false
                 return(value)
             })
@@ -154,7 +130,10 @@
             var filterData = {
                 branch : [],
                 year:[],
-                skill:[]
+                skill:[],
+                allbranches:allbranches,
+                allyears:allyears,
+                allinterests:allinterests
             }
             this.props.updateFilter(filterData)
         }
@@ -167,7 +146,10 @@
             var filterData = {
                 branch : branch,
                 year : year,
-                skill : skill
+                skill : skill,
+                allbranches:this.state.allbranches,
+                allyears:this.state.allyears,
+                allinterests:this.state.allinterests
             }
 
             this.props.updateFilter(filterData);
@@ -184,7 +166,6 @@
             allinterests = prevSelected.ainterests;
             allyears = prevSelected.ayears;
             allbranches = prevSelected.abranches;
-            console.log(prevSelected)
             this.setState({
                 selectedBranch : selectedBranch,
                 selectedSkill : selectedSkill,

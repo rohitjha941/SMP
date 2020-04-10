@@ -74,7 +74,7 @@ function App() {
   useEffect(() => {
     fetchBlogsIfEmpty();
     fetchEventsIfEmpty();
-    // fetchTeamIfEmpty();
+    fetchTeamIfEmpty();
     fetchMentorsIfEmpty();
     fetchMentorsDocsIfEmpty();
     fetchFAQsIfEmpty();

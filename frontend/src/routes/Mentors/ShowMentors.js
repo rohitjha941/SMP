@@ -11,7 +11,7 @@ class MentorShow extends Component {
             filterbranches : [],
             filterinterests : [],
             allbranches: [],
-            allinterests: this.props.interests ? this.props.interests : null,
+            allinterests: this.props.interests ? this.props.interests : [],
             mentors : [],
             filteredmentors:[],
             filterToggle:false,
@@ -78,10 +78,17 @@ class MentorShow extends Component {
         const newBranches = value.branch;
         const newYear = value.year;
         const newInterests = value.skill;
-        let {filterComponentData} = this.state;
-        filterComponentData.selectedBranch  = newBranches;
-        filterComponentData.selectedYear = newYear;
-        filterComponentData.selectedSkill = newInterests;
+        const allbranches = value.allbranches;
+        const allinterests = value.allinterests;
+        const allyears = value.allyears;
+        const filterComponentData = {
+            selectedBranch  : newBranches,
+            selectedYear : newYear,
+            selectedSkill : newInterests,
+            allyears : allyears,
+            allinterests : allinterests,
+            allbranches : allbranches,
+        }
         this.setState({
             filteryear:newYear,
             filterbranches:newBranches,
