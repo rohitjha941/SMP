@@ -47,7 +47,7 @@ function WrappedComponent(props) {
                 :
                 null}
                 <Link to={'/blogs/view/'+blog_id+'/'} >
-                    <div id='imagediv'className={styles.ImageWrapperDiv}><img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} /></div>
+                    <div id='imagediv'className={styles.imageWrapperDiv}><img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} /></div>
                 </Link>
                 <Text heading={heading} text={truncatedText} metadata={metadata} blog_id={blog_id} headingTop={headingTop} type={props.type}/>
             </div>

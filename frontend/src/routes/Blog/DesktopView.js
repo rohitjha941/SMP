@@ -9,6 +9,7 @@ class DesktopView extends Component {
         const blogData = this.props.blogData;
         return ( 
             <>
+            <div className={styles.mainWrapper}>
             <div className={styles.container1}>
                 <div className={styles.headingContainer}>
                      <span className='color-red'>Read</span> What We Do
@@ -17,6 +18,7 @@ class DesktopView extends Component {
                     <li>
                         <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl} textlimit={500}/>
                     </li>
+                    <li></li>{/* Empty li to maintain margin*/}
                     <li>
                         <ul className={styles.ul2}>
                             <li>
@@ -38,6 +40,7 @@ class DesktopView extends Component {
                         )
                     }) : null}
                 </ul>
+            </div>
             </div>   
             </>
          );

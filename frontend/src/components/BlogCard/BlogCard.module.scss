@@ -8,11 +8,7 @@
     max-width: 90vw;
 }
 
-.containerxl{
-    max-width: 37.5rem;
-}
-
-.ImageWrapperDiv{
+.imageWrapperDiv{
     width: 100%;
     overflow: hidden;
     margin: 0;
@@ -31,40 +27,32 @@
     transform: translate(-50%, -50%);
 }
 
-.headingsm {
-    text-align:left;
-    display:block;
+@mixin heading-mixin {
+    text-align: left;
+    display: block;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
+    color : $grey-level-0_8;
     margin: 0.625rem auto 0.625rem 0;
+}
+
+.headingsm {
+    @include heading-mixin;
     font-size: 0.9375rem;
     line-height: 1.1875rem;
 }
 
 .headingmd {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @include heading-mixin;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
 .headinglg {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @include heading-mixin;
     font-size: 1.25rem;
     line-height: 1.625rem;
 }
 .headingxl {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @include heading-mixin;
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }

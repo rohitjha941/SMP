@@ -1,5 +1,6 @@
-.mainDiv{
-    padding: 5%;
+.mainWrapper{
+    width:79.167%;
+    margin: auto;
 }
 .headingContainer{
     font-size: 3.125rem;
@@ -12,7 +13,7 @@
         width: 100%;
         overflow: hidden;
         margin: 0;
-        padding-top: 75%;
+        padding-top: 66.67%;
         position: relative;
         img{
             position: absolute;
@@ -28,7 +29,7 @@
         width: 100%;
         overflow: hidden;
         margin: 0;
-        padding-top: 56.25%;
+        padding-top: 51.97%;
         position: relative;
         img{
             position: absolute;
@@ -40,17 +41,13 @@
     }
 }
 .ul1{
-    width: 80%;
+    width: 100%;
     display: grid;
     margin: auto;
-    grid-template-columns: 50% 50%;
-    li{
-        padding-left: 2%;
-        padding-right:2%;
-    }
+    grid-template-columns: 52.64% 9.56% 37.80%;
 }
 .ul2{
-    width: 80%;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     li{
@@ -61,12 +58,12 @@
     font-weight: 500;
     font-size: 1.875rem;
     line-height: 2.4375rem;
-    margin-left: 10%;
+    // margin-left: 10%;
     margin-top: 2rem;
 }
 .ul3{
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    // margin: auto;
     margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
