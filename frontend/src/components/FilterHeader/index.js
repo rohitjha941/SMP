@@ -3,7 +3,7 @@ import styles from './FilterHeader.module.scss';
 
 export default class FilterHeader extends Component{
     handleClick = () => {
-        this.props.handleToggle();
+        this.props.handleClose();
     }
     render(){
         return(

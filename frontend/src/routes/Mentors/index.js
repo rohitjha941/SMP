@@ -18,11 +18,6 @@ const ShowMentors = Loadable({
     loading: () => <Loader />
 })
 
-const FilterMentors = Loadable({
-    loader: () => import('./FilterMentors'),
-    loading: () => <Loader />
-})
-
 class Mentors extends Component {
 
     render() { 
