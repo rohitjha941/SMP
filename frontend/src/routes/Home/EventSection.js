@@ -11,7 +11,8 @@ class EventSection extends Component {
         this.state ={
             mobView : window.innerWidth < 600,
             tabView: window.innerWidth<1000,
-            eventData:[]
+            upcomingEvents:[],
+            pastEvents:[]
         }
     }
     resize  = () => {
@@ -38,13 +39,28 @@ class EventSection extends Component {
                 isThisWeek: value.isThisWeek
             }
         });
-        this.setState({eventData: eventData});
+        let upcomingEvents = [];
+        let pastEvents = [];
+        eventData.forEach(event=>{
+            if(event.isThisWeek){
+                upcomingEvents.unshift(event);
+            }else if(event.isUpcoming){
+                upcomingEvents.push(event);
+            }
+            else{
+                pastEvents.push(event);
+            }
+        })
+        this.setState({
+            upcomingEvents:upcomingEvents,
+            pastEvents:pastEvents
+        });
     }
     componentWillUnmount() {
         window.removeEventListener('resize', this.resize);
     }
     render() { 
-        let eventData = this.state.eventData;
+        let eventData = this.state.upcomingEvents.length>0 ? this.state.upcomingEvents : this.state.pastEvents;
         return ( 
             <React.Fragment>
                 <div className={styles.eventParentDiv}>

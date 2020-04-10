@@ -7,7 +7,9 @@ export function calculateReadingTime(text) {
 }
 
 export function updateEvents(events){
-    var events_updated = events.map(event => {
+    var uevents = events;
+    var events_updated = []; 
+    uevents.forEach(event => {
         var eventDate = new Date(event.date+'T'+event.time);
         var currentDate = new Date();
         var thisWeekDate = new Date();
@@ -16,7 +18,7 @@ export function updateEvents(events){
         var isUpcoming = currentDate<=eventDate;
         event.isThisWeek = isThisWeek;
         event.isUpcoming = isUpcoming;
-        return event;
+        return events_updated.push(event);
     })
     return events_updated;
 }

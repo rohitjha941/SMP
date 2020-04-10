@@ -22,7 +22,7 @@ const Footer = Loadable({
 function App() {
 
   const [blogs, setBlogs] = useState([]);
-  let [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]);
   const [team,setTeam] = useState([]);
   const [mentors,setMentors] = useState([]);
   const [mentorsDocs,setMentorsDocs] = useState([]);
@@ -75,7 +75,7 @@ function App() {
   useEffect(() => {
     fetchBlogsIfEmpty();
     fetchEventsIfEmpty();
-    fetchTeamIfEmpty();
+    // fetchTeamIfEmpty();
     fetchMentorsIfEmpty();
     fetchMentorsDocsIfEmpty();
     fetchFAQsIfEmpty();
@@ -83,15 +83,14 @@ function App() {
     fetchInterestsIfEmpty();
   });
 
-  events = updateEvents(events);
-
+  const uevents = updateEvents(events);
   return (
     <div className="App">
       <Header />
       <div className="router-footer-container">
         <RouterView 
           blogs={blogs} 
-          events={events} 
+          events={uevents} 
           team={team} 
           mentors={mentors} 
           mentorsDocs={mentorsDocs}
