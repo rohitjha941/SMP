@@ -52,15 +52,12 @@ class InterestView (viewsets.ModelViewSet):
     queryset = Interest.objects.all().order_by('interest_name')
     serializer_class = InterestSerializer
 
-<<<<<<< HEAD
 class CampusGroupsView (generics.ListAPIView):
     queryset = CampusGroups.objects.all().order_by('group_name')
     serializer_class = CampusGroupsSerializer
-=======
 class BlogCategoryView (viewsets.ModelViewSet):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
->>>>>>> master
 
 class BlogsView (viewsets.ModelViewSet):
     queryset = Blogs.objects.all()
