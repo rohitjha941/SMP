@@ -1,0 +1,42 @@
+@import '../../style/common.scss';
+.mainWrapper{
+    background-image: linear-gradient($light-blue, $white);
+    min-height: 100vh;
+}
+.mainContent{
+    margin:auto;
+    padding: 5%;
+    width:80%;
+    text-align: center;
+    @media screen and (min-width:$break){
+        display: grid;
+        grid-template-columns: 1fr 1fr;   
+    }
+}
+.Error404{
+    color:$blue-text;
+    font-weight: 500;
+    font-size: 1.5rem;
+    padding:5%;
+}
+.PageNotFound{
+    color:$grey-level-0_8;
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin:1rem;
+}
+.button{
+    margin:1rem;
+}
+.image{
+    @media screen and (min-width:$break){
+        margin-top: 30%;
+    }
+    width:70%;
+    margin-bottom: 1rem;
+}
+.Text{
+    @media screen and (min-width:$break){
+        padding-top: 35%;
+    }
+}

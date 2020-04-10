@@ -12,11 +12,14 @@ class Slider extends Component {
                 <div className="slider">
                     <div className="slides">
                         {blogData ? blogData.map((data,index) =>{
-                            return(
-                            <div key={index} id={'slide-'+index}>
-                                <BlogCard className='blogCardCommon' key={index} type={window.innerWidth < 1000 ? 'sm' : 'md'} blogData={data} headingTop={false} text={false}/>
-                            </div>
-                            )
+                            if(data.is_featured){
+                                return(
+                                    <div key={index} id={'slide-'+index}>
+                                        <BlogCard className='blogCardCommon' key={index} type={window.innerWidth < 1000 ? 'sm' : 'md'} blogData={data} headingTop={false} text={false}/>
+                                    </div>
+                                    )
+                            }
+                            return null;
                         })
                         :
                         null
