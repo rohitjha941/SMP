@@ -95,6 +95,11 @@ class MentorForm extends Component {
         this.setState({
             createdInterest : [...createdInterest,inputValue]
         })
+
+        /**
+         * Make a POST request here to `/backend/interests/`. 
+         * It will create a entry in backend and return its ids. 
+         */
     };
     handleAddAchievement = (e) => {
         e.preventDefault();
