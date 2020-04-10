@@ -99,7 +99,6 @@ function App() {
           blogs={blogs} 
           events={uevents} 
           blogCategory={blogCategory}
-          events={uevents} 
           team={team} 
           mentors={mentors} 
           mentorsDocs={mentorsDocs}
