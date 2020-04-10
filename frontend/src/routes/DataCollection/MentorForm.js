@@ -191,6 +191,18 @@ class MentorForm extends Component {
             interest: This will contain array of ids of interest Eg : [1,8,23]
             groups: same as interests
          */
+
+    /**
+     * To create achievements post request to `mentors/achievements/` with following data
+     * {
+            "mentor_id" : "1", : ID of mentor
+            "achievements" : [
+                "test",
+                "test2",
+                "test3"
+            ] An array containing all the achievements
+        }
+     */
   };
   componentDidMount() {
     let branchOptions = [],
