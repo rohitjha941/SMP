@@ -52,7 +52,7 @@
             if(flag){
                 obj.selected = false;
                 this.setState({
-                    selectedYear:  this.state.selectedYear.filter(item => item!=value),
+                    selectedYear:  this.state.selectedYear.filter(item => item!==value),
                     allyears : this.state.allyears.map((item)=> item.name === value ? obj : item)
                 })
             }else{
@@ -73,7 +73,7 @@
             if(flag){
                 obj.selected = false;
                 this.setState({
-                    selectedBranch : this.state.selectedBranch.filter(item => item!=value),
+                    selectedBranch : this.state.selectedBranch.filter(item => item!==value),
                     allbranches : this.state.allbranches.map((item)=> item.id===value ? obj : item)
                 })
             }else{
@@ -94,7 +94,7 @@
             if(flag){
                 obj.selected = false;
                 this.setState({
-                    selectedSkill : this.state.selectedSkill.filter(item => item!=value),
+                    selectedSkill : this.state.selectedSkill.filter(item => item!==value),
                     allinterests : this.state.allinterests.map((item)=> item.id === value ? obj : item)
                 })
             }else{
