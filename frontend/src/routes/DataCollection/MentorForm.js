@@ -115,7 +115,7 @@ class MentorForm extends Component {
     this.setState({
       internships: [
         ...this.state.internships,
-        { company: "", year: "", domain: "" },
+        { company: "", duration: "", domain: "" },
       ],
     });
   };
@@ -144,6 +144,8 @@ class MentorForm extends Component {
       facebook,
       linkden,
       groups,
+      achievements,
+      internships,
     } = this.state;
 
     const intrestToCreate = interest.filter((i) => typeof i === "string");
@@ -166,7 +168,7 @@ class MentorForm extends Component {
     data.append("year", year);
     data.append("enrollno", enrollno);
     data.append("branch", branch);
-    data.append("interest", interest);
+    data.append("interest", createdIntrest);
     data.append("email", email);
     data.append("mobile", mobile);
     data.append("photo", image);
@@ -175,12 +177,47 @@ class MentorForm extends Component {
     data.append("linkden", linkden);
     data.append("groups", groups);
 
-    console.log(data);
     axios
       .post(process.env.REACT_APP_API_BASE + "mentors/", data)
       .then((response) => {
         console.log(response);
-        this.setState({ errMsg: "Submitted Successfully" });
+
+        let achievementData = {
+          mentor_id: response.data.id,
+          achievements: achievements,
+        };
+
+        let internshipsData = {
+          mentor_id: response.data.id,
+          interns: internships,
+        };
+        axios
+          .post(
+            process.env.REACT_APP_API_BASE + "mentors/achievements/",
+            achievementData
+          )
+          .then((response) => {
+            console.log(response);
+            this.setState({ errMsg: "Submitted Successfully" });
+          })
+          .catch((error) => {
+            console.log(error);
+            this.setState({ errMsg: "Unable to Submit Right Now" });
+          });
+
+        axios
+          .post(
+            process.env.REACT_APP_API_BASE + "mentors/intern/",
+            internshipsData
+          )
+          .then((response) => {
+            console.log(response);
+            this.setState({ errMsg: "Submitted Successfully" });
+          })
+          .catch((error) => {
+            console.log(error);
+            this.setState({ errMsg: "Unable to Submit Right Now" });
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -458,19 +495,19 @@ class MentorForm extends Component {
                     </div>
                     <div className="form-group row">
                       <label
-                        htmlFor={"year" + index}
+                        htmlFor={"duration" + index}
                         className="col-sm-2 col-form-label"
                       >
-                        Year of Internship:
+                        Duration of Internship:
                       </label>
                       <div className="col-sm-10">
                         <input
                           type="text"
                           className="form-control"
-                          value={internship.year}
-                          id={"year" + index}
+                          value={internship.duration}
+                          id={"duration" + index}
                           onChange={(e) =>
-                            this.handleChangeInternship(e, index, "year")
+                            this.handleChangeInternship(e, index, "duration")
                           }
                         />
                       </div>
