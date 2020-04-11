@@ -4,7 +4,7 @@ import styles from "./MentorForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import axios from 'axios';
+import axios from "axios";
 
 const animatedComponents = makeAnimated();
 const yearOptions = [
@@ -93,12 +93,7 @@ class MentorForm extends Component {
       interest: value,
     });
   };
-  handleCreateInterests = (inputValue) => {
-    const { createdInterest } = this.state;
-    this.setState({
-      createdInterest: [...createdInterest, inputValue],
-    });
-  };
+
   handleAddAchievement = (e) => {
     e.preventDefault();
     this.setState({
@@ -136,38 +131,6 @@ class MentorForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    const { createdInterest } = this.state;
-    
-    /**
-     * Make a POST request to `/backend/interests/`. 
-     * It will create a interests in backend and return its ids.
-     */
-    createdInterest.forEach(interest=>{
-      const data = {interest_name:interest}
-      axios.post(process.env.REACT_APP_API_BASE+'interests/',data)
-      .then((response)=>{
-        console.log(response.data);
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
-    })
-
-    /**
-          Make post Request to `/backend/mentors` to create a entry for mentor with following params
-            name	
-            photo required	
-            resume	
-            email	
-            mobile	
-            enrollno	
-            facebook	
-            linkden	
-            year	
-            branch required	
-            interest: This will contain array of ids of interest Eg : [1,8,23]
-            groups: same as interests
-         */
     const {
       name,
       year,
@@ -182,69 +145,47 @@ class MentorForm extends Component {
       linkden,
       groups,
     } = this.state;
-    // let data = new FormData();
-    // data.append('name',name)
-    // data.append('year',year)
-    // data.append('enrollno',enrollno)
-    // data.append('branch',branch)
-    // data.append('interest',JSON.stringify(interest))
-    // data.append('email',email)
-    // data.append('mobile',mobile)
-    // data.append('photo',image)
-    // data.append('resume',resume)
-    // data.append('facebook',facebook)
-    // data.append('linkden',linkden)
-    // data.append('groups',JSON.stringify(groups))
 
-    const data = {
-      name: name,
-      year: year,
-      enrollno: enrollno,
-      branch: branch,
-      intertest: interest,
-      email: email,
-      mobile: mobile,
-      photo: image,
-      resume: resume,
-      facebook: facebook,
-      linkden: linkden,
-      groups: groups,
-    };
+    const intrestToCreate = interest.filter((i) => typeof i === "string");
+    let createdIntrest = interest.filter((i) => typeof i === "number");
 
-    console.log(data)
-    axios.post(process.env.REACT_APP_API_BASE+'mentors/',data,
-    {headers:{
-      'content-type' : 'multipart/form-data'
-    }})
-    .then((response)=>{
-      console.log(response)
-      const mentorID  = response.data.id
-      const data = {
-        mentor_id : mentorID,
-        achievements : this.state.achievements
-      }
-      return axios.post(process.env.REACT_APP_API_BASE+'mentors/achievements/',data)
-    })
-    .then((response)=>{
-      console.log(response);
-      this.setState({errMsg:"Submitted Successfully"})
-    })
-    .catch((error)=>{
-      console.log(error)
-      this.setState({errMsg:"Unable to Submit Right Now"})
-    })
-      
-    /**
-     * To create achievements post request to `mentors/achievements/` with following data
-     * {
-            "mentor_id" : "1", : ID of mentor
-            "achievements" : [
-                "test",
-                "test2",
-                "test3"
-            ] An array containing all the achievements
-        }
-     */
+    // TODO: Make a API to create interests in one GO.
+    intrestToCreate.forEach((interest) => {
+      const data = { interest_name: interest };
+      axios
+        .post(process.env.REACT_APP_API_BASE + "interests/", data)
+        .then((response) => {
+          createdIntrest.push(response.data.id);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+    let data = new FormData();
+    data.append("name", name);
+    data.append("year", year);
+    data.append("enrollno", enrollno);
+    data.append("branch", branch);
+    data.append("interest", interest);
+    data.append("email", email);
+    data.append("mobile", mobile);
+    data.append("photo", image);
+    data.append("resume", resume);
+    data.append("facebook", facebook);
+    data.append("linkden", linkden);
+    data.append("groups", groups);
+
+    console.log(data);
+    axios
+      .post(process.env.REACT_APP_API_BASE + "mentors/", data)
+      .then((response) => {
+        console.log(response);
+        this.setState({ errMsg: "Submitted Successfully" });
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({ errMsg: "Unable to Submit Right Now" });
+      });
   };
   componentDidMount() {
     let branchOptions = [],
@@ -389,7 +330,6 @@ class MentorForm extends Component {
                 closeMenuOnSelect={false}
                 isMulti
                 onChange={this.handleChangeInterests}
-                onCreateOption={this.handleCreateInterests}
                 components={animatedComponents}
                 required
               />
