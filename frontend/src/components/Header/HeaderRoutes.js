@@ -24,7 +24,7 @@ export default class HeaderRoutes extends Component {
             },
             {
                 to: "/queries",
-                display: "Queries",
+                display: "FAQs",
             },
             {
                 to: "/about",

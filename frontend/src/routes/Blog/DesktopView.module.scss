@@ -1,5 +1,6 @@
-.mainDiv{
-    padding: 5%;
+.mainWrapper{
+    width:79.167%;
+    margin: auto;
 }
 .headingContainer{
     font-size: 3.125rem;
@@ -12,7 +13,7 @@
         width: 100%;
         overflow: hidden;
         margin: 0;
-        padding-top: 75%;
+        padding-top: 66.67%;
         position: relative;
         img{
             position: absolute;
@@ -28,7 +29,7 @@
         width: 100%;
         overflow: hidden;
         margin: 0;
-        padding-top: 56.25%;
+        padding-top: 51.97%;
         position: relative;
         img{
             position: absolute;
@@ -40,26 +41,22 @@
     }
 }
 .ul1{
-    width: 80%;
+    width: 100%;
     display: grid;
     margin: auto;
-    grid-template-columns: 50% 50%;
-    li{
-        // margin-left:auto;
-        // margin-right:auto;
-        padding-top: -3.125rem;
-        padding: 2%;
-        // vertical-align: top;
+    grid-template-columns: 60% 40%;
+    .ul1Li1{
+        padding-right:12.26%;
+    }
+    .ul1Li2{
+        padding-left:5.5%;
     }
 }
 .ul2{
-    width: 80%;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    padding-top:1.5rem;
     li{
-        // margin:auto;
-        // padding: 2%;
         padding-bottom:1rem;
     }
 }
@@ -67,12 +64,12 @@
     font-weight: 500;
     font-size: 1.875rem;
     line-height: 2.4375rem;
-    margin-left: 10%;
+    // margin-left: 10%;
     margin-top: 2rem;
 }
 .ul3{
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    // margin: auto;
     margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

@@ -7,6 +7,7 @@
 }
 
 .headingsm {
+    padding-left: 3%;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
     margin-top: 1.031825rem;
@@ -15,6 +16,7 @@
 }
 
 .headingmd {
+    padding-left: 5%;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
     margin-top: 1.031825rem;
@@ -22,6 +24,7 @@
     line-height: 1.25rem;
 }
 .headinglg {
+
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
     margin-top: 1.031825rem;
@@ -38,9 +41,6 @@
 
 .metadata{
     width: fit-content;
-    height: 1em;
-    
-    font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: normal;
     font-size: 0.75rem;
@@ -58,7 +58,6 @@
 }
 
 .text {
-    font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: 300;
     font-size: 0.75rem;

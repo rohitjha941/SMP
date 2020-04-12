@@ -30,6 +30,7 @@ class MobileView extends Component {
         return ( 
             <React.Fragment>
                 <div className={styles.heading}>We conduct <span className='color-red'>Events </span><span className={styles.dashedWord}>year-round</span></div>
+                <div className={styles.MainWrapper}>
                 <div>
                 {upcomingEvents.length>0? 
                     <>
@@ -71,6 +72,7 @@ class MobileView extends Component {
                     })}
                     </>
                     :null}
+                </div>
                 </div>
                 <Button type='outline' text='View More'/>
             </React.Fragment>

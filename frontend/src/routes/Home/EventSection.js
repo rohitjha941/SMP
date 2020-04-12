@@ -64,6 +64,7 @@ class EventSection extends Component {
         return ( 
             <React.Fragment>
                 <div className={styles.eventParentDiv}>
+                    <div className={styles.eventInnerWrapper}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
                     {eventData.length > 0 ?(
                     <>
@@ -80,6 +81,7 @@ class EventSection extends Component {
                     </>) :null}
                     <Link to='/events'><Button className={styles.eventsButton} text='View More' type='outline'/></Link>
                     </div>
+                </div>
             </React.Fragment>
          );
     }
