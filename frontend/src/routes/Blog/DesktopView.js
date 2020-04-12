@@ -15,11 +15,10 @@ class DesktopView extends Component {
                      <span className='color-red'>Read</span> What We Do
                 </div>
                 <ul className={styles.ul1}>
-                    <li>
+                    <li className={styles.ul1Li1}>
                         <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl} textlimit={500}/>
                     </li>
-                    <li></li>{/* Empty li to maintain margin*/}
-                    <li>
+                    <li className={styles.ul1Li2}>
                         <ul className={styles.ul2}>
                             <li>
                                 <Blogcard blogData={blogData[1]} type='lg' className={styles.blogcardlg} text={false}/>

@@ -44,7 +44,13 @@
     width: 100%;
     display: grid;
     margin: auto;
-    grid-template-columns: 52.64% 9.56% 37.80%;
+    grid-template-columns: 60% 40%;
+    .ul1Li1{
+        padding-right:12.26%;
+    }
+    .ul1Li2{
+        padding-left:5.5%;
+    }
 }
 .ul2{
     width: 100%;
