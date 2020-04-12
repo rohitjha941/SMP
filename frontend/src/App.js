@@ -3,6 +3,7 @@ import './style/App.scss';
 import Loadable from 'react-loadable';
 import Loader from './components/Loader';
 import { Flash } from 'components/Flash';
+import Bus from 'utils/Bus';
 
 var methods = require('./api/methods/');
 
@@ -18,6 +19,8 @@ const Footer = Loadable({
   loader: () => import('./components/Footer'),
   loading: () => <Loader />
 })
+
+window.flash = (message, type="success") => Bus.emit('flash',({message,type}));
 
 function App() {
 
@@ -81,7 +84,7 @@ function App() {
   useEffect(() => {
     fetchBlogsIfEmpty();
     fetchEventsIfEmpty();
-    fetchTeamIfEmpty();
+    // fetchTeamIfEmpty();
     fetchMentorsIfEmpty();
     fetchMentorsDocsIfEmpty();
     fetchFAQsIfEmpty();
@@ -89,6 +92,7 @@ function App() {
     fetchInterestsIfEmpty();
     fetchBlogCategoryIfEmpty();
   });
+  console.log(events)
 
   return (
     <div className="App">
