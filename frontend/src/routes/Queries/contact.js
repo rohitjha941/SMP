@@ -54,6 +54,9 @@ class Contact extends Component {
                 window.flash("There was a problem sending your query! Please try again later",'error')
             })
         }
+        else{
+            window.flash("Please Verify the Recaptcha!","warning")
+        }
         //reset captcha
         recaptchaRef.current.reset();
         this.setState({captcha:false});
