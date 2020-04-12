@@ -1,10 +1,12 @@
 @import '../../style/common.scss';
 
 .containersm {
+    width:100%;
     max-width: 90vw;
 }
 
 .containermd{
+    width:100%;
     max-width: 90vw;
 }
 
@@ -27,8 +29,7 @@
 
 
 .eventImage{
-    // width: 0.9854em;
-    width: 100%;
+    width: 98.54%;
     max-width: 90vw;
     display:block;
     border-radius: 0.3125rem;

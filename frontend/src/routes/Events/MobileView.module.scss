@@ -1,5 +1,8 @@
 @import '../../style/common.scss';
-
+.MainWrapper{
+    width:64%;
+    margin: auto;
+}
 .heading{
     margin: 1.9375rem auto 0 auto;
     font-style: normal;
@@ -31,13 +34,14 @@
 }
 
 .eventCardCommon{
+    width:100%;
     margin: auto;
     display: block;
 }
 
 .hr{
     margin: 1.25rem auto 0.8175rem auto;
-    width: 80%;
+    width: 100%;
     height: 0;
     border: 0.03125rem solid $grey-level-0_1;
     @media screen and (min-width: $break){

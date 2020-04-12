@@ -1,44 +1,30 @@
 @import '../../style/common.scss';
 
 .containersm {
-    font-size: 17.125rem;
     width: 17.125rem;
-    max-width: 90vw;
-    // height:fit-content;
-}
-
-.containermd{
-    font-size:20.25rem;
-    width:100%;
-    max-width: 20.25rem;
-    // height:fit-content;
 }
 
 .containerlg{
-    font-size: 36.9375rem;
-    width:36.975rem;
     max-width: 90vw;
-    @media screen and (max-width:$break-blogs){
-        width: 100%;
-    }
-    // height:fit-content;
-
 }
 
-.containerxl{
-    font-size:37.5rem;
-    // width:%;
-    max-width: 37.5rem;
-    // height:fit-content;
+.imageWrapperDiv{
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    //Aspect Ratio 16:9, for 4:3 use 75%
+    padding-top: 56.25%;
+    position: relative;
 }
-
 
 .blogImage{
-    width: 100%;
     display:block;
     border-radius: 0.3125rem;
-    text-align:center;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
 }
 
 @mixin heading-mixin{

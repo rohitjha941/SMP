@@ -62,7 +62,7 @@ class EventSection extends Component {
                     />
                     </>) :null}
                     <Link to='/events'><Button className={styles.eventsButton} text='View More' type='outline'/></Link>
-                </div>
+                    </div>
                 </div>
             </React.Fragment>
          );

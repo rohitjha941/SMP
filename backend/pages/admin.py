@@ -30,7 +30,7 @@ class branchAdmin(ImportExportModelAdmin):
 
 @register(Mentor)
 class MentorAdmin(ImportExportModelAdmin):
-    list_display =  ('branch', 'name', 'photo', 'facebook', 'linkden', )
+    list_display =  ('name', 'year','branch', 'facebook', 'linkden', )
 
 @register(BlogCategory)
 class BlogCategoryAdmin(ImportExportModelAdmin):
