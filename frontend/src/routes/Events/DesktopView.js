@@ -24,8 +24,9 @@ class DesktopView extends Component {
         const eventData = this.props.eventData ? this.props.eventData : null; 
         return ( 
             <>
+            <div className={styles.mainWrapper}>
                <div className={styles.mainHeading}>We Conduct <span className='color-red'>Events</span> year-round</div>
-               <div className={styles.MainWrapper}>
+               <div className={styles.innerMainWrapper}>
                <div className={styles.container1}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
                     { eventData ? 
@@ -48,6 +49,7 @@ class DesktopView extends Component {
                     }   
                </div>
                </div>
+            </div>
             </>
          );
     }

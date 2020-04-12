@@ -46,7 +46,7 @@ class EventSection extends Component {
         return ( 
             <React.Fragment>
                 <div className={styles.eventParentDiv}>
-                    <div className={styles.eventInnerWrapper}>
+                    <div className={styles.eventWrapper}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
                     {eventData.length > 0 ?(
                     <>

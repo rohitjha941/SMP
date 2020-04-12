@@ -5,36 +5,32 @@
     width: 98.54%;
     max-width: inherit;
 }
-
-.headingsm {
-    padding-left: 3%;
+@mixin heading-mixin{
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
+    color: $grey-level-0_8;
     margin-top: 1.031825rem;
-        font-size: 0.9375rem;
-        line-height: 1.1875rem;
+}
+.heading{
+    @include heading-mixin;
+}
+.headingsm {
+    @extend .heading;
+    font-size: 0.9375rem;
+    line-height: 1.1875rem;
 }
 
 .headingmd {
-    padding-left: 5%;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin-top: 1.031825rem;
+    @extend .heading;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
 .headinglg {
-
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin-top: 1.031825rem;
+    @extend .heading;
     font-size: 1.25rem;
     line-height: 1.625rem;
 }
 .headingxl {
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin-top: 1.031825rem;
+    @extend .heading;
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }
