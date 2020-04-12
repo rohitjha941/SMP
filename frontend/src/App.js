@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './style/App.scss';
 import Loadable from 'react-loadable';
 import Loader from './components/Loader';
-import { Flash } from 'components/Flash';
+import {Flash} from './components/Flash';
 import Bus from 'utils/Bus';
 
 var methods = require('./api/methods/');
@@ -20,8 +20,6 @@ const Footer = Loadable({
   loading: () => <Loader />
 })
 
-window.flash = (message, type="success") => Bus.emit('flash',({message,type}));
-
 function App() {
 
   const [blogs, setBlogs] = useState([]);
@@ -33,6 +31,8 @@ function App() {
   const [faqs,setFaqs] = useState([]);
   const [branches,setBranches] = useState([]);
   const [interests,setInterests] = useState([]);
+
+  window.flash = (message, type="success") => Bus.emit('flash',({message,type}));
 
   const fetchBlogsIfEmpty = () => {
     if (!blogs || blogs.length === 0) {
@@ -84,7 +84,7 @@ function App() {
   useEffect(() => {
     fetchBlogsIfEmpty();
     fetchEventsIfEmpty();
-    // fetchTeamIfEmpty();
+    fetchTeamIfEmpty();
     fetchMentorsIfEmpty();
     fetchMentorsDocsIfEmpty();
     fetchFAQsIfEmpty();
@@ -92,13 +92,12 @@ function App() {
     fetchInterestsIfEmpty();
     fetchBlogCategoryIfEmpty();
   });
-  console.log(events)
 
   return (
     <div className="App">
       <Header />
-      <Flash />
       <div className="router-footer-container">
+        <Flash />
         <RouterView 
           blogs={blogs} 
           blogCategory={blogCategory}

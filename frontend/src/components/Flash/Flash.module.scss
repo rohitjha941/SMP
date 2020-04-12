@@ -1,25 +1,43 @@
+@import '../../style/common.scss';
 .alert {
-    color: white;
-    border-radius: 10px;
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
+    color:white;
+    position: fixed;
     z-index: 1111;
+    width:90%;
+    display: block;
+    margin-left: 5%;
+    text-align: center;
+    border-radius: 6px;
+    @media screen and (min-width:$break){
+        width:60%;
+        margin-left:20%;
+        font-size: 1.2rem;
+    }
 }
 .message {
-    margin: 0;
+    margin-bottom:0.2rem;
 }
-.alert-error {
-    background: lightcoral;
+.error {
+    background-color: #D61A3C;
 }
-.alert-success {
-    background: lightgreen;
+.success {
+    background-color: #3D9E74;
 }
-.close {
-    color: white;
+.cross{
+    margin:auto;
+    margin-bottom:0.3rem;
     cursor: pointer;
-    margin-right: 10px;
-}
+    display: inline-block;
+    div{
+        margin-top: 0.5rem;
+        background-color: $grey;
+        height: 0.125rem;
+        width:1.2rem;
+        &:nth-child(1){
+            transform: rotate(45deg) translateY(0.45rem);
+        }
+        &:nth-child(2){
+            transform: rotate(-45deg) translateY(-0.45rem);
+      }
+    }
+  }
