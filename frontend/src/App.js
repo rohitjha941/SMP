@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './style/App.scss';
 import Loadable from 'react-loadable';
 import Loader from './components/Loader';
+import { Flash } from 'components/Flash';
 
 var methods = require('./api/methods/');
 
@@ -92,6 +93,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <Flash />
       <div className="router-footer-container">
         <RouterView 
           blogs={blogs} 
