@@ -3,6 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 import Button from '../../components/Button';
 import styles from './contact.module.scss';
+import IsLoading from '../../components/IsLoading'
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -16,6 +17,7 @@ class Contact extends Component {
             query:'',
             captcha: false,
             'g-recaptcha-response':'',
+            isLoading:false,
         }
     }
     onChange = (e) => {
@@ -32,6 +34,7 @@ class Contact extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault(); 
+        this.setState({isLoading:true})
         if(this.state.captcha){
             let data = {
                 name: this.state.name,
@@ -46,11 +49,15 @@ class Contact extends Component {
                     email:'',
                     query:'',
                     name:'',
+                    isLoading:false
                 });
-                window.flash("Your Quesy has been raised. We'll get back to you soon.")
+                window.flash("Your Query has been raised. We'll get back to you soon.")
             })
             .catch((error) => {
                 // console.log(error)
+                this.setState({
+                    isLoading:false,
+                })
                 window.flash("There was a problem sending your query! Please try again later",'error')
             })
         }
@@ -66,6 +73,8 @@ class Contact extends Component {
         let name = this.state.name;
         let query = this.state.query; 
         return ( 
+            <>
+            {this.state.isLoading ? <IsLoading /> : null}
             <div className={styles.contact}>
                 <div className={styles.contactTitle}>Need More Help? <span className='color-red'>Contact Us</span></div>
                 <div className={styles.contactForm}>
@@ -123,6 +132,7 @@ class Contact extends Component {
                     </form>
                 </div>
             </div>
+            </>
          );
     }
 }
