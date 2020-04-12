@@ -14,8 +14,7 @@ class Contact extends Component {
             name: '',
             email: '',
             query:'',
-            errmsg:'',
-            captcha: true,
+            captcha: false,
             'g-recaptcha-response':'',
         }
     }
@@ -44,17 +43,15 @@ class Contact extends Component {
             .then((response) => {
                 // console.log(response);
                 this.setState({
-                    errmsg:"<div>Your query has been raised<br/>We'll get back to you soon.</div>",
                     email:'',
                     query:'',
                     name:'',
                 });
+                window.flash("Your Quesy has been raised. We'll get back to you soon.")
             })
             .catch((error) => {
                 // console.log(error)
-                this.setState({
-                    errmsg:"<div>There was a problem sending your query<br/>Please try again later.</div>"
-                });
+                window.flash("There was a problem sending your query! Please try again later",'error')
             })
         }
         //reset captcha
