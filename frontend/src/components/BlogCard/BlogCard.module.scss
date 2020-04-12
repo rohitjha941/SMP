@@ -41,40 +41,34 @@
     position: relative;
 }
 
-.headingsm {
+@mixin heading-mixin{
     text-align:left;
     display:block;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
+    color: $grey-level-0_8;
     margin: 0.625rem auto 0.625rem 0;
+}
+.heading{
+    @include heading-mixin;
+}
+.headingsm {
+    @extend .heading;
     font-size: 0.9375rem;
     line-height: 1.1875rem;
 }
 
 .headingmd {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @extend .heading;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
 .headinglg {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @extend .heading;
     font-size: 1.25rem;
     line-height: 1.625rem;
 }
 .headingxl {
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 0.625rem auto 0.625rem 0;
+    @extend .heading;
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }

@@ -49,24 +49,27 @@
     color: $grey-level-0_8;
     margin: 0.625rem auto 0.625rem 0;
 }
-.headingsm {
+.heading{
     @include heading-mixin;
+}
+.headingsm {
+    @extend .heading;
     font-size: 0.9375rem;
     line-height: 1.1875rem;
 }
 
 .headingmd {
-    @include heading-mixin;
+    @extend .heading;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
 .headinglg {
-    @include heading-mixin;
+    @extend .heading;
     font-size: 1.25rem;
     line-height: 1.625rem;
 }
 .headingxl {
-    @include heading-mixin;
+    @extend .heading;
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }
