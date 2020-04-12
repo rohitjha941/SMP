@@ -25,6 +25,7 @@ class DesktopView extends Component {
         return ( 
             <>
                <div className={styles.mainHeading}>We Conduct <span className='color-red'>Events</span> year-round</div>
+               <div className={styles.MainWrapper}>
                <div className={styles.container1}>
                     <div className={styles.sectionHeading}>Upcoming Events</div>
                     { eventData ? 
@@ -45,6 +46,7 @@ class DesktopView extends Component {
                     </ul>
                     :null
                     }   
+               </div>
                </div>
             </>
          );

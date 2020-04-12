@@ -33,6 +33,7 @@ export default class MobileView extends Component {
             <React.Fragment>
                 <div className={styles.heading}><span className='color-red'>Read</span> what we do</div>
                 <>
+                <div className={styles.mainWrapper}>
                 {featuredBlogs.length>0 ? 
                 <div>
                     <div className={styles.categoryHeading}>Featured</div>
@@ -74,6 +75,7 @@ export default class MobileView extends Component {
                 <div>
                 </div>
                 <Button className={styles.viewMore} type='outline' text='View More'/>
+                </div>
                 </>
             </React.Fragment>
         );

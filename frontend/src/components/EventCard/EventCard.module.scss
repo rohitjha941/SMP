@@ -1,24 +1,19 @@
 @import '../../style/common.scss';
 
 .containersm {
-    font-size: 17.125rem;
-    width: 17.125rem;
+    width:100%;
     max-width: 90vw;
-    // height:fit-content;
 }
 
 .containermd{
-    font-size:20.25rem;
-    width:20.25rem;
+    width:100%;
     max-width: 90vw;
-    // height:fit-content;
 }
 
 .containerlg{
     font-size: 36.9375rem;
     widows: 80%;
     max-width: 90vw;
-    // height:fit-content;
 
 }
 
@@ -26,7 +21,6 @@
     width:37.5rem;
     width:37.5rem;
     max-width: 90vw;
-    // height:fit-content;
 }
 
 .containerSide{
@@ -40,7 +34,7 @@
 
 
 .eventImage{
-    width: 0.9854em;
+    width: 98.54%;
     max-width: 90vw;
     display:block;
     border-radius: 0.3125rem;
