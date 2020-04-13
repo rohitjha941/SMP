@@ -4,8 +4,8 @@ from django.template import loader
 import requests
 from pages.utils  import get_client_ip
 
-from backend.settings import EMAIL_HOST_USER
-from backend.settings import EMAIL_SEND_TO_ADMIN
+from backend.settings import DEFAULT_FROM_EMAIL
+from backend.settings import SEND_EMAIL_TO
 from backend.settings import RECAPTCHA_SECRET_KEY
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -79,7 +79,7 @@ def send_email(request):
         query_email = serializer.data['email']
         subject=('#'+str(query_id)+' Query raised from smp.iitr.ac.in')
         message = ''
-        recepient = EMAIL_SEND_TO_ADMIN
+        recepient = SEND_EMAIL_TO
         
         html_message = loader.render_to_string(
             'mail_template/raise_query.html',
@@ -91,7 +91,7 @@ def send_email(request):
                 'query_id' : query_id
             }
         )
-        send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently = False,html_message=html_message)
+        send_mail(subject, message, DEFAULT_FROM_EMAIL, [recepient], fail_silently = False,html_message=html_message)
 
 @api_view(('POST',))
 @ensure_csrf_cookie
