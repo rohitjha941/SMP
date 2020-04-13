@@ -5,3 +5,4 @@ sendgrid:
   sendgrid_api_key : 
   from_email : 
   send_to_email : 
+  receiver_name: 

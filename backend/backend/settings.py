@@ -156,15 +156,10 @@ REST_FRAMEWORK = {
 }
 
 #raise_query_email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL=cfg["sendgrid"]["from_email"]
-EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = cfg["sendgrid"]["sendgrid_api_key"]
-
-
 SEND_EMAIL_TO = cfg["sendgrid"]["send_to_email"]
+RECEIVER_NAME = cfg["sendgrid"]["receiver_name"]
 
+#ReCAPTCHA
 RECAPTCHA_SECRET_KEY = cfg["recaptcha"]["recaptcha_secret_key"]

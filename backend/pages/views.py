@@ -1,24 +1,31 @@
-from django.shortcuts import render
-from django.core.mail import send_mail
-from django.template import loader
 import requests
-from pages.utils  import get_client_ip
+
+from django.shortcuts import render
+from django.template import loader
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from backend.settings import DEFAULT_FROM_EMAIL
 from backend.settings import SEND_EMAIL_TO
+from backend.settings import EMAIL_HOST_PASSWORD
 from backend.settings import RECAPTCHA_SECRET_KEY
+from backend.settings import RECEIVER_NAME
+
+from rest_framework import status
+from rest_framework import viewsets
+from rest_framework import generics
+
+from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
-from django.views.decorators.csrf import ensure_csrf_cookie
 
 from .models import *
 from .serializers import *
-from rest_framework import viewsets
-from rest_framework import generics
+from .utils  import get_client_ip
+
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 class HomeView (generics.ListAPIView):
     queryset = Home.objects.all()
@@ -69,6 +76,7 @@ class MentorDocsView (viewsets.ModelViewSet):
     serializer_class = MentorDocsSerializer
 
 
+
 def send_email(request):
     serializer  = RaisedQuerySerializer(data=request.data)
     if serializer.is_valid():
@@ -78,20 +86,29 @@ def send_email(request):
         query_name = serializer.data['name']
         query_email = serializer.data['email']
         subject=('#'+str(query_id)+' Query raised from smp.iitr.ac.in')
-        message = ''
-        recepient = SEND_EMAIL_TO
-        
-        html_message = loader.render_to_string(
+        message = Mail(
+            from_email = DEFAULT_FROM_EMAIL,
+            to_emails = SEND_EMAIL_TO,
+            subject = subject,
+            html_content = loader.render_to_string(
             'mail_template/raise_query.html',
-            {
-                'reciever_name': 'Laksh',
-                'query_name':  query_name,
-                'query_content': query_content,
-                'query_email': query_email,
-                'query_id' : query_id
-            }
+                {
+                    'reciever_name': RECEIVER_NAME,
+                    'query_name':  query_name,
+                    'query_content': query_content,
+                    'query_email': query_email,
+                    'query_id' : query_id
+                }
+            )
         )
-        send_mail(subject, message, DEFAULT_FROM_EMAIL, [recepient], fail_silently = False,html_message=html_message)
+        try:
+            sg = SendGridAPIClient(EMAIL_HOST_PASSWORD)
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        except Exception as e:
+            print(e.message)
 
 @api_view(('POST',))
 @ensure_csrf_cookie
