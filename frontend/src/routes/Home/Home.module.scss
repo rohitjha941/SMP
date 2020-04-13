@@ -9,7 +9,7 @@
 
 .titleContainer {
     width: 80%;
-    margin: 5% auto 0 auto;
+    margin: 5% auto 0 5.56%;
 }
 
 .illustration {
@@ -30,11 +30,11 @@
     width: 80%;
     font-size: 1rem;
     line-height: 150%;
-    margin: 5.014% auto 0 auto;
+    margin: 5.014% auto 0 5.56%;
 }
 
 .learnMore{
-    margin : 5% auto 8.21% auto;
+    margin : 5% auto 8.21% 5.56%;
     display:block; 
     @media screen and (min-width:$break-tablet){
         display: none;
@@ -67,7 +67,7 @@
         cursor:pointer; 
         display: block;
         color:$blue-text;
-        margin: 5% auto 0 auto;
+        margin: 5% auto 0 5.56%;
         font-weight: 500;
         font-size: 1.25rem;
         line-height: 1.625rem;
@@ -82,7 +82,7 @@
         display: block;
         width: 80%;
         text-align: left;
-        margin: 5% auto 0 auto;
+        margin: 5% auto 0 5.56%;
         img{
             height:1.75rem;
             width:1.75rem;
