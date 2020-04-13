@@ -23,7 +23,8 @@ class EventSection extends Component {
     }
     componentDidMount() {
         window.addEventListener('resize', this.resize);
-        const eventData = this.props.events.map(value => {
+        const eventData = this.props.events ? this.props.events : [];
+        const pastEvents = (eventData.past && eventData.past.length>0)  ? eventData.past.map(value => {
             return {
                 event_id: value.id,
                 imgSrc: value.thumbnail,
@@ -35,24 +36,41 @@ class EventSection extends Component {
                     d2: value.time + ' hrs',
                     d3: value.venue,
                 },
-                isUpcoming: value.isUpcoming,
-                isThisWeek: value.isThisWeek
+                isThisWeek: false,
             }
-        });
-        let upcomingEvents = [];
-        let pastEvents = [];
-        eventData.forEach(event=>{
-            if(event.isThisWeek){
-                upcomingEvents.unshift(event);
-            }else if(event.isUpcoming){
-                upcomingEvents.push(event);
+        }) : [] ;
+        const thisWeekEvents = (eventData.this_week && eventData.this_week.length>0) ? eventData.this_week.map(value => {
+            return{
+                event_id: value.id,
+                imgSrc: value.thumbnail,
+                imgAlt: value.title,
+                heading: value.title,
+                text: value.content,
+                metadata: {
+                    d1: value.date,
+                    d2: value.time + ' hrs',
+                    d3: value.venue,
+                },
+                isThisWeek: true,
             }
-            else{
-                pastEvents.push(event);
+        }):[];
+        const upcomingEvents = (eventData.upcoming && eventData.upcoming.length>0) ? eventData.upcoming.map(value=>{
+            return{
+                event_id: value.id,
+                imgSrc: value.thumbnail,
+                imgAlt: value.title,
+                heading: value.title,
+                text: value.content,
+                metadata: {
+                    d1: value.date,
+                    d2: value.time + ' hrs',
+                    d3: value.venue,
+                },
+                isThisWeek: false,
             }
-        })
+        }): [];
         this.setState({
-            upcomingEvents:upcomingEvents,
+            upcomingEvents:[...thisWeekEvents,...upcomingEvents],
             pastEvents:pastEvents
         });
     }

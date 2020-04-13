@@ -5,13 +5,14 @@ import ThisWeek from 'assets/images/ThisWeek.svg';
 
 function WrappedComponent(props) {
     const event_id = props.eventData.event_id;
-    const imageSource = props.eventData.imgSrc;
+    const imageSource = 'http://localhost:8000' + props.eventData.imgSrc;
     const isThisWeek = props.eventData.isThisWeek;
     const imageAlternativeText = (props.eventData.imgAlt) ? props.eventData.imgAlt : props.eventData.heading;
     const heading = props.heading === undefined ? props.eventData.heading : props.heading ? props.eventData.heading : null;
     const text = props.text === undefined ? props.eventData.text : props.text ? props.eventData.text : null;
     const metadata = props.metadata === undefined ? props.eventData.metadata : props.metadata ? props.eventData.metadata : null;
     const headingTop = props.headingTop ? true :  false;
+    console.log(imageSource);
     return (
         <React.Fragment>
             <div className={

@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import './style/App.scss';
 import Loadable from 'react-loadable';
 import Loader from './components/Loader';
-import {updateEvents} from 'utils';
 
 var methods = require('./api/methods/');
 
@@ -89,15 +88,13 @@ function App() {
     fetchInterestsIfEmpty();
     fetchBlogCategoryIfEmpty();
   });
-
-  const uevents = updateEvents(events);
   return (
     <div className="App">
       <Header />
       <div className="router-footer-container">
         <RouterView 
           blogs={blogs} 
-          events={uevents} 
+          events={events} 
           blogCategory={blogCategory}
           team={team} 
           mentors={mentors} 
