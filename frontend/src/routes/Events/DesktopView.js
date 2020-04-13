@@ -18,17 +18,56 @@ class DesktopView extends Component {
     }
     componentDidMount() {
         window.addEventListener('resize', this.resize);
-        var upcomingEvents = [];
-        var pastEvents = [];
-        this.props.eventData.map(event=>{
-            if(event.isThisWeek){
-                return upcomingEvents.unshift(event);
-            }else if(event.isUpcoming){
-                return upcomingEvents.push(event);
+        const eventData = this.props.events ? this.props.events : [];
+        const pastEvents = (eventData.past && eventData.past.length>0)  ? eventData.past.map(value => {
+            return {
+                event_id: value.id,
+                imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
+                imgAlt: value.title,
+                heading: value.title,
+                text: value.content,
+                metadata: {
+                    d1: value.date,
+                    d2: value.time + ' hrs',
+                    d3: value.venue,
+                },
+                isThisWeek: false,
             }
-            return pastEvents.push(event);
-        })
-        this.setState({upcomingEvents:upcomingEvents,pastEvents:pastEvents});
+        }) : [] ;
+        const thisWeekEvents = (eventData.this_week && eventData.this_week.length>0) ? eventData.this_week.map(value => {
+            return{
+                event_id: value.id,
+                imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
+                imgAlt: value.title,
+                heading: value.title,
+                text: value.content,
+                metadata: {
+                    d1: value.date,
+                    d2: value.time + ' hrs',
+                    d3: value.venue,
+                },
+                isThisWeek: true,
+            }
+        }):[];
+        const upcomingEvents = (eventData.upcoming && eventData.upcoming.length>0) ? eventData.upcoming.map(value=>{
+            return{
+                event_id: value.id,
+                imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
+                imgAlt: value.title,
+                heading: value.title,
+                text: value.content,
+                metadata: {
+                    d1: value.date,
+                    d2: value.time + ' hrs',
+                    d3: value.venue,
+                },
+                isThisWeek: false,
+            }
+        }): [];
+        this.setState({
+            upcomingEvents:[...thisWeekEvents,...upcomingEvents],
+            pastEvents:pastEvents
+        });
     }
     componentWillUnmount() {
         window.removeEventListener('resize', this.resize);

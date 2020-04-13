@@ -27,7 +27,7 @@ class EventSection extends Component {
         const pastEvents = (eventData.past && eventData.past.length>0)  ? eventData.past.map(value => {
             return {
                 event_id: value.id,
-                imgSrc: value.thumbnail,
+                imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
                 imgAlt: value.title,
                 heading: value.title,
                 text: value.content,
@@ -42,7 +42,7 @@ class EventSection extends Component {
         const thisWeekEvents = (eventData.this_week && eventData.this_week.length>0) ? eventData.this_week.map(value => {
             return{
                 event_id: value.id,
-                imgSrc: value.thumbnail,
+                imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
                 imgAlt: value.title,
                 heading: value.title,
                 text: value.content,
@@ -57,7 +57,7 @@ class EventSection extends Component {
         const upcomingEvents = (eventData.upcoming && eventData.upcoming.length>0) ? eventData.upcoming.map(value=>{
             return{
                 event_id: value.id,
-                imgSrc: value.thumbnail,
+                imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
                 imgAlt: value.title,
                 heading: value.title,
                 text: value.content,
