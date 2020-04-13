@@ -1,9 +1,13 @@
 @import '../../style/common.scss';
+.mainWrapper{
+    width:82.45%;
+    margin:auto;
+}
 .mainHeading{
     font-size: 3.125rem;
     line-height: 4.0625rem;
 }
-.MainWrapper{
+.innerMainWrapper{
     width:90%;
     margin:auto;
 }
@@ -13,22 +17,24 @@
     font-weight: 500;
     text-align: left;
     margin-top: 5%;
+    margin-bottom: 3%;
 }
 .ul1{
-    margin: auto;
+    width:100%;
     li{
-        margin-top: 2%;
-        padding-bottom:6%;
+        padding-bottom:5.935rem;
     }
 }
 .ul2{
+    width:100%;
+    margin: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    li{
-        padding-top:8%;
-        padding-right: 25%; 
+    grid-template-columns: 50% 50%;
+    li:nth-child(odd){
+        margin-bottom: 10%;
+        padding-right: 20%;
     }
-    @media screen and (max-width:$break-events){
-        grid-template-columns: 1fr 1fr 1fr;
+    li:nth-child(even){
+        padding-left: 20%;
     }
 }   
