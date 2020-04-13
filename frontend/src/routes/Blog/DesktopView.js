@@ -9,15 +9,16 @@ class DesktopView extends Component {
         const blogData = this.props.blogData;
         return ( 
             <>
+            <div className={styles.mainWrapper}>
             <div className={styles.container1}>
                 <div className={styles.headingContainer}>
                      <span className='color-red'>Read</span> What We Do
                 </div>
                 <ul className={styles.ul1}>
-                    <li>
+                    <li className={styles.ul1Li1}>
                         <Blogcard blogData={blogData[0]} type='xl' className={styles.blogcardXl} textlimit={500}/>
                     </li>
-                    <li>
+                    <li className={styles.ul1Li2}>
                         <ul className={styles.ul2}>
                             <li>
                                 <Blogcard blogData={blogData[1]} type='lg' className={styles.blogcardlg} text={false}/>
@@ -38,6 +39,7 @@ class DesktopView extends Component {
                         )
                     }) : null}
                 </ul>
+            </div>
             </div>   
             </>
          );

@@ -1,4 +1,4 @@
-@import '../../style/common.scss';
+    @import '../../style/common.scss';
 
 .eventParentDiv{
     background: $blue-home;
@@ -6,17 +6,29 @@
     text-align:center;
     padding-top: 2.0625rem;
     padding-bottom: 1.9325rem;
+    margin: auto;
+}
+.eventInnerWrapper{
+    width:95%;
+    margin:auto;
+
+    @media screen and (max-width:$break-tablet){
+        width:70%;
+    }
+    @media screen and (max-width:$break){
+        width:80%;
+    }
+}
+.eventWrapper{
+    width:80%;
+    margin:0 auto 0 5.55%;
 }
 .sectionHeading{
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.3125rem;
-    /* identical to box height */
     color: $blue-text;
-    width:80%;
-    margin: 0 auto 0 auto;
-    // float:left;
     text-align: left;
     padding-top: 2.0625rem;
     @media screen and (min-width:$break){
@@ -26,9 +38,7 @@
 }
 
 .eventCardCommon{
-    max-width: 90%;
-    margin: 2.75rem auto 0 auto;
-    // display:inline-block;
+    margin-top: 2.75rem;
     @media screen and (min-width:$break-tablet){
         margin-top: 5.875rem;
     }

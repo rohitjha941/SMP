@@ -21,6 +21,9 @@ class SearchHeader extends Component {
           }
         }
     }
+    handleClick = () => {
+        this.props.handleToggle();
+    }
 
     render() { 
         return ( 
@@ -32,11 +35,11 @@ class SearchHeader extends Component {
                             <input type='text' id="search-input" className={styles.searchBox} onChange={(e) => this.handleFilter(e)} placeholder='Search by Name'/>
                         </li>
                         <li>
-                            <Link to='/mentors/filter'><div className={styles.filterIcon}>
+                            <div onClick={this.handleClick} className={styles.filterIcon}>
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                            </div></Link>
+                            </div>
                         </li>
                     </ul>
                 </div>

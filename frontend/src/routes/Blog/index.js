@@ -53,7 +53,6 @@ export default class Blog extends Component {
         return (
             <React.Fragment>
                 <div className={styles.mainDiv}>
-                
                 {this.state.mobileView ? 
                   <Switch>
                       <Route exact path = "/blogs" render={props => (<MobileView {...props} blogData={blogData}/>)} />

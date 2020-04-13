@@ -2,45 +2,41 @@
 
 .container {
     text-align:left;
-    width: 0.9854em;
+    width: 98.54%;
     max-width: inherit;
 }
-
-.headingsm {
+@mixin heading-mixin{
     font-weight: bold;
     color: rgba(0, 0, 0, 0.8);
     margin-top: 1.031825rem;
-        font-size: 0.9375rem;
-        line-height: 1.1875rem;
+}
+.heading{
+    @include heading-mixin;
+}
+.headingsm {
+    @extend .heading;
+    font-size: 0.9375rem;
+    line-height: 1.1875rem;
 }
 
 .headingmd {
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin-top: 1.031825rem;
+    @extend .heading;
     font-size: 1.125rem;
     line-height: 1.25rem;
 }
 .headinglg {
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin-top: 1.031825rem;
+    @extend .heading;
     font-size: 1.25rem;
     line-height: 1.625rem;
 }
 .headingxl {
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin-top: 1.031825rem;
+    @extend .heading;
     font-size: 1.875rem;
     line-height: 2.4375rem;
 }
 
 .metadata{
     width: fit-content;
-    height: 1em;
-    
-    font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: normal;
     font-size: 0.75rem;
@@ -58,7 +54,6 @@
 }
 
 .text {
-    font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: 300;
     font-size: 0.75rem;
