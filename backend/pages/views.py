@@ -75,9 +75,9 @@ class BlogsView (viewsets.ModelViewSet):
 class EventsView (APIView):
     def get(self, request):
         data = {
-            'events': EventsSerializer(Events.objects.all(), many=True).data,
+            'past': EventsSerializer(Events.objects.filter(date__lt=datetime.date.today()), many=True).data,
             'this_week': EventsSerializer(Events.objects.filter(date__gt=datetime.date.today(), date__lt=(datetime.date.today() + datetime.timedelta(days=7))), many=True).data,
-            'upcoming': EventsSerializer(Events.objects.filter(date__gte=datetime.date.today()), many=True).data
+            'upcoming': EventsSerializer(Events.objects.filter(date__gte=datetime.date.today() + datetime.timedelta(days=7)), many=True).data
         }
         return Response(data, status=status.HTTP_200_OK)
 
