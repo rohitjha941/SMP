@@ -4,9 +4,8 @@ import styles from "./MentorForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.css';
-
+import {createMentor} from 'api/methods';
 const animatedComponents = makeAnimated();
 const yearOptions = [
   {
@@ -34,7 +33,7 @@ class MentorForm extends Component {
       achievements: [],
       internships: [],
       email: "",
-      mobile: undefined,
+      mobile: "",
       image: null,
       resume: null,
       facebook: "",
@@ -149,81 +148,42 @@ class MentorForm extends Component {
       internships,
     } = this.state;
 
-    const interestToCreate = interest.filter((i) => typeof i === "string");
-    let createdInterest = interest.filter((i) => typeof i === "number");
-
-    // TODO: Make a API to create interests in one GO.
-    interestToCreate.forEach((interest) => {
-      const data = { interest_name: interest };
-      axios
-        .post(process.env.REACT_APP_API_BASE + "interests/", data)
-        .then((response) => {
-          createdInterest.push(response.data.id);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-    let data = new FormData();
-    data.append("name", name);
-    data.append("year", year);
-    data.append("enrollno", enrollno);
-    data.append("branch", branch);
-    data.append("interest", createdInterest);
-    data.append("email", email);
-    data.append("mobile", mobile);
-    data.append("photo", image);
-    data.append("resume", resume);
-    data.append("facebook", facebook);
-    data.append("linkden", linkden);
-    data.append("groups", groups);
-
-    axios
-      .post(process.env.REACT_APP_API_BASE + "mentors/", data)
-      .then((response) => {
-        console.log(response);
-
-        let achievementData = {
-          mentor_id: response.data.id,
-          achievements: achievements,
-        };
-
-        let internshipsData = {
-          mentor_id: response.data.id,
-          interns: internships,
-        };
-        axios
-          .post(
-            process.env.REACT_APP_API_BASE + "mentors/achievements/",
-            achievementData
-          )
-          .then((response) => {
-            console.log(response);
-            this.setState({ errMsg: "Submitted Successfully" });
-          })
-          .catch((error) => {
-            console.log(error);
-            this.setState({ errMsg: "Unable to Submit Right Now" });
-          });
-
-        axios
-          .post(
-            process.env.REACT_APP_API_BASE + "mentors/intern/",
-            internshipsData
-          )
-          .then((response) => {
-            console.log(response);
-            this.setState({ errMsg: "Submitted Successfully" });
-          })
-          .catch((error) => {
-            console.log(error);
-            this.setState({ errMsg: "Unable to Submit Right Now" });
-          });
+    const data = {
+      name:name,
+      year:year,
+      enrollno:enrollno,
+      branch:branch,
+      interest:interest,
+      email:email,
+      mobile:mobile,
+      image:image,
+      resume:resume,
+      facebook:facebook,
+      linkden:linkden,
+      groups:groups,
+      achievements:achievements,
+      internships:internships,
+    }
+    const response = createMentor(data);
+    console.log(response)
+    if(response){
+      this.setState({
+        name:"",
+        year:"",
+        enrollno:"",
+        branch:"",
+        interest:[],
+        email:"",
+        mobile:"",
+        image:null,
+        resume:null,
+        facebook:"",
+        linkden:"",
+        groups:[],
+        achievements:[],
+        internships:[],
       })
-      .catch((error) => {
-        console.log(error);
-        this.setState({ errMsg: "Unable to Submit Right Now" });
-      });
+    }
   };
   componentDidMount() {
     let branchOptions = [],
