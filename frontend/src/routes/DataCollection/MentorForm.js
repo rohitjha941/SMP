@@ -5,6 +5,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css';
 
 const animatedComponents = makeAnimated();
 const yearOptions = [
