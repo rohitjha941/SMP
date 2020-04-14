@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Flash.module.scss';
 import Bus from 'utils/Bus';
+import {CrossButton} from './CrossButton';
 
 export const Flash = () => {
     let [visibility, setVisibility] = useState(false);
@@ -14,7 +15,7 @@ export const Flash = () => {
             setType(type);
             setTimeout(() => {
             setVisibility(false);
-            }, 6000);
+            }, 4000);
         });
                 
 
@@ -29,10 +30,7 @@ export const Flash = () => {
     return (
         visibility &&
             <div className={styles.alert +' ' +styles[type]}>
-                    <div className={styles.cross + ' close'}>
-                        <div></div>
-                        <div></div>
-                    </div>
+                    <CrossButton className={'close'}/>
                     <p className={styles.message}>{message}</p>
             </div>  
     )
