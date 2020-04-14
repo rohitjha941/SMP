@@ -7,6 +7,7 @@ import CreatableSelect from "react-select/creatable";
 import 'bootstrap/dist/css/bootstrap.css';
 import {createMentor} from 'api/methods';
 import LoadingOverlay from '../../components/LoadingOverlay'
+import {Redirect} from 'react-router-dom'
 const animatedComponents = makeAnimated();
 const yearOptions = [
   {
@@ -167,9 +168,10 @@ class MentorForm extends Component {
       achievements:achievements,
       internships:internships,
     }
-    const response = createMentor(data);
+    let response = createMentor(data);
     console.log(response)
     if(response){
+      window.flash("Your response has been succesfully recorded")
       this.setState({
         name:"",
         year:"",
@@ -185,11 +187,15 @@ class MentorForm extends Component {
         groups:[],
         achievements:[],
         internships:[],
+        isLoading:false
       })
+    }else{
+      this.setState({
+        isLoading:false,
+      })
+      window.flash('We are unable to process your request right now. Please try again later!',"error");
+      return re
     }
-    this.setState({
-      isLoading:false,
-    })
   };
   componentDidMount() {
     let branchOptions = [],
