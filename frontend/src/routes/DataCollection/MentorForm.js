@@ -149,16 +149,16 @@ class MentorForm extends Component {
       internships,
     } = this.state;
 
-    const intrestToCreate = interest.filter((i) => typeof i === "string");
-    let createdIntrest = interest.filter((i) => typeof i === "number");
+    const interestToCreate = interest.filter((i) => typeof i === "string");
+    let createdInterest = interest.filter((i) => typeof i === "number");
 
     // TODO: Make a API to create interests in one GO.
-    intrestToCreate.forEach((interest) => {
+    interestToCreate.forEach((interest) => {
       const data = { interest_name: interest };
       axios
         .post(process.env.REACT_APP_API_BASE + "interests/", data)
         .then((response) => {
-          createdIntrest.push(response.data.id);
+          createdInterest.push(response.data.id);
         })
         .catch((error) => {
           console.log(error);
@@ -169,7 +169,7 @@ class MentorForm extends Component {
     data.append("year", year);
     data.append("enrollno", enrollno);
     data.append("branch", branch);
-    data.append("interest", createdIntrest);
+    data.append("interest", createdInterest);
     data.append("email", email);
     data.append("mobile", mobile);
     data.append("photo", image);
