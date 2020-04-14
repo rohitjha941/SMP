@@ -378,6 +378,7 @@ class MentorForm extends Component {
                 name="photo"
                 aria-describedby="photo-help"
                 id="photo"
+                accept="image/*"
                 required
                 onChange={this.handleImage}
               />
