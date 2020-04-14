@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import styles from './IsLoading.module.scss';
+import styles from './LoadingOverlay.module.scss';
 import Loader from 'assets/images/double-ring.svg'
-class IsLoading extends Component {
+class LoadingOverlay extends Component {
     render() { 
         return ( 
             <>
@@ -13,4 +13,4 @@ class IsLoading extends Component {
     }
 }
  
-export default IsLoading;
+export default LoadingOverlay;

@@ -3,7 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 import Button from '../../components/Button';
 import styles from './contact.module.scss';
-import IsLoading from '../../components/IsLoading'
+import LoadingOverlay from '../../components/LoadingOverlay'
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -34,8 +34,8 @@ class Contact extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault(); 
-        this.setState({isLoading:true})
         if(this.state.captcha){
+            this.setState({isLoading:true})
             let data = {
                 name: this.state.name,
                 email: this.state.email,
@@ -74,7 +74,7 @@ class Contact extends Component {
         let query = this.state.query; 
         return ( 
             <>
-            {this.state.isLoading ? <IsLoading /> : null}
+            {this.state.isLoading ? <LoadingOverlay /> : null}
             <div className={styles.contact}>
                 <div className={styles.contactTitle}>Need More Help? <span className='color-red'>Contact Us</span></div>
                 <div className={styles.contactForm}>
