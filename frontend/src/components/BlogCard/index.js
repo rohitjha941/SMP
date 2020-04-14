@@ -10,8 +10,13 @@ function WrappedComponent(props) {
 
     var markup = props.blogData.text;
     var el = document.createElement('div');
-    el.innerHTML = markup;  
-    var textedited = (el.getElementsByTagName("p")[0].innerHTML+el.getElementsByTagName("p")[1].innerHTML+el.getElementsByTagName("p")[2].innerHTML).substr(0,blogCardContentCharacterLimit).trim()
+    el.innerHTML = markup;
+    var textpara = el.getElementsByTagName("p");
+    var textedited = "";
+    for(var i=0;i<textpara.length;i++){
+        textedited+=textpara[i].innerHTML;
+    }  
+    textedited = textedited.substr(0,blogCardContentCharacterLimit).trim()
 
     const blog_id = props.blogData.blog_id;
     const imageSource = props.blogData.imgSrc;
@@ -42,7 +47,7 @@ function WrappedComponent(props) {
                 :
                 null}
                 <Link to={'/blogs/view/'+blog_id+'/'} >
-                    <div id='imagediv'><img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} /></div>
+                    <div id='imagediv'className={styles.imageWrapperDiv}><img className={styles.blogImage} src={imageSource} alt={imageAlternativeText} /></div>
                 </Link>
                 <Text heading={heading} text={truncatedText} metadata={metadata} blog_id={blog_id} headingTop={headingTop} type={props.type}/>
             </div>

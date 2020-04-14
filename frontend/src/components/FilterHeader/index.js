@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import styles from './FilterHeader.module.scss';
-import {Link} from 'react-router-dom';
 
 export default class FilterHeader extends Component{
+    handleClick = () => {
+        this.props.handleClose();
+    }
     render(){
         return(
             <>
@@ -10,10 +12,10 @@ export default class FilterHeader extends Component{
                     <ul>
                         <li><div className={styles.heading}><span className={'color-red'}> Filter</span> Your Search</div></li>
                         <li>
-                            <Link to='/mentors/show'><div className={styles.cross}>
+                            <div onClick={this.handleClick} className={styles.cross}>
                                 <span></span>
                                 <span></span>
-                            </div></Link>
+                            </div>
                         </li>
                     </ul>
                 </div>
