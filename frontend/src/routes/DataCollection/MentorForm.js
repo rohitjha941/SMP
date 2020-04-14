@@ -6,6 +6,7 @@ import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
 import 'bootstrap/dist/css/bootstrap.css';
 import {createMentor} from 'api/methods';
+import LoadingOverlay from '../../components/LoadingOverlay'
 const animatedComponents = makeAnimated();
 const yearOptions = [
   {
@@ -44,6 +45,7 @@ class MentorForm extends Component {
       branchOptions: [],
       interestOptions: [],
       groupsOptions: [],
+      isLoading:false,
     };
   }
   handleChange = (e) => {
@@ -131,6 +133,7 @@ class MentorForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({isLoading:true})
     const {
       name,
       year,
@@ -184,6 +187,9 @@ class MentorForm extends Component {
         internships:[],
       })
     }
+    this.setState({
+      isLoading:false,
+    })
   };
   componentDidMount() {
     let branchOptions = [],
@@ -228,6 +234,7 @@ class MentorForm extends Component {
   render() {
     return (
       <>
+      {this.state.isLoading  ? <LoadingOverlay/> : null}
         <div className={styles.MainWrapper}>
           <h2 className={styles.heading}>
             Mentors' <span className="color-red">Data</span>
