@@ -99,6 +99,23 @@ class InterestView (generics.ListCreateAPIView):
     queryset = Interest.objects.all().order_by('interest_name')
     serializer_class = InterestSerializer
 
+    def create(self,request):
+        interests = []
+        interest_ids = []
+        try:
+            interests = request.data["interests"]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        for interest in interests:
+            instance,created  = Interest.objects.get_or_create(interest_name=interest)
+            interest_ids.append(instance.id)
+            
+        data = {
+            'interest_ids':interest_ids
+        }
+        return Response(data,status=status.HTTP_201_CREATED)
+
 
 class CampusGroupsView (generics.ListAPIView):
     queryset = CampusGroups.objects.all().order_by('group_name')
