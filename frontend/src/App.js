@@ -66,7 +66,7 @@ function App() {
     }
   };
   const fetchInterestsIfEmpty = () => {
-    if (!branches || branches.length === 0) {
+    if (!interests || interests.length === 0) {
       methods.getInterests().then((data) => setInterests(data));
     }
   };
