@@ -3,6 +3,8 @@ import {
     EVENTS,
     TEAM,
     MENTORS, 
+    MENTORSINTERN,
+    MENTORSACHIEVEMENTS, 
     MENTORSDOCS,
     FAQS,
     BRANCH,
