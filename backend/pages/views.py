@@ -1,7 +1,8 @@
-from django.shortcuts import get_object_or_404, render
+import requests
+import datetime
+from django.shortcuts import get_object_or_404,render
 from django.core.mail import send_mail
 from django.template import loader
-import requests
 from pages.utils import get_client_ip
 
 from backend.settings import EMAIL_HOST_USER
@@ -114,9 +115,15 @@ class BlogsView (generics.ListCreateAPIView):
     serializer_class = BlogsSerializer
 
 
-class EventsView (generics.ListCreateAPIView):
-    queryset = Events.objects.all()
-    serializer_class = EventsSerializer
+class EventsView (APIView):
+    def get(self, request):
+        data = {
+            'past': EventsSerializer(Events.objects.filter(date__lt=datetime.date.today()), many=True).data,
+            'this_week': EventsSerializer(Events.objects.filter(date__gte=datetime.date.today(), date__lt=(datetime.date.today() + datetime.timedelta(days=7))), many=True).data,
+            'upcoming': EventsSerializer(Events.objects.filter(date__gte=datetime.date.today() + datetime.timedelta(days=7)), many=True).data
+        }
+        return Response(data, status=status.HTTP_200_OK)
+
 
 
 class MentorDocsView (generics.ListCreateAPIView):

@@ -1,4 +1,20 @@
-import {BLOGS,EVENTS,TEAM,MENTORS, MENTORSDOCS,FAQS,BRANCH,INTERESTS,GROUPS,BLOGCATEGORY} from 'api/constants';
+import {
+    BLOGS,
+    EVENTS,
+    TEAM,
+    MENTORS, 
+    MENTORSDOCS,
+    FAQS,
+    BRANCH,
+    INTERESTS,
+    BLOGCATEGORY,
+    GROUPS,
+    RAISEQUERY,
+} from 'api/constants';
+import axios from 'axios';
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 const Blogs = function() {
     return new Promise((resolve, reject) => {
@@ -81,6 +97,9 @@ const Groups = function() {
         .catch(e => reject(e))
     })
 };
+const PostQuery = function(data) {
+    return axios.post(RAISEQUERY,data)
+}
 
 export const getBlogs = Blogs;
 export const getEvents = Events;
@@ -92,4 +111,5 @@ export const getBranch = Branch;
 export const getInterests = Interests;
 export const getGroups = Groups ;
 export const getBlogCategory = BlogCategory;
+export const postQuery = PostQuery;
 

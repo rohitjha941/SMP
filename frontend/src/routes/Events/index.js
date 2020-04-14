@@ -23,28 +23,14 @@ class Events extends Component {
     }
 
     render() { 
-        const eventData = this.props.events.map(value => {
-            return {
-                event_id: value.id,
-                imgSrc: value.thumbnail,
-                imgAlt: value.title,
-                heading: value.title,
-                text: value.content,
-                metadata: {
-                    d1: value.date,
-                    d2: value.time + ' hrs',
-                    d3: value.venue,
-                }
-            }
-        })
         return ( 
             <React.Fragment>
                 <div className={styles.mainDiv}>
                     {
                     (window.innerWidth < 1000) ? 
-                        <MobileView eventData={eventData}/>
+                        <MobileView events={this.props.events}/>
                         :
-                        <DesktopView eventData={eventData}/>
+                        <DesktopView events={this.props.events}/>
                     }
                 </div>
             </React.Fragment>

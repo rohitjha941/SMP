@@ -12,6 +12,7 @@ const apiConstants = {
     interests:'interests',
     groups:'campusGroups',
     blogcategory:'blogCategory',
+    raiseQuery : 'raise-query/',
 }
 
 
@@ -25,3 +26,4 @@ export const FAQS = apiConstants.base + apiConstants.faqs;
 export const BRANCH = apiConstants.base + apiConstants.branch;
 export const INTERESTS = apiConstants.base + apiConstants.interests;
 export const GROUPS = apiConstants.base + apiConstants.groups;
+export const RAISEQUERY = apiConstants.base + apiConstants.raiseQuery;
