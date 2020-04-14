@@ -88,15 +88,14 @@ function App() {
     fetchInterestsIfEmpty();
     fetchBlogCategoryIfEmpty();
   });
-
   return (
     <div className="App">
       <Header />
       <div className="router-footer-container">
         <RouterView 
           blogs={blogs} 
-          blogCategory={blogCategory}
           events={events} 
+          blogCategory={blogCategory}
           team={team} 
           mentors={mentors} 
           mentorsDocs={mentorsDocs}

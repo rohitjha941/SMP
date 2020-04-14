@@ -4,6 +4,8 @@
     text-align:left;
     width: 98.54%;
     max-width: inherit;
+    margin-bottom: 1.5%;
+    margin-left: 2%;
 }
 @mixin heading-mixin{
     font-weight: bold;
@@ -36,7 +38,6 @@
 }
 
 .metadata{
-    width: fit-content;
     font-style: normal;
     font-weight: normal;
     font-size: 0.75rem;

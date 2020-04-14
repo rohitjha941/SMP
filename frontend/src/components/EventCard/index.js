@@ -1,11 +1,12 @@
 import React from 'react';
 import Text from './Text';
 import styles from './EventCard.module.scss';
-// import ThisWeek from 'assets/images/ThisWeek.svg';
+import ThisWeek from 'assets/images/ThisWeek.svg';
 
 function WrappedComponent(props) {
     const event_id = props.eventData.event_id;
-    const imageSource = props.eventData.imgSrc;
+    const imageSource =  props.eventData.imgSrc;
+    const isThisWeek = props.eventData.isThisWeek;
     const imageAlternativeText = (props.eventData.imgAlt) ? props.eventData.imgAlt : props.eventData.heading;
     const heading = props.heading === undefined ? props.eventData.heading : props.heading ? props.eventData.heading : null;
     const text = props.text === undefined ? props.eventData.text : props.text ? props.eventData.text : null;
@@ -32,7 +33,7 @@ function WrappedComponent(props) {
                 </h3>
                 :
                 null}
-                {/* <img className={styles.thisWeek} src={ThisWeek} alt='This Week'/> */}
+                {isThisWeek ? <img className={styles.thisWeek} src={ThisWeek} alt='This Week'/>:null}
                 <img className={
                     props.type==='side' ? styles.sideViewImg : styles.eventImage} src={imageSource} alt={imageAlternativeText} />
                 <Text heading={heading} text={text} metadata={metadata} event_id={event_id} headingTop={headingTop} type={props.type}/>
