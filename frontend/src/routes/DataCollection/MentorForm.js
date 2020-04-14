@@ -47,6 +47,7 @@ class MentorForm extends Component {
       interestOptions: [],
       groupsOptions: [],
       isLoading:false,
+      redirect:false,
     };
   }
   handleChange = (e) => {
@@ -187,14 +188,14 @@ class MentorForm extends Component {
         groups:[],
         achievements:[],
         internships:[],
+        redirect:true,
         isLoading:false
       })
     }else{
+      window.flash('We are unable to process your request right now. Please try again later!',"error");
       this.setState({
         isLoading:false,
       })
-      window.flash('We are unable to process your request right now. Please try again later!',"error");
-      return re
     }
   };
   componentDidMount() {
@@ -238,6 +239,9 @@ class MentorForm extends Component {
     });
   }
   render() {
+    if(this.state.redirect){
+      return <Redirect to="/"/>
+    }
     return (
       <>
       {this.state.isLoading  ? <LoadingOverlay/> : null}
