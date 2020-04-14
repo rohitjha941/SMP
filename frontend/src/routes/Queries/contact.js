@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import axios from 'axios';
 import Button from '../../components/Button';
 import styles from './contact.module.scss';
+import LoadingOverlay from '../../components/LoadingOverlay'
+import {postQuery} from '../../api/methods';
 
-axios.defaults.xsrfCookieName = 'csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 const recaptchaRef = React.createRef();
 class Contact extends Component {
     constructor() {
@@ -14,9 +14,9 @@ class Contact extends Component {
             name: '',
             email: '',
             query:'',
-            errmsg:'',
-            captcha: true,
+            captcha: false,
             'g-recaptcha-response':'',
+            isLoading:false,
         }
     }
     onChange = (e) => {
@@ -34,28 +34,32 @@ class Contact extends Component {
     handleSubmit = (e) => {
         e.preventDefault(); 
         if(this.state.captcha){
+            this.setState({isLoading:true})
             let data = {
                 name: this.state.name,
                 email: this.state.email,
                 query: this.state.query,
                 'g-recaptcha-response' : this.state['g-recaptcha-response']
             }
-            axios.post((process.env.REACT_APP_API_BASE+'raise-query/'),data)
-            .then((response) => {
-                // console.log(response);
+            postQuery(data)
+            .then((response)=>{
                 this.setState({
-                    errmsg:"<div>Your query has been raised<br/>We'll get back to you soon.</div>",
                     email:'',
                     query:'',
                     name:'',
+                    isLoading:false
                 });
+                window.flash("Your Query has been raised. We'll get back to you soon.")
             })
-            .catch((error) => {
-                // console.log(error)
+            .catch((error)=>{
                 this.setState({
-                    errmsg:"<div>There was a problem sending your query<br/>Please try again later.</div>"
-                });
+                    isLoading:false,
+                })
+                window.flash("There was a problem sending your query! Please try again later",'error')
             })
+        }
+        else{
+            window.flash("Please Verify the Recaptcha!","warning")
         }
         //reset captcha
         recaptchaRef.current.reset();
@@ -66,6 +70,8 @@ class Contact extends Component {
         let name = this.state.name;
         let query = this.state.query; 
         return ( 
+            <>
+            {this.state.isLoading ? <LoadingOverlay /> : null}
             <div className={styles.contact}>
                 <div className={styles.contactTitle}>Need More Help? <span className='color-red'>Contact Us</span></div>
                 <div className={styles.contactForm}>
@@ -123,6 +129,7 @@ class Contact extends Component {
                     </form>
                 </div>
             </div>
+            </>
          );
     }
 }

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import './style/App.scss';
 import Loadable from 'react-loadable';
 import Loader from './components/Loader';
+import {Flash} from './components/Flash';
+import Bus from 'utils/Bus';
 
 var methods = require('./api/methods/');
 
@@ -29,6 +31,8 @@ function App() {
   const [faqs,setFaqs] = useState([]);
   const [branches,setBranches] = useState([]);
   const [interests,setInterests] = useState([]);
+
+  window.flash = (message, type="success") => Bus.emit('flash',({message,type}));
 
   const fetchBlogsIfEmpty = () => {
     if (!blogs || blogs.length === 0) {
@@ -92,6 +96,7 @@ function App() {
     <div className="App">
       <Header />
       <div className="router-footer-container">
+        <Flash />
         <RouterView 
           blogs={blogs} 
           events={events} 
