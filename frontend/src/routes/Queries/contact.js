@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import axios from 'axios';
 import Button from '../../components/Button';
 import styles from './contact.module.scss';
 import LoadingOverlay from '../../components/LoadingOverlay'
+import {postQuery} from '../../api/methods';
 
-axios.defaults.xsrfCookieName = 'csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 const recaptchaRef = React.createRef();
 class Contact extends Component {
     constructor() {
@@ -42,9 +41,8 @@ class Contact extends Component {
                 query: this.state.query,
                 'g-recaptcha-response' : this.state['g-recaptcha-response']
             }
-            axios.post((process.env.REACT_APP_API_BASE+'raise-query/'),data)
-            .then((response) => {
-                // console.log(response);
+            postQuery(data)
+            .then((response)=>{
                 this.setState({
                     email:'',
                     query:'',
@@ -53,8 +51,7 @@ class Contact extends Component {
                 });
                 window.flash("Your Query has been raised. We'll get back to you soon.")
             })
-            .catch((error) => {
-                // console.log(error)
+            .catch((error)=>{
                 this.setState({
                     isLoading:false,
                 })

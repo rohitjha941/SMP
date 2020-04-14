@@ -11,6 +11,7 @@ const apiConstants = {
     branch:'branch',
     interests:'interests',
     blogcategory:'blogCategory',
+    raiseQuery : 'raise-query/',
 }
 
 
@@ -23,3 +24,4 @@ export const MENTORSDOCS = apiConstants.base + apiConstants.mentorsDocs;
 export const FAQS = apiConstants.base + apiConstants.faqs;
 export const BRANCH = apiConstants.base + apiConstants.branch;
 export const INTERESTS = apiConstants.base + apiConstants.interests;
+export const RAISEQUERY = apiConstants.base + apiConstants.raiseQuery;
