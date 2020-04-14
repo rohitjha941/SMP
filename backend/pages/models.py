@@ -168,7 +168,8 @@ class CampusGroups(models.Model):
 class Interest(models.Model):
     interest_name = models.CharField(
         max_length=100,
-        default=""
+        default="",
+        unique=True
     )
 
     def __str__(self):
