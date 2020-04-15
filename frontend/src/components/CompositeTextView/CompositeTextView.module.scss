@@ -1,22 +1,22 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 
 .container {
-    text-align: center;
-    width: 100%;
-    & > * {
-        text-align: inherit;
-        margin: 5% auto;
-    }
+  text-align: center;
+  width: 100%;
+  & > * {
+    text-align: inherit;
+    margin: 5% auto;
+  }
 }
 
 .heading {
-    color: $grey-level-0_7;
-    font-size: 1.2em;
-    font-weight: bold;
+  color: $grey-level-0_7;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 .text {
-    color: $grey;
-    font-size: 0.9em;
-    line-height: 1.6em;
+  color: $grey;
+  font-size: 0.9em;
+  line-height: 1.6em;
 }

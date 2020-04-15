@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import styles from './CrossButton.module.scss'
+import styles from "./CrossButton.module.scss";
 
 export const CrossButton = (props) => {
-    return (
-        <div className={styles.cross+ ' '+ props.className}>
-            <div></div>
-            <div></div>
-        </div>
-    )
-}
+  return (
+    <div className={styles.cross + " " + props.className}>
+      <div></div>
+      <div></div>
+    </div>
+  );
+};

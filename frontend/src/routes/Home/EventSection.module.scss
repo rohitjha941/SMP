@@ -1,53 +1,53 @@
-    @import '../../style/common.scss';
+@import "../../style/common.scss";
 
-.eventParentDiv{
-    background: $blue-home;
-    min-height: 100vh;
-    text-align:center;
-    padding-top: 2.0625rem;
-    padding-bottom: 1.9325rem;
-    margin: auto;
+.eventParentDiv {
+  background: $blue-home;
+  min-height: 100vh;
+  text-align: center;
+  padding-top: 2.0625rem;
+  padding-bottom: 1.9325rem;
+  margin: auto;
 }
-.eventInnerWrapper{
-    width:95%;
-    margin:auto;
+.eventInnerWrapper {
+  width: 95%;
+  margin: auto;
 
-    @media screen and (max-width:$break-tablet){
-        width:70%;
-    }
-    @media screen and (max-width:$break){
-        width:80%;
-    }
+  @media screen and (max-width: $break-tablet) {
+    width: 70%;
+  }
+  @media screen and (max-width: $break) {
+    width: 80%;
+  }
 }
-.eventWrapper{
-    width:80%;
-    margin:0 auto 0 5.55%;
+.eventWrapper {
+  width: 80%;
+  margin: 0 auto 0 5.55%;
 }
-.sectionHeading{
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.3125rem;
-    color: $blue-text;
-    text-align: left;
-    padding-top: 2.0625rem;
-    @media screen and (min-width:$break){
-        font-size: 1.6875rem;
-        line-height: 2.1875rem;
-    }
-}
-
-.eventCardCommon{
-    margin-top: 2.75rem;
-    @media screen and (min-width:$break-tablet){
-        margin-top: 5.875rem;
-    }
+.sectionHeading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.3125rem;
+  color: $blue-text;
+  text-align: left;
+  padding-top: 2.0625rem;
+  @media screen and (min-width: $break) {
+    font-size: 1.6875rem;
+    line-height: 2.1875rem;
+  }
 }
 
-.eventsButton{
-    margin: 2.6875rem auto 0 auto;
-    background: $blue-home;
-    @media screen and (min-width:$break-tablet){
-        margin-top: 4rem;
-    }
+.eventCardCommon {
+  margin-top: 2.75rem;
+  @media screen and (min-width: $break-tablet) {
+    margin-top: 5.875rem;
+  }
+}
+
+.eventsButton {
+  margin: 2.6875rem auto 0 auto;
+  background: $blue-home;
+  @media screen and (min-width: $break-tablet) {
+    margin-top: 4rem;
+  }
 }

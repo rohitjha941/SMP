@@ -1,82 +1,82 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 
-.container{
-    width:87.91%;
-    border-top: 0.0625rem solid $grey;
-    background: white;
-    left:0;
-    right:0;
-    margin: 0 auto;
-    position:relative;
-    display: flex;
-    flex-direction: column;
-    bottom:0;
+.container {
+  width: 87.91%;
+  border-top: 0.0625rem solid $grey;
+  background: white;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
 
-    font-size: 1.125rem;
-    line-height: 1.4375rem;
-    color: $grey;
-    font-weight: normal;
-    @media screen and (max-width:$break-tablet){
-        font-size: 1rem;
-        line-height: 1.25rem;
-    }
+  font-size: 1.125rem;
+  line-height: 1.4375rem;
+  color: $grey;
+  font-weight: normal;
+  @media screen and (max-width: $break-tablet) {
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
 }
-.brand{
-    font-size: 1.25rem;
-    line-height: 1.625rem;
-    background: $white;
-    width:20rem;
-    position:relative;
-    top: -0.8125rem;
-    left: -0.625rem;
-    @media screen and (max-width:$break-tablet){
-        font-size: 1rem;
-        line-height: 1.25rem;
-        width: 15.625rem;
-        top:-0.625rem;
-        left:-0.3125rem;
-    }
-}
-
-.logoContainer{
-    display: grid;
-    margin-bottom: 2.5rem;
+.brand {
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  background: $white;
+  width: 20rem;
+  position: relative;
+  top: -0.8125rem;
+  left: -0.625rem;
+  @media screen and (max-width: $break-tablet) {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    width: 15.625rem;
+    top: -0.625rem;
+    left: -0.3125rem;
+  }
 }
 
-.logo{
-    width:40.26%;
-    margin-left:3.5398%;
+.logoContainer {
+  display: grid;
+  margin-bottom: 2.5rem;
 }
-.emblem{
-    width:35.39%
+
+.logo {
+  width: 40.26%;
+  margin-left: 3.5398%;
 }
-.instiLink{
-    width:100%;
-    margin-top:0.25rem;
-    font-weight: normal;
+.emblem {
+  width: 35.39%;
 }
-.instiLinkHead{
-    font-weight: 300;
-    margin-top:1.0625rem;
+.instiLink {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-weight: normal;
 }
-.columns{
-    display: grid;
-    margin:auto 0 auto 0;
-    grid-template-columns: 29% 20% 20% 31%;
-    li{
-        margin:0 auto auto 0;
-        padding: 0.625rem 0.125rem;
+.instiLinkHead {
+  font-weight: 300;
+  margin-top: 1.0625rem;
+}
+.columns {
+  display: grid;
+  margin: auto 0 auto 0;
+  grid-template-columns: 29% 20% 20% 31%;
+  li {
+    margin: 0 auto auto 0;
+    padding: 0.625rem 0.125rem;
+  }
+  @media screen and (max-width: $break-tablet) {
+    li {
+      padding: 0.4375rem 0.125rem;
     }
-    @media screen and (max-width:$break-tablet){
-        li{
-            padding: 0.4375rem 0.125rem;
-        }
-    }
+  }
 }
-.categoryHeading{
-    font-weight: 500;
-    color: $grey-level-0_8;
+.categoryHeading {
+  font-weight: 500;
+  color: $grey-level-0_8;
 }
-.address{
-    font-weight: 300;
+.address {
+  font-weight: 300;
 }

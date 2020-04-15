@@ -1,53 +1,53 @@
-@import '../../style/common.scss';
-.MainWrapper{
-    width:64%;
-    margin: auto;
+@import "../../style/common.scss";
+.MainWrapper {
+  width: 64%;
+  margin: auto;
 }
-.heading{
-    margin: 1.9375rem auto 0 auto;
-    font-style: normal;
-    font-weight: 500;
+.heading {
+  margin: 1.9375rem auto 0 auto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.6875rem;
+  line-height: 2.1875rem;
+  text-align: center;
+  @media screen and (min-width: $break) {
+    font-size: 3.125rem;
+    line-height: 4.0625rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.categoryHeading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: $blue-text;
+  widows: 17.125rem;
+  margin: 2.375rem auto 1rem auto;
+  text-align: left;
+  @media screen and (min-width: $break) {
     font-size: 1.6875rem;
     line-height: 2.1875rem;
-    text-align: center;
-    @media screen and (min-width:$break){
-        font-size: 3.125rem;
-        line-height: 4.0625rem;
-        margin-bottom: 2rem;
-    }
+    width: 36.3975rem;
+  }
 }
 
-.categoryHeading{
-    font-style: normal;
-    font-weight: 500;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color:$blue-text;
-    widows: 17.125rem;
-    margin: 2.375rem auto 1rem auto;
-    text-align: left;
-    @media screen and (min-width:$break){
-        font-size:1.6875rem;
-        line-height: 2.1875rem;
-        width: 36.3975rem;
-        }
+.eventCardCommon {
+  width: 100%;
+  margin: auto;
+  display: block;
 }
 
-.eventCardCommon{
-    width:100%;
-    margin: auto;
-    display: block;
+.hr {
+  margin: 1.25rem auto 0.8175rem auto;
+  width: 100%;
+  height: 0;
+  border: 0.03125rem solid $grey-level-0_1;
+  @media screen and (min-width: $break) {
+  }
 }
 
-.hr{
-    margin: 1.25rem auto 0.8175rem auto;
-    width: 100%;
-    height: 0;
-    border: 0.03125rem solid $grey-level-0_1;
-    @media screen and (min-width: $break){
-    }
-}
-
-.dashedWord{
-    display: inline-block;
+.dashedWord {
+  display: inline-block;
 }

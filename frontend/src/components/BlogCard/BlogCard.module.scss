@@ -1,61 +1,60 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 
 .containersm {
-    width: 17.125rem;
+  width: 17.125rem;
 }
 
-.containerlg{
-    max-width: 90vw;
+.containerlg {
+  max-width: 90vw;
 }
 
-.imageWrapperDiv{
-    width: 100%;
-    overflow: hidden;
-    margin: 0;
-    //Aspect Ratio 16:9, for 4:3 use 75%
-    padding-top: 56.25%;
-    position: relative;
+.imageWrapperDiv {
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  //Aspect Ratio 16:9, for 4:3 use 75%
+  padding-top: 56.25%;
+  position: relative;
 }
 
-.blogImage{
-    display:block;
-    border-radius: 0.3125rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%, -50%);
+.blogImage {
+  display: block;
+  border-radius: 0.3125rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
 }
 
-@mixin heading-mixin{
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: $grey-level-0_8;
-    margin: 0.625rem auto 0.625rem 0;
+@mixin heading-mixin {
+  text-align: left;
+  display: block;
+  font-weight: bold;
+  color: $grey-level-0_8;
+  margin: 0.625rem auto 0.625rem 0;
 }
-.heading{
-    @include heading-mixin;
+.heading {
+  @include heading-mixin;
 }
 .headingsm {
-    @extend .heading;
-    font-size: 0.9375rem;
-    line-height: 1.1875rem;
+  @extend .heading;
+  font-size: 0.9375rem;
+  line-height: 1.1875rem;
 }
 
 .headingmd {
-    @extend .heading;
-    font-size: 1.125rem;
-    line-height: 1.25rem;
+  @extend .heading;
+  font-size: 1.125rem;
+  line-height: 1.25rem;
 }
 .headinglg {
-    @extend .heading;
-    font-size: 1.25rem;
-    line-height: 1.625rem;
+  @extend .heading;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
 }
 .headingxl {
-    @extend .heading;
-    font-size: 1.875rem;
-    line-height: 2.4375rem;
+  @extend .heading;
+  font-size: 1.875rem;
+  line-height: 2.4375rem;
 }
-

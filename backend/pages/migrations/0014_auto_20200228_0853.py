@@ -6,22 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0013_mentordocs'),
+        ("pages", "0013_mentordocs"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='mentordocs',
-            name='MentorsGuide',
+        migrations.RemoveField(model_name="mentordocs", name="MentorsGuide",),
+        migrations.AddField(
+            model_name="mentordocs",
+            name="mentorsGuide",
+            field=models.FileField(blank=True, null=True, upload_to="mentorDocs/"),
         ),
         migrations.AddField(
-            model_name='mentordocs',
-            name='mentorsGuide',
-            field=models.FileField(blank=True, null=True, upload_to='mentorDocs/'),
-        ),
-        migrations.AddField(
-            model_name='mentordocs',
-            name='name',
-            field=models.CharField(default='', max_length=100),
+            model_name="mentordocs",
+            name="name",
+            field=models.CharField(default="", max_length=100),
         ),
     ]

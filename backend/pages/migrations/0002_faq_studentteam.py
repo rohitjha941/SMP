@@ -6,29 +6,51 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0001_initial'),
+        ("pages", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='faq',
+            name="faq",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('question', models.CharField(default='', max_length=300)),
-                ('answer', models.CharField(default='', max_length=1000)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("question", models.CharField(default="", max_length=300)),
+                ("answer", models.CharField(default="", max_length=1000)),
             ],
         ),
         migrations.CreateModel(
-            name='StudentTeam',
+            name="StudentTeam",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='', max_length=100)),
-                ('photo', models.ImageField(max_length=200, upload_to='members/')),
-                ('facebook', models.URLField(blank=True, db_index=True, max_length=1000)),
-                ('linkden', models.URLField(blank=True, db_index=True, max_length=1000)),
-                ('branch', models.CharField(default='', max_length=100)),
-                ('year', models.CharField(default='', max_length=100)),
-                ('is_coordinator', models.BooleanField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(default="", max_length=100)),
+                ("photo", models.ImageField(max_length=200, upload_to="members/")),
+                (
+                    "facebook",
+                    models.URLField(blank=True, db_index=True, max_length=1000),
+                ),
+                (
+                    "linkden",
+                    models.URLField(blank=True, db_index=True, max_length=1000),
+                ),
+                ("branch", models.CharField(default="", max_length=100)),
+                ("year", models.CharField(default="", max_length=100)),
+                ("is_coordinator", models.BooleanField()),
             ],
         ),
     ]

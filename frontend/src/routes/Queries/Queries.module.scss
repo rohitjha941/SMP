@@ -1,20 +1,20 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 
-.redArm{
-    position: absolute;
-    right:0;
-    top: 116.1525rem;
-    z-index: 10;
-    @media screen and (max-width: $break-tablet){
-        display:none;
-    }
+.redArm {
+  position: absolute;
+  right: 0;
+  top: 116.1525rem;
+  z-index: 10;
+  @media screen and (max-width: $break-tablet) {
+    display: none;
+  }
 }
-.blueArm{
-    position: absolute;
-    left: 0;
-    top: 87.688125rem;
-    z-index:10;
-    @media screen and (max-width: $break-tablet){
-        display:none;
-    }
+.blueArm {
+  position: absolute;
+  left: 0;
+  top: 87.688125rem;
+  z-index: 10;
+  @media screen and (max-width: $break-tablet) {
+    display: none;
+  }
 }
