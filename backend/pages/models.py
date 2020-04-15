@@ -59,7 +59,8 @@ class StudentTeam(models.Model):
 
     linkden = models.URLField(max_length=1000, db_index=True, blank=True)
 
-    branch = models.ForeignKey(branch, related_name="teams", on_delete=models.CASCADE,)
+    branch = models.ForeignKey(
+        branch, related_name="teams", on_delete=models.CASCADE,)
 
     year = models.CharField(
         max_length=100, blank=True, null=True, choices=year_choices_team
@@ -83,16 +84,19 @@ year_choices = (("3rd", "3rd Year"), ("4th", "4th Year"), ("5th", "5th Year"))
 
 
 class Mentor(models.Model):
-    branch = models.ForeignKey(branch, related_name="mentors", on_delete=models.CASCADE)
+    branch = models.ForeignKey(
+        branch, related_name="mentors", on_delete=models.CASCADE)
 
-    interest = models.ManyToManyField(Interest, related_name="interest", blank=True,)
+    interest = models.ManyToManyField(
+        Interest, related_name="interest", blank=True,)
 
     name = models.CharField(max_length=1000, blank=True, null=True)
     photo = models.ImageField(upload_to="mentors/", max_length=200)
 
     facebook = models.URLField(max_length=1000, db_index=True, blank=True)
     linkden = models.URLField(max_length=1000, db_index=True, blank=True)
-    year = models.CharField(max_length=100, blank=True, null=True, choices=year_choices)
+    year = models.CharField(max_length=100, blank=True,
+                            null=True, choices=year_choices)
 
 
 class ContactDetails(models.Model):
@@ -111,7 +115,8 @@ class ContactDetails(models.Model):
 
 
 class BlogCategory(models.Model):
-    category_name = models.CharField(max_length=100, default="", blank=True, null=True)
+    category_name = models.CharField(
+        max_length=100, default="", blank=True, null=True)
 
     def __str__(self):
         return self.category_name

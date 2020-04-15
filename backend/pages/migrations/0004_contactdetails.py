@@ -26,11 +26,13 @@ class Migration(migrations.Migration):
                 ("photo", models.ImageField(max_length=200, upload_to="members/")),
                 (
                     "facebook",
-                    models.URLField(blank=True, db_index=True, max_length=1000),
+                    models.URLField(blank=True, db_index=True,
+                                    max_length=1000),
                 ),
                 (
                     "linkden",
-                    models.URLField(blank=True, db_index=True, max_length=1000),
+                    models.URLField(blank=True, db_index=True,
+                                    max_length=1000),
                 ),
                 ("branch", models.CharField(default="", max_length=100)),
                 ("year", models.CharField(default="", max_length=100)),

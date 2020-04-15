@@ -78,7 +78,8 @@ class EventsView(APIView):
             "this_week": EventsSerializer(
                 Events.objects.filter(
                     date__gte=datetime.date.today(),
-                    date__lt=(datetime.date.today() + datetime.timedelta(days=7)),
+                    date__lt=(datetime.date.today() +
+                              datetime.timedelta(days=7)),
                 ),
                 many=True,
             ).data,

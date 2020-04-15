@@ -27,7 +27,8 @@ class Migration(migrations.Migration):
             name="year",
             field=models.CharField(
                 blank=True,
-                choices=[("3rd", "3rd Year"), ("4th", "4th Year"), ("5th", "5th Year")],
+                choices=[("3rd", "3rd Year"), ("4th", "4th Year"),
+                         ("5th", "5th Year")],
                 max_length=100,
                 null=True,
             ),

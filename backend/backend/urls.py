@@ -10,7 +10,6 @@ from backend import settings
 API_TITLE = "SMP API Docs"
 API_DESCRIPTION = ""
 
-
 urlpatterns = [
     path("backend/admin/", admin.site.urls),
     path("backend/", include("pages.urls")),
@@ -18,4 +17,5 @@ urlpatterns = [
     url(r"^tinymce/", include("tinymce.urls")),
 ]
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

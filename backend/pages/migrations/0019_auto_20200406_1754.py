@@ -25,7 +25,8 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "category_name",
-                    models.CharField(blank=True, default="", max_length=100, null=True),
+                    models.CharField(blank=True, default="",
+                                     max_length=100, null=True),
                 ),
             ],
         ),

@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="mentordocs",
             name="mentorsGuide",
-            field=models.FileField(blank=True, null=True, upload_to="mentorDocs/"),
+            field=models.FileField(blank=True, null=True,
+                                   upload_to="mentorDocs/"),
         ),
         migrations.AddField(
             model_name="mentordocs",
