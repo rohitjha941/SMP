@@ -176,11 +176,7 @@ class Interest(models.Model):
         return self.interest_name
 
 
-year_choices = (
-    ("3rd", "3rd Year"),
-    ("4th", "4th Year"),
-    ("5th", "5th Year")
-)
+year_choices = (("3rd", "3rd Year"), ("4th", "4th Year"), ("5th", "5th Year"))
 
 
 class Mentor(models.Model):
@@ -282,6 +278,10 @@ class MentorIntern(models.Model):
         null=True
     )
 
+    facebook = models.URLField(max_length=1000, db_index=True, blank=True)
+    linkden = models.URLField(max_length=1000, db_index=True, blank=True)
+    branch = models.CharField(default="", max_length=100,)
+
 
 class ContactDetails(models.Model):
     name = models.CharField(
@@ -363,12 +363,13 @@ class Blogs(models.Model):
     is_featured = models.BooleanField(
         default=False,
     )
+    is_featured = models.BooleanField(default=False,)
     category = models.ForeignKey(
         BlogCategory,
         related_name="blogs_category",
         on_delete=models.CASCADE,
         blank=True,
-        null=True
+        null=True,
     )
 
     content = tinymce_models.HTMLField()
@@ -398,6 +399,7 @@ class Events(models.Model):
         default="",
         max_length=100
     )
+    venue = models.CharField(default="", max_length=100)
     content = tinymce_models.HTMLField()
 
 
@@ -414,11 +416,6 @@ class MentorDocs(models.Model):
 
 
 class RaisedQuery(models.Model):
-    name = models.CharField(
-        default="",
-        max_length=100
-    )
-    email = models.EmailField(
-        max_length=254,
-    )
+    name = models.CharField(default="", max_length=100)
+    email = models.EmailField(max_length=254,)
     query = models.TextField()

@@ -1,11 +1,11 @@
-@mixin blue-border-on-right{
-    &:after{
-        position: absolute;
-        top: 50%;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 50%;
-        border-right: 0.125rem solid $blue-text;
-    }
+@mixin blue-border-on-right {
+  &:after {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 50%;
+    border-right: 0.125rem solid $blue-text;
+  }
 }

@@ -6,15 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0012_auto_20200227_1750'),
+        ("pages", "0012_auto_20200227_1750"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='MentorDocs',
+            name="MentorDocs",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('MentorsGuide', models.FileField(upload_to='mentorDocs/')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("MentorsGuide", models.FileField(upload_to="mentorDocs/")),
             ],
         ),
     ]

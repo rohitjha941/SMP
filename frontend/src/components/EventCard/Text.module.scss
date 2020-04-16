@@ -1,102 +1,101 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 
 .container {
-    text-align:left;
-    width: 98.54%;
-    max-width: inherit;
+  text-align: left;
+  width: 98.54%;
+  max-width: inherit;
 }
-@mixin heading-mixin{
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.8);
-    margin-top: 1.031825rem;
+@mixin heading-mixin {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 1.031825rem;
 }
-.heading{
-    @include heading-mixin;
+.heading {
+  @include heading-mixin;
 }
 .headingsm {
-    @extend .heading;
-    font-size: 0.9375rem;
-    line-height: 1.1875rem;
+  @extend .heading;
+  font-size: 0.9375rem;
+  line-height: 1.1875rem;
 }
 
 .headingmd {
-    @extend .heading;
-    font-size: 1.125rem;
-    line-height: 1.25rem;
+  @extend .heading;
+  font-size: 1.125rem;
+  line-height: 1.25rem;
 }
 .headinglg {
-    @extend .heading;
-    font-size: 1.25rem;
-    line-height: 1.625rem;
+  @extend .heading;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
 }
 .headingxl {
-    @extend .heading;
-    font-size: 1.875rem;
-    line-height: 2.4375rem;
+  @extend .heading;
+  font-size: 1.875rem;
+  line-height: 2.4375rem;
 }
 
-.metadata{
-    width: fit-content;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    margin-top: 0.4375rem;
-    /* identical to box height */
-    
-    
-    color: rgba(0, 0, 0, 0.8);
-    @media screen and (min-width:$break){
-        font-weight: 300;
-        font-size: 0.9375rem;
-        line-height: 1.1875rem;
-    }
+.metadata {
+  width: fit-content;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  margin-top: 0.4375rem;
+  /* identical to box height */
+
+  color: rgba(0, 0, 0, 0.8);
+  @media screen and (min-width: $break) {
+    font-weight: 300;
+    font-size: 0.9375rem;
+    line-height: 1.1875rem;
+  }
 }
 
 .text {
-    font-style: normal;
-    font-weight: 300;
-    font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.75rem;
+  line-height: 150%;
+  margin-top: 0.4375rem;
+  color: $grey;
+  @media screen and (min-width: $break) {
+    font-size: 1rem;
     line-height: 150%;
-    margin-top: 0.4375rem;
-    color: $grey;
-    @media screen and (min-width: $break){
-        font-size: 1rem;
-        line-height: 150%;
-    }
+  }
 }
 
-.readMore{
-    color: $blue-text;
+.readMore {
+  color: $blue-text;
 }
 
-.sideContainer{
-    width: 54.85%;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 3%;
+.sideContainer {
+  width: 54.85%;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 3%;
 }
 
-.headingSide{
-    font-weight: 500;
-    font-size: 1.875rem;
-    line-height: 2.4375rem;
-    color:$grey-level-0_8;
+.headingSide {
+  font-weight: 500;
+  font-size: 1.875rem;
+  line-height: 2.4375rem;
+  color: $grey-level-0_8;
 }
-.metaSide{
-    font-weight: normal;
-    font-size: 1.25rem;
-    line-height: 1.625rem;
-    /* identical to box height */
-    display: inline-block;
-    color: #000000;
-    // position: absolute;
-    vertical-align: bottom;
+.metaSide {
+  font-weight: normal;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  /* identical to box height */
+  display: inline-block;
+  color: #000000;
+  // position: absolute;
+  vertical-align: bottom;
 }
-.textSide{
-    font-weight: 300;
-    font-size: 1.25rem;
-    line-height: 147.6%;
-    color: $grey;
-    margin: 1.25rem auto 4.625rem 0;
+.textSide {
+  font-weight: 300;
+  font-size: 1.25rem;
+  line-height: 147.6%;
+  color: $grey;
+  margin: 1.25rem auto 4.625rem 0;
 }

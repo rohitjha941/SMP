@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.admin import register
-from .models import *
 from import_export.admin import ImportExportModelAdmin
+
+from .models import *
 
 
 @register(Home)
@@ -27,7 +28,7 @@ class StudentTeamAdmin(ImportExportModelAdmin):
 
 @register(branch)
 class branchAdmin(ImportExportModelAdmin):
-    list_display = ("branch_name", )
+    list_display = ("branch_name",)
 
 
 @register(ContactDetails)
@@ -43,7 +44,7 @@ class MentorAdmin(ImportExportModelAdmin):
 
 @register(BlogCategory)
 class BlogCategoryAdmin(ImportExportModelAdmin):
-    list_display = ('category_name',)
+    list_display = ("category_name",)
 
 
 @register(Blogs)
@@ -63,7 +64,7 @@ class MentorDocsAdmin(ImportExportModelAdmin):
 
 @register(Interest)
 class InterestsAdmin(ImportExportModelAdmin):
-    list_display = ('interest_name',)
+    list_display = ("interest_name",)
 
 
 @register(CampusGroups)
@@ -79,6 +80,7 @@ class RaisedQuery(ImportExportModelAdmin):
 @register(MentorIntern)
 class MentorIntern(ImportExportModelAdmin):
     list_display = ('mentor', 'company', 'duration', 'domain', )
+
 
 @register(MentorAchievement)
 class MentorAchievement(ImportExportModelAdmin):

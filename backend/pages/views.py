@@ -1,38 +1,36 @@
-import requests
 import datetime
-from django.shortcuts import get_object_or_404,render
-from django.core.mail import send_mail
-from django.template import loader
-from pages.utils import get_client_ip
+from django.shortcuts import get_object_or_404, render
 
-from backend.settings import EMAIL_HOST_USER
-from backend.settings import EMAIL_SEND_TO_ADMIN
-from backend.settings import RECAPTCHA_SECRET_KEY
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.parsers import JSONParser
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+import requests
+from django.core.mail import send_mail
+from django.shortcuts import render
+from django.template import loader
 from django.views.decorators.csrf import ensure_csrf_cookie
+from pages.utils import get_client_ip
+from rest_framework import generics, status, viewsets
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from backend.settings import EMAIL_HOST_USER, EMAIL_SEND_TO_ADMIN, RECAPTCHA_SECRET_KEY
 
 from .models import *
 from .serializers import *
-from rest_framework import viewsets
-from rest_framework import generics
 
 
-class HomeView (generics.ListAPIView):
+class HomeView(generics.ListAPIView):
     queryset = Home.objects.all()
     serializer_class = HomeSerializer
 
 
-class HomeVisionView (generics.ListAPIView):
+class HomeVisionView(generics.ListAPIView):
     queryset = HomeVision.objects.all()
     serializer_class = HomeVisionSerializer
 
 
-class faqView (generics.ListAPIView):
+class faqView(generics.ListAPIView):
     queryset = faq.objects.all()
     serializer_class = faqSerializer
 
@@ -47,7 +45,7 @@ class branchView (generics.ListAPIView):
     serializer_class = branchSerializer
 
 
-class ContactDetailsView (generics.ListAPIView):
+class ContactDetailsView(generics.ListAPIView):
     queryset = ContactDetails.objects.all()
     serializer_class = ContactDetailsSerializer
 
@@ -75,6 +73,7 @@ class MentorAchievementView(APIView):
             )
         return Response(status=status.HTTP_201_CREATED)
 
+
 class MentorInternView(APIView):
     def post(self, request):
         mentor_id = ""
@@ -89,17 +88,18 @@ class MentorInternView(APIView):
         for intern in interns:
             MentorIntern.objects.create(
                 mentor=mentor,
-                company = intern['company'],
-                duration = intern['duration'],
-                domain = intern['domain']
+                company=intern['company'],
+                duration=intern['duration'],
+                domain=intern['domain']
             )
         return Response(status=status.HTTP_201_CREATED)
+
 
 class InterestView (generics.ListCreateAPIView):
     queryset = Interest.objects.all().order_by('interest_name')
     serializer_class = InterestSerializer
 
-    def create(self,request):
+    def create(self, request):
         interests = []
         interest_ids = []
         try:
@@ -108,13 +108,14 @@ class InterestView (generics.ListCreateAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         for interest in interests:
-            instance,created  = Interest.objects.get_or_create(interest_name=interest)
+            instance, created = Interest.objects.get_or_create(
+                interest_name=interest)
             interest_ids.append(instance.id)
-            
+
         data = {
-            'interest_ids':interest_ids
+            'interest_ids': interest_ids
         }
-        return Response(data,status=status.HTTP_201_CREATED)
+        return Response(data, status=status.HTTP_201_CREATED)
 
 
 class CampusGroupsView (generics.ListAPIView):
@@ -132,15 +133,28 @@ class BlogsView (generics.ListCreateAPIView):
     serializer_class = BlogsSerializer
 
 
-class EventsView (APIView):
+class EventsView(APIView):
     def get(self, request):
         data = {
-            'past': EventsSerializer(Events.objects.filter(date__lt=datetime.date.today()), many=True).data,
-            'this_week': EventsSerializer(Events.objects.filter(date__gte=datetime.date.today(), date__lt=(datetime.date.today() + datetime.timedelta(days=7))), many=True).data,
-            'upcoming': EventsSerializer(Events.objects.filter(date__gte=datetime.date.today() + datetime.timedelta(days=7)), many=True).data
+            "past": EventsSerializer(
+                Events.objects.filter(date__lt=datetime.date.today()), many=True
+            ).data,
+            "this_week": EventsSerializer(
+                Events.objects.filter(
+                    date__gte=datetime.date.today(),
+                    date__lt=(datetime.date.today() +
+                              datetime.timedelta(days=7)),
+                ),
+                many=True,
+            ).data,
+            "upcoming": EventsSerializer(
+                Events.objects.filter(
+                    date__gte=datetime.date.today() + datetime.timedelta(days=7)
+                ),
+                many=True,
+            ).data,
         }
         return Response(data, status=status.HTTP_200_OK)
-
 
 
 class MentorDocsView (generics.ListCreateAPIView):
@@ -152,43 +166,52 @@ def send_email(request):
     serializer = RaisedQuerySerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        query_id = serializer.data['id']
-        query_content = serializer.data['query']
-        query_name = serializer.data['name']
-        query_email = serializer.data['email']
-        subject = ('#'+str(query_id)+' Query raised from smp.iitr.ac.in')
-        message = ''
+        query_id = serializer.data["id"]
+        query_content = serializer.data["query"]
+        query_name = serializer.data["name"]
+        query_email = serializer.data["email"]
+        subject = "#" + str(query_id) + " Query raised from smp.iitr.ac.in"
+        message = ""
         recepient = EMAIL_SEND_TO_ADMIN
 
         html_message = loader.render_to_string(
-            'mail_template/raise_query.html',
+            "mail_template/raise_query.html",
             {
-                'reciever_name': 'Laksh',
-                'query_name':  query_name,
-                'query_content': query_content,
-                'query_email': query_email,
-                'query_id': query_id
-            }
+                "reciever_name": "Laksh",
+                "query_name": query_name,
+                "query_content": query_content,
+                "query_email": query_email,
+                "query_id": query_id,
+            },
         )
-        send_mail(subject, message, EMAIL_HOST_USER, [
-                  recepient], fail_silently=False, html_message=html_message)
+        send_mail(
+            subject,
+            message,
+            EMAIL_HOST_USER,
+            [recepient],
+            fail_silently=False,
+            html_message=html_message,
+        )
 
 
-@api_view(('POST',))
+@api_view(("POST",))
 @ensure_csrf_cookie
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def raisedQuery(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         r = requests.post(
-            'https://www.google.com/recaptcha/api/siteverify',
+            "https://www.google.com/recaptcha/api/siteverify",
             data={
-                'secret': RECAPTCHA_SECRET_KEY,
-                'response': request.data['g-recaptcha-response'],
-                'remoteip': get_client_ip(request),
-            }
+                "secret": RECAPTCHA_SECRET_KEY,
+                "response": request.data["g-recaptcha-response"],
+                "remoteip": get_client_ip(request),
+            },
         )
-        if r.json()['success']:
+        if r.json()["success"]:
             send_email(request)
-            return Response(data={'post': 'post'}, status=status.HTTP_201_CREATED)
-        return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-    return Response(data={'post': 'post'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+            return Response(data={"post": "post"}, status=status.HTTP_201_CREATED)
+        return Response(
+            data={"error": "ReCAPTCHA not verified."},
+            status=status.HTTP_406_NOT_ACCEPTABLE,
+        )
+    return Response(data={"post": "post"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import './style/App.scss';
-import Loadable from 'react-loadable';
-import Loader from './components/Loader';
-import {Flash} from './components/Flash';
-import Bus from 'utils/Bus';
+import React, { useState, useEffect } from "react";
+import "./style/App.scss";
+import Loadable from "react-loadable";
+import Loader from "./components/Loader";
+import { Flash } from "./components/Flash";
+import Bus from "utils/Bus";
 
 var methods = require("./api/methods/");
 
@@ -32,7 +32,8 @@ function App() {
   const [interests, setInterests] = useState([]);
   const [groups, setGroups] = useState([]);
 
-  window.flash = (message, type="success") => Bus.emit('flash',({message,type}));
+  window.flash = (message, type = "success") =>
+    Bus.emit("flash", { message, type });
 
   const fetchBlogsIfEmpty = () => {
     if (!blogs || blogs.length === 0) {
@@ -103,12 +104,12 @@ function App() {
       <Header />
       <div className="router-footer-container">
         <Flash />
-        <RouterView 
-          blogs={blogs} 
-          events={events} 
+        <RouterView
+          blogs={blogs}
+          events={events}
           blogCategory={blogCategory}
-          team={team} 
-          mentors={mentors} 
+          team={team}
+          mentors={mentors}
           mentorsDocs={mentorsDocs}
           faqs={faqs}
           branches={branches}

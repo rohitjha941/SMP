@@ -1,14 +1,14 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 
 .text {
-    color: $grey-level-0_7;
-    font-size: 1.8em;
-    // text-align: center;
-    line-height: 1.6em;
-    font-weight: bold;
-    @media screen and (min-width: $break){
-        font-weight: 600;
-        font-size: 3.5rem;
-        line-height: 4.5625rem;
-    }
+  color: $grey-level-0_7;
+  font-size: 1.8em;
+  // text-align: center;
+  line-height: 1.6em;
+  font-weight: bold;
+  @media screen and (min-width: $break) {
+    font-weight: 600;
+    font-size: 3.5rem;
+    line-height: 4.5625rem;
+  }
 }
