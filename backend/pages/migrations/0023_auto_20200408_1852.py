@@ -42,7 +42,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='mentor',
             name='photo',
-            field=models.ImageField(max_length=200, upload_to='mentors/images'),
+            field=models.ImageField(
+                max_length=200, upload_to='mentors/images'),
         ),
         migrations.AlterField(
             model_name='studentteam',

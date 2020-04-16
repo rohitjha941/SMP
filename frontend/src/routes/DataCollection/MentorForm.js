@@ -4,10 +4,10 @@ import styles from "./MentorForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import 'bootstrap/dist/css/bootstrap.css';
-import {createMentor} from 'api/methods';
-import LoadingOverlay from '../../components/LoadingOverlay'
-import {Redirect} from 'react-router-dom'
+import "bootstrap/dist/css/bootstrap.css";
+import { createMentor } from "api/methods";
+import LoadingOverlay from "../../components/LoadingOverlay";
+import { Redirect } from "react-router-dom";
 const animatedComponents = makeAnimated();
 const yearOptions = [
   {
@@ -46,8 +46,8 @@ class MentorForm extends Component {
       branchOptions: [],
       interestOptions: [],
       groupsOptions: [],
-      isLoading:false,
-      redirect:false,
+      isLoading: false,
+      redirect: false,
     };
   }
   handleChange = (e) => {
@@ -135,7 +135,7 @@ class MentorForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({isLoading:true})
+    this.setState({ isLoading: true });
     const {
       name,
       year,
@@ -154,48 +154,51 @@ class MentorForm extends Component {
     } = this.state;
 
     const data = {
-      name:name,
-      year:year,
-      enrollno:enrollno,
-      branch:branch,
-      interest:interest,
-      email:email,
-      mobile:mobile,
-      image:image,
-      resume:resume,
-      facebook:facebook,
-      linkden:linkden,
-      groups:groups,
-      achievements:achievements,
-      internships:internships,
-    }
+      name: name,
+      year: year,
+      enrollno: enrollno,
+      branch: branch,
+      interest: interest,
+      email: email,
+      mobile: mobile,
+      image: image,
+      resume: resume,
+      facebook: facebook,
+      linkden: linkden,
+      groups: groups,
+      achievements: achievements,
+      internships: internships,
+    };
     let response = createMentor(data);
-    console.log(response)
-    if(response){
-      window.flash("Your response has been succesfully recorded")
+    console.log(response);
+    if (response) {
+      window.flash("Your response has been succesfully recorded");
       this.setState({
-        name:"",
-        year:"",
-        enrollno:"",
-        branch:"",
-        interest:[],
-        email:"",
-        mobile:"",
-        image:null,
-        resume:null,
-        facebook:"",
-        linkden:"",
-        groups:[],
-        achievements:[],
-        internships:[],
-        redirect:true,
-        isLoading:false
-      })
-    }else{
-      window.flash('We are unable to process your request right now. Please try again later!',"error");
+        name: "",
+        year: "",
+        enrollno: "",
+        branch: "",
+        interest: [],
+        email: "",
+        mobile: "",
+        image: null,
+        resume: null,
+        facebook: "",
+        linkden: "",
+        groups: [],
+        achievements: [],
+        internships: [],
+        redirect: true,
+        isLoading: false,
+      });
+    } else {
+      window.flash(
+        "We are unable to process your request right now. Please try again later!",
+        "error"
+      );
       this.setState({
-        isLoading:false,
-      })
+        isLoading: false,
+      });
     }
   };
   componentDidMount() {
@@ -239,12 +242,12 @@ class MentorForm extends Component {
     });
   }
   render() {
-    if(this.state.redirect){
-      return <Redirect to="/"/>
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
     }
     return (
       <>
-      {this.state.isLoading  ? <LoadingOverlay/> : null}
+        {this.state.isLoading ? <LoadingOverlay /> : null}
         <div className={styles.MainWrapper}>
           <h2 className={styles.heading}>
             Mentors' <span className="color-red">Data</span>

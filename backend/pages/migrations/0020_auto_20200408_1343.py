@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='studentteam',
             name='position',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='team_position', to='pages.TeamPosition'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='team_position', to='pages.TeamPosition'),
         ),
     ]

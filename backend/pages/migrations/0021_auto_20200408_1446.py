@@ -13,12 +13,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='studentteam',
             name='vertical',
-            field=models.CharField(blank=True, choices=[('Admin', 'Admin'), ('Operations', 'Operations'), ('WebD', 'WebD'), ('Eventts', 'Events'), ('Content', 'Content'), ('Design', 'Design')], max_length=100, null=True),
+            field=models.CharField(blank=True, choices=[('Admin', 'Admin'), ('Operations', 'Operations'), ('WebD', 'WebD'), (
+                'Eventts', 'Events'), ('Content', 'Content'), ('Design', 'Design')], max_length=100, null=True),
         ),
         migrations.AlterField(
             model_name='studentteam',
             name='position',
-            field=models.CharField(blank=True, choices=[('Manager', 'Manager'), ('Coordinator', 'Coordinator')], max_length=100, null=True),
+            field=models.CharField(blank=True, choices=[(
+                'Manager', 'Manager'), ('Coordinator', 'Coordinator')], max_length=100, null=True),
         ),
         migrations.DeleteModel(
             name='TeamPosition',
