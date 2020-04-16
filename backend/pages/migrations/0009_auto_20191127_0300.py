@@ -6,23 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0008_blogs'),
+        ("pages", "0008_blogs"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blogs',
-            name='author',
-            field=models.CharField(default='', max_length=100),
+            model_name="blogs",
+            name="author",
+            field=models.CharField(default="", max_length=100),
         ),
         migrations.AddField(
-            model_name='blogs',
-            name='created_at',
+            model_name="blogs",
+            name="created_at",
             field=models.DateField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='blogs',
-            name='thumbnail',
-            field=models.ImageField(blank=True, max_length=200, null=True, upload_to='blogs/'),
+            model_name="blogs",
+            name="thumbnail",
+            field=models.ImageField(
+                blank=True, max_length=200, null=True, upload_to="blogs/"
+            ),
         ),
     ]

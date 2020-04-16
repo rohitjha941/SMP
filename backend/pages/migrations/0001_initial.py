@@ -7,24 +7,39 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Home',
+            name="Home",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('smp_description', models.TextField(default='', max_length=1000)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("smp_description", models.TextField(default="", max_length=1000)),
             ],
         ),
         migrations.CreateModel(
-            name='HomeVision',
+            name="HomeVision",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(default='', max_length=1000)),
-                ('description', models.TextField(default='', max_length=1000)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='home/')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(default="", max_length=1000)),
+                ("description", models.TextField(default="", max_length=1000)),
+                ("image", models.ImageField(blank=True, null=True, upload_to="home/")),
             ],
         ),
     ]

@@ -1,56 +1,56 @@
-@import '../../style/common.scss';
-.container{
-    padding:5%;
-    min-height: 100vh;
-    position: absolute;
-    width:100%;
-    background:$white;
-    z-index:100;
-    top:-8%;
+@import "../../style/common.scss";
+.container {
+  padding: 5%;
+  min-height: 100vh;
+  position: absolute;
+  width: 100%;
+  background: $white;
+  z-index: 100;
+  top: -8%;
 }
-.button{
-    background: white;
-    // float:left;
-    margin: 0.375rem 0.75rem 0.375rem 0;
-}
-
-.section{
-    margin-top: 1.5rem;
+.button {
+  background: white;
+  // float:left;
+  margin: 0.375rem 0.75rem 0.375rem 0;
 }
 
-.sectionHeading{
-    font-weight: 500;
-    font-size: 0.9375rem;
-    line-height: 1.1875rem;
-    color: $grey-level-0_6;
-    display: inline-block;
+.section {
+  margin-top: 1.5rem;
+}
+
+.sectionHeading {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  line-height: 1.1875rem;
+  color: $grey-level-0_6;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.375rem;
+}
+
+hr {
+  width: 100vw;
+  margin-left: -5%;
+  border: 0.0625rem solid $grey-level-0_05;
+  margin-top: 2.625rem;
+}
+
+.apply {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: auto;
+  padding: auto;
+  li {
+    margin: 0.6875rem auto;
     width: 100%;
-    margin-bottom: 0.375rem;
-}
-
-hr{
-    width:100vw;
-    margin-left: -5%;
-    border: 0.0625rem solid $grey-level-0_05;
-    margin-top: 2.625rem;
-}
-
-.apply{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    margin:auto;
-    padding:auto;
-    li{
-        margin: 0.6875rem auto;
-        width:100%;
-        button{
-            width:95%;
-            font-size: 0.875rem;
-            line-height: 1.125rem;
-        }
+    button {
+      width: 95%;
+      font-size: 0.875rem;
+      line-height: 1.125rem;
     }
+  }
 }
 
-.counter{
-    color: $blue-text;
+.counter {
+  color: $blue-text;
 }

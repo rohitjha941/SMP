@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0011_studentteam_position'),
+        ("pages", "0011_studentteam_position"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='studentteam',
-            name='email',
-            field=models.CharField(default='', max_length=100),
+            model_name="studentteam",
+            name="email",
+            field=models.CharField(default="", max_length=100),
         ),
         migrations.AddField(
-            model_name='studentteam',
-            name='mobile',
-            field=models.CharField(default='', max_length=100),
+            model_name="studentteam",
+            name="mobile",
+            field=models.CharField(default="", max_length=100),
         ),
     ]

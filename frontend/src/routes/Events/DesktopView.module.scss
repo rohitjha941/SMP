@@ -1,40 +1,40 @@
-@import '../../style/common.scss';
-.mainWrapper{
-    width:82.45%;
-    margin:auto;
+@import "../../style/common.scss";
+.mainWrapper {
+  width: 82.45%;
+  margin: auto;
 }
-.mainHeading{
-    font-size: 3.125rem;
-    line-height: 4.0625rem;
+.mainHeading {
+  font-size: 3.125rem;
+  line-height: 4.0625rem;
 }
-.innerMainWrapper{
-    width:90%;
-    margin:auto;
+.innerMainWrapper {
+  width: 90%;
+  margin: auto;
 }
-.sectionHeading{
-    font-size: 1.875rem;
-    line-height: 2.4375;
-    font-weight: 500;
-    text-align: left;
-    margin-top: 5%;
-    margin-bottom: 3%;
+.sectionHeading {
+  font-size: 1.875rem;
+  line-height: 2.4375;
+  font-weight: 500;
+  text-align: left;
+  margin-top: 5%;
+  margin-bottom: 3%;
 }
-.ul1{
-    width:100%;
-    li{
-        padding-bottom:5.935rem;
-    }
+.ul1 {
+  width: 100%;
+  li {
+    padding-bottom: 5.935rem;
+  }
 }
-.ul2{
-    width:100%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    li:nth-child(odd){
-        margin-bottom: 10%;
-        padding-right: 20%;
-    }
-    li:nth-child(even){
-        padding-left: 20%;
-    }
-}   
+.ul2 {
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  li:nth-child(odd) {
+    margin-bottom: 10%;
+    padding-right: 20%;
+  }
+  li:nth-child(even) {
+    padding-left: 20%;
+  }
+}

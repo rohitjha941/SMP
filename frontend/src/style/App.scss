@@ -35,13 +35,12 @@ div.router-footer-container {
   width: 100%;
 }
 
-div.header-container{
+div.header-container {
   position: fixed;
   background: $white;
   border-bottom: 0.0625rem solid $grey-level-0_05;
   width: 100%;
 }
-
 
 div.about {
   // div {
@@ -56,14 +55,14 @@ div.queries {
   padding: 5%;
   width: 100%;
   font-size: 1rem;
-  @media screen and (max-width: $break){
+  @media screen and (max-width: $break) {
     width: 100%;
   }
 }
 
 div.hamburger {
   display: flex;
-  @media screen and (min-width: $break){
+  @media screen and (min-width: $break) {
     display: none;
   }
   flex-direction: column;
@@ -72,20 +71,19 @@ div.hamburger {
   div {
     background-color: $grey;
     height: 0.125rem;
-    width:0.9375rem;
-    transition: all .2s ease-in-out;
+    width: 0.9375rem;
+    transition: all 0.2s ease-in-out;
   }
-  &.cross{
-    div{
-      &:nth-child(1){
+  &.cross {
+    div {
+      &:nth-child(1) {
         transform: rotate(45deg) translateY(0.3125rem);
       }
-      &:nth-child(2){
+      &:nth-child(2) {
         opacity: 0;
       }
-      &:nth-child(3){
+      &:nth-child(3) {
         transform: rotate(-45deg) translateY(-0.3125rem);
-
       }
     }
   }

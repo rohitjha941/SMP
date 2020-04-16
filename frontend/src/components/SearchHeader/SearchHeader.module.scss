@@ -1,60 +1,60 @@
-@import '../../style/common.scss';
-.container{
-    top:0;
-    height:8%;
-    width:100%;
-    ul{
-        display: grid;
-        grid-template-columns: 10% 80% 10%;
-    }
-    border-bottom: 0.0625rem solid $grey-level-0_05;
-    margin-bottom: 0.8125rem;
-    margin-top:0;
-    padding-bottom:0.5rem;
+@import "../../style/common.scss";
+.container {
+  top: 0;
+  height: 8%;
+  width: 100%;
+  ul {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+  }
+  border-bottom: 0.0625rem solid $grey-level-0_05;
+  margin-bottom: 0.8125rem;
+  margin-top: 0;
+  padding-bottom: 0.5rem;
 }
 
-.filterIcon{
-    display: flex;
-    flex-direction: column;
-    height: 0.6rem;
-    width:0.9375rem;
-    justify-content: space-between;
-    margin:0.5rem auto;
-    span {
-      background-color: $grey;
-      height: 0.10125rem;
-      border-radius: 0.0625rem;
-      &:nth-child(1){
-        width:0.9375rem;
-      }
-      &:nth-child(2){
-        width:0.75rem;
-        margin-right:0;
-        margin-left: auto;
-      }
-      &:nth-child(3){
-        width:0.5rem;
-        margin-right:0;
-        margin-left: auto;
-      }
+.filterIcon {
+  display: flex;
+  flex-direction: column;
+  height: 0.6rem;
+  width: 0.9375rem;
+  justify-content: space-between;
+  margin: 0.5rem auto;
+  span {
+    background-color: $grey;
+    height: 0.10125rem;
+    border-radius: 0.0625rem;
+    &:nth-child(1) {
+      width: 0.9375rem;
     }
+    &:nth-child(2) {
+      width: 0.75rem;
+      margin-right: 0;
+      margin-left: auto;
+    }
+    &:nth-child(3) {
+      width: 0.5rem;
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
 }
 
-.searchBox{
-    background: rgba(0, 0, 0, 0.01);
-    border: 0.036rem solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    border-radius: 0.18rem;
-    width:100%;
-    min-height: 2rem;
-    padding: 0.5rem auto 0.5rem 0.625rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color: $grey-level-0_5;
-    &:focus{
-      outline:none;
-    }
+.searchBox {
+  background: rgba(0, 0, 0, 0.01);
+  border: 0.036rem solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  border-radius: 0.18rem;
+  width: 100%;
+  min-height: 2rem;
+  padding: 0.5rem auto 0.5rem 0.625rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: $grey-level-0_5;
+  &:focus {
+    outline: none;
+  }
 }
-.backArrow{
-    margin:0.625rem auto;
+.backArrow {
+  margin: 0.625rem auto;
 }

@@ -1,14 +1,14 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 
 .text {
-    color: $grey-level-0_6;
-    font-size: 1.2em;
-    text-align: center;
-    line-height: 1.6em;
-    @media screen and (min-width:$break-tablet){
-        // position:absolute;
-        margin-top: 3.125rem;
-        text-align: left;
-        width:34.65vw;
-    }
+  color: $grey-level-0_6;
+  font-size: 1.2em;
+  text-align: center;
+  line-height: 1.6em;
+  @media screen and (min-width: $break-tablet) {
+    // position:absolute;
+    margin-top: 3.125rem;
+    text-align: left;
+    width: 34.65vw;
+  }
 }
