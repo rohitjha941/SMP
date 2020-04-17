@@ -278,10 +278,6 @@ class MentorIntern(models.Model):
         null=True
     )
 
-    facebook = models.URLField(max_length=1000, db_index=True, blank=True)
-    linkden = models.URLField(max_length=1000, db_index=True, blank=True)
-    branch = models.CharField(default="", max_length=100,)
-
 
 class ContactDetails(models.Model):
     name = models.CharField(
