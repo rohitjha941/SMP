@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
                                     max_length=1000),
                 ),
                 (
-                    "linkden",
+                    "linkedin",
                     models.URLField(blank=True, db_index=True,
                                     max_length=1000),
                 ),

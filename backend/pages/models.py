@@ -111,9 +111,9 @@ class StudentTeam(models.Model):
     enrollno = models.IntegerField(
         null=True
     )
-    # Field Containing Linkden URL
+    # Field Containing linkedin URL
 
-    linkden = models.URLField(
+    linkedin = models.URLField(
         max_length=1000,
         db_index=True,
 
@@ -221,7 +221,7 @@ class Mentor(models.Model):
         db_index=True,
         blank=True
     )
-    linkden = models.URLField(
+    linkedin = models.URLField(
         max_length=1000,
         db_index=True,
         blank=True
@@ -295,7 +295,7 @@ class ContactDetails(models.Model):
 
         blank=True
     )
-    linkden = models.URLField(
+    linkedin = models.URLField(
         max_length=1000,
         db_index=True,
 
