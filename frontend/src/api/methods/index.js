@@ -144,7 +144,9 @@ const postMentorFormData = (postData) => {
     formData.append("groups", group_id);
   });
 
-  console.log(formData);
+  formData.append("achievements", JSON.stringify(achievements));
+  formData.append("interns", JSON.stringify(internships));
+
   return axios.post(MENTORS, formData);
 };
 

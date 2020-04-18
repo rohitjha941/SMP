@@ -1,6 +1,7 @@
 import datetime
 from django.shortcuts import get_object_or_404, render
 
+import json
 import requests
 from django.core.mail import send_mail
 from django.db import transaction
@@ -57,16 +58,34 @@ class MentorView (APIView):
     def post(self, request):
         with transaction.atomic():
             request_data = request.data
-            mentor = MentorSerializer(data=request_data)
-            if mentor.is_valid():
-                mentor.save()
-                return Response(mentor.data)
+
+            mentor_serializer = MentorSerializer(data=request_data)
+            if mentor_serializer.is_valid():
+                mentor_serializer.save()
+
+                if 'achievements' in request_data:
+                    print(request_data)
+                    achievements = json.loads(
+                        request_data.get('achievements'))
+                    for achievement in achievements:
+                        achievement_data = dict(
+                            mentor=mentor_serializer.data.get('id'),
+                            achievement_name=achievement
+                        )
+                        achievement_serializer = MentorAchievementSerializer(
+                            data=achievement_data)
+                        if achievement_serializer.is_valid():
+                            achievement_serializer.save()
+                        else:
+                            raise Exception
+                        print(achievement_serializer.data)
             # achievements = MentorAchievementSerializer(
             #     data=request_data.achievement)
             # if achievements.is_valid():
             #     print(achievements)
             # else:
             #     raise Exception
+        return Response(dict(error=1), status=status.HTTP_409_CONFLICT)
 
 
 # class MentorAchievementView(APIView):
