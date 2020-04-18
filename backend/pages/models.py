@@ -209,12 +209,15 @@ class Mentor(models.Model):
     email = models.EmailField(
         max_length=200,
         default="",
+        unique=True
     )
     mobile = models.IntegerField(
-        null=True
+        null=True,
+        unique=True
     )
     enrollno = models.IntegerField(
-        null=True
+        null=True,
+        unique=True
     )
     facebook = models.URLField(
         max_length=1000,
