@@ -169,37 +169,37 @@ class MentorForm extends Component {
       achievements: achievements,
       internships: internships,
     };
-    let response = createMentor(data);
-    console.log(response);
-    if (response) {
-      window.flash("Your response has been succesfully recorded");
-      this.setState({
-        name: "",
-        year: "",
-        enrollno: "",
-        branch: "",
-        interest: [],
-        email: "",
-        mobile: "",
-        image: null,
-        resume: null,
-        facebook: "",
-        linkedin: "",
-        groups: [],
-        achievements: [],
-        internships: [],
-        redirect: true,
-        isLoading: false,
-      });
-    } else {
-      window.flash(
-        "We are unable to process your request right now. Please try again later!",
-        "error"
-      );
-      this.setState({
-        isLoading: false,
-      });
-    }
+    createMentor(data).then((response) => {
+      if (response.status === 201) {
+        window.flash("Your response has been succesfully recorded");
+        this.setState({
+          name: "",
+          year: "",
+          enrollno: "",
+          branch: "",
+          interest: [],
+          email: "",
+          mobile: "",
+          image: null,
+          resume: null,
+          facebook: "",
+          linkedin: "",
+          groups: [],
+          achievements: [],
+          internships: [],
+          redirect: true,
+          isLoading: false,
+        });
+      } else {
+        window.flash(
+          "We are unable to process your request right now. Please try again later!",
+          "error"
+        );
+        this.setState({
+          isLoading: false,
+        });
+      }
+    });
   };
   componentDidMount() {
     let branchOptions = [],

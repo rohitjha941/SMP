@@ -136,6 +136,9 @@ const postMentorFormData = (postData) => {
   formData.append("facebook", facebook);
   formData.append("linkedin", linkedin);
 
+  // We need to add each interest separately since
+  // DRF reads form data this way. An array can't be
+  // sent directly
   interest.forEach((interest_id) => {
     formData.append("interest", interest_id);
   });
@@ -144,6 +147,8 @@ const postMentorFormData = (postData) => {
     formData.append("groups", group_id);
   });
 
+  // This is also array data but this is being explicitly handled
+  // on backend with json parse.
   formData.append("achievements", JSON.stringify(achievements));
   formData.append("interns", JSON.stringify(internships));
 
@@ -151,7 +156,6 @@ const postMentorFormData = (postData) => {
 };
 
 const CreateMentor = (mentorData) => {
-  console.log(mentorData);
   const interestToCreate = mentorData.interest.filter(
     (i) => typeof i === "string"
   );
@@ -161,48 +165,34 @@ const CreateMentor = (mentorData) => {
   const interestData = {
     interests: interestToCreate,
   };
-  if (interestToCreate.length > 0) {
-    CreateInterests(interestData).then((response) => {
-      const createInterestIds = response.data.interest_ids;
-      const updatedInterestIds = [...existingInterestIds, ...createInterestIds];
-      mentorData.interest = updatedInterestIds; // This mutation should be avoided
-      postMentorFormData(mentorData)
-        .then(() => {})
-        .catch((error) => {
-          return false;
-        });
-    });
-  } else {
-    postMentorFormData(mentorData)
-      .then(() => {})
-      .catch((error) => {
-        return false;
+
+  return new Promise((resolve, reject) => {
+    if (interestToCreate.length > 0) {
+      CreateInterests(interestData).then((response) => {
+        const createInterestIds = response.data.interest_ids;
+        const updatedInterestIds = [
+          ...existingInterestIds,
+          ...createInterestIds,
+        ];
+        mentorData.interest = updatedInterestIds; // This mutation should be avoided
+        postMentorFormData(mentorData)
+          .then((response) => {
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(false);
+          });
       });
-  }
-
-  // .then((response) => {
-  //   // console.log(response)
-  //   let achievementData = {
-  //     mentor_id: response.data.id,
-  //     achievements: achievements,
-  //   };
-
-  //   let internshipsData = {
-  //     mentor_id: response.data.id,
-  //     interns: internships,
-  //   };
-  //   return axios.all([
-  //     axios.post(MENTORSACHIEVEMENTS, achievementData),
-  //     axios.post(MENTORSINTERN, internshipsData),
-  //   ]);
-  // })
-  // .then(
-  //   axios.spread((achievementsRes, internsRes) => {
-  //     // console.log(achievementsRes)
-  //     // console.log(internsRes)
-  //     return true;
-  //   })
-  // )
+    } else {
+      postMentorFormData(mentorData)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(false);
+        });
+    }
+  });
 };
 
 export const getBlogs = Blogs;
