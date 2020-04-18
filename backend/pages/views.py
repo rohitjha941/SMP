@@ -53,45 +53,50 @@ class ContactDetailsView(generics.ListAPIView):
 
 
 class MentorView (APIView):
+    def get(self, request):
+        return Response(MentorSerializer(Mentor.objects.all(), many=True).data, status=status.HTTP_200_OK)
+
     def post(self, request):
-        with transaction.atomic():
-            request_data = request.data
-            mentor_serializer = MentorSerializer(data=request_data)
-            if mentor_serializer.is_valid():
-                mentor_serializer.save()
+        try:
+            with transaction.atomic():
+                request_data = request.data
+                mentor_serializer = MentorSerializer(data=request_data)
+                if mentor_serializer.is_valid():
+                    mentor_serializer.save()
 
-                if 'achievements' in request_data:
-                    achievements = json.loads(
-                        request_data.get('achievements'))
-                    for achievement in achievements:
-                        achievement_data = dict(
-                            mentor=mentor_serializer.data.get('id'),
-                            achievement_name=achievement
-                        )
-                        achievement_serializer = MentorAchievementSerializer(
-                            data=achievement_data)
-                        if achievement_serializer.is_valid():
-                            achievement_serializer.save()
-                        else:
-                            raise Exception
+                    if 'achievements' in request_data:
+                        achievements = json.loads(
+                            request_data.get('achievements'))
+                        for achievement in achievements:
+                            achievement_data = dict(
+                                mentor=mentor_serializer.data.get('id'),
+                                achievement_name=achievement
+                            )
+                            achievement_serializer = MentorAchievementSerializer(
+                                data=achievement_data)
+                            if achievement_serializer.is_valid():
+                                achievement_serializer.save()
+                            else:
+                                raise Exception
 
-                if 'interns' in request_data:
-                    interns = json.loads(
-                        request_data.get('interns'))
-                    for intern in interns:
-                        intern_data = dict(
-                            mentor=mentor_serializer.data.get('id'),
-                            company=intern.get('company'),
-                            duration=intern.get('duration'),
-                            domain=intern.get('domain')
-                        )
-                        intern_serializer = MentorInternSerializer(
-                            data=intern_data)
-                        if intern_serializer.is_valid():
-                            intern_serializer.save()
-                        else:
-                            raise Exception
-        return Response(mentor_serializer.data, status=status.HTTP_201_CREATED)
+                    if 'interns' in request_data:
+                        interns = json.loads(
+                            request_data.get('interns'))
+                        for intern in interns:
+                            intern_data = dict(
+                                mentor=mentor_serializer.data.get('id'),
+                                company=intern.get('company'),
+                                duration=intern.get('duration'),
+                                domain=intern.get('domain')
+                            )
+                            intern_serializer = MentorInternSerializer(
+                                data=intern_data)
+                            if intern_serializer.is_valid():
+                                intern_serializer.save()
+                            else:
+                                raise Exception
+        except Exception:
+            return Response(mentor_serializer.data, status=status.HTTP_201_CREATED)
 
 
 class InterestView (generics.ListCreateAPIView):
