@@ -108,58 +108,56 @@ class MentorDocsView(viewsets.ModelViewSet):
     serializer_class = MentorDocsSerializer
 
 
-def send_email(request):
-    serializer = RaisedQuerySerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        query_id = serializer.data['id']
-        query_content = serializer.data['query']
-        query_name = serializer.data['name']
-        query_email = serializer.data['email']
-        subject = ('#' + str(query_id) + ' Query raised from smp.iitr.ac.in')
-        message = Mail(
-            from_email=DEFAULT_FROM_EMAIL,
-            to_emails=SEND_EMAIL_TO,
-            subject=subject,
-            html_content=loader.render_to_string(
-                'mail_template/raise_query.html',
-                {
-                    'reciever_name': RECEIVER_NAME,
-                    'query_name': query_name,
-                    'query_content': query_content,
-                    'query_email': query_email,
-                    'query_id': query_id
-                }
-            )
+def send_email(data):
+    query_id = data['id']
+    query_content = data['query']
+    query_name = data['name']
+    query_email = data['email']
+    subject = subject = '#{} Query raised from smp.iitr.ac.in'.format(query_id)
+    message = Mail(
+        from_email=DEFAULT_FROM_EMAIL,
+        to_emails=SEND_EMAIL_TO,
+        subject=subject,
+        html_content=loader.render_to_string(
+            'mail_template/raise_query.html',
+            {
+                'receiver_name': RECEIVER_NAME,
+                'query_name': query_name,
+                'query_content': query_content,
+                'query_email': query_email,
+                'query_id': query_id
+            }
         )
-        try:
-            sg = SendGridAPIClient(EMAIL_HOST_PASSWORD)
-            response = sg.send(message)
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
-        except Exception as e:
-            print(e.message)
+    )
+    try:
+        sg = SendGridAPIClient(EMAIL_HOST_PASSWORD)
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e.message)
 
 
-@api_view(("POST",))
+@api_view(('POST',))
 @ensure_csrf_cookie
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def raisedQuery(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         r = requests.post(
-            "https://www.google.com/recaptcha/api/siteverify",
+            'https://www.google.com/recaptcha/api/siteverify',
             data={
-                "secret": RECAPTCHA_SECRET_KEY,
-                "response": request.data["g-recaptcha-response"],
-                "remoteip": get_client_ip(request),
-            },
+                'secret': RECAPTCHA_SECRET_KEY,
+                'response': request.data['g-recaptcha-response'],
+                'remoteip': get_client_ip(request),
+            }
         )
-        if r.json()["success"]:
-            send_email(request)
-            return Response(data={"post": "post"}, status=status.HTTP_201_CREATED)
-        return Response(
-            data={"error": "ReCAPTCHA not verified."},
-            status=status.HTTP_406_NOT_ACCEPTABLE,
-        )
-    return Response(data={"post": "post"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        if r.json()['success']:
+            serializer = RaisedQuerySerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                send_email(serializer.data)
+                return Response(data={'query': serializer.data}, status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
