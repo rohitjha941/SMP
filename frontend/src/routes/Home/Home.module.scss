@@ -1,93 +1,92 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 .homeContainer {
-    & > * {
-        margin: 0 auto;
-        padding: 8%;
-        // width:80%;
-    }
+  & > * {
+    margin: 0 auto;
+    padding: 8%;
+    // width:80%;
+  }
 }
 
 .titleContainer {
-    width: 80%;
-    margin: 5% auto 0 5.56%;
+  width: 80%;
+  margin: 5% auto 0 5.56%;
 }
 
 .illustration {
+  width: 80%;
+  margin: 5% auto 0 auto;
+  img {
+    width: 100%;
+  }
+  @media screen and (min-width: $break-tablet) {
+    width: 56.25%;
+    position: absolute;
+    right: 2.3%;
+    top: 6.67vh;
+  }
+}
+
+.description {
+  width: 80%;
+  font-size: 1rem;
+  line-height: 150%;
+  margin: 5.014% auto 0 5.56%;
+}
+
+.learnMore {
+  margin: 5% auto 8.21% 5.56%;
+  display: block;
+  @media screen and (min-width: $break-tablet) {
+    display: none;
+  }
+}
+
+.InfoSection {
+  min-height: 100vh;
+}
+
+.title {
+  text-align: center;
+  color: $grey-level-0_7;
+  font-size: 1.8em;
+  line-height: 1.6em;
+  font-weight: bold;
+  @media screen and (min-width: $break-tablet) {
+    // position: absolute;
+    text-align: left;
+    // left: 9.86vw;
+    width: 50.42vw;
+    font-weight: 600;
+    font-size: 3.5rem;
+    line-height: 4.5625rem;
+  }
+}
+.learnMoreText {
+  display: none;
+  @media screen and (min-width: $break-tablet) {
+    cursor: pointer;
+    display: block;
+    color: $blue-text;
+    margin: 5% auto 0 5.56%;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
     width: 80%;
-    margin : 5% auto 0 auto;
+  }
+}
+
+.navDown {
+  display: none;
+  @media screen and (min-width: $break-tablet) {
+    cursor: pointer;
+    display: block;
+    width: 80%;
+    text-align: left;
+    margin: 5% auto 0 5.56%;
     img {
-        width: 100%;
+      height: 1.75rem;
+      width: 1.75rem;
+      margin-left: 0;
     }
-    @media screen and (min-width:$break-tablet){
-        width:56.25%;
-        position: absolute;
-        right: 2.3%;
-        top: 6.67vh;
-    }
-}
-
-.description  {
-    width: 80%;
-    font-size: 1rem;
-    line-height: 150%;
-    margin: 5.014% auto 0 5.56%;
-}
-
-.learnMore{
-    margin : 5% auto 8.21% 5.56%;
-    display:block; 
-    @media screen and (min-width:$break-tablet){
-        display: none;
-    }
-}
-
-.InfoSection{
-    min-height:100vh;
-}
-
-.title{
-    text-align: center;
-    color: $grey-level-0_7;
-    font-size: 1.8em;
-    line-height: 1.6em;
-    font-weight: bold;
-    @media screen and (min-width:$break-tablet){
-        // position: absolute;
-        text-align:left;
-        // left: 9.86vw;
-        width:50.42vw;
-        font-weight: 600;
-        font-size: 3.5rem;
-        line-height: 4.5625rem;
-    }
-}
-.learnMoreText{
-    display: none;
-    @media screen and (min-width:$break-tablet){
-        cursor:pointer; 
-        display: block;
-        color:$blue-text;
-        margin: 5% auto 0 5.56%;
-        font-weight: 500;
-        font-size: 1.25rem;
-        line-height: 1.625rem;
-        width: 80%;
-    }
-}
-
-.navDown{
-    display: none;
-    @media screen and (min-width:$break-tablet){
-        cursor:pointer;
-        display: block;
-        width: 80%;
-        text-align: left;
-        margin: 5% auto 0 5.56%;
-        img{
-            height:1.75rem;
-            width:1.75rem;
-            margin-left: 0;
-            
-        }
-    }
+  }
 }

@@ -1,49 +1,49 @@
-@import '../../style/common.scss';
-.mainWrapper{
-    width:64%;
-    margin: auto;
+@import "../../style/common.scss";
+.mainWrapper {
+  width: 64%;
+  margin: auto;
 }
-.heading{
-    margin: 1.9375rem auto 0 auto;
-    font-style: normal;
-    font-weight: 500;
+.heading {
+  margin: 1.9375rem auto 0 auto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.6875rem;
+  line-height: 2.1875rem;
+  text-align: center;
+  @media screen and (min-width: $break) {
+    font-size: 3.125rem;
+    line-height: 4.0625rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.categoryHeading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: $blue-text;
+  margin: 1.5625rem auto 0.8125rem auto;
+  text-align: left;
+  @media screen and (min-width: $break) {
     font-size: 1.6875rem;
     line-height: 2.1875rem;
-    text-align: center;
-    @media screen and (min-width:$break){
-        font-size: 3.125rem;
-        line-height: 4.0625rem;
-        margin-bottom: 2rem;
-    }
+  }
 }
 
-.categoryHeading{
-    font-style: normal;
-    font-weight: 500;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color:$blue-text;
-    margin: 1.5625rem auto 0.8125rem auto;
-    text-align: left;
-    @media screen and (min-width:$break){
-        font-size:1.6875rem;
-        line-height: 2.1875rem;
-        }
+.blogCardCommon {
+  margin: 0 auto 0 auto;
+  width: 100%;
 }
 
-.blogCardCommon{
-    margin: 0 auto 0 auto;
-    width: 100%;
+.hr {
+  margin: 1.25rem auto 0.8125rem auto;
+  width: 100%;
+  height: 0;
+  border: 0.03125rem solid $grey-level-0_1;
 }
 
-.hr{
-    margin: 1.25rem auto 0.8125rem auto;
-    width: 100%;  
-    height: 0;
-    border: 0.03125rem solid $grey-level-0_1;
-}
-
-.viewMore{
-    margin: 0 auto 3.6825rem auto;
-    display: block;
+.viewMore {
+  margin: 0 auto 3.6825rem auto;
+  display: block;
 }

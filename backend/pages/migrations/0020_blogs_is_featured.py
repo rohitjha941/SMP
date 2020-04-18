@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0019_auto_20200406_1754'),
+        ("pages", "0019_auto_20200406_1754"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blogs',
-            name='is_featured',
+            model_name="blogs",
+            name="is_featured",
             field=models.BooleanField(default=False),
         ),
     ]

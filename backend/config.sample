@@ -1,8 +1,8 @@
 recaptcha:
-  recaptcha_secret_key  : 
+  recaptcha_secret_key  :
 
 sendgrid:
-  sendgrid_api_key : 
-  from_email : 
-  send_to_email : 
-  receiver_name: 
+  sendgrid_api_key :
+  from_email :
+  send_to_email :
+  receiver_name:

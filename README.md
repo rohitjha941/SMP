@@ -1,52 +1,77 @@
-# Student Mentorship  Program 
+# Student Mentorship Program
+
 Official Portal of SMP IIT Roorkee
 
+## Boiler Plate for Django - React app
 
-# Boiler Plate for Django - React app
 - Clone the Repository
-- Install yarn [https://linuxize.com/post/how-to-install-yarn-on-ubuntu-18-04/]
+- Install yarn [<https://linuxize.com/post/how-to-install-yarn-on-ubuntu-18-04/]>
 - Install python
-- Install pip [https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/]
+- Install pip [<https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/]>
 - Install virtualenvironment
+
 ```sh
-- sudo pip3 install virtualenv 
+- sudo pip3 install virtualenv
 ```
 
-# Backend
+## Backend
 
 - Setup Backend
+
 ```sh
 - cd backend/
-- virtualenv myenv 
+- virtualenv myenv
 - source myenv/bin/activate
 ```
+
 - Install requirements
+
 ```sh
 - pip3 install -r r.txt
 ```
+
 - Create Admin
+
 ```sh
 - python manage.py createsuperuser
 ```
+
 - Create Config File named config.yml file and populate it as config.sample
 
-- Import all the sample databases ( from /backend/SampleDatabase ) into your local database [localhost:8000/backend/admin]
-- Configure your username and password for sending mail in backend/bankend/settings.py
+- Import all the sample databases ( from /backend/SampleDatabase )
+  into your local database [localhost:8000/backend/admin]
+- Configure your username and password for sending mail in backend/backend/settings.py
 - Run the backend server
+
 ```sh
 - python manage.py runserver
 ```
-# Frontend
+
+## Frontend
+
 - Setup Frontend
 - In a new shell
+
 ```sh
 - cd frontend/
 - yarn install
 ```
+
 - Make a .env file as .env.sample
 - run frontend server
+
 ```sh
 - yarn start
 ```
 
+## Additional development instructions
 
+### Install pre-commit
+
+```sh
+pip install pre-commit
+pre-commit install
+```
+
+Now git hooks will be activated.
+Every commit will be validated for code style and linting errors.

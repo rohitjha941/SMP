@@ -1,0 +1,19 @@
+@import "../../style/common.scss";
+.cross {
+  margin: auto;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+  display: inline-block;
+  div {
+    margin-top: 0.5rem;
+    background-color: $grey;
+    height: 0.125rem;
+    width: 1.2rem;
+    &:nth-child(1) {
+      transform: rotate(45deg) translateY(0.45rem);
+    }
+    &:nth-child(2) {
+      transform: rotate(-45deg) translateY(-0.45rem);
+    }
+  }
+}

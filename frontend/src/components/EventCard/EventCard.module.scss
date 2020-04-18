@@ -1,84 +1,80 @@
-@import '../../style/common.scss';
+@import "../../style/common.scss";
 
 .containersm {
-    width:100%;
-    max-width: 90vw;
+  width: 100%;
+  max-width: 90vw;
 }
 
-.containermd{
-    width:100%;
-    max-width: 90vw;
+.containermd {
+  width: 100%;
+  max-width: 90vw;
 }
 
-.containerlg{
-    max-width: 90vw;
-
+.containerlg {
+  max-width: 90vw;
 }
 
-.containerxl{
-    max-width: 90vw;
+.containerxl {
+  max-width: 90vw;
 }
 
-.containerSide{
-    display:block;
-    text-align: left;
-    @media screen and (max-width: $break-events-side-container){
-        width:95%;
-    }
+.containerSide {
+  display: block;
+  text-align: left;
+  @media screen and (max-width: $break-events-side-container) {
+    width: 95%;
+  }
 }
 
-
-.eventImage{
-    width: 98.54%;
-    max-width: 90vw;
-    display:block;
-    border-radius: 0.3125rem;
+.eventImage {
+  width: 98.54%;
+  max-width: 90vw;
+  display: block;
+  border-radius: 0.3125rem;
 }
 
-.thisWeek{
-    display:block;
-    position: absolute;
-    z-index:11;
-    margin-top:0.75rem;
-    margin-left: -0.125rem;
+.thisWeek {
+  display: block;
+  position: absolute;
+  z-index: 11;
+  margin-top: 0.75rem;
+  margin-left: -0.125rem;
 }
 
-@mixin heading-mixin{
-    text-align:left;
-    display:block;
-    font-weight: bold;
-    color: $grey-level-0_8;
-    margin: 0.625rem auto 0.625rem 0;
+@mixin heading-mixin {
+  text-align: left;
+  display: block;
+  font-weight: bold;
+  color: $grey-level-0_8;
+  margin: 0.625rem auto 0.625rem 0;
 }
-.heading{
-    @include heading-mixin;
+.heading {
+  @include heading-mixin;
 }
 .headingsm {
-    @extend .heading;
-    font-size: 0.9375rem;
-    line-height: 1.1875rem;
+  @extend .heading;
+  font-size: 0.9375rem;
+  line-height: 1.1875rem;
 }
 
 .headingmd {
-    @extend .heading;
-    font-size: 1.125rem;
-    line-height: 1.25rem;
+  @extend .heading;
+  font-size: 1.125rem;
+  line-height: 1.25rem;
 }
 .headinglg {
-    @extend .heading;
-    font-size: 1.25rem;
-    line-height: 1.625rem;
+  @extend .heading;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
 }
 .headingxl {
-    @extend .heading;
-    font-size: 1.875rem;
-    line-height: 2.4375rem;
+  @extend .heading;
+  font-size: 1.875rem;
+  line-height: 2.4375rem;
 }
 
-.sideViewImg{
-    width:41.63%;
-    display: inline-block;
-    vertical-align: top;
+.sideViewImg {
+  width: 41.63%;
+  display: inline-block;
+  vertical-align: top;
 }
-
-

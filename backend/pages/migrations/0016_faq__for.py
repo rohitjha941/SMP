@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0015_auto_20200228_0913'),
+        ("pages", "0015_auto_20200228_0913"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='faq',
-            name='_for',
-            field=models.CharField(blank=True, choices=[('mentor', 'MENTOR'), ('mentee', 'MENTEE')], max_length=100, null=True),
+            model_name="faq",
+            name="_for",
+            field=models.CharField(
+                blank=True,
+                choices=[("mentor", "MENTOR"), ("mentee", "MENTEE")],
+                max_length=100,
+                null=True,
+            ),
         ),
     ]
