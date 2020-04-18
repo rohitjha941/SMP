@@ -96,7 +96,12 @@ class MentorView (APIView):
                             else:
                                 raise Exception
         except Exception:
-            return Response(mentor_serializer.data, status=status.HTTP_201_CREATED)
+            error_data = dict(
+                error=True,
+                message="Mentor already exists"
+            )
+            return Response(error_data, status=status.HTTP_409_CONFLICT)
+        return Response(mentor_serializer.data, status=status.HTTP_201_CREATED)
 
 
 class InterestView (generics.ListCreateAPIView):
