@@ -31,7 +31,7 @@ class MentorForm extends Component {
       year: "",
       enrollno: "",
       branch: "",
-      intertest: [],
+      interests: [],
       achievements: [],
       internships: [],
       email: "",
@@ -39,7 +39,7 @@ class MentorForm extends Component {
       image: null,
       resume: null,
       facebook: "",
-      linkden: "",
+      linkedin: "",
       career: "",
       groups: [],
       createdInterest: [],
@@ -147,7 +147,7 @@ class MentorForm extends Component {
       image,
       resume,
       facebook,
-      linkden,
+      linkedin,
       groups,
       achievements,
       internships,
@@ -164,7 +164,7 @@ class MentorForm extends Component {
       image: image,
       resume: resume,
       facebook: facebook,
-      linkden: linkden,
+      linkedin: linkedin,
       groups: groups,
       achievements: achievements,
       internships: internships,
@@ -184,7 +184,7 @@ class MentorForm extends Component {
         image: null,
         resume: null,
         facebook: "",
-        linkden: "",
+        linkedin: "",
         groups: [],
         achievements: [],
         internships: [],
@@ -544,13 +544,13 @@ class MentorForm extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="linkden">LinkedIn URL</label>
+              <label htmlFor="linkedin">LinkedIn URL</label>
               <input
                 type="url"
                 className="form-control"
-                value={this.state.linkden}
-                id="linkden"
-                name="linkden"
+                value={this.state.linkedin}
+                id="linkedin"
+                name="linkedin"
                 placeholder="Enter your LinkedIn URL"
                 onChange={this.handleChange}
               />

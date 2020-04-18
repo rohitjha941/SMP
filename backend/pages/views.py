@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 
 import requests
 from django.core.mail import send_mail
+from django.db import transaction
 from django.shortcuts import render
 from django.template import loader
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -50,49 +51,62 @@ class ContactDetailsView(generics.ListAPIView):
     serializer_class = ContactDetailsSerializer
 
 
-class MentorView (generics.ListCreateAPIView):
-    queryset = Mentor.objects.all()
-    serializer_class = MentorSerializer
-
-
-class MentorAchievementView(APIView):
+class MentorView (APIView):
+    # queryset = Mentor.objects.all()
+    # serializer_class = MentorSerializer
     def post(self, request):
-        mentor_id = ""
-        achievements = []
-        try:
-            mentor_id = request.data["mentor_id"]
-            achievements = request.data["achievements"]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
-        mentor = get_object_or_404(Mentor, id=mentor_id)
-        for achievement in achievements:
-            MentorAchievement.objects.create(
-                mentor=mentor,
-                achievement_name=achievement
-            )
-        return Response(status=status.HTTP_201_CREATED)
+        with transaction.atomic():
+            request_data = request.data
+            mentor = MentorSerializer(data=request_data)
+            if mentor.is_valid():
+                mentor.save()
+                return Response(mentor.data)
+            # achievements = MentorAchievementSerializer(
+            #     data=request_data.achievement)
+            # if achievements.is_valid():
+            #     print(achievements)
+            # else:
+            #     raise Exception
 
 
-class MentorInternView(APIView):
-    def post(self, request):
-        mentor_id = ""
-        interns = []
-        try:
-            mentor_id = request.data["mentor_id"]
-            interns = request.data["interns"]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+# class MentorAchievementView(APIView):
+#     def post(self, request):
+#         mentor_id = ""
+#         achievements = []
+#         try:
+#             mentor_id = request.data["mentor_id"]
+#             achievements = request.data["achievements"]
+#         except:
+#             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        mentor = get_object_or_404(Mentor, id=mentor_id)
-        for intern in interns:
-            MentorIntern.objects.create(
-                mentor=mentor,
-                company=intern['company'],
-                duration=intern['duration'],
-                domain=intern['domain']
-            )
-        return Response(status=status.HTTP_201_CREATED)
+#         mentor = get_object_or_404(Mentor, id=mentor_id)
+#         for achievement in achievements:
+#             MentorAchievement.objects.create(
+#                 mentor=mentor,
+#                 achievement_name=achievement
+#             )
+#         return Response(status=status.HTTP_201_CREATED)
+
+
+# class MentorInternView(APIView):
+#     def post(self, request):
+#         mentor_id = ""
+#         interns = []
+#         try:
+#             mentor_id = request.data["mentor_id"]
+#             interns = request.data["interns"]
+#         except:
+#             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+#         mentor = get_object_or_404(Mentor, id=mentor_id)
+#         for intern in interns:
+#             MentorIntern.objects.create(
+#                 mentor=mentor,
+#                 company=intern['company'],
+#                 duration=intern['duration'],
+#                 domain=intern['domain']
+#             )
+#         return Response(status=status.HTTP_201_CREATED)
 
 
 class InterestView (generics.ListCreateAPIView):
