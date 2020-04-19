@@ -169,28 +169,33 @@ class MentorForm extends Component {
       achievements: achievements,
       internships: internships,
     };
-    createMentor(data).then((response) => {
-      if (response.status === 201) {
-        window.flash("Your response has been succesfully recorded");
-        this.setState({
-          name: "",
-          year: "",
-          enrollno: "",
-          branch: "",
-          interest: [],
-          email: "",
-          mobile: "",
-          image: null,
-          resume: null,
-          facebook: "",
-          linkedin: "",
-          groups: [],
-          achievements: [],
-          internships: [],
-          redirect: true,
-          isLoading: false,
-        });
-      } else {
+    createMentor(data)
+      .then((response) => {
+        if (response.status === 201) {
+          window.flash("Your response has been succesfully recorded");
+          this.setState({
+            name: "",
+            year: "",
+            enrollno: "",
+            branch: "",
+            interest: [],
+            email: "",
+            mobile: "",
+            image: null,
+            resume: null,
+            facebook: "",
+            linkedin: "",
+            groups: [],
+            achievements: [],
+            internships: [],
+            redirect: true,
+            isLoading: false,
+          });
+        }
+      })
+      .catch((error) => {
+        // TODO: Display error(s) from error response in flash message(s)
+        // console.log(error.data);
         window.flash(
           "We are unable to process your request right now. Please try again later!",
           "error"
@@ -198,8 +203,7 @@ class MentorForm extends Component {
         this.setState({
           isLoading: false,
         });
-      }
-    });
+      });
   };
   componentDidMount() {
     let branchOptions = [],

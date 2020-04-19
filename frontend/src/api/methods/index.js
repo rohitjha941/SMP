@@ -168,28 +168,32 @@ const CreateMentor = (mentorData) => {
 
   return new Promise((resolve, reject) => {
     if (interestToCreate.length > 0) {
-      CreateInterests(interestData).then((response) => {
-        const createInterestIds = response.data.interest_ids;
-        const updatedInterestIds = [
-          ...existingInterestIds,
-          ...createInterestIds,
-        ];
-        mentorData.interest = updatedInterestIds; // This mutation should be avoided
-        postMentorFormData(mentorData)
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(false);
-          });
-      });
+      CreateInterests(interestData)
+        .then((response) => {
+          const createInterestIds = response.data.interest_ids;
+          const updatedInterestIds = [
+            ...existingInterestIds,
+            ...createInterestIds,
+          ];
+          mentorData.interest = updatedInterestIds; // This mutation should be avoided
+          postMentorFormData(mentorData)
+            .then((response) => {
+              resolve(response);
+            })
+            .catch((error) => {
+              reject(error.response);
+            });
+        })
+        .catch((error) => {
+          reject(error.response);
+        });
     } else {
       postMentorFormData(mentorData)
         .then((response) => {
           resolve(response);
         })
         .catch((error) => {
-          reject(false);
+          reject(error.response);
         });
     }
   });
