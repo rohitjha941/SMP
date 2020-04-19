@@ -123,6 +123,7 @@ const postMentorFormData = (postData) => {
     groups,
     achievements,
     internships,
+    career,
   } = postData;
   let formData = new FormData();
   formData.append("name", name);
@@ -135,6 +136,7 @@ const postMentorFormData = (postData) => {
   formData.append("resume", resume);
   formData.append("facebook", facebook);
   formData.append("linkedin", linkedin);
+  formData.append("career", career);
 
   // We need to add each interest separately since
   // DRF reads form data this way. An array can't be

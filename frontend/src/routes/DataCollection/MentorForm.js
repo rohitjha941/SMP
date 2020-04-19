@@ -151,6 +151,7 @@ class MentorForm extends Component {
       groups,
       achievements,
       internships,
+      career,
     } = this.state;
 
     const data = {
@@ -168,6 +169,7 @@ class MentorForm extends Component {
       groups: groups,
       achievements: achievements,
       internships: internships,
+      career: career,
     };
     createMentor(data)
       .then((response) => {
@@ -194,7 +196,6 @@ class MentorForm extends Component {
         }
       })
       .catch((error) => {
-        // TODO: Display error(s) from error response in flash message(s)
         const errorData = error.data;
         let errorMessage = "";
         if (errorData.email) {

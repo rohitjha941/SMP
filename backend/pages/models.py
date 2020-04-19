@@ -240,6 +240,10 @@ class Mentor(models.Model):
         related_name="campus_groups_mentor",
         blank=True
     )
+    career = models.CharField(
+        max_length=100,
+        blank=True
+    )
 
 
 class MentorAchievement(models.Model):
