@@ -194,6 +194,7 @@ class MentorForm extends Component {
             internships: [],
             redirect: true,
             isLoading: false,
+            career: "",
           });
         }
       })
