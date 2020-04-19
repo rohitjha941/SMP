@@ -195,11 +195,18 @@ class MentorForm extends Component {
       })
       .catch((error) => {
         // TODO: Display error(s) from error response in flash message(s)
-        // console.log(error.data);
-        window.flash(
-          "We are unable to process your request right now. Please try again later!",
-          "error"
-        );
+        const errorData = error.data;
+        let errorMessage = "";
+        if (errorData.email) {
+          errorMessage += "This Email is already in use.\n";
+        }
+        if (errorData.enrollno) {
+          errorMessage += "This Enrollment No. is already in use.\n";
+        }
+        if (errorData.mobile) {
+          errorMessage += "This Mobile No. is already in use.";
+        }
+        window.flash(errorMessage, "error");
         this.setState({
           isLoading: false,
         });

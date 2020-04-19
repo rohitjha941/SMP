@@ -64,10 +64,8 @@ class MentorView (APIView):
             # avoiding inconsistent mentor data in case of query failure.
             with transaction.atomic():
                 request_data = request.data
-                print(request_data)
                 mentor_serializer = MentorSerializer(data=request_data)
                 last_used_serializer = mentor_serializer
-                print(mentor_serializer.is_valid())
                 if mentor_serializer.is_valid():
                     mentor_serializer.save()
                     if 'achievements' in request_data:
