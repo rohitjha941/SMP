@@ -57,13 +57,19 @@ class MentorView (APIView):
         return Response(MentorSerializer(Mentor.objects.all(), many=True).data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        last_used_serializer = None
         try:
+            # We will include serializer checks and raise Exception explicitly
+            # if they fail. Using atomic transaction will cause complete rollback
+            # avoiding inconsistent mentor data in case of query failure.
             with transaction.atomic():
                 request_data = request.data
+                print(request_data)
                 mentor_serializer = MentorSerializer(data=request_data)
+                last_used_serializer = mentor_serializer
+                print(mentor_serializer.is_valid())
                 if mentor_serializer.is_valid():
                     mentor_serializer.save()
-
                     if 'achievements' in request_data:
                         achievements = json.loads(
                             request_data.get('achievements'))
@@ -74,6 +80,7 @@ class MentorView (APIView):
                             )
                             achievement_serializer = MentorAchievementSerializer(
                                 data=achievement_data)
+                            last_used_serializer = achievement_serializer
                             if achievement_serializer.is_valid():
                                 achievement_serializer.save()
                             else:
@@ -91,16 +98,15 @@ class MentorView (APIView):
                             )
                             intern_serializer = MentorInternSerializer(
                                 data=intern_data)
+                            last_used_serializer = intern_serializer
                             if intern_serializer.is_valid():
                                 intern_serializer.save()
                             else:
                                 raise Exception
+                else:
+                    raise Exception
         except Exception:
-            error_data = dict(
-                error=True,
-                message="Mentor already exists"
-            )
-            return Response(error_data, status=status.HTTP_409_CONFLICT)
+            return Response(last_used_serializer.errors, status=status.HTTP_409_CONFLICT)
         return Response(mentor_serializer.data, status=status.HTTP_201_CREATED)
 
 
