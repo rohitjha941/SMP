@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 function WrappedComponent(props) {
   var blogCardContentCharacterLimit = props.textlimit ? props.textlimit : 100;
 
+  if (!props.blogData) {
+    return;
+  }
   var markup = props.blogData.text;
   var el = document.createElement("div");
   el.innerHTML = markup;

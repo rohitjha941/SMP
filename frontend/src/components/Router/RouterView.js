@@ -53,7 +53,14 @@ export default class RouterView extends Component {
             exact
             path="/"
             render={() => (
-              <Home blogs={this.props.blogs} events={this.props.events} />
+              <Home
+                blogs={this.props.blogs}
+                events={this.props.events}
+                fetchers={{
+                  blogs: this.props.fetchers.blogs,
+                  events: this.props.fetchers.events,
+                }}
+              />
             )}
           />
           <Route path="/freshers" component={ComingSoon} />
@@ -63,7 +70,12 @@ export default class RouterView extends Component {
           />
           <Route
             path="/events"
-            render={() => <Events events={this.props.events} />}
+            render={() => (
+              <Events
+                events={this.props.events}
+                fetch={this.props.fetchers.events}
+              />
+            )}
           />
           <Route
             path="/blogs"
@@ -71,6 +83,7 @@ export default class RouterView extends Component {
               <Blog
                 blogs={this.props.blogs}
                 blogCategory={this.props.blogCategory}
+                fetch={this.props.fetchers.blogs}
               />
             )}
           />

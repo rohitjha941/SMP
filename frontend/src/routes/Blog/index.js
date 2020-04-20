@@ -26,6 +26,9 @@ export default class Blog extends Component {
     let mobWidth = window.innerWidth < 1000;
     this.setState({ mobileView: mobWidth });
   };
+  componentWillMount() {
+    this.props.fetch();
+  }
   componentDidMount() {
     window.addEventListener("resize", this.resize);
   }
