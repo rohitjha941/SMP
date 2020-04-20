@@ -8,8 +8,8 @@ import styles from "./About.module.scss";
 export default class Info extends Component {
   render() {
     const heading = "Guiding at every step";
-    // eslint-disable-next-line no-multi-str
     const info =
+      // eslint-disable-next-line no-multi-str
       "Every fresher joining the institute is assigned a mentor \
                     (a student of 3/4th year) who they can approach with queries \
                     on any issue like academics, extracurricular, personal life or \
