@@ -6,6 +6,8 @@ import FilterMentors from "./FilterMentors";
 class MentorShow extends Component {
   constructor(props) {
     super(props);
+    // TODO: Remove prop dependent data from state and calculate
+    // only in render function.
     this.state = {
       filteryear: [],
       filterbranches: [],
@@ -17,6 +19,9 @@ class MentorShow extends Component {
       filterToggle: false,
       filterComponentData: {},
     };
+  }
+  componentWillMount() {
+    this.props.fetch();
   }
   componentDidMount() {
     let mentors = this.props.mentors.map((value) => {

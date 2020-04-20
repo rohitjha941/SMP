@@ -106,6 +106,14 @@ export default class RouterView extends Component {
                 branches={this.props.branches}
                 interests={this.props.interests}
                 docs={this.props.mentorsDocs}
+                fetch={() => {
+                  this.props.fetchers.mentorDocs();
+                }}
+                fetchers={{
+                  branches: this.props.fetchers.branches,
+                  interests: this.props.fetchers.interests,
+                  mentors: this.props.fetchers.mentors,
+                }}
               />
             )}
           />
