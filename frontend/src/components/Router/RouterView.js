@@ -66,7 +66,9 @@ export default class RouterView extends Component {
           <Route path="/freshers" component={ComingSoon} />
           <Route
             path="/about"
-            render={() => <About team={this.props.team} />}
+            render={() => (
+              <About team={this.props.team} fetch={this.props.fetchers.team} />
+            )}
           />
           <Route
             path="/events"

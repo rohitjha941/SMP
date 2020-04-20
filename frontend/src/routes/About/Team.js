@@ -3,6 +3,9 @@ import styles from "./About.module.scss";
 import TeamCard from "../../components/TeamCard";
 import Button from "../../components/Button";
 class Team extends Component {
+  componentWillMount() {
+    this.props.fetch();
+  }
   render() {
     const member = this.props.team.map((value) => {
       return {
