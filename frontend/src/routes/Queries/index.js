@@ -18,7 +18,7 @@ export default class Queries extends Component {
     this.setState({ activeTab: value });
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetch();
   }
   render() {

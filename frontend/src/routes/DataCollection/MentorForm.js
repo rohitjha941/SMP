@@ -47,7 +47,7 @@ class MentorForm extends Component {
       redirect: false,
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetch();
   }
   handleChange = (e) => {

@@ -3,7 +3,7 @@ import styles from "./About.module.scss";
 import TeamCard from "../../components/TeamCard";
 import Button from "../../components/Button";
 class Team extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetch();
   }
   render() {

@@ -20,10 +20,8 @@ class MentorShow extends Component {
       filterComponentData: {},
     };
   }
-  componentWillMount() {
-    this.props.fetch();
-  }
   componentDidMount() {
+    this.props.fetch();
     let mentors = this.props.mentors.map((value) => {
       let interests = [];
       value.interest.forEach((interestID) => {

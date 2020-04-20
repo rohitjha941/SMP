@@ -15,7 +15,7 @@ export default class Home extends Component {
       window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
     }, delay);
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetch();
   }
   render() {

@@ -23,7 +23,7 @@ const PageNotFound = Loadable({
   loading: () => <Loader />,
 });
 class Mentors extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetch();
   }
   render() {
