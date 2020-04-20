@@ -90,9 +90,11 @@ class MentorForm extends Component {
     });
   };
   handleChangeInterests = (option) => {
-    const value = option.map((interest) => {
-      return interest.value;
-    });
+    const value = option
+      ? option.map((interest) => {
+          return interest.value;
+        })
+      : [];
     this.setState({
       interest: value,
     });
@@ -192,6 +194,7 @@ class MentorForm extends Component {
             internships: [],
             redirect: true,
             isLoading: false,
+            career: "",
           });
         }
       })
