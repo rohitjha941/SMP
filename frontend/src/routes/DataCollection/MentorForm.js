@@ -43,12 +43,12 @@ class MentorForm extends Component {
       career: "",
       groups: [],
       createdInterest: [],
-      branchOptions: [],
-      interestOptions: [],
-      groupsOptions: [],
       isLoading: false,
       redirect: false,
     };
+  }
+  componentWillMount() {
+    this.props.fetch();
   }
   handleChange = (e) => {
     const name = e.target.name;
@@ -213,11 +213,8 @@ class MentorForm extends Component {
         });
       });
   };
-  componentDidMount() {
-    let branchOptions = [],
-      interestOptions = [],
-      groupsOptions = [];
-    branchOptions =
+  render() {
+    const branchOptions =
       this.props.branches && this.props.branches.length > 0
         ? this.props.branches.map((branch) => {
             const option = {
@@ -227,7 +224,7 @@ class MentorForm extends Component {
             return option;
           })
         : [];
-    interestOptions =
+    const interestOptions =
       this.props.interests && this.props.interests.length > 0
         ? this.props.interests.map((interest) => {
             const option = {
@@ -237,7 +234,7 @@ class MentorForm extends Component {
             return option;
           })
         : [];
-    groupsOptions =
+    const groupsOptions =
       this.props.groups && this.props.groups.length > 0
         ? this.props.groups.map((group) => {
             const option = {
@@ -247,13 +244,6 @@ class MentorForm extends Component {
             return option;
           })
         : [];
-    this.setState({
-      branchOptions: branchOptions,
-      interestOptions: interestOptions,
-      groupsOptions: groupsOptions,
-    });
-  }
-  render() {
     if (this.state.redirect) {
       return <Redirect to="/" />;
     }
@@ -315,7 +305,7 @@ class MentorForm extends Component {
               <Select
                 id="branch"
                 onChange={this.handleChangeBranch}
-                options={this.state.branchOptions}
+                options={branchOptions}
                 required
               />
             </div>
@@ -329,7 +319,7 @@ class MentorForm extends Component {
                 isMulti
                 components={animatedComponents}
                 onChange={this.handleChangeGroups}
-                options={this.state.groupsOptions}
+                options={groupsOptions}
                 required
               />
             </div>
@@ -356,7 +346,7 @@ class MentorForm extends Component {
               </label>
               <CreatableSelect
                 id="interests"
-                options={this.state.interestOptions}
+                options={interestOptions}
                 closeMenuOnSelect={false}
                 isMulti
                 onChange={this.handleChangeInterests}
