@@ -56,9 +56,9 @@ export default class RouterView extends Component {
               <Home
                 blogs={this.props.blogs}
                 events={this.props.events}
-                fetchers={{
-                  blogs: this.props.fetchers.blogs,
-                  events: this.props.fetchers.events,
+                fetch={() => {
+                  this.props.fetchers.blogs();
+                  this.props.fetchers.events();
                 }}
               />
             )}
@@ -85,7 +85,10 @@ export default class RouterView extends Component {
               <Blog
                 blogs={this.props.blogs}
                 blogCategory={this.props.blogCategory}
-                fetch={this.props.fetchers.blogs}
+                fetch={() => {
+                  this.props.fetchers.blogs();
+                  this.props.fetchers.blogCategory();
+                }}
               />
             )}
           />

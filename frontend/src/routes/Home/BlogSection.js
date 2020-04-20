@@ -12,9 +12,6 @@ class BlogSection extends Component {
       containerType: "md",
     };
   }
-  componentWillMount() {
-    this.props.fetch();
-  }
   componentDidMount() {
     let type = window.innerWidth < 600 ? "sm" : "lg";
     this.setState({

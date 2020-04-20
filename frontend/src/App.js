@@ -33,6 +33,7 @@ function App() {
   const [groups, setGroups] = useState([]);
   const [canFetch, setFetchableStatus] = useState({
     blogs: true,
+    blogCategory: true,
     events: true,
     team: true,
     mentors: true,
@@ -89,7 +90,8 @@ function App() {
     }
   };
   const fetchInterestsIfEmpty = () => {
-    if (!interests || interests.length === 0) {
+    if (canFetch.interests) {
+      setFetchableStatus({ ...canFetch, interests: false });
       methods.getInterests().then((data) => setInterests(data));
     }
   };

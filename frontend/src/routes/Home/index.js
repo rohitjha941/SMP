@@ -15,6 +15,9 @@ export default class Home extends Component {
       window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
     }, delay);
   }
+  componentWillMount() {
+    this.props.fetch();
+  }
   render() {
     const description =
       "Student Mentorship Program is one of the largest on-campus student body initiative which assigns a mentor(a pre-final or final year student) to all the freshmen within the same branch. It ensures bridging the communication gap between senior and first-year students by providing a dynamic environment for healthy discussion, guidance and one to one counseling.";
@@ -48,15 +51,10 @@ export default class Home extends Component {
           </div>
         </div>
         <EventSection
-          fetch={this.props.fetchers.events}
           className={styles.EventSection}
           events={this.props.events}
         />
-        <BlogSection
-          fetch={this.props.fetchers.blogs}
-          className={styles.BlogSection}
-          blogs={this.props.blogs}
-        />
+        <BlogSection className={styles.BlogSection} blogs={this.props.blogs} />
       </div>
     );
   }

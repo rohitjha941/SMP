@@ -19,9 +19,6 @@ class EventSection extends Component {
     let mobWidth = window.innerWidth < 600;
     this.setState({ mobView: mobWidth });
   };
-  componentWillMount() {
-    this.props.fetch();
-  }
   componentDidMount() {
     window.addEventListener("resize", this.resize);
   }
