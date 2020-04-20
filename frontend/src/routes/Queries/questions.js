@@ -9,30 +9,9 @@ class Questions extends Component {
     this.state = {
       mentorQueryLimit: 8,
       menteeQueryLimit: 8,
-      MentorQuestions: [],
-      MenteeQuestions: [],
       viewTextMentor: "View More",
       viewTextMentee: "View More",
     };
-  }
-  componentDidMount() {
-    var MentorQuestions = [];
-    var MenteeQuestions = [];
-    if (this.props.faqs) {
-      this.props.faqs.forEach((value) => {
-        var dat = {
-          question: value.question,
-          answer: value.answer,
-        };
-        value._for === "mentor"
-          ? MentorQuestions.push(dat)
-          : MenteeQuestions.push(dat);
-      });
-    }
-    this.setState({
-      MenteeQuestions: MenteeQuestions,
-      MentorQuestions: MentorQuestions,
-    });
   }
   handlequerychange = () => {
     this.props.activeTab === "mentor" && this.state.mentorQueryLimit === 8
@@ -49,30 +28,41 @@ class Questions extends Component {
       : this.setState({ menteeQueryLimit: 8, viewTextMentee: "View More" });
   };
   render() {
+    const MentorQuestions = [];
+    const MenteeQuestions = [];
+    if (this.props.faqs) {
+      this.props.faqs.forEach((value) => {
+        var dat = {
+          question: value.question,
+          answer: value.answer,
+        };
+        value._for === "mentor"
+          ? MentorQuestions.push(dat)
+          : MenteeQuestions.push(dat);
+      });
+    }
     return (
       <div className={styles.questions}>
         <ul>
           {this.props.activeTab === "mentor"
-            ? this.state.MentorQuestions.slice(
-                0,
-                this.state.mentorQueryLimit
-              ).map((data, i) => {
-                return (
-                  <li>
-                    <QuestionsBox key={i} query={data} />
-                  </li>
-                );
-              })
-            : this.state.MenteeQuestions.slice(
-                0,
-                this.state.menteeQueryLimit
-              ).map((data, i) => {
-                return (
-                  <li>
-                    <QuestionsBox key={i} query={data} />
-                  </li>
-                );
-              })}
+            ? MentorQuestions.slice(0, this.state.mentorQueryLimit).map(
+                (data, i) => {
+                  return (
+                    <li>
+                      <QuestionsBox key={i} query={data} />
+                    </li>
+                  );
+                }
+              )
+            : MenteeQuestions.slice(0, this.state.menteeQueryLimit).map(
+                (data, i) => {
+                  return (
+                    <li>
+                      <QuestionsBox key={i} query={data} />
+                    </li>
+                  );
+                }
+              )}
         </ul>
         <Button
           onClick={this.handlequerychange}

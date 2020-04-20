@@ -94,7 +94,9 @@ export default class RouterView extends Component {
           />
           <Route
             path="/queries"
-            render={() => <Queries faqs={this.props.faqs} />}
+            render={() => (
+              <Queries faqs={this.props.faqs} fetch={this.props.fetchers.faq} />
+            )}
           />
           <Route
             path="/mentors"
