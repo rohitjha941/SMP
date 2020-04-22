@@ -8,8 +8,6 @@ class DesktopView extends Component {
     super();
     this.state = {
       break: window.innerWidth < 1470 ? true : false,
-      upcomingEvents: [],
-      pastEvents: [],
     };
   }
   resize = () => {
@@ -18,6 +16,11 @@ class DesktopView extends Component {
   };
   componentDidMount() {
     window.addEventListener("resize", this.resize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.resize);
+  }
+  render() {
     const eventData = this.props.events ? this.props.events : [];
     const pastEvents =
       eventData.past && eventData.past.length > 0
@@ -34,24 +37,6 @@ class DesktopView extends Component {
                 d3: value.venue,
               },
               isThisWeek: false,
-            };
-          })
-        : [];
-    const thisWeekEvents =
-      eventData.this_week && eventData.this_week.length > 0
-        ? eventData.this_week.map((value) => {
-            return {
-              event_id: value.id,
-              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
-              imgAlt: value.title,
-              heading: value.title,
-              text: value.content,
-              metadata: {
-                d1: value.date,
-                d2: value.time + " hrs",
-                d3: value.venue,
-              },
-              isThisWeek: true,
             };
           })
         : [];
@@ -73,17 +58,6 @@ class DesktopView extends Component {
             };
           })
         : [];
-    this.setState({
-      upcomingEvents: [...thisWeekEvents, ...upcomingEvents],
-      pastEvents: pastEvents,
-    });
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.resize);
-  }
-  render() {
-    const upcomingEvents = this.state.upcomingEvents;
-    const pastEvents = this.state.pastEvents;
     return (
       <>
         <div className={styles.mainWrapper}>

@@ -15,6 +15,7 @@ class Events extends Component {
     this.setState({ mobileView: mobWidth });
   };
   componentDidMount() {
+    this.props.fetch();
     window.addEventListener("resize", this.resize);
   }
   componentWillUnmount() {

@@ -26,13 +26,25 @@ export const Flash = () => {
         .addEventListener("click", () => setVisibility(false));
     }
   });
-
+  const messageString = message;
+  const parsedMessages = messageToJSX(messageString);
   return (
     visibility && (
       <div className={styles.alert + " " + styles[type]}>
         <CrossButton className={"close"} />
-        <p className={styles.message}>{message}</p>
+        {parsedMessages}
       </div>
     )
   );
+};
+
+const messageToJSX = (messageString) => {
+  // For the time being, this function only parses
+  // multi-line messages.
+  const messages = messageString.split("\n");
+  return messages.map((messageLine, idx) => (
+    <p className={styles.message} key={idx}>
+      {messageLine}
+    </p>
+  ));
 };

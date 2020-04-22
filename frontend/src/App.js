@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./style/App.scss";
 import Loadable from "react-loadable";
 import Loader from "./components/Loader";
@@ -23,74 +23,103 @@ const Footer = Loadable({
 function App() {
   const [blogs, setBlogs] = useState([]);
   const [blogCategory, setBlogCategory] = useState([]);
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState({});
   const [team, setTeam] = useState([]);
   const [mentors, setMentors] = useState([]);
   const [mentorsDocs, setMentorsDocs] = useState([]);
   const [faqs, setFaqs] = useState([]);
   const [branches, setBranches] = useState([]);
   const [interests, setInterests] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [canFetch, setFetchableStatus] = useState({
+    blogs: true,
+    blogCategory: true,
+    events: true,
+    team: true,
+    mentors: true,
+    mentorDocs: true,
+    faqs: true,
+    branches: true,
+    interests: true,
+    groups: true,
+  });
 
   window.flash = (message, type = "success") =>
     Bus.emit("flash", { message, type });
 
   const fetchBlogsIfEmpty = () => {
-    if (!blogs || blogs.length === 0) {
+    if (canFetch.blogs) {
+      setFetchableStatus({ ...canFetch, blogs: false });
       methods.getBlogs().then((data) => setBlogs(data));
     }
   };
   const fetchEventsIfEmpty = () => {
-    if (!events || events.length === 0) {
+    if (canFetch.events) {
+      setFetchableStatus({ ...canFetch, events: false });
       methods.getEvents().then((data) => setEvents(data));
     }
   };
   const fetchTeamIfEmpty = () => {
-    if (!team || team.length === 0) {
+    if (canFetch.team) {
+      setFetchableStatus({ ...canFetch, team: false });
       methods.getTeam().then((data) => setTeam(data));
     }
   };
   const fetchMentorsIfEmpty = () => {
-    if (!mentors || mentors.length === 0) {
+    if (canFetch.mentors) {
+      setFetchableStatus({ ...canFetch, mentors: false });
       methods.getMentors().then((data) => setMentors(data));
     }
   };
   const fetchMentorsDocsIfEmpty = () => {
-    if (!mentorsDocs || mentorsDocs.length === 0) {
+    if (canFetch.mentorDocs) {
+      setFetchableStatus({ ...canFetch, mentorDocs: false });
       methods.getMentorsDocs().then((data) => setMentorsDocs(data));
     }
   };
   const fetchFAQsIfEmpty = () => {
-    if (!faqs || faqs.length === 0) {
+    if (canFetch.faqs) {
+      setFetchableStatus({ ...canFetch, faqs: false });
       methods.getFAQs().then((data) => setFaqs(data));
     }
   };
   const fetchBranchesIfEmpty = () => {
-    if (!branches || branches.length === 0) {
+    if (canFetch.branches) {
+      setFetchableStatus({ ...canFetch, branches: false });
       methods.getBranch().then((data) => setBranches(data));
     }
   };
   const fetchInterestsIfEmpty = () => {
-    if (!branches || branches.length === 0) {
+    if (canFetch.interests) {
+      setFetchableStatus({ ...canFetch, interests: false });
       methods.getInterests().then((data) => setInterests(data));
     }
   };
+  const fetchGroupsIfEmpty = () => {
+    if (canFetch.groups) {
+      setFetchableStatus({ ...canFetch, groups: false });
+      methods.getGroups().then((data) => setGroups(data));
+    }
+  };
   const fetchBlogCategoryIfEmpty = () => {
-    if (!blogCategory || blogCategory.length === 0) {
+    if (canFetch.blogCategory) {
+      setFetchableStatus({ ...canFetch, blogCategory: false });
       methods.getBlogCategory().then((data) => setBlogCategory(data));
     }
   };
 
-  useEffect(() => {
-    fetchBlogsIfEmpty();
-    fetchEventsIfEmpty();
-    fetchTeamIfEmpty();
-    fetchMentorsIfEmpty();
-    fetchMentorsDocsIfEmpty();
-    fetchFAQsIfEmpty();
-    fetchBranchesIfEmpty();
-    fetchInterestsIfEmpty();
-    fetchBlogCategoryIfEmpty();
-  });
+  const fetcherCollection = {
+    blogs: fetchBlogsIfEmpty,
+    events: fetchEventsIfEmpty,
+    team: fetchTeamIfEmpty,
+    mentors: fetchMentorsIfEmpty,
+    mentorDocs: fetchMentorsDocsIfEmpty,
+    faq: fetchFAQsIfEmpty,
+    branches: fetchBranchesIfEmpty,
+    interests: fetchInterestsIfEmpty,
+    groups: fetchGroupsIfEmpty,
+    blogCategory: fetchBlogCategoryIfEmpty,
+  };
   return (
     <div className="App">
       <Header />
@@ -106,6 +135,8 @@ function App() {
           faqs={faqs}
           branches={branches}
           interests={interests}
+          groups={groups}
+          fetchers={fetcherCollection}
         />
         <Footer />
       </div>

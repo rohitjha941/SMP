@@ -11,6 +11,18 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* Hide scrollbar for IE and Edge */
 body {
   -ms-overflow-style: none;
@@ -40,12 +52,6 @@ div.header-container {
   background: $white;
   border-bottom: 0.0625rem solid $grey-level-0_05;
   width: 100%;
-}
-
-div.about {
-  // div {
-  //   margin: auto;
-  // }
 }
 
 //** Queries **//

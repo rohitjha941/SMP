@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import ImageText from "components/ImageText";
 
 class MentorIndex extends Component {
-  state = {};
   render() {
-    const docs = this.props.interests
+    const docs = this.props.docs
       ? this.props.docs.map((value) => {
           return {
             name: value.name,

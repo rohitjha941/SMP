@@ -15,7 +15,7 @@ export default class About extends Component {
           <Stats />
         </div>
         <Info />
-        <Team team={this.props.team} />
+        <Team team={this.props.team} fetch={this.props.fetch} />
       </div>
     );
   }

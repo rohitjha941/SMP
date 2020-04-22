@@ -45,6 +45,19 @@ class MentorSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class MentorAchievementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MentorAchievement
+        fields = "__all__"
+
+
+class MentorInternSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MentorIntern
+        fields = "__all__"
+
+
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
@@ -78,4 +91,11 @@ class MentorDocsSerializer(serializers.ModelSerializer):
 class RaisedQuerySerializer(serializers.ModelSerializer):
     class Meta:
         model = RaisedQuery
+        fields = "__all__"
+
+
+class CampusGroupsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CampusGroups
         fields = "__all__"
