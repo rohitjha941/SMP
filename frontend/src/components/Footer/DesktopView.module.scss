@@ -18,6 +18,9 @@
   font-weight: normal;
   & a {
     color: $grey-level-0_7;
+    &:hover {
+      color: $grey-level-0_8;
+    }
   }
   @media screen and (max-width: $break-tablet) {
     font-size: 1rem;

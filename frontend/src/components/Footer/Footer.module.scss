@@ -44,6 +44,9 @@
     }
     & a {
       color: $grey-level-0_7;
+      &:hover {
+        color: $grey-level-0_8;
+      }
     }
   }
   .acknowledgementContainer {
