@@ -78,20 +78,18 @@ class EventSection extends Component {
               ? eventData.map((event, index) => {
                   if (index !== 2) {
                     return (
-                      <>
-                        <EventCard
-                          className={styles.eventCardCommon}
-                          key={index}
-                          eventData={event}
-                          type={
-                            this.state.mobView
-                              ? "sm"
-                              : this.state.tabView
-                              ? "lg"
-                              : "side"
-                          }
-                        />
-                      </>
+                      <EventCard
+                        className={styles.eventCardCommon}
+                        eventData={event}
+                        key={index}
+                        type={
+                          this.state.mobView
+                            ? "sm"
+                            : this.state.tabView
+                            ? "lg"
+                            : "side"
+                        }
+                      />
                     );
                   }
                   return null;
