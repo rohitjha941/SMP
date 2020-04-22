@@ -42,6 +42,9 @@
         padding: 5% 0;
       }
     }
+    & a {
+      color: $grey-level-0_7;
+    }
   }
   .acknowledgementContainer {
     text-align: center;

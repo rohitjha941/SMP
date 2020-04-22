@@ -16,6 +16,9 @@
   line-height: 1.4375rem;
   color: $grey;
   font-weight: normal;
+  & a {
+    color: $grey-level-0_7;
+  }
   @media screen and (max-width: $break-tablet) {
     font-size: 1rem;
     line-height: 1.25rem;
