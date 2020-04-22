@@ -1,0 +1,10 @@
+@import "../../style/common.scss";
+
+.pdfContainer {
+  height: 90vh;
+  width: 100%;
+  margin: 0 auto 5% auto;
+  @media screen and (min-width: $break) {
+    width: 75%;
+  }
+}
