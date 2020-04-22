@@ -12,76 +12,15 @@ class MentorShow extends Component {
       filteryear: [],
       filterbranches: [],
       filterinterests: [],
-      allbranches: [],
-      allinterests: this.props.interests ? this.props.interests : [],
-      mentors: [],
-      filteredmentors: [],
       filterToggle: false,
-      filterComponentData: {},
+      filterComponentData: null,
     };
   }
   componentDidMount() {
     this.props.fetch();
-    let mentors = this.props.mentors.map((value) => {
-      let interests = [];
-      value.interest.forEach((interestID) => {
-        this.props.interests.forEach((interest) => {
-          if (interest.id === interestID) {
-            return interests.push(interest.interest_name);
-          }
-        });
-      });
-      let branch_name = this.props.branches.find((element) => {
-        return element.id === value.branch;
-      });
-      return {
-        image: value.photo,
-        name: value.name,
-        branch: value.branch,
-        branch_name: branch_name.branch_name,
-        year: value.year,
-        skills: interests,
-        interests: value.interest,
-      };
-    });
-    const allinterests = this.props.interests
-      ? this.props.interests.map((value) => {
-          return {
-            id: value.id,
-            name: value.interest_name,
-            selected: false,
-          };
-        })
-      : [];
-    const allbranches = this.props.branches
-      ? this.props.branches.map((value) => {
-          return {
-            id: value.id,
-            name: value.branch_name,
-            selected: false,
-          };
-        })
-      : [];
-    const allyears = [
-      { name: "3rd", selected: false },
-      { name: "4th", selected: false },
-      { name: "5th", selected: false },
-    ];
-    let filterComponentData = {
-      allbranches: allbranches,
-      allyears: allyears,
-      allinterests: allinterests,
-      selectedSkill: [],
-      selectedBranch: [],
-      selectedYear: [],
-    };
-    this.setState(
-      { mentors: mentors, filterComponentData: filterComponentData },
-      () => {
-        this.filterMentors(this.state.mentors);
-      }
-    );
   }
+
+  //CHANGES FILTER DATA WHEN TRIGGERED FROM FILTERMENTORS COMPONENT
   updateFilter = (value) => {
     const newBranches = value.branch;
     const newYear = value.year;
@@ -97,62 +36,62 @@ class MentorShow extends Component {
       allinterests: allinterests,
       allbranches: allbranches,
     };
-    this.setState(
-      {
-        filteryear: newYear,
-        filterbranches: newBranches,
-        filterinterests: newInterests,
-        filterComponentData: filterComponentData,
-      },
-      () => {
-        this.filterMentors(this.state.mentors);
-      }
-    );
+    this.setState({
+      filteryear: newYear,
+      filterbranches: newBranches,
+      filterinterests: newInterests,
+      filterComponentData: filterComponentData,
+    });
   };
 
-  updateBranches = (mentors) => {
-    let availablebranches = [];
+  // UPDATE BRANCHES ACCORDING TO FILTEREDMENTORS
+
+  updateBranches = (mentors, allbranches) => {
+    //create list of all available branches
+    let availablebranches_ID = [];
     mentors.forEach((value) => {
       var isAvailable = false;
-      availablebranches.forEach((branch) => {
+      //check if branch of mentor is already present in the available list
+      availablebranches_ID.forEach((branch) => {
         if (branch === value.branch) {
           isAvailable = true;
         }
       });
+      //if not present then add that branch into the list
       if (!isAvailable) {
-        availablebranches.push(value.branch);
+        availablebranches_ID.push(value.branch);
       }
     });
-    let allbranches = [];
-    this.props.branches.forEach((value) => {
-      availablebranches.forEach((branchID) => {
+    let availableBranches = [];
+    allbranches.forEach((value) => {
+      availablebranches_ID.forEach((branchID) => {
         if (branchID === value.id) {
-          return allbranches.push(value);
+          return availableBranches.push(value);
         }
       });
     });
-    this.setState({ allbranches: allbranches });
+    return availableBranches;
   };
 
-  filterMentors = (mentors) => {
+  //FILTER MENTORS
+
+  filterMentors = (allmentors) => {
     let { filteryear, filterbranches, filterinterests } = this.state;
     if (
       (!filteryear || filteryear.length === 0) &&
       (!filterbranches || filterbranches.length === 0) &&
       (!filterinterests || filterinterests.length === 0)
     ) {
-      this.setState({ filteredmentors: mentors }, () => {
-        this.updateBranches(mentors);
-      });
+      return allmentors;
     } else {
       let branchFiltered = [];
       filterbranches.length > 0
         ? filterbranches.map((filterbranch) => {
             return branchFiltered.push(
-              ...mentors.filter(({ branch }) => branch === filterbranch)
+              ...allmentors.filter(({ branch }) => branch === filterbranch)
             );
           })
-        : (branchFiltered = mentors);
+        : (branchFiltered = allmentors);
       let yearFiltered = [];
       filteryear.length > 0
         ? filteryear.map((filteryear) => {
@@ -181,22 +120,88 @@ class MentorShow extends Component {
             return 0;
           })
         : (interestFiltered = yearFiltered);
-      this.setState({ filteredmentors: interestFiltered }, () => {
-        this.updateBranches(interestFiltered);
-      });
+      return interestFiltered;
     }
   };
+
+  //HANDLE TOGGLE
+
   handleToggle = () => {
     var filterToggle = !this.state.filterToggle;
     this.setState({ filterToggle: filterToggle });
   };
   render() {
-    let { allbranches } = this.state;
+    const allmentors =
+      this.props.mentors &&
+      this.props.interests &&
+      this.props.branches.length > 0
+        ? this.props.mentors.map((value) => {
+            let interests = [];
+            value.interest.forEach((interestID) => {
+              this.props.interests.forEach((interest) => {
+                if (interest.id === interestID) {
+                  return interests.push(interest.interest_name);
+                }
+              });
+            });
+            let branch_name = this.props.branches.find((element) => {
+              return element.id === value.branch;
+            });
+            return {
+              image: process.env.REACT_APP_IMAGE_API_BASE + value.photo,
+              name: value.name,
+              branch: value.branch,
+              branch_name: branch_name.branch_name,
+              year: value.year,
+              skills: interests,
+              interests: value.interest,
+            };
+          })
+        : [];
+    const allinterests = this.props.interests
+      ? this.props.interests.map((value) => {
+          return {
+            id: value.id,
+            name: value.interest_name,
+            selected: false,
+          };
+        })
+      : [];
+    const allbranches = this.props.branches
+      ? this.props.branches.map((value) => {
+          return {
+            id: value.id,
+            name: value.branch_name,
+            selected: false,
+          };
+        })
+      : [];
+    const allyears = [
+      { name: "3rd", selected: false },
+      { name: "4th", selected: false },
+      { name: "5th", selected: false },
+    ];
+    let filterComponentData = this.state.filterComponentData
+      ? this.state.filterComponentData
+      : {
+          allbranches: allbranches,
+          allyears: allyears,
+          allinterests: allinterests,
+          selectedSkill: [],
+          selectedBranch: [],
+          selectedYear: [],
+        };
+    const filteredMentors =
+      allmentors.length > 0 ? this.filterMentors(allmentors) : [];
+    const availableBranches =
+      filteredMentors.length > 0 && this.props.branches.length > 0
+        ? this.updateBranches(filteredMentors, this.props.branches)
+        : [];
     return (
       <>
         {this.state.filterToggle ? (
           <FilterMentors
-            filterData={this.state.filterComponentData}
+            filterData={filterComponentData}
             updateFilter={this.updateFilter}
             handleToggle={this.handleToggle}
           />
@@ -204,12 +209,12 @@ class MentorShow extends Component {
           <>
             <div className={styles.container}>
               <SearchHeader handleToggle={this.handleToggle} />
-              {allbranches.map((value) => {
+              {availableBranches.map((value) => {
                 return (
                   <>
                     <div className={styles.department}>{value.branch_name}</div>
                     <ul className="mentors">
-                      {this.state.filteredmentors.map((mentor, i) => {
+                      {filteredMentors.map((mentor, i) => {
                         if (mentor.branch === value.id) {
                           return (
                             <>
@@ -219,7 +224,6 @@ class MentorShow extends Component {
                                   profile={mentor}
                                   key={i}
                                 />
-                                {/* {i>0? <hr/> : null} */}
                               </li>
                             </>
                           );
