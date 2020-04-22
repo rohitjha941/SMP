@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./MobileView.module.scss";
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
 import EventCard from "../../components/EventCard";
 
 class MobileView extends Component {
@@ -92,7 +92,7 @@ class MobileView extends Component {
             ) : null}
           </div>
         </div>
-        <Button type="outline" text="View More" />
+        {/* <Button type="outline" text="View More" /> */}
       </React.Fragment>
     );
   }
