@@ -31,7 +31,7 @@ class MentorForm extends Component {
       year: "",
       enrollno: "",
       branch: "",
-      intertest: [],
+      interests: [],
       achievements: [],
       internships: [],
       email: "",
@@ -39,16 +39,16 @@ class MentorForm extends Component {
       image: null,
       resume: null,
       facebook: "",
-      linkden: "",
+      linkedin: "",
       career: "",
       groups: [],
       createdInterest: [],
-      branchOptions: [],
-      interestOptions: [],
-      groupsOptions: [],
       isLoading: false,
       redirect: false,
     };
+  }
+  componentDidMount() {
+    this.props.fetch();
   }
   handleChange = (e) => {
     const name = e.target.name;
@@ -90,9 +90,11 @@ class MentorForm extends Component {
     });
   };
   handleChangeInterests = (option) => {
-    const value = option.map((interest) => {
-      return interest.value;
-    });
+    const value = option
+      ? option.map((interest) => {
+          return interest.value;
+        })
+      : [];
     this.setState({
       interest: value,
     });
@@ -147,10 +149,11 @@ class MentorForm extends Component {
       image,
       resume,
       facebook,
-      linkden,
+      linkedin,
       groups,
       achievements,
       internships,
+      career,
     } = this.state;
 
     const data = {
@@ -164,48 +167,57 @@ class MentorForm extends Component {
       image: image,
       resume: resume,
       facebook: facebook,
-      linkden: linkden,
+      linkedin: linkedin,
       groups: groups,
       achievements: achievements,
       internships: internships,
+      career: career,
     };
-    let response = createMentor(data);
-    console.log(response);
-    if (response) {
-      window.flash("Your response has been succesfully recorded");
-      this.setState({
-        name: "",
-        year: "",
-        enrollno: "",
-        branch: "",
-        interest: [],
-        email: "",
-        mobile: "",
-        image: null,
-        resume: null,
-        facebook: "",
-        linkden: "",
-        groups: [],
-        achievements: [],
-        internships: [],
-        redirect: true,
-        isLoading: false,
+    createMentor(data)
+      .then((response) => {
+        if (response.status === 201) {
+          window.flash("Your response has been succesfully recorded");
+          this.setState({
+            name: "",
+            year: "",
+            enrollno: "",
+            branch: "",
+            interest: [],
+            email: "",
+            mobile: "",
+            image: null,
+            resume: null,
+            facebook: "",
+            linkedin: "",
+            groups: [],
+            achievements: [],
+            internships: [],
+            redirect: true,
+            isLoading: false,
+            career: "",
+          });
+        }
+      })
+      .catch((error) => {
+        const errorData = error.data;
+        let errorMessage = "";
+        if (errorData.email) {
+          errorMessage += "This Email is already in use.\n";
+        }
+        if (errorData.enrollno) {
+          errorMessage += "This Enrollment No. is already in use.\n";
+        }
+        if (errorData.mobile) {
+          errorMessage += "This Mobile No. is already in use.";
+        }
+        window.flash(errorMessage, "error");
+        this.setState({
+          isLoading: false,
+        });
       });
-    } else {
-      window.flash(
-        "We are unable to process your request right now. Please try again later!",
-        "error"
-      );
-      this.setState({
-        isLoading: false,
-      });
-    }
   };
-  componentDidMount() {
-    let branchOptions = [],
-      interestOptions = [],
-      groupsOptions = [];
-    branchOptions =
+  render() {
+    const branchOptions =
       this.props.branches && this.props.branches.length > 0
         ? this.props.branches.map((branch) => {
             const option = {
@@ -215,7 +227,7 @@ class MentorForm extends Component {
             return option;
           })
         : [];
-    interestOptions =
+    const interestOptions =
       this.props.interests && this.props.interests.length > 0
         ? this.props.interests.map((interest) => {
             const option = {
@@ -225,7 +237,7 @@ class MentorForm extends Component {
             return option;
           })
         : [];
-    groupsOptions =
+    const groupsOptions =
       this.props.groups && this.props.groups.length > 0
         ? this.props.groups.map((group) => {
             const option = {
@@ -235,13 +247,6 @@ class MentorForm extends Component {
             return option;
           })
         : [];
-    this.setState({
-      branchOptions: branchOptions,
-      interestOptions: interestOptions,
-      groupsOptions: groupsOptions,
-    });
-  }
-  render() {
     if (this.state.redirect) {
       return <Redirect to="/" />;
     }
@@ -303,7 +308,7 @@ class MentorForm extends Component {
               <Select
                 id="branch"
                 onChange={this.handleChangeBranch}
-                options={this.state.branchOptions}
+                options={branchOptions}
                 required
               />
             </div>
@@ -317,7 +322,7 @@ class MentorForm extends Component {
                 isMulti
                 components={animatedComponents}
                 onChange={this.handleChangeGroups}
-                options={this.state.groupsOptions}
+                options={groupsOptions}
                 required
               />
             </div>
@@ -344,7 +349,7 @@ class MentorForm extends Component {
               </label>
               <CreatableSelect
                 id="interests"
-                options={this.state.interestOptions}
+                options={interestOptions}
                 closeMenuOnSelect={false}
                 isMulti
                 onChange={this.handleChangeInterests}
@@ -544,13 +549,13 @@ class MentorForm extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="linkden">LinkedIn URL</label>
+              <label htmlFor="linkedin">LinkedIn URL</label>
               <input
                 type="url"
                 className="form-control"
-                value={this.state.linkden}
-                id="linkden"
-                name="linkden"
+                value={this.state.linkedin}
+                id="linkedin"
+                name="linkedin"
                 placeholder="Enter your LinkedIn URL"
                 onChange={this.handleChange}
               />

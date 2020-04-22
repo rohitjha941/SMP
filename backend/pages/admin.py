@@ -22,7 +22,7 @@ class faqVisionAdmin(ImportExportModelAdmin):
 
 @register(StudentTeam)
 class StudentTeamAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'photo', 'facebook', 'linkden',
+    list_display = ('name', 'photo', 'facebook', 'linkedin',
                     'branch', 'year', 'position',)
 
 
@@ -33,13 +33,13 @@ class branchAdmin(ImportExportModelAdmin):
 
 @register(ContactDetails)
 class branchAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'photo', 'facebook', 'linkden',
+    list_display = ('name', 'photo', 'facebook', 'linkedin',
                     'branch', 'year', 'mobile', 'email', )
 
 
 @register(Mentor)
 class MentorAdmin(ImportExportModelAdmin):
-    list_display = ('branch', 'name', 'photo', 'facebook', 'linkden', )
+    list_display = ('branch', 'name', 'photo', 'facebook', 'linkedin', )
 
 
 @register(BlogCategory)

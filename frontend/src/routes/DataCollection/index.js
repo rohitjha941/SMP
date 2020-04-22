@@ -22,6 +22,7 @@ class DataCollection extends Component {
             path="/datacollection/mentors"
             render={() => (
               <MentorForm
+                fetch={this.props.fetch}
                 groups={this.props.groups}
                 branches={this.props.branches}
                 interests={this.props.interests}

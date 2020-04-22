@@ -15,8 +15,10 @@ export default class Home extends Component {
       window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
     }, delay);
   }
+  componentDidMount() {
+    this.props.fetch();
+  }
   render() {
-    // const title = "Fostering Senior Junior Relationship"
     const description =
       "Student Mentorship Program is one of the largest on-campus student body initiative which assigns a mentor(a pre-final or final year student) to all the freshmen within the same branch. It ensures bridging the communication gap between senior and first-year students by providing a dynamic environment for healthy discussion, guidance and one to one counseling.";
     return (

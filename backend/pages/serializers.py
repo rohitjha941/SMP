@@ -45,6 +45,19 @@ class MentorSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class MentorAchievementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MentorAchievement
+        fields = "__all__"
+
+
+class MentorInternSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MentorIntern
+        fields = "__all__"
+
+
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest

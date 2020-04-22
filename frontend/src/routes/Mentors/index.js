@@ -23,6 +23,9 @@ const PageNotFound = Loadable({
   loading: () => <Loader />,
 });
 class Mentors extends Component {
+  componentDidMount() {
+    this.props.fetch();
+  }
   render() {
     return (
       <React.Fragment>
@@ -40,6 +43,11 @@ class Mentors extends Component {
                 branches={this.props.branches}
                 interests={this.props.interests}
                 mentors={this.props.mentors}
+                fetch={() => {
+                  this.props.fetchers.branches();
+                  this.props.fetchers.interests();
+                  this.props.fetchers.mentors();
+                }}
               />
             )}
           />

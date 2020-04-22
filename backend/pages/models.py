@@ -111,9 +111,9 @@ class StudentTeam(models.Model):
     enrollno = models.IntegerField(
         null=True
     )
-    # Field Containing Linkden URL
+    # Field Containing linkedin URL
 
-    linkden = models.URLField(
+    linkedin = models.URLField(
         max_length=1000,
         db_index=True,
 
@@ -209,19 +209,22 @@ class Mentor(models.Model):
     email = models.EmailField(
         max_length=200,
         default="",
+        unique=True
     )
     mobile = models.IntegerField(
-        null=True
+        null=True,
+        unique=True
     )
     enrollno = models.IntegerField(
-        null=True
+        null=True,
+        unique=True
     )
     facebook = models.URLField(
         max_length=1000,
         db_index=True,
         blank=True
     )
-    linkden = models.URLField(
+    linkedin = models.URLField(
         max_length=1000,
         db_index=True,
         blank=True
@@ -235,6 +238,10 @@ class Mentor(models.Model):
     groups = models.ManyToManyField(
         CampusGroups,
         related_name="campus_groups_mentor",
+        blank=True
+    )
+    career = models.CharField(
+        max_length=100,
         blank=True
     )
 
@@ -278,10 +285,6 @@ class MentorIntern(models.Model):
         null=True
     )
 
-    facebook = models.URLField(max_length=1000, db_index=True, blank=True)
-    linkden = models.URLField(max_length=1000, db_index=True, blank=True)
-    branch = models.CharField(default="", max_length=100,)
-
 
 class ContactDetails(models.Model):
     name = models.CharField(
@@ -299,7 +302,7 @@ class ContactDetails(models.Model):
 
         blank=True
     )
-    linkden = models.URLField(
+    linkedin = models.URLField(
         max_length=1000,
         db_index=True,
 
