@@ -143,7 +143,7 @@ class BlogCategoryView (generics.ListCreateAPIView):
 
 
 class BlogsView (generics.ListCreateAPIView):
-    queryset = Blogs.objects.all()
+    queryset = Blogs.objects.all().order_by("-created_at")
     serializer_class = BlogsSerializer
 
 
@@ -151,20 +151,20 @@ class EventsView(APIView):
     def get(self, request):
         data = {
             "past": EventsSerializer(
-                Events.objects.filter(date__lt=datetime.date.today()), many=True
+                Events.objects.filter(date__lt=datetime.date.today()).order_by("-date"), many=True
             ).data,
             "this_week": EventsSerializer(
                 Events.objects.filter(
                     date__gte=datetime.date.today(),
                     date__lt=(datetime.date.today() +
                               datetime.timedelta(days=7)),
-                ),
+                ).order_by("-date"),
                 many=True,
             ).data,
             "upcoming": EventsSerializer(
                 Events.objects.filter(
                     date__gte=datetime.date.today() + datetime.timedelta(days=7)
-                ),
+                ).order_by("date"),
                 many=True,
             ).data,
         }

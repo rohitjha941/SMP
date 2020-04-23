@@ -21,43 +21,8 @@ class DesktopView extends Component {
     window.removeEventListener("resize", this.resize);
   }
   render() {
-    const eventData = this.props.events ? this.props.events : [];
-    const pastEvents =
-      eventData.past && eventData.past.length > 0
-        ? eventData.past.map((value) => {
-            return {
-              event_id: value.id,
-              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
-              imgAlt: value.title,
-              heading: value.title,
-              text: value.content,
-              metadata: {
-                d1: value.date,
-                d2: value.time + " hrs",
-                d3: value.venue,
-              },
-              isThisWeek: false,
-            };
-          })
-        : [];
-    const upcomingEvents =
-      eventData.upcoming && eventData.upcoming.length > 0
-        ? eventData.upcoming.map((value) => {
-            return {
-              event_id: value.id,
-              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
-              imgAlt: value.title,
-              heading: value.title,
-              text: value.content,
-              metadata: {
-                d1: value.date,
-                d2: value.time + " hrs",
-                d3: value.venue,
-              },
-              isThisWeek: false,
-            };
-          })
-        : [];
+    const pastEvents = this.props.pastEvents;
+    const futureEvents = this.props.futureEvents;
     return (
       <>
         <div className={styles.mainWrapper}>
@@ -65,11 +30,11 @@ class DesktopView extends Component {
             We Conduct <span className="color-red">Events</span> year-round
           </div>
           <div className={styles.innerMainWrapper}>
-            {upcomingEvents.length > 0 ? (
+            {futureEvents.length > 0 ? (
               <div className={styles.container1}>
                 <div className={styles.sectionHeading}>Upcoming Events</div>
                 <ul className={styles.ul1}>
-                  {upcomingEvents.map((event, index) => {
+                  {futureEvents.map((event, index) => {
                     return (
                       <li key={index}>
                         <EventCard eventData={event} type="side" />

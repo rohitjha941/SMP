@@ -45,6 +45,24 @@ class EventSection extends Component {
             };
           })
         : [];
+    const thisWeekEvents =
+      events.this_week && events.this_week.length > 0
+        ? events.this_week.map((value) => {
+            return {
+              event_id: value.id,
+              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
+              imgAlt: value.title,
+              heading: value.title,
+              text: value.content,
+              metadata: {
+                d1: value.date,
+                d2: value.time + " hrs",
+                d3: value.venue,
+              },
+              isThisWeek: true,
+            };
+          })
+        : [];
     const upcomingEvents =
       events.upcoming && events.upcoming.length > 0
         ? events.upcoming.map((value) => {
@@ -63,9 +81,10 @@ class EventSection extends Component {
             };
           })
         : [];
+    const futureEvents = [...thisWeekEvents, ...upcomingEvents];
     const eventData =
-      upcomingEvents.length > 0
-        ? upcomingEvents
+      futureEvents.length > 0
+        ? futureEvents
         : pastEvents.length > 0
         ? pastEvents
         : [];
@@ -73,10 +92,12 @@ class EventSection extends Component {
       <React.Fragment>
         <div className={styles.eventParentDiv}>
           <div className={styles.eventWrapper}>
-            <div className={styles.sectionHeading}>Upcoming Events</div>
+            <div className={styles.sectionHeading}>
+              {upcomingEvents.length > 0 ? "Upcoming Events" : "SMP Events"}
+            </div>
             {eventData.length > 0
               ? eventData.map((event, index) => {
-                  if (index !== 2) {
+                  if (index < 2) {
                     return (
                       <EventCard
                         className={styles.eventCardCommon}

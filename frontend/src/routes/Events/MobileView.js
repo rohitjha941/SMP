@@ -5,43 +5,8 @@ import EventCard from "../../components/EventCard";
 
 class MobileView extends Component {
   render() {
-    const eventData = this.props.events ? this.props.events : [];
-    const pastEvents =
-      eventData.past && eventData.past.length > 0
-        ? eventData.past.map((value) => {
-            return {
-              event_id: value.id,
-              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
-              imgAlt: value.title,
-              heading: value.title,
-              text: value.content,
-              metadata: {
-                d1: value.date,
-                d2: value.time + " hrs",
-                d3: value.venue,
-              },
-              isThisWeek: false,
-            };
-          })
-        : [];
-    const upcomingEvents =
-      eventData.upcoming && eventData.upcoming.length > 0
-        ? eventData.upcoming.map((value) => {
-            return {
-              event_id: value.id,
-              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
-              imgAlt: value.title,
-              heading: value.title,
-              text: value.content,
-              metadata: {
-                d1: value.date,
-                d2: value.time + " hrs",
-                d3: value.venue,
-              },
-              isThisWeek: false,
-            };
-          })
-        : [];
+    const pastEvents = this.props.pastEvents;
+    const futureEvents = this.props.futureEvents;
     return (
       <React.Fragment>
         <div className={styles.heading}>
@@ -50,10 +15,10 @@ class MobileView extends Component {
         </div>
         <div className={styles.MainWrapper}>
           <div>
-            {upcomingEvents.length > 0 ? (
+            {futureEvents.length > 0 ? (
               <>
                 <div className={styles.categoryHeading}>Upcoming Events</div>
-                {upcomingEvents.map((event, index) => {
+                {futureEvents.map((event, index) => {
                   return (
                     <>
                       <EventCard
