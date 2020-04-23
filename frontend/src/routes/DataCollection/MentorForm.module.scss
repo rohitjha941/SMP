@@ -1,19 +1,17 @@
 @import "../../style/common.scss";
 .MainWrapper {
+  @import "../../../node_modules/bootstrap/scss/bootstrap";
   width: 80%;
-  margin: auto;
-  margin-top: 2rem;
+  margin: 2rem auto;
   min-height: 100vh;
   @media screen and (min-width: $break) {
     width: 40%;
   }
 }
 .button {
-  margin-top: 2rem;
-  margin: auto;
+  margin: 2rem auto;
   display: block;
   width: 40%;
-  margin-bottom: 2rem;
 }
 .heading {
   text-align: center;

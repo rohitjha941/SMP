@@ -65,32 +65,3 @@ div.queries {
     width: 100%;
   }
 }
-
-div.hamburger {
-  display: flex;
-  @media screen and (min-width: $break) {
-    display: none;
-  }
-  flex-direction: column;
-  height: 0.625rem;
-  justify-content: space-between;
-  div {
-    background-color: $grey;
-    height: 0.125rem;
-    width: 0.9375rem;
-    transition: all 0.2s ease-in-out;
-  }
-  &.cross {
-    div {
-      &:nth-child(1) {
-        transform: rotate(45deg) translateY(0.3125rem);
-      }
-      &:nth-child(2) {
-        opacity: 0;
-      }
-      &:nth-child(3) {
-        transform: rotate(-45deg) translateY(-0.3125rem);
-      }
-    }
-  }
-}

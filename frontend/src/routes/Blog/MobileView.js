@@ -1,34 +1,18 @@
 import React, { Component } from "react";
 import BlogCard from "../../components/BlogCard";
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
 import styles from "./MobileView.module.scss";
 
 export default class MobileView extends Component {
-  constructor() {
-    super();
-    this.state = {
-      featuredBlogs: [],
-      categoryBlogs: [],
-      blogCategory: [],
-    };
-  }
-  componentDidMount() {
-    let featuredBlogs = [];
-    let categoryBlogs = [];
-    this.props.blogData.map((value) => {
-      if (value.is_featured) {
-        return featuredBlogs.push(value);
-      }
-      return categoryBlogs.push(value);
-    });
-    this.setState({
-      featuredBlogs: featuredBlogs,
-      categoryBlogs: categoryBlogs,
-      blogCategory: this.props.blogCategory,
-    });
-  }
   render() {
-    let { featuredBlogs, categoryBlogs } = this.state;
+    const featuredBlogs = [];
+    const categoryBlogs = [];
+    this.props.blogData.forEach((value) => {
+      if (value.is_featured) {
+        featuredBlogs.push(value);
+      }
+      categoryBlogs.push(value);
+    });
     return (
       <React.Fragment>
         <div className={styles.heading}>
@@ -53,8 +37,8 @@ export default class MobileView extends Component {
                 })}
               </div>
             ) : null}
-            {this.state.blogCategory
-              ? this.state.blogCategory.map((category, index) => {
+            {this.props.blogCategory
+              ? this.props.blogCategory.map((category, index) => {
                   return (
                     <>
                       <div key={index} className={styles.categoryHeading}>
@@ -80,11 +64,11 @@ export default class MobileView extends Component {
                 })
               : null}
             <div></div>
-            <Button
+            {/* <Button
               className={styles.viewMore}
               type="outline"
               text="View More"
-            />
+            /> */}
           </div>
         </>
       </React.Fragment>

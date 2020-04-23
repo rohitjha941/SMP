@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./About.module.scss";
 import TeamCard from "../../components/TeamCard";
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
 class Team extends Component {
   componentDidMount() {
     this.props.fetch();
@@ -35,7 +35,7 @@ class Team extends Component {
               : null}
           </ul>
         </div>
-        <Button className={styles.viewMore} text="View More" type="outline" />
+        {/* <Button className={styles.viewMore} text="View More" type="outline" /> */}
       </>
     );
   }
