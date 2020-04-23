@@ -62,7 +62,11 @@ export default class Blog extends Component {
                 exact
                 path="/blogs"
                 render={(props) => (
-                  <MobileView {...props} blogData={blogData} />
+                  <MobileView
+                    {...props}
+                    blogData={blogData}
+                    blogCategory={this.props.blogCategory}
+                  />
                 )}
               />
               <Route
