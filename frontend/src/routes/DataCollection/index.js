@@ -3,10 +3,10 @@ import { Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
 import Loader from "../../components/Loader";
 
-// const PageNotFound = Loadable({
-//     loader: () => import('../../components/404/Index'),
-//     loading: () => <Loader />
-// })
+const PageNotFound = Loadable({
+  loader: () => import("../../components/404/Index"),
+  loading: () => <Loader />,
+});
 const MentorForm = Loadable({
   loader: () => import("./MentorForm"),
   loading: () => <Loader />,
@@ -29,7 +29,7 @@ class DataCollection extends Component {
               />
             )}
           />
-          {/* <Route to="*" component={PageNotFound} />  */}
+          <Route to="*" component={PageNotFound} />
         </Switch>
       </>
     );
