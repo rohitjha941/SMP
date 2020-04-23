@@ -11,7 +11,9 @@ export default class MobileView extends Component {
       if (value.is_featured) {
         featuredBlogs.push(value);
       }
-      categoryBlogs.push(value);
+      if (value.category) {
+        categoryBlogs.push(value);
+      }
     });
     return (
       <React.Fragment>
