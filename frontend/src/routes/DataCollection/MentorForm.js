@@ -357,9 +357,7 @@ class MentorForm extends Component {
               />
             </div>
             <div className={styles["form-group"]}>
-              <label htmlFor="mobile">
-                Mobile Number<span className="color-red">*</span>
-              </label>
+              <label htmlFor="mobile">Mobile Number</label>
               <div className={styles["input-group"]}>
                 <div className={styles["input-group-prepend"]}>
                   <div className={styles["input-group-text"]}>+91</div>
