@@ -8,7 +8,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 from backend.settings import DEFAULT_FROM_EMAIL, SEND_EMAIL_TO, EMAIL_HOST_PASSWORD, RECAPTCHA_SECRET_KEY, RECEIVER_NAME
 
-from rest_framework import generics, status
+from rest_framework import generics, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, renderer_classes
@@ -137,12 +137,12 @@ class CampusGroupsView (generics.ListAPIView):
     serializer_class = CampusGroupsSerializer
 
 
-class BlogCategoryView (generics.ListCreateAPIView):
+class BlogCategoryView (generics.ListAPIView):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
 
 
-class BlogsView (generics.ListCreateAPIView):
+class BlogsView (viewsets.ReadOnlyModelViewSet):
     queryset = Blogs.objects.all().order_by("-created_at")
     serializer_class = BlogsSerializer
 
