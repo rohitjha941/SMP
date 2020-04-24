@@ -57,11 +57,6 @@ class EventsAdmin(ImportExportModelAdmin):
     list_display = ('date', 'title', 'venue',)
 
 
-@register(MentorDocs)
-class MentorDocsAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'document')
-
-
 @register(Interest)
 class InterestsAdmin(ImportExportModelAdmin):
     list_display = ("interest_name",)

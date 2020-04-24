@@ -31,6 +31,7 @@ function App() {
   const [branches, setBranches] = useState([]);
   const [interests, setInterests] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [freshersGuideUrl, setFreshersGuideUrl] = useState("");
   const [canFetch, setFetchableStatus] = useState({
     blogs: true,
     blogCategory: true,
@@ -42,6 +43,7 @@ function App() {
     branches: true,
     interests: true,
     groups: true,
+    freshers: true,
   });
 
   window.flash = (message, type = "success") =>
@@ -108,6 +110,13 @@ function App() {
     }
   };
 
+  const fetchFreshersGuideUrlIfEmpty = () => {
+    if (canFetch.freshers) {
+      setFetchableStatus({ ...canFetch, freshers: false });
+      methods.getFreshersGuideUrl().then((data) => setFreshersGuideUrl(data));
+    }
+  };
+
   const fetcherCollection = {
     blogs: fetchBlogsIfEmpty,
     events: fetchEventsIfEmpty,
@@ -119,6 +128,7 @@ function App() {
     interests: fetchInterestsIfEmpty,
     groups: fetchGroupsIfEmpty,
     blogCategory: fetchBlogCategoryIfEmpty,
+    freshersGuideUrl: fetchFreshersGuideUrlIfEmpty,
   };
   return (
     <div className="App">
@@ -136,6 +146,7 @@ function App() {
           branches={branches}
           interests={interests}
           groups={groups}
+          freshersGuideUrl={freshersGuideUrl}
           fetchers={fetcherCollection}
         />
         <Footer />
