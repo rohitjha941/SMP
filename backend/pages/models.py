@@ -406,18 +406,6 @@ class Events(models.Model):
     content = tinymce_models.HTMLField()
 
 
-class MentorDocs(models.Model):
-    name = models.CharField(
-        default="",
-        max_length=100,
-    )
-    document = models.FileField(
-        upload_to="mentorDocs/",
-        null=True,
-        blank=True
-    )
-
-
 class RaisedQuery(models.Model):
     name = models.CharField(default="", max_length=100)
     email = models.EmailField(max_length=254,)

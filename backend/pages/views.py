@@ -182,11 +182,6 @@ class EventsView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-class MentorDocsView (generics.ListCreateAPIView):
-    queryset = MentorDocs.objects.all()
-    serializer_class = MentorDocsSerializer
-
-
 def send_email(data):
     query_id = data['id']
     query_content = data['query']

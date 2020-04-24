@@ -10,7 +10,7 @@ const apiConstants = {
   mentors: "mentors/",
   mentorAchievements: "mentors/achievements/",
   mentorIntern: "mentors/intern/",
-  mentorsDocs: "mentorsDocs",
+  mentorsDocs: "/documents/mentor-docs",
   faqs: "faq",
   branch: "branch",
   interests: "interests/",
@@ -28,7 +28,7 @@ export const MENTORS = apiConstants.base + apiConstants.mentors;
 export const MENTORSINTERN = apiConstants.base + apiConstants.mentorIntern;
 export const MENTORSACHIEVEMENTS =
   apiConstants.base + apiConstants.mentorAchievements;
-export const MENTORSDOCS = apiConstants.base + apiConstants.mentorsDocs;
+export const MENTORSDOCS = apiConstants.media + apiConstants.mentorsDocs;
 export const FAQS = apiConstants.base + apiConstants.faqs;
 export const BRANCH = apiConstants.base + apiConstants.branch;
 export const INTERESTS = apiConstants.base + apiConstants.interests;
