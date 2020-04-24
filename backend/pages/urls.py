@@ -3,6 +3,11 @@
 from django.urls import include, path
 from .views import *
 
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register(r'blogs', BlogsView)
+
 urlpatterns = [
     path('faq/', faqView.as_view()),
     path("branch/", branchView.as_view()),
@@ -12,10 +17,8 @@ urlpatterns = [
     path("team/", StudentTeamView.as_view()),
     path("mentorsDocs/", MentorDocsView.as_view()),
     path("events/", EventsView.as_view()),
-    path("blogs/", BlogsView.as_view()),
-
-
-
     path("interests/", InterestView.as_view()),
     path("mentors/", MentorView.as_view()),
 ]
+
+urlpatterns += router.urls
