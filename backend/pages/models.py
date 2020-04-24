@@ -81,7 +81,7 @@ vertical_choices = (
     ('Admin', 'Admin'),
     ('Operations', 'Operations'),
     ('WebD', 'WebD'),
-    ('Eventts', 'Events'),
+    ('Events', 'Events'),
     ('Content', 'Content'),
     ('Design', 'Design'),
 )
