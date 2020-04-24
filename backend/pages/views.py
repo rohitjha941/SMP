@@ -38,7 +38,7 @@ class faqView(generics.ListAPIView):
     serializer_class = faqSerializer
 
 
-class StudentTeamView (generics.ListCreateAPIView):
+class StudentTeamView (generics.ListAPIView):
     queryset = StudentTeam.objects.all()
     serializer_class = StudentTeamSerializer
 
