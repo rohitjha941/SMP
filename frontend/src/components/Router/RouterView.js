@@ -72,7 +72,15 @@ export default class RouterView extends Component {
               />
             )}
           />
-          <Route path="/freshers" component={Freshers} />
+          <Route
+            path="/freshers"
+            render={() => (
+              <Freshers
+                url={this.props.freshersGuideUrl}
+                fetch={this.props.fetchers.freshersGuideUrl}
+              />
+            )}
+          />
           <Route
             path="/about"
             render={() => (

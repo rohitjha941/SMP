@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Freshers.module.scss";
 
-function WrappedComponent() {
+function WrappedComponent(props) {
+  useEffect(() => {
+    props.fetch();
+  });
   return (
     <div className={styles.pdfContainer}>
       <object
-        data="http://watchout.iitr.ac.in/Freshman_Guide_To_IITR.pdf"
+        data={props.url}
         type="application/pdf"
         width="100%"
         height="100%"

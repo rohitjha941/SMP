@@ -1,7 +1,9 @@
 const BASE_URL = process.env.REACT_APP_API_BASE;
+export const BASE_MEDIA_URL = process.env.REACT_APP_MEDIA_API_BASE;
 
 const apiConstants = {
   base: BASE_URL,
+  media: BASE_MEDIA_URL,
   blogs: "blogs",
   events: "events",
   team: "team",
@@ -15,6 +17,7 @@ const apiConstants = {
   groups: "campusGroups",
   blogcategory: "blogCategory",
   raiseQuery: "raise-query/",
+  freshersGuide: "/documents/freshers-guide",
 };
 
 export const BLOGS = apiConstants.base + apiConstants.blogs;
@@ -31,3 +34,4 @@ export const BRANCH = apiConstants.base + apiConstants.branch;
 export const INTERESTS = apiConstants.base + apiConstants.interests;
 export const GROUPS = apiConstants.base + apiConstants.groups;
 export const RAISEQUERY = apiConstants.base + apiConstants.raiseQuery;
+export const FRESHERS_GUIDE = apiConstants.media + apiConstants.freshersGuide;
