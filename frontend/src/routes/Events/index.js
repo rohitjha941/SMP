@@ -28,7 +28,7 @@ class Events extends Component {
         ? this.props.events.past.map((value) => {
             return {
               event_id: value.id,
-              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
+              imgSrc: process.env.REACT_APP_MEDIA_API_BASE + value.thumbnail,
               imgAlt: value.title,
               heading: value.title,
               text: value.content,
@@ -46,7 +46,7 @@ class Events extends Component {
         ? this.props.events.this_week.map((value) => {
             return {
               event_id: value.id,
-              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
+              imgSrc: process.env.REACT_APP_MEDIA_API_BASE + value.thumbnail,
               imgAlt: value.title,
               heading: value.title,
               text: value.content,
@@ -64,7 +64,7 @@ class Events extends Component {
         ? this.props.events.upcoming.map((value) => {
             return {
               event_id: value.id,
-              imgSrc: process.env.REACT_APP_IMAGE_API_BASE + value.thumbnail,
+              imgSrc: process.env.REACT_APP_MEDIA_API_BASE + value.thumbnail,
               imgAlt: value.title,
               heading: value.title,
               text: value.content,
