@@ -1,4 +1,5 @@
 import {
+  BASE_MEDIA_URL,
   BLOGS,
   EVENTS,
   TEAM,
@@ -10,6 +11,7 @@ import {
   BLOGCATEGORY,
   GROUPS,
   RAISEQUERY,
+  FRESHERS_GUIDE,
 } from "api/constants";
 import axios from "axios";
 
@@ -196,6 +198,14 @@ const CreateMentor = (mentorData) => {
           reject(error.response);
         });
     }
+  });
+};
+
+export const getFreshersGuideUrl = () => {
+  return new Promise((resolve, reject) => {
+    axios.get(FRESHERS_GUIDE).then((response) => {
+      resolve(BASE_MEDIA_URL + response.data.document);
+    });
   });
 };
 

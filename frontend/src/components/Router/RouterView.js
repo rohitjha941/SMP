@@ -32,18 +32,27 @@ const Mentors = Loadable({
   loader: () => import("../../routes/Mentors"),
   loading: () => <Loader />,
 });
-const ComingSoon = Loadable({
-  loader: () => import("../../components/ComingSoon"),
-  loading: () => <Loader />,
-});
+
+// const ComingSoon = Loadable({
+//   loader: () => import("../../components/ComingSoon"),
+//   loading: () => <Loader />,
+// });
+
 const DataCollection = Loadable({
   loader: () => import("../../routes/DataCollection"),
   loading: () => <Loader />,
 });
+
 const PageNotFound = Loadable({
   loader: () => import("../404/Index"),
   loading: () => <Loader />,
 });
+
+const Freshers = Loadable({
+  loader: () => import("../../routes/Freshers"),
+  loading: () => <Loader />,
+});
+
 export default class RouterView extends Component {
   render() {
     return (
@@ -63,7 +72,15 @@ export default class RouterView extends Component {
               />
             )}
           />
-          <Route path="/freshers" component={ComingSoon} />
+          <Route
+            path="/freshers"
+            render={() => (
+              <Freshers
+                url={this.props.freshersGuideUrl}
+                fetch={this.props.fetchers.freshersGuideUrl}
+              />
+            )}
+          />
           <Route
             path="/about"
             render={() => (
