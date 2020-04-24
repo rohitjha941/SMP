@@ -33,6 +33,10 @@ class MentorForm extends Component {
       interests: [],
       achievements: [],
       internships: [],
+      placement: {
+        company: "",
+        job_title: "",
+      },
       email: "",
       mobile: "",
       image: null,
@@ -134,6 +138,11 @@ class MentorForm extends Component {
     this.state.internships.splice(index, 1);
     this.setState({ internships: this.state.internships });
   };
+  handleChangePlacement = (e, field) => {
+    const placement = this.state.placement;
+    placement[field] = e.target.value;
+    this.setState({ placement: placement });
+  };
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ isLoading: true });
@@ -152,6 +161,7 @@ class MentorForm extends Component {
       groups,
       achievements,
       internships,
+      placement,
       career,
     } = this.state;
 
@@ -170,6 +180,7 @@ class MentorForm extends Component {
       groups: groups,
       achievements: achievements,
       internships: internships,
+      placement: placement,
       career: career,
     };
     createMentor(data)
@@ -191,6 +202,7 @@ class MentorForm extends Component {
             groups: [],
             achievements: [],
             internships: [],
+            placement: { company: "", job_title: "" },
             redirect: true,
             isLoading: false,
             career: "",
@@ -536,6 +548,50 @@ class MentorForm extends Component {
                 Add Internship
               </button>
             </div>
+            <br />
+            <hr />
+
+            {/* Placement */}
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="placement">Placement (for final year only)</label>
+              <div className={`${styles["form-group"]} ${styles.row}`}>
+                <label
+                  htmlFor={"company"}
+                  className={`${styles["col-sm-2"]} ${styles["col-form-label"]}`}
+                >
+                  Name of Commpany:
+                </label>
+                <div className={styles["col-sm-10"]}>
+                  <input
+                    type="text"
+                    className={styles["form-control"]}
+                    value={this.state.placement.company}
+                    id={"company"}
+                    onChange={(e) => this.handleChangePlacement(e, "company")}
+                  />
+                </div>
+              </div>
+              <div className={`${styles["form-group"]} ${styles.row}`}>
+                <label
+                  htmlFor={"job_title"}
+                  className={`${styles["col-sm-2"]} ${styles["col-form-label"]}`}
+                >
+                  Job Title:
+                </label>
+                <div className={styles["col-sm-10"]}>
+                  <input
+                    type="text"
+                    className={styles["form-control"]}
+                    value={this.state.placement.domain}
+                    id={"job_title"}
+                    onChange={(e) => this.handleChangePlacement(e, "job_title")}
+                  />
+                </div>
+              </div>
+            </div>
+            <hr />
+            <br />
             <div className={styles["form-group"]}>
               <label htmlFor="facebook">Facebook URL</label>
               <input

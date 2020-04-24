@@ -123,6 +123,7 @@ const postMentorFormData = (postData) => {
     groups,
     achievements,
     internships,
+    placement,
     career,
   } = postData;
   let formData = new FormData();
@@ -153,6 +154,7 @@ const postMentorFormData = (postData) => {
   // on backend with json parse.
   formData.append("achievements", JSON.stringify(achievements));
   formData.append("interns", JSON.stringify(internships));
+  formData.append("placement", placement);
 
   return axios.post(MENTORS, formData);
 };
