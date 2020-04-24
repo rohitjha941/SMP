@@ -14,6 +14,7 @@ urlpatterns = [
     path("backend/admin/", admin.site.urls),
     path("backend/", include("pages.urls")),
     path("docs/", include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
+    path("documents/", include("docs.urls")),
     url(r"^tinymce/", include("tinymce.urls")),
 ]
 if settings.DEBUG:
