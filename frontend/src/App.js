@@ -22,6 +22,7 @@ const Footer = Loadable({
 
 function App() {
   const [blogs, setBlogs] = useState([]);
+  const [singleBlog, setSingleBlog] = useState({});
   const [blogCategory, setBlogCategory] = useState([]);
   const [events, setEvents] = useState({});
   const [team, setTeam] = useState([]);
@@ -116,6 +117,16 @@ function App() {
       methods.getFreshersGuideUrl().then((data) => setFreshersGuideUrl(data));
     }
   };
+  const fetchSingleBlogIfEmpty = (blogID) => {
+    const result = blogs.find(({ id }) => id === blogID);
+    if (result === undefined) {
+      if (!singleBlog || singleBlog.id !== blogID) {
+        methods.getSingleBlog(blogID).then((data) => setSingleBlog(data));
+      }
+    } else {
+      setSingleBlog(result);
+    }
+  };
 
   const fetcherCollection = {
     blogs: fetchBlogsIfEmpty,
@@ -129,6 +140,7 @@ function App() {
     groups: fetchGroupsIfEmpty,
     blogCategory: fetchBlogCategoryIfEmpty,
     freshersGuideUrl: fetchFreshersGuideUrlIfEmpty,
+    singleBlog: fetchSingleBlogIfEmpty,
   };
   return (
     <div className="App">
@@ -137,6 +149,7 @@ function App() {
         <Flash />
         <RouterView
           blogs={blogs}
+          singleBlog={singleBlog}
           events={events}
           blogCategory={blogCategory}
           team={team}

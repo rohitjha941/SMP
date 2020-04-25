@@ -28,6 +28,11 @@ const Queries = Loadable({
   loading: () => <Loader />,
 });
 
+const BlogFullView = Loadable({
+  loader: () => import("../../routes/Blog/BlogFullView"),
+  loading: () => <Loader />,
+});
+
 const Mentors = Loadable({
   loader: () => import("../../routes/Mentors"),
   loading: () => <Loader />,
@@ -97,6 +102,7 @@ export default class RouterView extends Component {
             )}
           />
           <Route
+            exact
             path="/blogs"
             render={() => (
               <Blog
@@ -105,6 +111,19 @@ export default class RouterView extends Component {
                 fetch={() => {
                   this.props.fetchers.blogs();
                   this.props.fetchers.blogCategory();
+                }}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/blogs/view/:blogID/"
+            render={(props) => (
+              <BlogFullView
+                {...props}
+                blogData={this.props.singleBlog}
+                fetch={(id) => {
+                  this.props.fetchers.singleBlog(id);
                 }}
               />
             )}

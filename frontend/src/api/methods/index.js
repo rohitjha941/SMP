@@ -26,6 +26,16 @@ const Blogs = function () {
       .catch((e) => reject(e));
   });
 };
+
+export const getSingleBlog = (id) => {
+  return new Promise((resolve, reject) => {
+    fetch(BLOGS + `/${id}/`)
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
 const BlogCategory = function () {
   return new Promise((resolve, reject) => {
     fetch(BLOGCATEGORY)
