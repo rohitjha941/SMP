@@ -148,7 +148,7 @@ class MentorShow extends Component {
               return element.id === value.branch;
             });
             return {
-              image: process.env.REACT_APP_IMAGE_API_BASE + value.photo,
+              image: value.photo,
               name: value.name,
               branch: value.branch,
               branch_name: branch_name.branch_name,
