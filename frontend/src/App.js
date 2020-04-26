@@ -21,8 +21,7 @@ const Footer = Loadable({
 });
 
 function App() {
-  const [blogs, setBlogs] = useState([]);
-  const [singleBlog, setSingleBlog] = useState({});
+  const [blogs, setBlogs] = useState({});
   const [blogCategory, setBlogCategory] = useState([]);
   const [events, setEvents] = useState({});
   const [team, setTeam] = useState([]);
@@ -53,7 +52,11 @@ function App() {
   const fetchBlogsIfEmpty = () => {
     if (canFetch.blogs) {
       setFetchableStatus({ ...canFetch, blogs: false });
-      methods.getBlogs().then((data) => setBlogs(data));
+      methods.getBlogs().then((data) => {
+        data.forEach((blog_object) => {
+          blogs[blog_object.id] = blog_object;
+        });
+      });
     }
   };
   const fetchEventsIfEmpty = () => {
@@ -118,16 +121,23 @@ function App() {
     }
   };
   const fetchSingleBlogIfEmpty = (blogID) => {
-    const result = blogs.find(({ id }) => id === blogID);
-    if (result === undefined) {
-      if (!singleBlog || singleBlog.id !== blogID) {
-        methods.getSingleBlog(blogID).then((data) => setSingleBlog(data));
-      }
-    } else {
-      setSingleBlog(result);
+    const result = `${blogID}` in blogs;
+    if (!result) {
+      methods
+        .getSingleBlog(blogID)
+        .then((data) => setBlogs({ ...blogs, [data.id]: data }));
     }
   };
-
+  const getBlogList = () => {
+    return Object.keys(blogs).map((id) => blogs[id]);
+  };
+  const getSingleBlog = (id) => {
+    if (`${id}` in blogs) {
+      return blogs[id];
+    } else {
+      return "Does Not Exist";
+    }
+  };
   const fetcherCollection = {
     blogs: fetchBlogsIfEmpty,
     events: fetchEventsIfEmpty,
@@ -148,8 +158,8 @@ function App() {
       <div className="router-footer-container">
         <Flash />
         <RouterView
-          blogs={blogs}
-          singleBlog={singleBlog}
+          getBlogList={getBlogList}
+          getSingleBlog={getSingleBlog}
           events={events}
           blogCategory={blogCategory}
           team={team}

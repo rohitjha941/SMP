@@ -23,10 +23,8 @@ export default class Blog extends Component {
     let mobWidth = window.innerWidth < 1000;
     this.setState({ mobileView: mobWidth });
   };
-  componentWillMount() {
-    this.props.fetch();
-  }
   componentDidMount() {
+    this.props.fetch();
     window.addEventListener("resize", this.resize);
   }
   componentWillUnmount() {
@@ -34,7 +32,7 @@ export default class Blog extends Component {
   }
 
   render() {
-    const blogData = this.props.blogs.map((value) => {
+    const blogData = this.props.getBlogList().map((value) => {
       return {
         blog_id: value.id,
         imgSrc: value.thumbnail,
