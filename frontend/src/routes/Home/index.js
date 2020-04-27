@@ -54,10 +54,7 @@ export default class Home extends Component {
           className={styles.EventSection}
           events={this.props.events}
         />
-        <BlogSection
-          className={styles.BlogSection}
-          getBlogList={this.props.getBlogList}
-        />
+        <BlogSection className={styles.BlogSection} blogs={this.props.blogs} />
       </div>
     );
   }

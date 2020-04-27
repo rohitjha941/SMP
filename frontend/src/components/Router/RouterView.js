@@ -68,7 +68,7 @@ export default class RouterView extends Component {
             path="/"
             render={() => (
               <Home
-                getBlogList={this.props.getBlogList}
+                blogs={this.props.blogs}
                 events={this.props.events}
                 fetch={() => {
                   this.props.fetchers.blogs();
@@ -104,10 +104,9 @@ export default class RouterView extends Component {
           <Route
             exact
             path="/blogs"
-            render={(props) => (
+            render={() => (
               <Blog
-                {...props}
-                getBlogList={this.props.getBlogList}
+                blogs={this.props.blogs}
                 blogCategory={this.props.blogCategory}
                 fetch={() => {
                   this.props.fetchers.blogs();
@@ -121,11 +120,9 @@ export default class RouterView extends Component {
             path="/blogs/view/:blogID/"
             render={(props) => (
               <BlogFullView
-                {...props}
-                getSingleBlog={this.props.getSingleBlog}
-                fetch={(id) => {
-                  this.props.fetchers.singleBlog(id);
-                }}
+                id={props.match.params.blogID}
+                getBlogById={this.props.getBlogById}
+                fetch={this.props.fetchers.singleBlog}
               />
             )}
           />
