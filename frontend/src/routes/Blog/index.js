@@ -32,7 +32,7 @@ export default class Blog extends Component {
   }
 
   render() {
-    const blogData = this.props.getBlogList().map((value) => {
+    const blogData = this.props.blogs.map((value) => {
       return {
         blog_id: value.id,
         imgSrc: value.thumbnail,

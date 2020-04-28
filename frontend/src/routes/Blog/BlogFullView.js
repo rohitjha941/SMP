@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import styles from "./BlogFullView.module.scss";
 import { calculateReadingTime } from "utils";
 
-let blogID = null;
 class BlogFullView extends Component {
   componentDidMount() {
-    blogID = parseInt(this.props.match.params.blogID);
+    const blogID = this.props.id;
     this.props.fetch(blogID);
   }
   render() {
-    const blog = this.props.getSingleBlog(blogID);
+    const blogID = this.props.id;
+    const blog = this.props.getBlogById(blogID);
     const blogData = blog.content
       ? {
           blog_id: blog.id,

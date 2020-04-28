@@ -52,10 +52,15 @@ function App() {
   const fetchBlogsIfEmpty = () => {
     if (canFetch.blogs) {
       setFetchableStatus({ ...canFetch, blogs: false });
-      methods.getBlogs().then((data) => {
-        data.forEach((blog_object) => {
-          blogs[blog_object.id] = blog_object;
+      const blogListToMap = (blogList) => {
+        const blogMap = {};
+        blogList.forEach((blog) => {
+          blogMap[blog.id] = blog;
         });
+        return blogMap;
+      };
+      methods.getBlogs().then((data) => {
+        setBlogs(blogListToMap(data));
       });
     }
   };
@@ -135,7 +140,10 @@ function App() {
     if (`${id}` in blogs) {
       return blogs[id];
     } else {
-      return "Does Not Exist";
+      return {
+        error: true,
+        message: "Does not exist",
+      };
     }
   };
   const fetcherCollection = {
@@ -158,8 +166,8 @@ function App() {
       <div className="router-footer-container">
         <Flash />
         <RouterView
-          getBlogList={getBlogList}
-          getSingleBlog={getSingleBlog}
+          blogs={getBlogList()}
+          getBlogById={getSingleBlog}
           events={events}
           blogCategory={blogCategory}
           team={team}
