@@ -7,6 +7,8 @@ import CreatableSelect from "react-select/creatable";
 import { createMentor } from "api/methods";
 import LoadingOverlay from "../../components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
+import ImageCropper from "components/ImageCropper";
+
 const animatedComponents = makeAnimated();
 const yearOptions = [
   {
@@ -48,6 +50,7 @@ class MentorForm extends Component {
       createdInterest: [],
       isLoading: false,
       redirect: false,
+      src: null,
     };
   }
   componentDidMount() {
@@ -61,10 +64,16 @@ class MentorForm extends Component {
     });
   };
   handleImage = (e) => {
-    const image = e.target.files[0];
-    this.setState({
-      image: image,
-    });
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () =>
+        this.setState({ src: reader.result })
+      );
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+  setImage = (image) => {
+    this.setState({ image: image });
   };
   handleResume = (e) => {
     const resume = e.target.files[0];
@@ -423,6 +432,7 @@ class MentorForm extends Component {
                 Photograph should be in 1:1 Aspect Ratio
               </small>
             </div>
+            <ImageCropper src={this.state.src} setImage={this.setImage} />
             <div className={styles["form-group"]}>
               <label htmlFor="resume">
                 Resume<span className="color-red">*</span>
