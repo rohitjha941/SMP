@@ -18,6 +18,7 @@
     &:hover {
       color: $white;
       background: $blue-text;
+      cursor: pointer;
     }
   }
   @media screen and (min-width: $break) {
@@ -46,6 +47,7 @@
     &:hover {
       color: $blue-text;
       background: $white;
+      cursor: pointer;
     }
   }
   @media screen and (min-width: $break) {
@@ -75,6 +77,7 @@
       color: $white;
       background: $blue-text;
       border-color: $blue-text;
+      cursor: pointer;
     }
   }
   @media screen and (min-width: $break) {
