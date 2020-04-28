@@ -138,7 +138,7 @@ function App() {
   };
   const getSingleBlog = (id) => {
     if (`${id}` in blogs) {
-      return blogs[id];
+      return { ...blogs[id], error: false };
     } else {
       return {
         error: true,
