@@ -154,7 +154,7 @@ const postMentorFormData = (postData) => {
   // on backend with json parse.
   formData.append("achievements", JSON.stringify(achievements));
   formData.append("interns", JSON.stringify(internships));
-  formData.append("placement", placement);
+  formData.append("placement", JSON.stringify(placement));
 
   return axios.post(MENTORS, formData);
 };

@@ -113,6 +113,20 @@ class MentorView (APIView):
                                 intern_serializer.save()
                             else:
                                 raise Exception
+                    if 'placement' in request_data:
+                        placement = json.loads(request_data.get('placement'))
+                        placement_data = dict(
+                            mentor=mentor_serializer.data.get('id'),
+                            company=placement.get('company'),
+                            job_title=placement.get('job_title')
+                        )
+                        placement_serializer = MentorPlacementSerializer(
+                            data=placement_data)
+                        last_used_serializer = placement_serializer
+                        if placement_serializer.is_valid():
+                            placement_serializer.save()
+                        else:
+                            raise Exception
                 else:
                     raise Exception
         except Exception:

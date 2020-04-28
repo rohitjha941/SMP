@@ -286,6 +286,24 @@ class MentorIntern(models.Model):
     )
 
 
+class MentorPlacement(models.Model):
+    mentor = models.ForeignKey(
+        Mentor,
+        related_name="mentor_placement",
+        on_delete=models.CASCADE
+    )
+    company = models.TextField(
+        max_length=500,
+        blank=True,
+        null=True
+    )
+    job_title = models.CharField(
+        max_length=500,
+        blank=True,
+        null=True,
+    )
+
+
 class ContactDetails(models.Model):
     name = models.CharField(
         default="",

@@ -77,6 +77,11 @@ class MentorIntern(ImportExportModelAdmin):
     list_display = ('mentor', 'company', 'duration', 'domain', )
 
 
+@register(MentorPlacement)
+class MentorIntern(ImportExportModelAdmin):
+    list_display = ('mentor', 'company', 'job_title', )
+
+
 @register(MentorAchievement)
 class MentorAchievement(ImportExportModelAdmin):
     list_display = ('mentor', 'achievement_name', )

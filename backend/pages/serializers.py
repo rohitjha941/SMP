@@ -58,6 +58,13 @@ class MentorInternSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class MentorPlacementSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MentorPlacement
+        fields = "__all__"
+
+
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
