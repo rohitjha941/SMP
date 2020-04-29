@@ -81,7 +81,7 @@ vertical_choices = (
     ('Admin', 'Admin'),
     ('Operations', 'Operations'),
     ('WebD', 'WebD'),
-    ('Eventts', 'Events'),
+    ('Events', 'Events'),
     ('Content', 'Content'),
     ('Design', 'Design'),
 )
@@ -283,6 +283,24 @@ class MentorIntern(models.Model):
         max_length=500,
         blank=True,
         null=True
+    )
+
+
+class MentorPlacement(models.Model):
+    mentor = models.ForeignKey(
+        Mentor,
+        related_name="mentor_placement",
+        on_delete=models.CASCADE
+    )
+    company = models.TextField(
+        max_length=500,
+        blank=True,
+        null=True
+    )
+    job_title = models.CharField(
+        max_length=500,
+        blank=True,
+        null=True,
     )
 
 
