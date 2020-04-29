@@ -3,30 +3,30 @@ import styles from "./BlogFullView.module.scss";
 import { calculateReadingTime } from "utils";
 import PageNotFound from "../../components/404/Index";
 import Loader from "components/Loader";
-let timer = 0;
 class BlogFullView extends Component {
   constructor() {
     super();
     this.state = {
       found: true,
+      isPending: true,
     };
   }
   componentDidMount() {
     const blogID = this.props.id;
-    this.props.fetch(blogID);
+    var that = this;
+    this.props
+      .fetch(blogID)
+      .then(() => {
+        that.setState({ isPending: false });
+      })
+      .catch(() => {
+        that.setState({ found: false, isPending: false });
+      });
   }
   render() {
-    const { found } = this.state;
+    const { found, isPending } = this.state;
     const blogID = this.props.id;
     const blog = this.props.getBlogById(blogID);
-    if (blog.error) {
-      timer = setTimeout(() => {
-        this.setState({ found: false });
-      }, 3000);
-    } else {
-      clearTimeout(timer);
-      timer = 0;
-    }
     const blogData = blog.content
       ? {
           blog_id: blog.id,
@@ -45,7 +45,7 @@ class BlogFullView extends Component {
       <React.Fragment>
         {found ? (
           <>
-            {blogData ? (
+            {blogData && !isPending ? (
               <div className={styles.mainDiv}>
                 <div className={styles.mainImageDiv}>
                   <img

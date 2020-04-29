@@ -126,12 +126,23 @@ function App() {
     }
   };
   const fetchSingleBlogIfEmpty = (blogID) => {
-    const result = `${blogID}` in blogs;
-    if (!result) {
-      methods
-        .getSingleBlog(blogID)
-        .then((data) => setBlogs({ ...blogs, [data.id]: data }));
-    }
+    return new Promise((resolve, reject) => {
+      const result = `${blogID}` in blogs;
+      if (result) {
+        resolve();
+      } else {
+        methods
+          .getSingleBlog(blogID)
+          .then((data) => {
+            setBlogs({
+              ...blogs,
+              [data.id]: data,
+            });
+            resolve();
+          })
+          .catch((e) => reject());
+      }
+    });
   };
   const getBlogList = () => {
     return Object.keys(blogs).map((id) => blogs[id]);
