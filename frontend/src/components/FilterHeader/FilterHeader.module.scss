@@ -13,6 +13,10 @@
   font-weight: 500;
   font-size: 1.1875rem;
   line-height: 1.5625rem;
+  @media screen and (min-width: $break) {
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+  }
 }
 
 .cross {
@@ -23,6 +27,7 @@
   flex-direction: column;
   height: 0.875rem;
   justify-content: space-between;
+  cursor: pointer;
   span {
     background-color: $grey;
     height: 0.15625rem;

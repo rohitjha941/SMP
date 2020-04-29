@@ -270,7 +270,7 @@ class FilterMentors extends Component {
           <hr />
           <ul className={styles.apply}>
             <li className={styles.applyButton}>
-              <Button text="Apply Filters" onClick={this.onApply} />
+              <Button text="Apply Filters" size="lg" onClick={this.onApply} />
             </li>
             <li className={styles.clearButton}>
               <Button text="Clear All" type="outline" onClick={this.onClear} />
