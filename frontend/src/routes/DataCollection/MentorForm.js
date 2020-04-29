@@ -557,7 +557,7 @@ class MentorForm extends Component {
                   htmlFor={"company"}
                   className={`${styles["col-sm-2"]} ${styles["col-form-label"]}`}
                 >
-                  Name of Commpany:
+                  Name of Company:
                 </label>
                 <div className={styles["col-sm-10"]}>
                   <input
