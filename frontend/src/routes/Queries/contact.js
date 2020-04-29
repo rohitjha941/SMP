@@ -132,6 +132,7 @@ class Contact extends Component {
                 onChange={this.handleCaptcha}
                 ref={recaptchaRef}
                 sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                className={styles.captcha}
               />
               <Button type="submit" text="Get In Touch" />
             </form>
