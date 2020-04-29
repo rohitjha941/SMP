@@ -1,7 +1,8 @@
 @import "../../style/common.scss";
 .container {
+  position: relative;
   top: 0;
-  height: 8%;
+  height: 8.89%;
   width: 100%;
   ul {
     display: grid;
@@ -11,6 +12,12 @@
   margin-bottom: 0.8125rem;
   margin-top: 0;
   padding-bottom: 0.5rem;
+  @media screen and (min-width: $break) {
+    ul {
+      grid-template-columns: 4% 90% 5%;
+    }
+    padding-bottom: 1.2rem;
+  }
 }
 
 .filterIcon {
@@ -20,6 +27,7 @@
   width: 0.9375rem;
   justify-content: space-between;
   margin: 0.5rem auto;
+  cursor: pointer;
   span {
     background-color: $grey;
     height: 0.10125rem;
@@ -29,13 +37,25 @@
     }
     &:nth-child(2) {
       width: 0.75rem;
-      margin-right: 0;
-      margin-left: auto;
     }
     &:nth-child(3) {
       width: 0.5rem;
-      margin-right: 0;
-      margin-left: auto;
+    }
+  }
+  @media screen and (min-width: $break) {
+    height: 1rem;
+    width: 1.75rem;
+    span {
+      height: 0.16rem;
+      &:nth-child(1) {
+        width: 1.75rem;
+      }
+      &:nth-child(2) {
+        width: 1.5rem;
+      }
+      &:nth-child(3) {
+        width: 1.25rem;
+      }
     }
   }
 }
@@ -46,15 +66,24 @@
   box-sizing: border-box;
   border-radius: 0.18rem;
   width: 100%;
-  min-height: 2rem;
-  padding: 0.5rem auto 0.5rem 0.625rem;
+  padding: 3%;
   font-size: 0.75rem;
   line-height: 1rem;
   color: $grey-level-0_5;
   &:focus {
     outline: none;
   }
+  @media screen and (min-width: $break) {
+    font-size: 1.1rem;
+    line-height: 1.2rem;
+    padding: 1%;
+  }
 }
 .backArrow {
+  height: auto;
   margin: 0.625rem auto;
+  cursor: pointer;
+  @media screen and (min-width: $break) {
+    width: 1.2rem;
+  }
 }
