@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import styles from "./Blog.module.scss";
-import { Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
 import Loader from "../../components/Loader";
-import BlogFullView from "./BlogFullView";
 import { calculateReadingTime } from "utils";
-import PageNotFound from "../../components/404/Index";
 
 const MobileView = Loadable({
   loader: () => import("./MobileView"),
@@ -26,10 +23,8 @@ export default class Blog extends Component {
     let mobWidth = window.innerWidth < 1000;
     this.setState({ mobileView: mobWidth });
   };
-  componentWillMount() {
-    this.props.fetch();
-  }
   componentDidMount() {
+    this.props.fetch();
     window.addEventListener("resize", this.resize);
   }
   componentWillUnmount() {
@@ -54,50 +49,21 @@ export default class Blog extends Component {
       };
     });
     return (
-      <React.Fragment>
+      <>
         <div className={styles.mainDiv}>
           {this.state.mobileView ? (
-            <Switch>
-              <Route
-                exact
-                path="/blogs"
-                render={(props) => (
-                  <MobileView {...props} blogData={blogData} />
-                )}
-              />
-              <Route
-                exact
-                path="/blogs/view/:blogID/"
-                render={(props) => (
-                  <BlogFullView {...props} blogData={blogData} />
-                )}
-              />
-              <Route to="*" component={PageNotFound} />
-            </Switch>
+            <MobileView
+              blogData={blogData}
+              blogCategory={this.props.blogCategory}
+            />
           ) : (
-            <Switch>
-              <Route
-                exact
-                path="/blogs"
-                render={(props) => (
-                  <DesktopView
-                    {...props}
-                    blogData={blogData}
-                    blogCategory={this.props.blogCategory}
-                  />
-                )}
-              />
-              <Route
-                path="/blogs/view/:blogID/"
-                render={(props) => (
-                  <BlogFullView {...props} blogData={blogData} />
-                )}
-              />
-              <Route to="*" component={PageNotFound} />
-            </Switch>
+            <DesktopView
+              blogData={blogData}
+              blogCategory={this.props.blogCategory}
+            />
           )}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

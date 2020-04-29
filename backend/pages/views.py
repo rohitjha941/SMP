@@ -1,34 +1,23 @@
 import requests
 import datetime
-from django.shortcuts import get_object_or_404, render
-
 import json
-import requests
-from django.core.mail import send_mail
+
 from django.db import transaction
-from django.shortcuts import render
 from django.template import loader
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from backend.settings import DEFAULT_FROM_EMAIL
-from backend.settings import SEND_EMAIL_TO
-from backend.settings import EMAIL_HOST_PASSWORD
-from backend.settings import RECAPTCHA_SECRET_KEY
-from backend.settings import RECEIVER_NAME
+from backend.settings import DEFAULT_FROM_EMAIL, SEND_EMAIL_TO, EMAIL_HOST_PASSWORD, RECAPTCHA_SECRET_KEY, RECEIVER_NAME
 
 from rest_framework import generics, status, viewsets
-from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 
 from pages.utils import get_client_ip
 
 from .models import *
 from .serializers import *
-from .utils import get_client_ip
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
@@ -49,7 +38,7 @@ class faqView(generics.ListAPIView):
     serializer_class = faqSerializer
 
 
-class StudentTeamView (generics.ListCreateAPIView):
+class StudentTeamView (generics.ListAPIView):
     queryset = StudentTeam.objects.all()
     serializer_class = StudentTeamSerializer
 
@@ -162,13 +151,13 @@ class CampusGroupsView (generics.ListAPIView):
     serializer_class = CampusGroupsSerializer
 
 
-class BlogCategoryView (generics.ListCreateAPIView):
+class BlogCategoryView (generics.ListAPIView):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
 
 
-class BlogsView (generics.ListCreateAPIView):
-    queryset = Blogs.objects.all()
+class BlogsView (viewsets.ReadOnlyModelViewSet):
+    queryset = Blogs.objects.all().order_by("-created_at")
     serializer_class = BlogsSerializer
 
 
@@ -176,20 +165,20 @@ class EventsView(APIView):
     def get(self, request):
         data = {
             "past": EventsSerializer(
-                Events.objects.filter(date__lt=datetime.date.today()), many=True
+                Events.objects.filter(date__lt=datetime.date.today()).order_by("-date"), many=True
             ).data,
             "this_week": EventsSerializer(
                 Events.objects.filter(
                     date__gte=datetime.date.today(),
                     date__lt=(datetime.date.today() +
                               datetime.timedelta(days=7)),
-                ),
+                ).order_by("-date"),
                 many=True,
             ).data,
             "upcoming": EventsSerializer(
                 Events.objects.filter(
                     date__gte=datetime.date.today() + datetime.timedelta(days=7)
-                ),
+                ).order_by("date"),
                 many=True,
             ).data,
         }

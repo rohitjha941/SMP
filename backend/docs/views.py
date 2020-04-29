@@ -11,6 +11,6 @@ class FresherDocumentView(APIView):
         return Response(doc_serializer.data, status=status.HTTP_200_OK)
 
 
-class MentorDocumentView (generics.ListCreateAPIView):
+class MentorDocumentView (generics.ListAPIView):
     queryset = MentorDocument.objects.all()
     serializer_class = MentorDocumentSerializer
