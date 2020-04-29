@@ -456,7 +456,6 @@ class MentorForm extends Component {
                     >
                       Remove
                     </button>
-                    <br />
                   </div>
                 );
               })}
@@ -478,7 +477,7 @@ class MentorForm extends Component {
                         htmlFor={"company" + index}
                         className={`${styles["col-sm-2"]} ${styles["col-form-label"]}`}
                       >
-                        Name of Commpany:
+                        Name of Company:
                       </label>
                       <div className={styles["col-sm-10"]}>
                         <input
@@ -536,7 +535,6 @@ class MentorForm extends Component {
                     >
                       Remove
                     </button>
-                    <br />
                   </div>
                 );
               })}
@@ -548,7 +546,6 @@ class MentorForm extends Component {
                 Add Internship
               </button>
             </div>
-            <br />
             <hr />
 
             {/* Placement */}
@@ -591,7 +588,6 @@ class MentorForm extends Component {
               </div>
             </div>
             <hr />
-            <br />
             <div className={styles["form-group"]}>
               <label htmlFor="facebook">Facebook URL</label>
               <input

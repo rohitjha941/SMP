@@ -78,7 +78,7 @@ class MentorIntern(ImportExportModelAdmin):
 
 
 @register(MentorPlacement)
-class MentorIntern(ImportExportModelAdmin):
+class MentorPlacement(ImportExportModelAdmin):
     list_display = ('mentor', 'company', 'job_title', )
 
 
