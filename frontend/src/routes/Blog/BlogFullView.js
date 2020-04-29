@@ -24,6 +24,8 @@ class BlogFullView extends Component {
           this.setState({ found: false, isPending: false });
         }.bind(this)
       );
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
   render() {
     const { found, isPending } = this.state;
