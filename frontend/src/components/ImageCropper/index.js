@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import ReactCrop from "react-image-crop";
+import Button from "components/Button";
 import styles from "./ImageCropper.module.scss";
 import "../../../node_modules/react-image-crop/dist/ReactCrop.css";
 export default class ImageCropper extends PureComponent {
@@ -35,6 +36,7 @@ export default class ImageCropper extends PureComponent {
         "newFile.jpeg"
       );
       this.setState({ croppedImageUrl });
+      this.props.setCroppedSrc(croppedImageUrl);
     }
   }
 
@@ -78,7 +80,9 @@ export default class ImageCropper extends PureComponent {
       }, "image/jpeg");
     });
   }
-
+  handleClick = () => {
+    this.props.toggleCropper();
+  };
   render() {
     const { crop, croppedImageUrl } = this.state;
     const src = this.props.src;
@@ -86,11 +90,11 @@ export default class ImageCropper extends PureComponent {
       <div className={styles.mainWrapper}>
         {src && (
           <>
-            <p className={styles.infoText}>Crop the Image as required</p>
             <ReactCrop
               src={src}
               crop={crop}
               ruleOfThirds
+              className={styles.ReactCrop}
               onImageLoaded={this.onImageLoaded}
               onComplete={this.onCropComplete}
               onChange={this.onCropChange}
@@ -99,7 +103,6 @@ export default class ImageCropper extends PureComponent {
         )}
         {croppedImageUrl && (
           <>
-            <p className={styles.infoText}>Cropped Image Preview :-</p>
             <img
               alt="Crop"
               className={styles.croppedImage}
@@ -107,6 +110,12 @@ export default class ImageCropper extends PureComponent {
             />
           </>
         )}
+        <Button
+          className={styles.doneBtn}
+          onClick={this.handleClick}
+          type="solid"
+          text="Done"
+        />
       </div>
     );
   }

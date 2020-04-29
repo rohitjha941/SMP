@@ -51,11 +51,23 @@ class MentorForm extends Component {
       isLoading: false,
       redirect: false,
       src: null,
+      croppedSrc: null,
+      cropperToggle: false,
     };
   }
   componentDidMount() {
     this.props.fetch();
   }
+  setCroppedSrc = (croppedImageURL) => {
+    this.setState({ croppedSrc: croppedImageURL });
+  };
+  toggleCropper = () => {
+    this.setState({ cropperToggle: !this.state.cropperToggle });
+  };
+  handleCropBtn = () => {
+    this.toggleCropper();
+    console.log("here");
+  };
   handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
@@ -67,7 +79,7 @@ class MentorForm extends Component {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener("load", () =>
-        this.setState({ src: reader.result })
+        this.setState({ src: reader.result, cropperToggle: true })
       );
       reader.readAsDataURL(e.target.files[0]);
     }
@@ -432,7 +444,29 @@ class MentorForm extends Component {
                 Photograph should be in 1:1 Aspect Ratio
               </small>
             </div>
-            <ImageCropper src={this.state.src} setImage={this.setImage} />
+            {this.state.cropperToggle ? (
+              <ImageCropper
+                src={this.state.src}
+                setImage={this.setImage}
+                toggleCropper={this.toggleCropper}
+                setCroppedSrc={this.setCroppedSrc}
+              />
+            ) : null}
+            {this.state.croppedSrc && !this.state.cropperToggle && (
+              <div className={styles.croppedImageDiv}>
+                <img
+                  alt="Crop"
+                  src={this.state.croppedSrc}
+                  className={styles.croopedImage}
+                />
+                <Button
+                  onClick={this.handleCropBtn}
+                  type="button"
+                  className={styles.cropAgain}
+                  text="Crop Again?"
+                />
+              </div>
+            )}
             <div className={styles["form-group"]}>
               <label htmlFor="resume">
                 Resume<span className="color-red">*</span>
