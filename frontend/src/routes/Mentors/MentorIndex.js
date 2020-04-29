@@ -3,6 +3,7 @@ import styles from "./MentorIndex.module.scss";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import ImageText from "components/ImageText";
+import becomeAMentor from "assets/images/become_a_mentor.jpeg";
 
 class MentorIndex extends Component {
   render() {
@@ -35,9 +36,7 @@ class MentorIndex extends Component {
 
           <div className={styles.infoContainer}>
             <ImageText
-              imgSrc={
-                "https://images.unsplash.com/photo-1490111718993-d98654ce6cf7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-              }
+              imgSrc={becomeAMentor}
               heading={"Become a mentor with SMP"}
               text={
                 "Every year SMP recruits mentors from future 3rd/4th/5th year to guide the coming freshers @ IITR. We want our mentor to guide the first yearities and help them adjust to the R-land."
