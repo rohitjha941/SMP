@@ -12,16 +12,18 @@ class BlogFullView extends Component {
     };
   }
   componentDidMount() {
-    const blogID = this.props.id;
-    var that = this;
     this.props
-      .fetch(blogID)
-      .then(() => {
-        that.setState({ isPending: false });
-      })
-      .catch(() => {
-        that.setState({ found: false, isPending: false });
-      });
+      .fetch(this.props.id)
+      .then(
+        function () {
+          this.setState({ isPending: false });
+        }.bind(this)
+      )
+      .catch(
+        function () {
+          this.setState({ found: false, isPending: false });
+        }.bind(this)
+      );
   }
   render() {
     const { found, isPending } = this.state;
