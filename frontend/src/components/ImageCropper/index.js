@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import ReactCrop from "react-image-crop";
 import Button from "components/Button";
 import styles from "./ImageCropper.module.scss";
-import "../../../node_modules/react-image-crop/dist/ReactCrop.css";
+import "react-image-crop/dist/ReactCrop.css";
 export default class ImageCropper extends PureComponent {
   constructor() {
     super();
@@ -23,8 +23,6 @@ export default class ImageCropper extends PureComponent {
   };
 
   onCropChange = (crop, percentCrop) => {
-    // You could also use percentCrop:
-    // this.setState({ crop: percentCrop });
     this.setState({ crop: percentCrop });
   };
 
@@ -63,9 +61,8 @@ export default class ImageCropper extends PureComponent {
     return new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
         if (!blob) {
-          //reject(new Error('Canvas is empty'));
           console.error("Canvas is empty");
-          return;
+          reject();
         }
         blob.name = fileName;
 
@@ -94,7 +91,7 @@ export default class ImageCropper extends PureComponent {
               src={src}
               crop={crop}
               ruleOfThirds
-              className={styles.ReactCrop}
+              className={styles.reactCrop}
               onImageLoaded={this.onImageLoaded}
               onComplete={this.onCropComplete}
               onChange={this.onCropChange}

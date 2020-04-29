@@ -5,7 +5,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
 import { createMentor } from "api/methods";
-import LoadingOverlay from "../../components/LoadingOverlay";
+import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
 import ImageCropper from "components/ImageCropper";
 
@@ -431,18 +431,11 @@ class MentorForm extends Component {
                 type="file"
                 className={styles["form-control-file"]}
                 name="photo"
-                aria-describedby="photo-help"
                 id="photo"
                 accept="image/*"
                 required
                 onChange={this.handleImage}
               />
-              <small
-                id="photo-help"
-                className={`${styles["form-text"]} ${styles["text-muted"]}`}
-              >
-                Photograph should be in 1:1 Aspect Ratio
-              </small>
             </div>
             {this.state.cropperToggle ? (
               <ImageCropper
