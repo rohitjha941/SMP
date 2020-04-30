@@ -1,7 +1,7 @@
 @import "../../style/common.scss";
-@import "../../../node_modules/bootstrap/scss/bootstrap";
 
 .MainWrapper {
+  @import "../../../node_modules/bootstrap/scss/bootstrap";
   width: 80%;
   margin: 2rem auto;
   min-height: 100vh;
@@ -19,13 +19,14 @@
   margin-bottom: 1.5rem;
 }
 .croppedImageDiv {
-  text-align: center;
+  margin-bottom: 1rem;
 }
 .cropAgain {
   display: block;
-  margin: 1rem auto;
 }
 .croppedImage {
+  object-fit: cover;
   width: 80%;
   display: block;
+  margin-bottom: 1rem;
 }

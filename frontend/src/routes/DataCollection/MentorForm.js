@@ -450,7 +450,7 @@ class MentorForm extends Component {
                 <img
                   alt="Crop"
                   src={this.state.croppedSrc}
-                  className={styles.croopedImage}
+                  className={styles.croppedImage}
                 />
                 <Button
                   onClick={this.handleCropBtn}
