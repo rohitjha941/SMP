@@ -23,7 +23,7 @@ export default class ImageCropper extends PureComponent {
   };
 
   onCropChange = (crop, percentCrop) => {
-    this.setState({ crop: percentCrop });
+    this.setState({ crop: crop });
   };
 
   async makeClientCrop(crop) {
