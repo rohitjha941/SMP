@@ -85,34 +85,40 @@ export default class ImageCropper extends PureComponent {
     const src = this.props.src;
     return (
       <div className={styles.mainWrapper}>
-        {src && (
-          <>
-            <ReactCrop
-              src={src}
-              crop={crop}
-              ruleOfThirds
-              className={styles.reactCrop}
-              onImageLoaded={this.onImageLoaded}
-              onComplete={this.onCropComplete}
-              onChange={this.onCropChange}
+        <ul>
+          <li>
+            {src && (
+              <>
+                <ReactCrop
+                  src={src}
+                  crop={crop}
+                  ruleOfThirds
+                  className={styles.reactCrop}
+                  onImageLoaded={this.onImageLoaded}
+                  onComplete={this.onCropComplete}
+                  onChange={this.onCropChange}
+                />
+              </>
+            )}
+            {croppedImageUrl && (
+              <>
+                <img
+                  alt="Crop"
+                  className={styles.croppedImage}
+                  src={croppedImageUrl}
+                />
+              </>
+            )}
+          </li>
+          <li>
+            <Button
+              className={styles.doneBtn}
+              onClick={this.handleClick}
+              type="solid"
+              text="Done"
             />
-          </>
-        )}
-        {croppedImageUrl && (
-          <>
-            <img
-              alt="Crop"
-              className={styles.croppedImage}
-              src={croppedImageUrl}
-            />
-          </>
-        )}
-        <Button
-          className={styles.doneBtn}
-          onClick={this.handleClick}
-          type="solid"
-          text="Done"
-        />
+          </li>
+        </ul>
       </div>
     );
   }

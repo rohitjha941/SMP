@@ -32,6 +32,8 @@
 }
 .doneBtn {
   position: fixed;
+  width: 40%;
+  left: 30%;
   bottom: 5%;
   display: inline-block;
   @media screen and (min-width: $break) {
