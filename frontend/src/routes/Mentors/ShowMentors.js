@@ -245,9 +245,7 @@ class MentorShow extends Component {
                             return (
                               <>
                                 <li
-                                  className={
-                                    "mentor-li" + ` branch${mentor.branch}-li`
-                                  }
+                                  className={`mentor-li branch${mentor.branch}-li`}
                                 >
                                   <MentorCard
                                     className={styles.mentorCard}
