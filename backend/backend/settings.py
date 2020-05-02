@@ -141,10 +141,11 @@ CORS_ALLOW_CREDENTIALS = False
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"}
 
-# raise_query_email
+# EMAIL_DATA
 DEFAULT_FROM_EMAIL = cfg["sendgrid"]["from_email"]
 EMAIL_HOST_PASSWORD = cfg["sendgrid"]["sendgrid_api_key"]
 SEND_EMAIL_TO = cfg["sendgrid"]["send_to_email"]
+
 RECEIVER_NAME = cfg["sendgrid"]["receiver_name"]
 
 # ReCAPTCHA

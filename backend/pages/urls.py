@@ -12,7 +12,7 @@ urlpatterns = [
     path('faq/', faqView.as_view()),
     path("branch/", branchView.as_view()),
     path('campusGroups/', CampusGroupsView.as_view()),
-    path('raise-query/', raisedQuery, name='raise_query'),
+    path('raise-query/', raisedQueryView.as_view()),
     path("blogCategory/", BlogCategoryView.as_view()),
     path("team/", StudentTeamView.as_view()),
     path("events/", EventsView.as_view()),

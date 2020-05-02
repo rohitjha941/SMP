@@ -1,15 +1,11 @@
 import requests
 import datetime
 
-from django.views.decorators.csrf import ensure_csrf_cookie
-
 from backend.settings import RECAPTCHA_SECRET_KEY
 
 from rest_framework import generics, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 
 from pages.utils import get_client_ip
 
@@ -88,11 +84,8 @@ class EventsView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-@api_view(('POST',))
-@ensure_csrf_cookie
-@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
-def raisedQuery(request):
-    if request.method == 'POST':
+class raisedQueryView(APIView):
+    def post(self, request):
         r = requests.post(
             'https://www.google.com/recaptcha/api/siteverify',
             data={
@@ -109,4 +102,3 @@ def raisedQuery(request):
                 return Response(data={'query': serializer.data}, status=status.HTTP_201_CREATED)
             return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
