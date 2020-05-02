@@ -48,7 +48,18 @@ export const getEvents = function () {
   return new Promise((resolve, reject) => {
     fetch(EVENTS)
       .then((data) => data.json())
-      .then((jsonData) => resolve(jsonData))
+      .then((jsonData) => {
+        let events = {};
+        Object.keys(jsonData).forEach((name) => {
+          events[name] = jsonData[name].map((event) => {
+            return {
+              ...event,
+              thumbnail: BASE_URL + event.thumbnail,
+            };
+          });
+        });
+        resolve(events);
+      })
       .catch((e) => reject(e));
   });
 };
