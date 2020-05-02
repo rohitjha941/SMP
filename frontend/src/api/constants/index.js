@@ -1,9 +1,9 @@
 export const BASE_URL = process.env.REACT_APP_API_BASE;
 
 const apiConstants = {
-  pages: BASE_URL + "/backend/pages/",
-  mentors: BASE_URL + "/backend/mentors/",
-  docs: BASE_URL + "/backend/documents/",
+  pages: BASE_URL + "/pages/",
+  mentors: BASE_URL + "/mentors/",
+  docs: BASE_URL + "/documents/",
   blogs: "blogs/",
   events: "events/",
   team: "team/",
