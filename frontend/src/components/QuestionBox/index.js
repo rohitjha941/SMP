@@ -4,18 +4,12 @@ import downArrow2 from "assets/images/down-arrow-2.svg";
 import styles from "./QuestionsBox.module.scss";
 import Answer from "./Answer";
 
-let image;
-
-if (window.innerWidth < 600) {
-  image = downArrow2;
-} else {
-  image = downArrow;
-}
 class QuestionsBox extends Component {
   constructor() {
     super();
     this.state = {
       visibility: false,
+      mobileView: window.innerWidth < 600,
     };
   }
   toggleAnswer = () => {
@@ -25,8 +19,19 @@ class QuestionsBox extends Component {
       };
     });
   };
+  resize = () => {
+    let mobWidth = window.innerWidth < 600;
+    this.setState({ mobileView: mobWidth });
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.resize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.resize);
+  }
 
   render() {
+    const image = this.state.mobileView ? downArrow2 : downArrow;
     return (
       <div className={styles.questionBox}>
         <div className={styles.parentContentDiv}>
