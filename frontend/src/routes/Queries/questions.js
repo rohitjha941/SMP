@@ -16,13 +16,13 @@ class Questions extends Component {
   handlequerychange = () => {
     this.props.activeTab === "mentor" && this.state.mentorQueryLimit === 8
       ? this.setState({
-          mentorQueryLimit: this.state.MentorQuestions.length,
+          mentorQueryLimit: -1,
           viewTextMentor: "View Less",
         })
       : this.setState({ mentorQueryLimit: 8, viewTextMentor: "View More" });
     this.props.activeTab === "mentee" && this.state.menteeQueryLimit === 8
       ? this.setState({
-          menteeQueryLimit: this.state.MenteeQuestions.length,
+          menteeQueryLimit: -1,
           viewTextMentee: "View Less",
         })
       : this.setState({ menteeQueryLimit: 8, viewTextMentee: "View More" });

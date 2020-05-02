@@ -7,6 +7,7 @@
   color: $grey-level-0_7;
   width: 100%;
   font-size: 1rem;
+  text-align: center;
   padding-top: 5%;
 }
 
@@ -14,7 +15,6 @@
   font-weight: 500;
   font-size: 1.6875rem;
   line-height: 2.1875rem;
-  text-align: center;
   color: $grey-level-0_7;
   @media screen and (min-width: $break) {
     font-size: 3.125rem;
@@ -26,7 +26,6 @@
   font-weight: 300;
   font-size: 0.875rem;
   line-height: 150%;
-  text-align: center;
   color: $grey;
   margin: 1.625rem auto 0 auto;
   width: 60%;
@@ -36,7 +35,6 @@
   }
 }
 .viewMentorsButton {
-  display: block;
   margin: 2.25rem auto 9.625rem auto;
 }
 .mentorImage {
@@ -138,8 +136,6 @@
 
 .learnMore {
   margin: 1.9375rem auto auto auto;
-  display: block;
-  background: $light-blue-background;
 }
 .resourceHeading {
   font-weight: 500;

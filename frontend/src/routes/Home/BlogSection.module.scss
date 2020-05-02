@@ -2,6 +2,7 @@
 .cardSection {
   width: 88.89%;
   margin: auto;
+  text-align: center;
 }
 .sectionHeading {
   margin: 3.0625rem auto 2.25rem 0;
@@ -9,6 +10,7 @@
   font-size: 1rem;
   line-height: 1.3125rem;
   color: $blue-text;
+  text-align: left;
   @media screen and (min-width: $break) {
     font-size: 1.6875rem;
     line-height: 2.1875rem;
@@ -16,7 +18,4 @@
 }
 .viewBlogsButton {
   margin: 2.1875rem auto 2.5rem auto;
-  display: block;
-  // left:-2.0625rem;
-  // position: relative;
 }

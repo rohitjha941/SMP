@@ -21,7 +21,7 @@ const Footer = Loadable({
 });
 
 function App() {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState({});
   const [blogCategory, setBlogCategory] = useState([]);
   const [events, setEvents] = useState({});
   const [team, setTeam] = useState([]);
@@ -52,7 +52,16 @@ function App() {
   const fetchBlogsIfEmpty = () => {
     if (canFetch.blogs) {
       setFetchableStatus({ ...canFetch, blogs: false });
-      methods.getBlogs().then((data) => setBlogs(data));
+      const blogListToMap = (blogList) => {
+        const blogMap = {};
+        blogList.forEach((blog) => {
+          blogMap[blog.id] = blog;
+        });
+        return blogMap;
+      };
+      methods.getBlogs().then((data) => {
+        setBlogs(blogListToMap(data));
+      });
     }
   };
   const fetchEventsIfEmpty = () => {
@@ -116,7 +125,38 @@ function App() {
       methods.getFreshersGuideUrl().then((data) => setFreshersGuideUrl(data));
     }
   };
-
+  const fetchSingleBlogIfEmpty = (blogID) => {
+    return new Promise((resolve, reject) => {
+      const result = `${blogID}` in blogs;
+      if (result) {
+        resolve();
+      } else {
+        methods
+          .getSingleBlog(blogID)
+          .then((data) => {
+            setBlogs({
+              ...blogs,
+              [data.id]: data,
+            });
+            resolve();
+          })
+          .catch((e) => reject());
+      }
+    });
+  };
+  const getBlogList = () => {
+    return Object.keys(blogs).map((id) => blogs[id]);
+  };
+  const getSingleBlog = (id) => {
+    if (`${id}` in blogs) {
+      return { ...blogs[id], error: false };
+    } else {
+      return {
+        error: true,
+        message: "Does not exist",
+      };
+    }
+  };
   const fetcherCollection = {
     blogs: fetchBlogsIfEmpty,
     events: fetchEventsIfEmpty,
@@ -129,6 +169,7 @@ function App() {
     groups: fetchGroupsIfEmpty,
     blogCategory: fetchBlogCategoryIfEmpty,
     freshersGuideUrl: fetchFreshersGuideUrlIfEmpty,
+    singleBlog: fetchSingleBlogIfEmpty,
   };
   return (
     <div className="App">
@@ -136,7 +177,8 @@ function App() {
       <div className="router-footer-container">
         <Flash />
         <RouterView
-          blogs={blogs}
+          blogs={getBlogList()}
+          getBlogById={getSingleBlog}
           events={events}
           blogCategory={blogCategory}
           team={team}

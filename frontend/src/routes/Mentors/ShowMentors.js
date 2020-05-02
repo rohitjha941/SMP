@@ -130,6 +130,25 @@ class MentorShow extends Component {
     var filterToggle = !this.state.filterToggle;
     this.setState({ filterToggle: filterToggle });
   };
+
+  clearUl = (availableBranches) => {
+    availableBranches.forEach((branch) => {
+      const branchLi = document.getElementsByClassName(`branch${branch.id}-li`);
+      let allClear = true;
+      Object.keys(branchLi).forEach((id) => {
+        if (branchLi[id].style.display === "") {
+          allClear = false;
+          return;
+        }
+      });
+      let branchDiv = document.getElementById(`branch${branch.id}-div`);
+      if (allClear) {
+        branchDiv.style.display = "none";
+      } else {
+        branchDiv.style.display = "";
+      }
+    });
+  };
   render() {
     const allmentors =
       this.props.mentors &&
@@ -148,7 +167,7 @@ class MentorShow extends Component {
               return element.id === value.branch;
             });
             return {
-              image: process.env.REACT_APP_MEDIA_API_BASE + value.photo,
+              image: value.photo,
               name: value.name,
               branch: value.branch,
               branch_name: branch_name.branch_name,
@@ -208,30 +227,40 @@ class MentorShow extends Component {
         ) : (
           <>
             <div className={styles.container}>
-              <SearchHeader handleToggle={this.handleToggle} />
-              {availableBranches.map((value) => {
+              <SearchHeader
+                handleToggle={this.handleToggle}
+                clearUl={this.clearUl}
+                availableBranches={availableBranches}
+              />
+              {availableBranches.map((value, index) => {
                 return (
                   <>
-                    <div className={styles.department}>{value.branch_name}</div>
-                    <ul className="mentors">
-                      {filteredMentors.map((mentor, i) => {
-                        if (mentor.branch === value.id) {
-                          return (
-                            <>
-                              <li className="mentor-li">
-                                <MentorCard
-                                  className={styles.mentorCard}
-                                  profile={mentor}
-                                  key={i}
-                                />
-                              </li>
-                            </>
-                          );
-                        }
-                        return null;
-                      })}
-                    </ul>
-                    <hr />
+                    <div id={`branch${value.id}-div`} key={index}>
+                      <div className={styles.department}>
+                        {value.branch_name}
+                      </div>
+                      <ul className="mentors">
+                        {filteredMentors.map((mentor, i) => {
+                          if (mentor.branch === value.id) {
+                            return (
+                              <>
+                                <li
+                                  className={`mentor-li branch${mentor.branch}-li`}
+                                >
+                                  <MentorCard
+                                    className={styles.mentorCard}
+                                    profile={mentor}
+                                    key={i}
+                                  />
+                                </li>
+                              </>
+                            );
+                          }
+                          return null;
+                        })}
+                      </ul>
+                      <hr />
+                    </div>
                   </>
                 );
               })}

@@ -2,36 +2,46 @@
 .container {
   // position:fixed;
   top: 0;
-  height: 8%;
+  height: 8.89%;
   width: 100%;
   ul {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 95% 5%;
   }
 }
 .heading {
   font-weight: 500;
   font-size: 1.1875rem;
   line-height: 1.5625rem;
+  @media screen and (min-width: $break) {
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+  }
 }
 
 .cross {
-  margin-top: 0.5rem;
-  right: 6%;
-  position: absolute;
+  margin: 0.55rem auto;
   display: flex;
   flex-direction: column;
   height: 0.875rem;
+  width: 1.2375rem;
   justify-content: space-between;
+  cursor: pointer;
   span {
-    background-color: $grey;
     height: 0.15625rem;
+    background-color: $grey;
     width: 1.2375rem;
     &:nth-child(1) {
       transform: rotate(45deg) translateY(0.5rem);
     }
     &:nth-child(2) {
       transform: rotate(-45deg) translateY(-0.5rem);
+    }
+  }
+  @media screen and (min-width: $break) {
+    width: 3.75rem;
+    span {
+      width: 1.85rem;
     }
   }
 }

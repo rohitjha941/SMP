@@ -18,7 +18,7 @@ import axios from "axios";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-const Blogs = function () {
+export const getBlogs = function () {
   return new Promise((resolve, reject) => {
     fetch(BLOGS)
       .then((data) => data.json())
@@ -26,7 +26,17 @@ const Blogs = function () {
       .catch((e) => reject(e));
   });
 };
-const BlogCategory = function () {
+
+export const getSingleBlog = (id) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(BLOGS + `/${id}/`)
+      .then((data) => resolve(data.data))
+      .catch((e) => reject(e));
+  });
+};
+
+export const getBlogCategory = function () {
   return new Promise((resolve, reject) => {
     fetch(BLOGCATEGORY)
       .then((data) => data.json())
@@ -34,7 +44,7 @@ const BlogCategory = function () {
       .catch((e) => reject(e));
   });
 };
-const Events = function () {
+export const getEvents = function () {
   return new Promise((resolve, reject) => {
     fetch(EVENTS)
       .then((data) => data.json())
@@ -42,7 +52,7 @@ const Events = function () {
       .catch((e) => reject(e));
   });
 };
-const Team = function () {
+export const getTeam = function () {
   return new Promise((resolve, reject) => {
     fetch(TEAM)
       .then((data) => data.json())
@@ -50,16 +60,26 @@ const Team = function () {
       .catch((e) => reject(e));
   });
 };
-const Mentors = function () {
+export const getMentors = function () {
   return new Promise((resolve, reject) => {
     fetch(MENTORS)
       .then((data) => data.json())
-      .then((jsonData) => resolve(jsonData))
+      .then((jsonData) => {
+        resolve(
+          jsonData.map((profile) => {
+            return {
+              ...profile,
+              photo: BASE_MEDIA_URL + profile.photo,
+              resume: BASE_MEDIA_URL + profile.resume,
+            };
+          })
+        );
+      })
       .catch((e) => reject(e));
   });
 };
 
-const MentorsDocs = function () {
+export const getMentorsDocs = function () {
   return new Promise((resolve, reject) => {
     fetch(MENTORSDOCS)
       .then((data) => data.json())
@@ -67,7 +87,7 @@ const MentorsDocs = function () {
       .catch((e) => reject(e));
   });
 };
-const Faqs = function () {
+export const getFAQs = function () {
   return new Promise((resolve, reject) => {
     fetch(FAQS)
       .then((data) => data.json())
@@ -75,7 +95,7 @@ const Faqs = function () {
       .catch((e) => reject(e));
   });
 };
-const Branch = function () {
+export const getBranch = function () {
   return new Promise((resolve, reject) => {
     fetch(BRANCH)
       .then((data) => data.json())
@@ -83,7 +103,7 @@ const Branch = function () {
       .catch((e) => reject(e));
   });
 };
-const Interests = function () {
+export const getInterests = function () {
   return new Promise((resolve, reject) => {
     fetch(INTERESTS)
       .then((data) => data.json())
@@ -91,7 +111,7 @@ const Interests = function () {
       .catch((e) => reject(e));
   });
 };
-const Groups = function () {
+export const getGroups = function () {
   return new Promise((resolve, reject) => {
     fetch(GROUPS)
       .then((data) => data.json())
@@ -99,7 +119,7 @@ const Groups = function () {
       .catch((e) => reject(e));
   });
 };
-const PostQuery = (data) => {
+export const postQuery = (data) => {
   return axios.post(RAISEQUERY, data);
 };
 
@@ -159,7 +179,7 @@ const postMentorFormData = (postData) => {
   return axios.post(MENTORS, formData);
 };
 
-const CreateMentor = (mentorData) => {
+export const createMentor = (mentorData) => {
   const interestToCreate = mentorData.interest.filter(
     (i) => typeof i === "string"
   );
@@ -210,16 +230,3 @@ export const getFreshersGuideUrl = () => {
     });
   });
 };
-
-export const getBlogs = Blogs;
-export const getEvents = Events;
-export const getTeam = Team;
-export const getMentors = Mentors;
-export const getMentorsDocs = MentorsDocs;
-export const getFAQs = Faqs;
-export const getBranch = Branch;
-export const getInterests = Interests;
-export const getGroups = Groups;
-export const getBlogCategory = BlogCategory;
-export const postQuery = PostQuery;
-export const createMentor = CreateMentor;
