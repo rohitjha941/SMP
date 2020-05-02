@@ -4,7 +4,6 @@ import styles from "./SearchHeader.module.scss";
 import back from "assets/images/back-arrow.svg";
 
 class SearchHeader extends Component {
-  state = {};
   handleFilter(e) {
     var input, filter, li, p, i, txtValue;
     input = document.getElementById("search-input");
@@ -20,6 +19,7 @@ class SearchHeader extends Component {
         li[i].style.display = "none";
       }
     }
+    this.props.clearUl(this.props.availableBranches);
   }
   handleClick = () => {
     this.props.handleToggle();
