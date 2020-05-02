@@ -319,6 +319,7 @@ class MentorForm extends Component {
                 maxLength="8"
                 placeholder="Enter your Enrollment Number"
                 onChange={this.handleChange}
+                onWheel={(e) => e.target.blur()}
                 required
               />
             </div>
@@ -405,6 +406,7 @@ class MentorForm extends Component {
                   maxLength="10"
                   placeholder="Enter your Mobile Number"
                   onChange={this.handleChange}
+                  onWheel={(e) => e.target.blur()}
                 />
               </div>
             </div>
