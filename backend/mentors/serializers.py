@@ -15,14 +15,12 @@ class MentorAchievementSerializer(serializers.ModelSerializer):
 
 
 class MentorInternSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = MentorIntern
         fields = "__all__"
 
 
 class MentorPlacementSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = MentorPlacement
         fields = "__all__"
