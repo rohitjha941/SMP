@@ -37,11 +37,6 @@ class branchAdmin(ImportExportModelAdmin):
                     'branch', 'year', 'mobile', 'email', )
 
 
-@register(Mentor)
-class MentorAdmin(ImportExportModelAdmin):
-    list_display = ('branch', 'name', 'photo', 'facebook', 'linkedin', )
-
-
 @register(BlogCategory)
 class BlogCategoryAdmin(ImportExportModelAdmin):
     list_display = ("category_name",)
@@ -57,11 +52,6 @@ class EventsAdmin(ImportExportModelAdmin):
     list_display = ('date', 'title', 'venue',)
 
 
-@register(Interest)
-class InterestsAdmin(ImportExportModelAdmin):
-    list_display = ("interest_name",)
-
-
 @register(CampusGroups)
 class CampusGroupsAdmin(ImportExportModelAdmin):
     list_display = ('group_name',)
@@ -70,18 +60,3 @@ class CampusGroupsAdmin(ImportExportModelAdmin):
 @register(RaisedQuery)
 class RaisedQuery(ImportExportModelAdmin):
     list_display = ('id', 'name', 'email', 'query')
-
-
-@register(MentorIntern)
-class MentorIntern(ImportExportModelAdmin):
-    list_display = ('mentor', 'company', 'duration', 'domain', )
-
-
-@register(MentorPlacement)
-class MentorPlacement(ImportExportModelAdmin):
-    list_display = ('mentor', 'company', 'job_title', )
-
-
-@register(MentorAchievement)
-class MentorAchievement(ImportExportModelAdmin):
-    list_display = ('mentor', 'achievement_name', )
