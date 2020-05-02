@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "pages",
     "docs",
     "mentors",
+    "mail",
     "rest_framework",
     "corsheaders",
     "import_export",

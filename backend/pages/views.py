@@ -1,10 +1,9 @@
 import requests
 import datetime
 
-from django.template import loader
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from backend.settings import DEFAULT_FROM_EMAIL, SEND_EMAIL_TO, EMAIL_HOST_PASSWORD, RECAPTCHA_SECRET_KEY, RECEIVER_NAME
+from backend.settings import RECAPTCHA_SECRET_KEY
 
 from rest_framework import generics, status, viewsets
 from rest_framework.views import APIView
@@ -17,8 +16,7 @@ from pages.utils import get_client_ip
 from .models import *
 from .serializers import *
 
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+from mail.mailer import mail_raised_query
 
 
 class HomeView(generics.ListAPIView):
@@ -90,37 +88,6 @@ class EventsView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-def send_email(data):
-    query_id = data['id']
-    query_content = data['query']
-    query_name = data['name']
-    query_email = data['email']
-    subject = subject = '#{} Query raised from smp.iitr.ac.in'.format(query_id)
-    message = Mail(
-        from_email=DEFAULT_FROM_EMAIL,
-        to_emails=SEND_EMAIL_TO,
-        subject=subject,
-        html_content=loader.render_to_string(
-            'mail_template/raise_query.html',
-            {
-                'receiver_name': RECEIVER_NAME,
-                'query_name': query_name,
-                'query_content': query_content,
-                'query_email': query_email,
-                'query_id': query_id
-            }
-        )
-    )
-    try:
-        sg = SendGridAPIClient(EMAIL_HOST_PASSWORD)
-        response = sg.send(message)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
-    except Exception as e:
-        print(e.message)
-
-
 @api_view(('POST',))
 @ensure_csrf_cookie
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
@@ -138,7 +105,7 @@ def raisedQuery(request):
             serializer = RaisedQuerySerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                send_email(serializer.data)
+                mail_raised_query(serializer.data)
                 return Response(data={'query': serializer.data}, status=status.HTTP_201_CREATED)
             return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
