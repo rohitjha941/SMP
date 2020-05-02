@@ -1,5 +1,5 @@
 import {
-  BASE_MEDIA_URL,
+  BASE_URL,
   BLOGS,
   EVENTS,
   TEAM,
@@ -69,8 +69,8 @@ export const getMentors = function () {
           jsonData.map((profile) => {
             return {
               ...profile,
-              photo: BASE_MEDIA_URL + profile.photo,
-              resume: BASE_MEDIA_URL + profile.resume,
+              photo: BASE_URL + profile.photo,
+              resume: BASE_URL + profile.resume,
             };
           })
         );
@@ -226,7 +226,7 @@ export const createMentor = (mentorData) => {
 export const getFreshersGuideUrl = () => {
   return new Promise((resolve, reject) => {
     axios.get(FRESHERS_GUIDE).then((response) => {
-      resolve(BASE_MEDIA_URL + response.data.document);
+      resolve(BASE_URL + response.data.document);
     });
   });
 };

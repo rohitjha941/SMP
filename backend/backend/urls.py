@@ -11,8 +11,8 @@ API_DESCRIPTION = ""
 
 urlpatterns = [
     path("backend/admin/", admin.site.urls),
-    path("backend/pages", include("pages.urls")),
-    path("backend/mentors", include("mentors.urls")),
+    path("backend/pages/", include("pages.urls")),
+    path("backend/mentors/", include("mentors.urls")),
     path("docs/", include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
     path("backend/documents/", include("docs.urls")),
     url(r"^tinymce/", include("tinymce.urls")),
