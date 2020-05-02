@@ -12,7 +12,7 @@ from pages.utils import get_client_ip
 from .models import *
 from .serializers import *
 
-from mail.mailer import mail_raised_query
+from mail.utils import mail_raised_query
 
 
 class HomeView(generics.ListAPIView):
