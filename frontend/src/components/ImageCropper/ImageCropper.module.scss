@@ -12,10 +12,13 @@
 }
 .reactCrop {
   margin: 2rem auto;
-  width: 80%;
+  max-width: 80%;
   display: block;
   @media screen and (min-width: $break) {
-    width: 40%;
+    max-width: 40%;
+    img {
+      max-height: 60vh;
+    }
   }
 }
 .infoText {
@@ -37,7 +40,9 @@
   bottom: 5%;
   display: inline-block;
   @media screen and (min-width: $break) {
+    width: auto;
     bottom: auto;
+    left: auto;
     right: 10%;
     top: 10%;
   }
