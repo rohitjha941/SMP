@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import downArrow from "../../assets/images/down-arrow.svg";
-import downArrow2 from "../../assets/images/down-arrow-2.svg";
+import downArrow from "assets/images/down-arrow.svg";
+import downArrow2 from "assets/images/down-arrow-2.svg";
 import styles from "./QuestionsBox.module.scss";
 import Answer from "./Answer";
 
