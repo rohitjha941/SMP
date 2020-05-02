@@ -26,6 +26,7 @@
   line-height: 150%;
   float: left;
   color: $grey-level-0_8;
+  cursor: pointer;
   @media screen and (max-width: $break) {
     width: 13.856875rem;
     font-size: 0.875rem;
@@ -33,6 +34,7 @@
   }
 }
 .downArrow {
+  cursor: pointer;
   float: right;
   margin: 1rem auto auto 3.4375rem;
   @media screen and (max-width: $break) {
