@@ -65,7 +65,9 @@ class MentorForm extends Component {
     this.setState({ cropperToggle: !this.state.cropperToggle });
   };
   checkKey = (e) => {
-    if (e.which === 38 || e.which === 40) {
+    const downArrow = 40;
+    const upArrow = 38;
+    if (e.which === upArrow || e.which === downArrow) {
       e.preventDefault();
     }
   };
