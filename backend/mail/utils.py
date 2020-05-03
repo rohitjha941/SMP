@@ -29,9 +29,6 @@ def mail_raised_query(data):
     )
     try:
         sg = SendGridAPIClient(EMAIL_HOST_PASSWORD)
-        response = sg.send(message)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        sg.send(message)
     except Exception as e:
         print(e.message)
