@@ -5,7 +5,7 @@ from .models import *
 class MentorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mentor
-        fields = "__all__"
+        fields = "name, branch, photo, year, interest"
 
 
 class MentorAchievementSerializer(serializers.ModelSerializer):
@@ -17,7 +17,7 @@ class MentorAchievementSerializer(serializers.ModelSerializer):
 class MentorInternSerializer(serializers.ModelSerializer):
     class Meta:
         model = MentorIntern
-        fields = "name, branch, photo, year, interest"
+        fields = "__all__"
 
 
 class MentorPlacementSerializer(serializers.ModelSerializer):

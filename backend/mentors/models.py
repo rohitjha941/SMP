@@ -1,6 +1,6 @@
 from django.db import models
 
-from pages.models import branch, CampusGroups
+from pages.models import Branch, CampusGroups
 
 
 class Interest(models.Model):
@@ -19,7 +19,7 @@ year_choices = (("3rd", "3rd Year"), ("4th", "4th Year"), ("5th", "5th Year"))
 
 class Mentor(models.Model):
     branch = models.ForeignKey(
-        branch,
+        Branch,
         related_name="mentors",
         on_delete=models.CASCADE
     )

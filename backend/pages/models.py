@@ -27,7 +27,7 @@ class HomeVision(models.Model):
     )
 
 
-class faq(models.Model):
+class Faq(models.Model):
 
     question = models.CharField(
         max_length=300,
@@ -54,7 +54,7 @@ class faq(models.Model):
         return self.question
 
 
-class branch(models.Model):
+class Branch(models.Model):
     branch_name = models.CharField(
         max_length=100,
         default=""
@@ -135,7 +135,7 @@ class StudentTeam(models.Model):
     )
 
     branch = models.ForeignKey(
-        branch,
+        Branch,
         related_name="teams",
         on_delete=models.CASCADE,
     )

@@ -25,9 +25,9 @@ class HomeVisionView(generics.ListAPIView):
     serializer_class = HomeVisionSerializer
 
 
-class faqView(generics.ListAPIView):
-    queryset = faq.objects.all()
-    serializer_class = faqSerializer
+class FaqView(generics.ListAPIView):
+    queryset = Faq.objects.all()
+    serializer_class = FaqSerializer
 
 
 class StudentTeamView (generics.ListAPIView):
@@ -35,9 +35,9 @@ class StudentTeamView (generics.ListAPIView):
     serializer_class = StudentTeamSerializer
 
 
-class branchView (generics.ListAPIView):
-    queryset = branch.objects.all().order_by('branch_name')
-    serializer_class = branchSerializer
+class BranchView (generics.ListAPIView):
+    queryset = Branch.objects.all().order_by('branch_name')
+    serializer_class = BranchSerializer
 
 
 class ContactDetailsView(generics.ListAPIView):
@@ -84,7 +84,7 @@ class EventsView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-class raisedQueryView(APIView):
+class RaisedQueryView(APIView):
     def post(self, request):
         r = requests.post(
             'https://www.google.com/recaptcha/api/siteverify',

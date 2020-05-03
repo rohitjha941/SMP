@@ -15,8 +15,8 @@ class HomeVisionAdmin(ImportExportModelAdmin):
     list_display = ('title', 'description', 'image', )
 
 
-@register(faq)
-class faqVisionAdmin(ImportExportModelAdmin):
+@register(Faq)
+class FaqVisionAdmin(ImportExportModelAdmin):
     list_display = ('_for', 'question', 'answer', )
 
 
@@ -26,13 +26,13 @@ class StudentTeamAdmin(ImportExportModelAdmin):
                     'branch', 'year', 'position',)
 
 
-@register(branch)
-class branchAdmin(ImportExportModelAdmin):
+@register(Branch)
+class BranchAdmin(ImportExportModelAdmin):
     list_display = ("branch_name",)
 
 
 @register(ContactDetails)
-class branchAdmin(ImportExportModelAdmin):
+class ContactDetailsAdmin(ImportExportModelAdmin):
     list_display = ('name', 'photo', 'facebook', 'linkedin',
                     'branch', 'year', 'mobile', 'email', )
 

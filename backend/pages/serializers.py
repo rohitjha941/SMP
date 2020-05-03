@@ -15,9 +15,9 @@ class HomeVisionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class faqSerializer(serializers.ModelSerializer):
+class FaqSerializer(serializers.ModelSerializer):
     class Meta:
-        model = faq
+        model = Faq
         fields = "__all__"
 
 
@@ -27,9 +27,9 @@ class StudentTeamSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class branchSerializer(serializers.ModelSerializer):
+class BranchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = branch
+        model = Branch
         fields = "__all__"
 
 
