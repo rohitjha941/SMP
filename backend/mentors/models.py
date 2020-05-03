@@ -54,7 +54,6 @@ class Mentor(models.Model):
         unique=True
     )
     enrollno = models.IntegerField(
-        null=True,
         unique=True
     )
     facebook = models.URLField(
@@ -68,7 +67,7 @@ class Mentor(models.Model):
         blank=True
     )
     year = models.CharField(
-        max_length=100,
+        max_length=15,
         blank=True,
         null=True,
         choices=year_choices
