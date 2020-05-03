@@ -15,7 +15,6 @@ urlpatterns = [
     path("mentors/", include("mentors.urls")),
     path("docs/", include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
     path("documents/", include("docs.urls")),
-    url(r"^tinymce/", include("tinymce.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
