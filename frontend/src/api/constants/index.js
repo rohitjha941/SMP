@@ -11,21 +11,21 @@ const apiConstants = {
   faqs: "faq/",
   branch: "branch/",
   interests: "interests/",
-  groups: "campusGroups/",
-  blogcategory: "blogCategory/",
+  groups: "campus-groups/",
+  blogCategory: "blog-category/",
   raiseQuery: "raise-query/",
   freshersGuide: "freshers-guide/",
 };
 
 export const BLOGS = apiConstants.pages + apiConstants.blogs;
-export const BLOGCATEGORY = apiConstants.pages + apiConstants.blogcategory;
+export const BLOG_CATEGORY = apiConstants.pages + apiConstants.blogCategory;
 export const EVENTS = apiConstants.pages + apiConstants.events;
 export const TEAM = apiConstants.pages + apiConstants.team;
 export const MENTORS = apiConstants.mentors;
-export const MENTORSDOCS = apiConstants.docs + apiConstants.mentorsDocs;
+export const MENTORS_DOCS = apiConstants.docs + apiConstants.mentorsDocs;
 export const FAQS = apiConstants.pages + apiConstants.faqs;
 export const BRANCH = apiConstants.pages + apiConstants.branch;
 export const INTERESTS = apiConstants.mentors + apiConstants.interests;
 export const GROUPS = apiConstants.pages + apiConstants.groups;
-export const RAISEQUERY = apiConstants.pages + apiConstants.raiseQuery;
+export const RAISE_QUERY = apiConstants.pages + apiConstants.raiseQuery;
 export const FRESHERS_GUIDE = apiConstants.docs + apiConstants.freshersGuide;

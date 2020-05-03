@@ -4,13 +4,13 @@ import {
   EVENTS,
   TEAM,
   MENTORS,
-  MENTORSDOCS,
+  MENTORS_DOCS,
   FAQS,
   BRANCH,
   INTERESTS,
-  BLOGCATEGORY,
+  BLOG_CATEGORY,
   GROUPS,
-  RAISEQUERY,
+  RAISE_QUERY,
   FRESHERS_GUIDE,
 } from "api/constants";
 import axios from "axios";
@@ -38,7 +38,7 @@ export const getSingleBlog = (id) => {
 
 export const getBlogCategory = function () {
   return new Promise((resolve, reject) => {
-    fetch(BLOGCATEGORY)
+    fetch(BLOG_CATEGORY)
       .then((data) => data.json())
       .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
@@ -92,7 +92,7 @@ export const getMentors = function () {
 
 export const getMentorsDocs = function () {
   return new Promise((resolve, reject) => {
-    fetch(MENTORSDOCS)
+    fetch(MENTORS_DOCS)
       .then((data) => data.json())
       .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
@@ -131,7 +131,7 @@ export const getGroups = function () {
   });
 };
 export const postQuery = (data) => {
-  return axios.post(RAISEQUERY, data);
+  return axios.post(RAISE_QUERY, data);
 };
 
 const CreateInterests = (interestData) => {
