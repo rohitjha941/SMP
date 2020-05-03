@@ -64,6 +64,13 @@ class MentorForm extends Component {
   toggleCropper = () => {
     this.setState({ cropperToggle: !this.state.cropperToggle });
   };
+  checkKey = (e) => {
+    const downArrow = 40;
+    const upArrow = 38;
+    if (e.which === upArrow || e.which === downArrow) {
+      e.preventDefault();
+    }
+  };
   handleCropBtn = () => {
     this.toggleCropper();
     console.log("here");
@@ -319,6 +326,8 @@ class MentorForm extends Component {
                 maxLength="8"
                 placeholder="Enter your Enrollment Number"
                 onChange={this.handleChange}
+                onKeyDown={this.checkKey}
+                onWheel={(e) => e.target.blur()}
                 required
               />
             </div>
@@ -405,6 +414,8 @@ class MentorForm extends Component {
                   maxLength="10"
                   placeholder="Enter your Mobile Number"
                   onChange={this.handleChange}
+                  onKeyDown={this.checkKey}
+                  onWheel={(e) => e.target.blur()}
                 />
               </div>
             </div>
