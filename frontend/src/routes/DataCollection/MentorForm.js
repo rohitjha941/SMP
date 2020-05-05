@@ -448,6 +448,7 @@ class MentorForm extends Component {
                       type="text"
                       className={styles["form-control"]}
                       value={achievement}
+                      required
                       onChange={(e) => this.handleChangeAchievement(e, index)}
                     />
                     <button
@@ -485,6 +486,7 @@ class MentorForm extends Component {
                           className={styles["form-control"]}
                           value={internship.company}
                           id={"company" + index}
+                          required
                           onChange={(e) =>
                             this.handleChangeInternship(e, index, "company")
                           }
@@ -504,6 +506,7 @@ class MentorForm extends Component {
                           className={styles["form-control"]}
                           value={internship.duration}
                           id={"duration" + index}
+                          required
                           onChange={(e) =>
                             this.handleChangeInternship(e, index, "duration")
                           }
@@ -523,6 +526,7 @@ class MentorForm extends Component {
                           className={styles["form-control"]}
                           value={internship.domain}
                           id={"domain" + index}
+                          required
                           onChange={(e) =>
                             this.handleChangeInternship(e, index, "domain")
                           }

@@ -10,7 +10,6 @@ class MentorGETSerializer(serializers.ModelSerializer):
 
 
 class MentorPOSTSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Mentor
         fields = "__all__"
