@@ -13,7 +13,7 @@ from .serializers import *
 # Create your views here.
 class MentorView (APIView):
     def get(self, request):
-        return Response(MentorSerializer(Mentor.objects.all(), many=True).data, status=status.HTTP_200_OK)
+        return Response(MentorGETSerializer(Mentor.objects.all(), many=True).data, status=status.HTTP_200_OK)
 
     def post(self, request):
         last_used_serializer = None
@@ -23,7 +23,7 @@ class MentorView (APIView):
             # avoiding inconsistent mentor data in case of query failure.
             with transaction.atomic():
                 request_data = request.data
-                mentor_serializer = MentorSerializer(data=request_data)
+                mentor_serializer = MentorPOSTSerializer(data=request_data)
                 last_used_serializer = mentor_serializer
                 if mentor_serializer.is_valid():
                     mentor_serializer.save()
