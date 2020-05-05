@@ -30,7 +30,7 @@ export const getBlogs = function () {
 export const getSingleBlog = (id) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(BLOGS + `/${id}/`)
+      .get(BLOGS + `${id}/`)
       .then((data) => resolve(data.data))
       .catch((e) => reject(e));
   });
