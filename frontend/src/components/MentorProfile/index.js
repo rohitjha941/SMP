@@ -15,7 +15,6 @@ class MentorProfile extends Component {
       interests = [],
       groups = [];
     if (mentor !== undefined) {
-      console.log(mentor);
       branch =
         this.props.branches.length > 0
           ? this.props.branches.find((branch) => {
@@ -44,7 +43,7 @@ class MentorProfile extends Component {
         this.props.groups.length > 0
       ) {
         mentor.groups.forEach((group_ID) => {
-          const group = this.props.interests.find((group) => {
+          const group = this.props.groups.find((group) => {
             return group.id === group_ID;
           });
           if (group) {
@@ -94,7 +93,25 @@ class MentorProfile extends Component {
             </div>
             <hr />
             <div className={styles.bioWrapper}>
-              <div className={styles.categoryHeading}>Campus Groups</div>
+              {groups.length > 0 ? (
+                <div>
+                  <div className={styles.categoryHeading}>Campus Groups</div>
+                  {groups.map((group) => {
+                    return (
+                      <>
+                        <div className={styles.groupWrapper}>
+                          <div className={styles.groupIcon}>
+                            <img src={group.thumbnail} alt={"group_icon"} />
+                          </div>
+                          <div className={styles.groupName}>
+                            {group.group_name}
+                          </div>
+                        </div>
+                      </>
+                    );
+                  })}
+                </div>
+              ) : null}
               <div className={styles.categoryHeading}>Internship</div>
               <div className={styles.categoryHeading}>Placement</div>
             </div>

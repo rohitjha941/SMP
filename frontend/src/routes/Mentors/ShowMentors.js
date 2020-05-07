@@ -136,6 +136,10 @@ class MentorShow extends Component {
   handleMentorToggle = () => {
     this.setState({ mentorToggle: !this.state.mentorToggle });
   };
+  showMentorDetail = (id) => {
+    console.log(id);
+    this.setState({ mentorId: id, mentorToggle: true });
+  };
 
   clearUl = (availableBranches) => {
     availableBranches.forEach((branch) => {
@@ -173,6 +177,7 @@ class MentorShow extends Component {
               return element.id === value.branch;
             });
             return {
+              id: value.id,
               image: value.photo,
               name: value.name,
               branch: value.branch,
@@ -265,6 +270,7 @@ class MentorShow extends Component {
                                     <MentorCard
                                       className={styles.mentorCard}
                                       profile={mentor}
+                                      showMentorDetail={this.showMentorDetail}
                                       key={i}
                                     />
                                   </li>
