@@ -1,0 +1,49 @@
+@import "../../style/common.scss";
+.mainWrapper {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  overflow-y: scroll;
+}
+.reactCrop {
+  margin: 2rem auto;
+  max-width: 80%;
+  display: block;
+  @media screen and (min-width: $break) {
+    max-width: 40%;
+    img {
+      max-height: 60vh;
+    }
+  }
+}
+.infoText {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.croppedImage {
+  display: block;
+  margin: 0 auto;
+  width: 40%;
+  @media screen and (min-width: $break) {
+    width: 15%;
+  }
+}
+.doneBtn {
+  position: fixed;
+  width: 40%;
+  left: 30%;
+  bottom: 5%;
+  display: inline-block;
+  @media screen and (min-width: $break) {
+    width: auto;
+    bottom: auto;
+    left: auto;
+    right: 10%;
+    top: 10%;
+  }
+}
