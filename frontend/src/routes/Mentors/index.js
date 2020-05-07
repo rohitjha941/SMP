@@ -43,10 +43,12 @@ class Mentors extends Component {
                 branches={this.props.branches}
                 interests={this.props.interests}
                 mentors={this.props.mentors}
+                groups={this.props.groups}
                 fetch={() => {
                   this.props.fetchers.branches();
                   this.props.fetchers.interests();
                   this.props.fetchers.mentors();
+                  this.props.fetchers.groups();
                 }}
               />
             )}

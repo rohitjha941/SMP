@@ -3,6 +3,8 @@ import SearchHeader from "../../components/SearchHeader";
 import styles from "./ShowMentors.module.scss";
 import MentorCard from "../../components/MentorCard";
 import FilterMentors from "./FilterMentors";
+import MentorProfile from "components/MentorProfile";
+
 class MentorShow extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,8 @@ class MentorShow extends Component {
       filterinterests: [],
       filterToggle: false,
       filterComponentData: null,
+      mentorToggle: false,
+      mentorId: null,
     };
   }
   componentDidMount() {
@@ -126,9 +130,11 @@ class MentorShow extends Component {
 
   //HANDLE TOGGLE
 
-  handleToggle = () => {
-    var filterToggle = !this.state.filterToggle;
-    this.setState({ filterToggle: filterToggle });
+  handleFilterToggle = () => {
+    this.setState({ filterToggle: !this.state.filterToggle });
+  };
+  handleMentorToggle = () => {
+    this.setState({ mentorToggle: !this.state.mentorToggle });
   };
 
   clearUl = (availableBranches) => {
@@ -222,48 +228,58 @@ class MentorShow extends Component {
           <FilterMentors
             filterData={filterComponentData}
             updateFilter={this.updateFilter}
-            handleToggle={this.handleToggle}
+            handleFilterToggle={this.handleFilterToggle}
           />
         ) : (
           <>
             <div className={styles.container}>
               <SearchHeader
-                handleToggle={this.handleToggle}
+                handleFilterToggle={this.handleFilterToggle}
                 clearUl={this.clearUl}
                 availableBranches={availableBranches}
               />
-              {availableBranches.map((value, index) => {
-                return (
-                  <>
-                    <div id={`branch${value.id}-div`} key={index}>
-                      <div className={styles.department}>
-                        {value.branch_name}
+              {this.state.mentorToggle && this.state.mentorId ? (
+                <MentorProfile
+                  id={this.state.mentorId}
+                  data={this.props.mentors}
+                  branches={this.props.branches}
+                  interests={this.props.interests}
+                  groups={this.props.groups}
+                />
+              ) : (
+                availableBranches.map((value, index) => {
+                  return (
+                    <>
+                      <div id={`branch${value.id}-div`} key={index}>
+                        <div className={styles.department}>
+                          {value.branch_name}
+                        </div>
+                        <ul className="mentors">
+                          {filteredMentors.map((mentor, i) => {
+                            if (mentor.branch === value.id) {
+                              return (
+                                <>
+                                  <li
+                                    className={`mentor-li branch${mentor.branch}-li`}
+                                  >
+                                    <MentorCard
+                                      className={styles.mentorCard}
+                                      profile={mentor}
+                                      key={i}
+                                    />
+                                  </li>
+                                </>
+                              );
+                            }
+                            return null;
+                          })}
+                        </ul>
+                        <hr />
                       </div>
-                      <ul className="mentors">
-                        {filteredMentors.map((mentor, i) => {
-                          if (mentor.branch === value.id) {
-                            return (
-                              <>
-                                <li
-                                  className={`mentor-li branch${mentor.branch}-li`}
-                                >
-                                  <MentorCard
-                                    className={styles.mentorCard}
-                                    profile={mentor}
-                                    key={i}
-                                  />
-                                </li>
-                              </>
-                            );
-                          }
-                          return null;
-                        })}
-                      </ul>
-                      <hr />
-                    </div>
-                  </>
-                );
-              })}
+                    </>
+                  );
+                })
+              )}
             </div>
           </>
         )}

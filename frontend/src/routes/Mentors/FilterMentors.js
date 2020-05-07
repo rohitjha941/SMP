@@ -169,7 +169,7 @@ class FilterMentors extends Component {
     };
 
     this.props.updateFilter(filterData);
-    this.props.handleToggle();
+    this.props.handleFilterToggle();
   };
   handleClose = () => {
     var selectedBranch,
@@ -195,7 +195,7 @@ class FilterMentors extends Component {
         allyears: allyears,
       },
       () => {
-        this.props.handleToggle();
+        this.props.handleFilterToggle();
       }
     );
   };

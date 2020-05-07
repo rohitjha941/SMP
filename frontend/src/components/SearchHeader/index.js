@@ -22,7 +22,7 @@ class SearchHeader extends Component {
     this.props.clearUl(this.props.availableBranches);
   }
   handleClick = () => {
-    this.props.handleToggle();
+    this.props.handleFilterToggle();
   };
 
   render() {
