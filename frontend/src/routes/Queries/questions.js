@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import QuestionsBox from "./QuestionsBox";
-import Button from "../../components/Button";
+import QuestionsBox from "components/QuestionBox";
+import Button from "components/Button";
 import styles from "./questions.module.scss";
 
 class Questions extends Component {

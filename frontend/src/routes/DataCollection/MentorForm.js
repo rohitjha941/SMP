@@ -5,8 +5,10 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
 import { createMentor } from "api/methods";
-import LoadingOverlay from "../../components/LoadingOverlay";
+import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
+import ImageCropper from "components/ImageCropper";
+
 const animatedComponents = makeAnimated();
 const yearOptions = [
   {
@@ -48,11 +50,31 @@ class MentorForm extends Component {
       createdInterest: [],
       isLoading: false,
       redirect: false,
+      src: null,
+      croppedSrc: null,
+      cropperToggle: false,
     };
   }
   componentDidMount() {
     this.props.fetch();
   }
+  setCroppedSrc = (croppedImageURL) => {
+    this.setState({ croppedSrc: croppedImageURL });
+  };
+  toggleCropper = () => {
+    this.setState({ cropperToggle: !this.state.cropperToggle });
+  };
+  checkKey = (e) => {
+    const downArrow = 40;
+    const upArrow = 38;
+    if (e.which === upArrow || e.which === downArrow) {
+      e.preventDefault();
+    }
+  };
+  handleCropBtn = () => {
+    this.toggleCropper();
+    console.log("here");
+  };
   handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
@@ -61,10 +83,16 @@ class MentorForm extends Component {
     });
   };
   handleImage = (e) => {
-    const image = e.target.files[0];
-    this.setState({
-      image: image,
-    });
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () =>
+        this.setState({ src: reader.result, cropperToggle: true })
+      );
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+  setImage = (image) => {
+    this.setState({ image: image });
   };
   handleResume = (e) => {
     const resume = e.target.files[0];
@@ -259,7 +287,7 @@ class MentorForm extends Component {
           })
         : [];
     if (this.state.redirect) {
-      return <Redirect to="/" />;
+      return <Redirect to="/mentors/show" />;
     }
     return (
       <>
@@ -298,6 +326,8 @@ class MentorForm extends Component {
                 maxLength="8"
                 placeholder="Enter your Enrollment Number"
                 onChange={this.handleChange}
+                onKeyDown={this.checkKey}
+                onWheel={(e) => e.target.blur()}
                 required
               />
             </div>
@@ -384,6 +414,8 @@ class MentorForm extends Component {
                   maxLength="10"
                   placeholder="Enter your Mobile Number"
                   onChange={this.handleChange}
+                  onKeyDown={this.checkKey}
+                  onWheel={(e) => e.target.blur()}
                 />
               </div>
             </div>
@@ -410,19 +442,35 @@ class MentorForm extends Component {
                 type="file"
                 className={styles["form-control-file"]}
                 name="photo"
-                aria-describedby="photo-help"
                 id="photo"
                 accept="image/*"
                 required
                 onChange={this.handleImage}
               />
-              <small
-                id="photo-help"
-                className={`${styles["form-text"]} ${styles["text-muted"]}`}
-              >
-                Photograph should be in 1:1 Aspect Ratio
-              </small>
             </div>
+            {this.state.cropperToggle ? (
+              <ImageCropper
+                src={this.state.src}
+                setImage={this.setImage}
+                toggleCropper={this.toggleCropper}
+                setCroppedSrc={this.setCroppedSrc}
+              />
+            ) : null}
+            {this.state.croppedSrc && !this.state.cropperToggle && (
+              <div className={styles.croppedImageDiv}>
+                <img
+                  alt="Crop"
+                  src={this.state.croppedSrc}
+                  className={styles.croppedImage}
+                />
+                <Button
+                  onClick={this.handleCropBtn}
+                  type="button"
+                  className={styles.cropAgain}
+                  text="Crop Again?"
+                />
+              </div>
+            )}
             <div className={styles["form-group"]}>
               <label htmlFor="resume">
                 Resume<span className="color-red">*</span>

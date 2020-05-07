@@ -2,9 +2,15 @@
 
 .container {
   width: 100%;
+  position: relative;
   ul {
     display: grid;
     grid-template-columns: 26% 74%;
+  }
+  @media screen and (min-width: $break) {
+    ul {
+      grid-template-columns: 14% 86%;
+    }
   }
 }
 
@@ -12,8 +18,12 @@
   transform: rotate(-90deg);
   height: 0.5rem;
   position: absolute;
+  top: 20%;
   right: 6%;
-  margin-top: 0.671875rem;
+  cursor: pointer;
+  @media screen and (min-width: $break) {
+    height: 0.6rem;
+  }
 }
 .imageParent {
   width: 100%;
@@ -34,6 +44,7 @@
 
 .mentorDetails {
   margin-left: 3.846%;
+  position: relative;
 }
 
 .name {
@@ -42,6 +53,11 @@
   line-height: 1.125rem;
   color: $grey-level-0_7;
   margin-bottom: 0.25rem;
+  @media screen and (min-width: $break) {
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+    margin-bottom: 0.4rem;
+  }
 }
 
 .meta {
@@ -50,10 +66,18 @@
   /* identical to box height */
   color: $grey-level-0_6;
   margin-bottom: 0.75rem;
+  @media screen and (min-width: $break) {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    margin-bottom: 1rem;
+  }
 }
 .skills {
   font-size: 0.75rem;
   line-height: 1rem;
-
   color: $grey-level-0_6;
+  @media screen and (min-width: $break) {
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+  }
 }
