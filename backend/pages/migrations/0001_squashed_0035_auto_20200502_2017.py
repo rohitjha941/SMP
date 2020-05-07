@@ -46,6 +46,14 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Branch',
+            fields=[
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('branch_name', models.CharField(default='', max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
             name='StudentTeam',
             fields=[
                 ('id', models.AutoField(auto_created=True,
@@ -70,14 +78,6 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='branch',
-            fields=[
-                ('id', models.AutoField(auto_created=True,
-                                        primary_key=True, serialize=False, verbose_name='ID')),
-                ('branch_name', models.CharField(default='', max_length=100)),
-            ],
-        ),
-        migrations.CreateModel(
             name='ContactDetails',
             fields=[
                 ('id', models.AutoField(auto_created=True,
@@ -95,7 +95,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Blogs',
+            name='blogs',
             fields=[
                 ('id', models.AutoField(auto_created=True,
                                         primary_key=True, serialize=False, verbose_name='ID')),
