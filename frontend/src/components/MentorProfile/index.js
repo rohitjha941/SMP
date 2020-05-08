@@ -142,7 +142,7 @@ class MentorProfile extends Component {
                   <div className={styles.groupsTitle}>Campus Groups</div>
                   {groups.map((group) => {
                     return (
-                      <>
+                      <div key={group.id}>
                         <div className={styles.groupWrapper}>
                           <div className={styles.groupIcon}>
                             <img src={group.thumbnail} alt={"group_icon"} />
@@ -151,7 +151,7 @@ class MentorProfile extends Component {
                             {group.group_name}
                           </div>
                         </div>
-                      </>
+                      </div>
                     );
                   })}
                 </div>
@@ -161,7 +161,7 @@ class MentorProfile extends Component {
                   <div className={styles.internsTitle}>Internship</div>
                   {interns.map((intern) => {
                     return (
-                      <>
+                      <div key={intern.id}>
                         {"company" in intern ? (
                           <div className={styles.internWrapper}>
                             <div className={styles.internCompany}>
@@ -172,7 +172,7 @@ class MentorProfile extends Component {
                             </div>
                           </div>
                         ) : null}
-                      </>
+                      </div>
                     );
                   })}
                 </div>

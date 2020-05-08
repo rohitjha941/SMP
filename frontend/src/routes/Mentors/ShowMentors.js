@@ -137,7 +137,6 @@ class MentorShow extends Component {
     this.setState({ mentorToggle: !this.state.mentorToggle });
   };
   showMentorDetail = (id) => {
-    console.log(id);
     this.setState({ mentorId: id, mentorToggle: true });
   };
 
@@ -160,6 +159,7 @@ class MentorShow extends Component {
     });
   };
   render() {
+    console.log(this.state.mentorToggle);
     const allmentors =
       this.props.mentors &&
       this.props.interests &&
@@ -234,6 +234,8 @@ class MentorShow extends Component {
             filterData={filterComponentData}
             updateFilter={this.updateFilter}
             handleFilterToggle={this.handleFilterToggle}
+            handleMentorToggle={this.handleMentorToggle}
+            mentorToggle={this.state.mentorToggle}
           />
         ) : (
           <>
@@ -242,6 +244,8 @@ class MentorShow extends Component {
                 handleFilterToggle={this.handleFilterToggle}
                 clearUl={this.clearUl}
                 availableBranches={availableBranches}
+                mentorToggle={this.state.mentorToggle}
+                handleMentorToggle={this.handleMentorToggle}
               />
               {this.state.mentorToggle && this.state.mentorId ? (
                 <MentorProfile

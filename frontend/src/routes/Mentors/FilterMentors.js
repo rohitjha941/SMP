@@ -156,6 +156,7 @@ class FilterMentors extends Component {
 
   onApply = (e) => {
     e.preventDefault();
+    if (this.props.mentorToggle) this.props.handleMentorToggle();
     const branch = this.state.selectedBranch;
     const year = this.state.selectedYear;
     const skill = this.state.selectedSkill;
