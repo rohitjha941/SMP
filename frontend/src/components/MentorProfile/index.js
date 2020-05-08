@@ -5,15 +5,23 @@ import linkedin from "assets/images/linkedin.svg";
 import resume from "assets/images/resume.svg";
 
 class MentorProfile extends Component {
+  componentDidMount() {
+    this.props.fetch();
+  }
   render() {
     const data = this.props.data;
     const id = this.props.id;
     const mentor = data.find((mentor) => {
       return mentor.id === id;
     });
-    var branch = "",
+    let branch = "",
       interests = [],
-      groups = [];
+      groups = [],
+      interns = [],
+      placement = {},
+      facebookURL = "#",
+      linkedinURL = "#",
+      resumeURL = "#";
     if (mentor !== undefined) {
       branch =
         this.props.branches.length > 0
@@ -51,12 +59,38 @@ class MentorProfile extends Component {
           }
         });
       }
+      if (
+        mentor.mentor_intern &&
+        mentor.mentor_intern.length > 0 &&
+        this.props.mentorInterns.length > 0
+      ) {
+        mentor.mentor_intern.forEach((intern_ID) => {
+          const intern = this.props.mentorInterns.find((intern) => {
+            return intern.id === intern_ID;
+          });
+          if (intern) {
+            return interns.push(intern);
+          }
+        });
+      }
+      if (
+        mentor.mentor_placement &&
+        mentor.mentor_placement.length > 0 &&
+        this.props.mentorPlacements.length > 0
+      ) {
+        placement = this.props.mentorPlacements.find((placement) => {
+          return placement.id === mentor.mentor_placement[0];
+        });
+      }
+      facebookURL = mentor.facebook;
+      linkedinURL = mentor.linkedin;
+      resumeURL = mentor.resume;
     }
-
     return (
       <>
         {mentor !== undefined ? (
           <div className={styles.mainWrapper}>
+            {/* Mentor Basic Info */}
             <div className={styles.infoWrapper}>
               <div className={styles.imageWrapper}>
                 <img
@@ -77,25 +111,35 @@ class MentorProfile extends Component {
                 </div>
               </div>
             </div>
+
+            {/* Mentor Contact */}
             <div className={styles.contactWrapper}>
-              <div className={styles.resume}>
-                <img src={resume} alt="resume" />
-                <div>Resume</div>
-              </div>
-              <div className={styles.facebook}>
-                <img src={facebook} alt="facebook" />
-                <div>Facebook</div>
-              </div>
-              <div className={styles.linkedin}>
-                <img src={linkedin} alt="linkedin" />
-                <div>LinkedIn</div>
-              </div>
+              <a href={resumeURL} download>
+                <div className={styles.resume}>
+                  <img src={resume} alt="resume" />
+                  <div>Resume</div>
+                </div>
+              </a>
+              <a href={facebookURL}>
+                <div className={styles.facebook}>
+                  <img src={facebook} alt="facebook" />
+                  <div>Facebook</div>
+                </div>
+              </a>
+              <a href={linkedinURL}>
+                <div className={styles.linkedin}>
+                  <img src={linkedin} alt="linkedin" />
+                  <div>LinkedIn</div>
+                </div>
+              </a>
             </div>
             <hr />
+
+            {/* Mentor Bio */}
             <div className={styles.bioWrapper}>
               {groups.length > 0 ? (
                 <div>
-                  <div className={styles.categoryHeading}>Campus Groups</div>
+                  <div className={styles.groupsTitle}>Campus Groups</div>
                   {groups.map((group) => {
                     return (
                       <>
@@ -112,8 +156,40 @@ class MentorProfile extends Component {
                   })}
                 </div>
               ) : null}
-              <div className={styles.categoryHeading}>Internship</div>
-              <div className={styles.categoryHeading}>Placement</div>
+              {interns.length > 0 ? (
+                <div>
+                  <div className={styles.internsTitle}>Internship</div>
+                  {interns.map((intern) => {
+                    return (
+                      <>
+                        {"company" in intern ? (
+                          <div className={styles.internWrapper}>
+                            <div className={styles.internCompany}>
+                              {intern.company}
+                            </div>
+                            <div className={styles.internMeta}>
+                              {intern.domain + " • " + intern.duration}
+                            </div>
+                          </div>
+                        ) : null}
+                      </>
+                    );
+                  })}
+                </div>
+              ) : null}
+              {placement.company && placement.company.length > 0 ? (
+                <>
+                  <div className={styles.placementsTitle}>Placement</div>
+                  <div className={styles.placementWrapper}>
+                    <div className={styles.placementCompany}>
+                      {placement.company}
+                    </div>
+                    <div className={styles.placementJobTitle}>
+                      {placement.job_title}
+                    </div>
+                  </div>
+                </>
+              ) : null}
             </div>
           </div>
         ) : null}

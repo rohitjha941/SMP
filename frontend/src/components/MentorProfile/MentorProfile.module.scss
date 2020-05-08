@@ -8,7 +8,7 @@
 }
 .infoWrapper {
   display: grid;
-  grid-template-columns: 35% 65%;
+  grid-template-columns: 28% 72%;
   .imageWrapper {
     width: 100%;
     overflow: hidden;
@@ -16,7 +16,7 @@
     padding-top: 100%;
     position: relative;
     .mentorImage {
-      border-radius: 50%;
+      border-radius: 5%;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -28,6 +28,7 @@
   }
   .infoDetail {
     margin-left: 5%;
+    position: relative;
     .mentorName {
       font-weight: 500;
       font-size: 0.875rem;
@@ -39,14 +40,14 @@
     .mentorMeta {
       font-size: 0.75rem;
       line-height: 1rem;
-      /* identical to box height */
       color: $grey-level-0_6;
       margin-bottom: 0.75rem;
     }
     .mentorInterest {
       font-size: 0.75rem;
       line-height: 1rem;
-
+      position: absolute;
+      bottom: 0;
       color: $grey-level-0_6;
     }
     @media screen and (min-width: $break) {
@@ -84,8 +85,6 @@
   }
 }
 .contactChildCommon {
-  border: 1px solid $grey-border;
-  border-radius: 5%;
   padding: 9% 0;
   text-align: center;
   img {
@@ -125,17 +124,29 @@ hr {
   margin: auto;
 }
 
+.categoryHeading {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.3125rem;
+  margin: 0.85rem auto;
+  color: $grey-level-0_7;
+}
+
 .bioWrapper {
-  .categoryHeading {
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.3125rem;
-    margin: 0.75rem auto;
+  .groupsTitle {
+    @extend .categoryHeading;
+  }
+  .internsTitle {
+    @extend .categoryHeading;
+  }
+  .placementsTitle {
+    @extend .categoryHeading;
   }
   .groupWrapper {
     display: grid;
     grid-template-columns: 8% 92%;
-    margin: 0.25rem auto;
+    margin-bottom: 0.3rem;
+    color: $grey-level-0_6;
     .groupIcon {
       img {
         width: 100%;
@@ -147,6 +158,24 @@ hr {
       margin-left: 3%;
       vertical-align: baseline;
       line-height: 180%;
+    }
+  }
+  .internWrapper {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: $grey-level-0_6;
+    margin-bottom: 0.5rem;
+    .internCompany {
+      font-weight: 500;
+    }
+  }
+  .placementWrapper {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: $grey-level-0_6;
+    margin-bottom: 0.5rem;
+    .placementCompany {
+      font-weight: 500;
     }
   }
 }

@@ -250,6 +250,15 @@ class MentorShow extends Component {
                   branches={this.props.branches}
                   interests={this.props.interests}
                   groups={this.props.groups}
+                  mentorInterns={this.props.mentorInterns}
+                  mentorPlacements={this.props.mentorPlacements}
+                  mentorAchievements={this.props.mentorAchievements}
+                  fetch={() => {
+                    this.props.fetchers.groups();
+                    this.props.fetchers.mentorInterns();
+                    this.props.fetchers.mentorPlacements();
+                    this.props.fetchers.mentorAchievements();
+                  }}
                 />
               ) : (
                 availableBranches.map((value, index) => {

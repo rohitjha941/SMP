@@ -102,3 +102,18 @@ class InterestView (generics.ListCreateAPIView):
             'interest_ids': interest_ids
         }
         return Response(data, status=status.HTTP_201_CREATED)
+
+
+class MentorInternView (generics.ListAPIView):
+    queryset = MentorIntern.objects.all()
+    serializer_class = MentorInternSerializer
+
+
+class MentorPlacementView (generics.ListAPIView):
+    queryset = MentorPlacement.objects.all()
+    serializer_class = MentorPlacementSerializer
+
+
+class MentorAchievementView (generics.ListAPIView):
+    queryset = MentorAchievement.objects.all()
+    serializer_class = MentorAchievementSerializer

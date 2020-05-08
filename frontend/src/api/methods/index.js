@@ -12,6 +12,9 @@ import {
   GROUPS,
   RAISE_QUERY,
   FRESHERS_GUIDE,
+  MENTOR_INTERNS,
+  MENTORS_PLACEMENTS,
+  MENTORS_ACHIEVEMENTS,
 } from "api/constants";
 import axios from "axios";
 
@@ -86,6 +89,33 @@ export const getMentors = function () {
           })
         );
       })
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorInterns = () => {
+  return new Promise((resolve, reject) => {
+    fetch(MENTOR_INTERNS)
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorPlacements = () => {
+  return new Promise((resolve, reject) => {
+    fetch(MENTORS_PLACEMENTS)
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorAchievements = () => {
+  return new Promise((resolve, reject) => {
+    fetch(MENTORS_ACHIEVEMENTS)
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
   });
 };

@@ -26,6 +26,9 @@ function App() {
   const [events, setEvents] = useState({});
   const [team, setTeam] = useState([]);
   const [mentors, setMentors] = useState([]);
+  const [mentorInterns, setMentorInterns] = useState([]);
+  const [mentorPlacements, setMentorPlacements] = useState([]);
+  const [mentorAchievements, setMentorAchievements] = useState([]);
   const [mentorsDocs, setMentorsDocs] = useState([]);
   const [faqs, setFaqs] = useState([]);
   const [branches, setBranches] = useState([]);
@@ -38,6 +41,9 @@ function App() {
     events: true,
     team: true,
     mentors: true,
+    mentorInterns: true,
+    mentorPlacements: true,
+    mentorAchievements: true,
     mentorDocs: true,
     faqs: true,
     branches: true,
@@ -80,6 +86,26 @@ function App() {
     if (canFetch.mentors) {
       setFetchableStatus({ ...canFetch, mentors: false });
       methods.getMentors().then((data) => setMentors(data));
+    }
+  };
+  const fetchMentorInternsIfEmpty = () => {
+    if (canFetch.mentorInterns) {
+      setFetchableStatus({ ...canFetch, mentorInterns: false });
+      methods.getMentorInterns().then((data) => setMentorInterns(data));
+    }
+  };
+  const fetchMentorPlacementsIfEmpty = () => {
+    if (canFetch.mentorPlacements) {
+      setFetchableStatus({ ...canFetch, mentorPlacements: false });
+      methods.getMentorPlacements().then((data) => setMentorPlacements(data));
+    }
+  };
+  const fetchMentorAchievementsIfEmpty = () => {
+    if (canFetch.mentorAchievements) {
+      setFetchableStatus({ ...canFetch, mentorAchievements: false });
+      methods
+        .getMentorAchievements()
+        .then((data) => setMentorAchievements(data));
     }
   };
   const fetchMentorsDocsIfEmpty = () => {
@@ -162,6 +188,9 @@ function App() {
     events: fetchEventsIfEmpty,
     team: fetchTeamIfEmpty,
     mentors: fetchMentorsIfEmpty,
+    mentorInterns: fetchMentorInternsIfEmpty,
+    mentorPlacements: fetchMentorPlacementsIfEmpty,
+    mentorAchievements: fetchMentorAchievementsIfEmpty,
     mentorDocs: fetchMentorsDocsIfEmpty,
     faq: fetchFAQsIfEmpty,
     branches: fetchBranchesIfEmpty,
@@ -183,6 +212,9 @@ function App() {
           blogCategory={blogCategory}
           team={team}
           mentors={mentors}
+          mentorInterns={mentorInterns}
+          mentorPlacements={mentorPlacements}
+          mentorAchievements={mentorAchievements}
           mentorsDocs={mentorsDocs}
           faqs={faqs}
           branches={branches}
