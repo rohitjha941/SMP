@@ -3,6 +3,9 @@ import styles from "./MentorProfile.module.scss";
 import facebook from "assets/images/facebook.svg";
 import linkedin from "assets/images/linkedin.svg";
 import resume from "assets/images/resume.svg";
+import facebookDisabled from "assets/images/facebook-disabled.svg";
+import linkedinDisabled from "assets/images/linkedin-disabled.svg";
+import resumeDisabled from "assets/images/resume-disabled.svg";
 
 class MentorProfile extends Component {
   componentDidMount() {
@@ -82,9 +85,12 @@ class MentorProfile extends Component {
           return placement.id === mentor.mentor_placement[0];
         });
       }
-      facebookURL = mentor.facebook;
-      linkedinURL = mentor.linkedin;
-      resumeURL = mentor.resume;
+      facebookURL =
+        mentor.facebook && mentor.facebook.length > 0 ? mentor.facebook : "#";
+      linkedinURL =
+        mentor.linkedin && mentor.linkedin.length > 0 ? mentor.linkedin : "#";
+      resumeURL =
+        mentor.resume && mentor.resume.length > 0 ? mentor.resume : "#";
     }
     return (
       <>
@@ -114,21 +120,39 @@ class MentorProfile extends Component {
 
             {/* Mentor Contact */}
             <div className={styles.contactWrapper}>
-              <a href={resumeURL} download>
+              <a
+                href={resumeURL}
+                target={resumeURL === "#" ? "_self" : "_blank"}
+              >
                 <div className={styles.resume}>
-                  <img src={resume} alt="resume" />
+                  <img
+                    src={resumeURL === "#" ? resumeDisabled : resume}
+                    alt="resume"
+                  />
                   <div>Resume</div>
                 </div>
               </a>
-              <a href={facebookURL}>
+              <a
+                href={facebookURL}
+                target={facebookURL === "#" ? "_self" : "_blank"}
+              >
                 <div className={styles.facebook}>
-                  <img src={facebook} alt="facebook" />
+                  <img
+                    src={facebookURL === "#" ? facebookDisabled : facebook}
+                    alt="facebook"
+                  />
                   <div>Facebook</div>
                 </div>
               </a>
-              <a href={linkedinURL}>
+              <a
+                href={linkedinURL}
+                target={linkedinURL === "#" ? "_self" : "_blank"}
+              >
                 <div className={styles.linkedin}>
-                  <img src={linkedin} alt="linkedin" />
+                  <img
+                    src={linkedinURL === "#" ? linkedinDisabled : linkedin}
+                    alt="linkedin"
+                  />
                   <div>LinkedIn</div>
                 </div>
               </a>
