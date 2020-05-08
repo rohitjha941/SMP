@@ -171,8 +171,10 @@ class MentorProfile extends Component {
                           <div className={styles.groupIcon}>
                             <img src={group.thumbnail} alt={"group_icon"} />
                           </div>
-                          <div className={styles.groupName}>
-                            {group.group_name}
+                          <div className={styles.groupNameParent}>
+                            <div className={styles.groupName}>
+                              {group.group_name}
+                            </div>
                           </div>
                         </div>
                       </div>

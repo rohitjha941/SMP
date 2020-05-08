@@ -2,9 +2,6 @@
 .mainWrapper {
   width: 93.97%;
   margin: auto;
-  @media screen and (min-width: $break) {
-    width: 70%;
-  }
 }
 .infoWrapper {
   display: grid;
@@ -81,7 +78,21 @@
     }
   }
   @media screen and (min-width: $break-tablet) {
-    grid-template-columns: 18% 82%;
+    grid-template-columns: 15% 85%;
+    .infoDetail {
+      margin-left: 3%;
+      .mentorName {
+        font-size: 1.4rem;
+      }
+      .mentorMeta {
+        font-size: 1.3rem;
+      }
+      .mentorInterest {
+        font-size: 1.3rem;
+        display: relative;
+        bottom: auto;
+      }
+    }
   }
 }
 .contactChildCommon {
@@ -96,6 +107,20 @@
     font-size: 0.75rem;
     line-height: 1rem;
     margin-top: 0.35rem;
+  }
+  @media screen and (min-width: $break) {
+    div {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+  @media screen and (min-width: $break-tablet) {
+    padding: 18%;
+    padding-left: 0;
+    div {
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
   }
 }
 .contactWrapper {
@@ -118,7 +143,16 @@
     @extend .contactChildCommon;
     margin-left: 31%;
   }
+  @media screen and (min-width: $break-tablet) {
+    .facebook,
+    .linkedin,
+    .resume {
+      margin-right: 31%;
+      margin-left: 0;
+    }
+  }
 }
+
 hr {
   width: 100%;
   margin: auto;
@@ -130,6 +164,15 @@ hr {
   line-height: 1.3125rem;
   margin: 0.85rem auto;
   color: $grey-level-0_7;
+  @media screen and (min-width: $break) {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+  @media screen and (min-width: $break-tablet) {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    margin: 1.5rem 0;
+  }
 }
 
 .bioWrapper {
@@ -153,11 +196,20 @@ hr {
         border-radius: 50%;
       }
     }
-    .groupName {
-      font-size: 0.75rem;
+    .groupNameParent {
+      display: table;
+      height: 100%;
       margin-left: 3%;
-      vertical-align: baseline;
-      line-height: 180%;
+      .groupName {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 0.75rem;
+      }
+      @media screen and (min-width: $break) {
+        .groupName {
+          font-size: 1rem;
+        }
+      }
     }
   }
   .internWrapper {
@@ -176,6 +228,31 @@ hr {
     margin-bottom: 0.5rem;
     .placementCompany {
       font-weight: 500;
+    }
+  }
+  @media screen and (min-width: $break) {
+    .internWrapper,
+    .placementWrapper {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-bottom: 0.9rem;
+    }
+  }
+  @media screen and (min-width: $break-tablet) {
+    .groupWrapper {
+      grid-template-columns: 5% 95%;
+      margin-bottom: 0.8rem;
+      .groupNameParent {
+        .groupName {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    .internWrapper,
+    .placementWrapper {
+      font-size: 1.3rem;
+      line-height: 1.5rem;
+      margin-bottom: 1rem;
     }
   }
 }
