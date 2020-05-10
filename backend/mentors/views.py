@@ -105,15 +105,45 @@ class InterestView (generics.ListCreateAPIView):
 
 
 class MentorInternView (generics.ListAPIView):
-    queryset = MentorIntern.objects.all()
     serializer_class = MentorInternSerializer
+
+    def get_queryset(self):
+        ids = self.request.query_params.get('ids', None)
+        queryset = MentorIntern.objects.all()
+        if ids == '':
+            queryset = MentorIntern.objects.none()
+        elif ids is not None:
+            ids_list = ids.split(",")
+            queryset = MentorIntern.objects.filter(id__in=ids_list)
+
+        return queryset
 
 
 class MentorPlacementView (generics.ListAPIView):
-    queryset = MentorPlacement.objects.all()
     serializer_class = MentorPlacementSerializer
+
+    def get_queryset(self):
+        ids = self.request.query_params.get('ids', None)
+        queryset = MentorPlacement.objects.all()
+        if ids == '':
+            queryset = MentorPlacement.objects.none()
+        elif ids is not None:
+            ids_list = ids.split(",")
+            queryset = MentorPlacement.objects.filter(id__in=ids_list)
+
+        return queryset
 
 
 class MentorAchievementView (generics.ListAPIView):
-    queryset = MentorAchievement.objects.all()
     serializer_class = MentorAchievementSerializer
+
+    def get_queryset(self):
+        ids = self.request.query_params.get('ids', None)
+        queryset = MentorAchievement.objects.all()
+        if ids == '':
+            queryset = MentorAchievement.objects.none()
+        elif ids is not None:
+            ids_list = ids.split(",")
+            queryset = MentorAchievement.objects.filter(id__in=ids_list)
+
+        return queryset

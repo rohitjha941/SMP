@@ -137,6 +137,7 @@ export default class RouterView extends Component {
             render={() => (
               <Mentors
                 mentors={this.props.mentors}
+                getMentorById={this.props.getMentorById}
                 branches={this.props.branches}
                 interests={this.props.interests}
                 docs={this.props.mentorsDocs}

@@ -9,23 +9,29 @@ import resumeDisabled from "assets/images/resume-disabled.svg";
 
 class MentorProfile extends Component {
   componentDidMount() {
-    this.props.fetch();
+    this.props.fetch(this.props.id);
   }
   render() {
-    const data = this.props.data;
-    const id = this.props.id;
-    const mentor = data.find((mentor) => {
-      return mentor.id === id;
-    });
+    const mentor = this.props.getMentorById(this.props.id);
+    const internData = this.props.mentorInterns(this.props.id);
+    const placementData = this.props.mentorPlacements(this.props.id);
+    const interns = internData.error
+      ? []
+      : internData.data.map((value) => {
+          return value;
+        });
+    const placement = placementData.error
+      ? {}
+      : placementData.data.length > 0
+      ? placementData.data[0]
+      : {};
     let branch = "",
       interests = [],
       groups = [],
-      interns = [],
-      placement = {},
       facebookURL = "#",
       linkedinURL = "#",
       resumeURL = "#";
-    if (mentor !== undefined) {
+    if (!mentor.error) {
       branch =
         this.props.branches.length > 0
           ? this.props.branches.find((branch) => {
@@ -62,29 +68,6 @@ class MentorProfile extends Component {
           }
         });
       }
-      if (
-        mentor.mentor_intern &&
-        mentor.mentor_intern.length > 0 &&
-        this.props.mentorInterns.length > 0
-      ) {
-        mentor.mentor_intern.forEach((intern_ID) => {
-          const intern = this.props.mentorInterns.find((intern) => {
-            return intern.id === intern_ID;
-          });
-          if (intern) {
-            return interns.push(intern);
-          }
-        });
-      }
-      if (
-        mentor.mentor_placement &&
-        mentor.mentor_placement.length > 0 &&
-        this.props.mentorPlacements.length > 0
-      ) {
-        placement = this.props.mentorPlacements.find((placement) => {
-          return placement.id === mentor.mentor_placement[0];
-        });
-      }
       facebookURL =
         mentor.facebook && mentor.facebook.length > 0 ? mentor.facebook : "#";
       linkedinURL =
@@ -94,7 +77,7 @@ class MentorProfile extends Component {
     }
     return (
       <>
-        {mentor !== undefined ? (
+        {!mentor.error ? (
           <div className={styles.mainWrapper}>
             {/* Mentor Basic Info */}
             <div className={styles.infoWrapper}>

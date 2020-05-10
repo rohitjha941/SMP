@@ -93,27 +93,54 @@ export const getMentors = function () {
   });
 };
 
-export const getMentorInterns = () => {
+export const getMentorInterns = (querydata) => {
   return new Promise((resolve, reject) => {
-    fetch(MENTOR_INTERNS)
+    fetch(
+      MENTOR_INTERNS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
       .then((data) => data.json())
       .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
   });
 };
 
-export const getMentorPlacements = () => {
+export const getMentorPlacements = (querydata) => {
   return new Promise((resolve, reject) => {
-    fetch(MENTORS_PLACEMENTS)
+    fetch(
+      MENTORS_PLACEMENTS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
       .then((data) => data.json())
       .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
   });
 };
 
-export const getMentorAchievements = () => {
+export const getMentorAchievements = (querydata) => {
   return new Promise((resolve, reject) => {
-    fetch(MENTORS_ACHIEVEMENTS)
+    fetch(
+      MENTORS_ACHIEVEMENTS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
       .then((data) => data.json())
       .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));

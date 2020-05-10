@@ -159,7 +159,6 @@ class MentorShow extends Component {
     });
   };
   render() {
-    console.log(this.state.mentorToggle);
     const allmentors =
       this.props.mentors &&
       this.props.interests &&
@@ -250,18 +249,18 @@ class MentorShow extends Component {
               {this.state.mentorToggle && this.state.mentorId ? (
                 <MentorProfile
                   id={this.state.mentorId}
-                  data={this.props.mentors}
+                  getMentorById={this.props.getMentorById}
                   branches={this.props.branches}
                   interests={this.props.interests}
                   groups={this.props.groups}
                   mentorInterns={this.props.mentorInterns}
                   mentorPlacements={this.props.mentorPlacements}
                   mentorAchievements={this.props.mentorAchievements}
-                  fetch={() => {
+                  fetch={(id) => {
                     this.props.fetchers.groups();
-                    this.props.fetchers.mentorInterns();
-                    this.props.fetchers.mentorPlacements();
-                    this.props.fetchers.mentorAchievements();
+                    this.props.fetchers.mentorInterns(id);
+                    this.props.fetchers.mentorPlacements(id);
+                    this.props.fetchers.mentorAchievements(id);
                   }}
                 />
               ) : (

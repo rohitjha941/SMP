@@ -43,6 +43,7 @@ class Mentors extends Component {
                 branches={this.props.branches}
                 interests={this.props.interests}
                 mentors={this.props.mentors}
+                getMentorById={this.props.getMentorById}
                 groups={this.props.groups}
                 mentorInterns={this.props.mentorInterns}
                 mentorPlacements={this.props.mentorPlacements}
