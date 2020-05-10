@@ -3,9 +3,6 @@ import styles from "./MentorProfile.module.scss";
 import facebook from "assets/images/facebook.svg";
 import linkedin from "assets/images/linkedin.svg";
 import resume from "assets/images/resume.svg";
-import facebookDisabled from "assets/images/facebook-disabled.svg";
-import linkedinDisabled from "assets/images/linkedin-disabled.svg";
-import resumeDisabled from "assets/images/resume-disabled.svg";
 
 class MentorProfile extends Component {
   componentDidMount() {
@@ -49,7 +46,7 @@ class MentorProfile extends Component {
             return interest.id === interest_ID;
           });
           if (interest) {
-            return interests.push(interest.interest_name);
+            interests.push(interest.interest_name);
           }
         });
       }
@@ -64,7 +61,7 @@ class MentorProfile extends Component {
             return group.id === group_ID;
           });
           if (group) {
-            return groups.push(group);
+            groups.push(group);
           }
         });
       }
@@ -102,44 +99,47 @@ class MentorProfile extends Component {
             </div>
 
             {/* Mentor Contact */}
-            <div className={styles.contactWrapper}>
-              <a
-                href={resumeURL}
-                target={resumeURL === "#" ? "_self" : "_blank"}
-              >
-                <div className={styles.resume}>
-                  <img
-                    src={resumeURL === "#" ? resumeDisabled : resume}
-                    alt="resume"
-                  />
-                  <div>Resume</div>
-                </div>
-              </a>
-              <a
-                href={facebookURL}
-                target={facebookURL === "#" ? "_self" : "_blank"}
-              >
-                <div className={styles.facebook}>
-                  <img
-                    src={facebookURL === "#" ? facebookDisabled : facebook}
-                    alt="facebook"
-                  />
-                  <div>Facebook</div>
-                </div>
-              </a>
-              <a
-                href={linkedinURL}
-                target={linkedinURL === "#" ? "_self" : "_blank"}
-              >
-                <div className={styles.linkedin}>
-                  <img
-                    src={linkedinURL === "#" ? linkedinDisabled : linkedin}
-                    alt="linkedin"
-                  />
-                  <div>LinkedIn</div>
-                </div>
-              </a>
-            </div>
+            {resumeURL !== "#" || facebookURL !== "#" || linkedinURL !== "#" ? (
+              <div className={styles.contactWrapper}>
+                {resumeURL !== "#" ? (
+                  <a
+                    href={resumeURL}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    <div className={styles.resume}>
+                      <img src={resume} alt="resume" />
+                      <div>Resume</div>
+                    </div>
+                  </a>
+                ) : null}
+                {facebookURL !== "#" ? (
+                  <a
+                    href={facebookURL}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    <div className={styles.facebook}>
+                      <img src={facebook} alt="facebook" />
+                      <div>Facebook</div>
+                    </div>
+                  </a>
+                ) : null}
+                {linkedinURL !== "#" ? (
+                  <a
+                    href={linkedinURL}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    <div className={styles.linkedin}>
+                      <img src={linkedin} alt="linkedin" />
+                      <div>LinkedIn</div>
+                    </div>
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+
             <hr />
 
             {/* Mentor Bio */}

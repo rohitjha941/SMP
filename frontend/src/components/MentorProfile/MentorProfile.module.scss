@@ -129,26 +129,35 @@
   margin: 2rem auto;
   .resume {
     @extend .contactChildCommon;
-    margin-right: 31%;
     img {
       width: 39%;
     }
   }
   .facebook {
     @extend .contactChildCommon;
-    margin-left: 15.5%;
-    margin-right: 15.5%;
   }
   .linkedin {
     @extend .contactChildCommon;
-    margin-left: 31%;
+  }
+  a {
+    &:nth-child(1) {
+      margin-right: 31%;
+    }
+    &:nth-child(2) {
+      margin: 0 15.5%;
+    }
+    &:nth-child(3) {
+      margin-left: 31%;
+    }
   }
   @media screen and (min-width: $break-tablet) {
-    .facebook,
-    .linkedin,
-    .resume {
-      margin-right: 31%;
-      margin-left: 0;
+    a {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        margin-right: 31%;
+        margin-left: 0;
+      }
     }
   }
 }
