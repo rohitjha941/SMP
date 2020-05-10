@@ -25,7 +25,7 @@ function App() {
   const [blogCategory, setBlogCategory] = useState([]);
   const [events, setEvents] = useState({});
   const [team, setTeam] = useState([]);
-  const [mentors, setMentors] = useState([]);
+  const [mentors, setMentors] = useState({});
   const [mentorInterns, setMentorInterns] = useState([]);
   const [mentorPlacements, setMentorPlacements] = useState([]);
   const [mentorAchievements, setMentorAchievements] = useState([]);
@@ -85,7 +85,16 @@ function App() {
   const fetchMentorsIfEmpty = () => {
     if (canFetch.mentors) {
       setFetchableStatus({ ...canFetch, mentors: false });
-      methods.getMentors().then((data) => setMentors(data));
+      const mentorListToMap = (mentorList) => {
+        const mentorsMap = {};
+        mentorList.forEach((mentor) => {
+          mentorsMap[mentor.id] = mentor;
+        });
+        return mentorsMap;
+      };
+      methods.getMentors().then((data) => {
+        setMentors(mentorListToMap(data));
+      });
     }
   };
   const fetchMentorInternsIfEmpty = () => {
@@ -173,6 +182,9 @@ function App() {
   const getBlogList = () => {
     return Object.keys(blogs).map((id) => blogs[id]);
   };
+  const getMentorList = () => {
+    return Object.keys(mentors).map((id) => mentors[id]);
+  };
   const getSingleBlog = (id) => {
     if (`${id}` in blogs) {
       return { ...blogs[id], error: false };
@@ -211,7 +223,7 @@ function App() {
           events={events}
           blogCategory={blogCategory}
           team={team}
-          mentors={mentors}
+          mentors={getMentorList()}
           mentorInterns={mentorInterns}
           mentorPlacements={mentorPlacements}
           mentorAchievements={mentorAchievements}
