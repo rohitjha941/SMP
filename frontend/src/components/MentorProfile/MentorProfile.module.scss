@@ -194,6 +194,9 @@ hr {
   .placementsTitle {
     @extend .categoryHeading;
   }
+  .achievementsTitle {
+    @extend .categoryHeading;
+  }
   .groupWrapper {
     display: grid;
     grid-template-columns: 8% 92%;
@@ -221,27 +224,24 @@ hr {
       }
     }
   }
-  .internWrapper {
+  .internWrapper,
+  .placementWrapper,
+  .achievementsWrapper {
     font-size: 0.75rem;
     line-height: 1rem;
     color: $grey-level-0_6;
     margin-bottom: 0.5rem;
-    .internCompany {
-      font-weight: 500;
-    }
   }
-  .placementWrapper {
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color: $grey-level-0_6;
-    margin-bottom: 0.5rem;
-    .placementCompany {
-      font-weight: 500;
-    }
+  .internCompany {
+    font-weight: 500;
+  }
+  .placementCompany {
+    font-weight: 500;
   }
   @media screen and (min-width: $break) {
     .internWrapper,
-    .placementWrapper {
+    .placementWrapper,
+    .achievementsWrapper {
       font-size: 1rem;
       line-height: 1.5rem;
       margin-bottom: 0.9rem;
@@ -258,7 +258,8 @@ hr {
       }
     }
     .internWrapper,
-    .placementWrapper {
+    .placementWrapper,
+    .achievementsWrapper {
       font-size: 1.3rem;
       line-height: 1.5rem;
       margin-bottom: 1rem;

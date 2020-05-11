@@ -12,6 +12,7 @@ class MentorProfile extends Component {
     const mentor = this.props.getMentorById(this.props.id);
     const internData = this.props.mentorInterns(this.props.id);
     const placementData = this.props.mentorPlacements(this.props.id);
+    const achievementData = this.props.mentorAchievements(this.props.id);
     const interns = internData.error
       ? []
       : internData.data.map((value) => {
@@ -22,6 +23,11 @@ class MentorProfile extends Component {
       : placementData.data.length > 0
       ? placementData.data[0]
       : {};
+    const achievements = achievementData.error
+      ? []
+      : achievementData.data.map((value) => {
+          return value;
+        });
     let branch = "",
       interests = [],
       groups = [],
@@ -197,6 +203,18 @@ class MentorProfile extends Component {
                       {placement.job_title}
                     </div>
                   </div>
+                </>
+              ) : null}
+              {achievements && achievements.length > 0 ? (
+                <>
+                  <div className={styles.achievementsTitle}>Achievements</div>
+                  {achievements.map((value) => {
+                    return (
+                      <li key={value.id} className={styles.achievementsWrapper}>
+                        {value.achievement_name}
+                      </li>
+                    );
+                  })}
                 </>
               ) : null}
             </div>
