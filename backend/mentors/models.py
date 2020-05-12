@@ -1,6 +1,28 @@
+import os
+
+from uuid import uuid4
+
 from django.db import models
+from django.utils.deconstruct import deconstructible
 
 from pages.models import Branch, CampusGroups
+
+
+@deconstructible
+class UploadToPathAndRename(object):
+
+    def __init__(self, path):
+        self.sub_path = path
+
+    def __call__(self, instance, filename):
+        ext = filename.split('.')[-1]
+
+        if instance.enrollno:
+            filename = '{}.{}'.format(instance.enrollno, ext)
+        else:
+            filename = '{}.{}'.format(uuid4().hex, ext)
+
+        return os.path.join(self.sub_path, filename)
 
 
 class Interest(models.Model):
@@ -37,11 +59,11 @@ class Mentor(models.Model):
         null=True
     )
     photo = models.ImageField(
-        upload_to="mentors/images",
+        upload_to=UploadToPathAndRename("mentors/images"),
         max_length=200
     )
     resume = models.FileField(
-        upload_to="mentors/resume",
+        upload_to=UploadToPathAndRename("mentors/resume"),
         null=True
     )
     email = models.EmailField(
@@ -138,4 +160,49 @@ class MentorPlacement(models.Model):
         max_length=500,
         blank=True,
         null=True,
+    )
+
+
+class MentorApplication(models.Model):
+    email = models.EmailField(
+        max_length=200,
+        default="",
+        unique=True
+    )
+    name = models.CharField(
+        max_length=1000,
+        blank=True,
+        null=True
+    )
+    enrollno = models.IntegerField(
+        unique=True
+    )
+    branch = models.ForeignKey(
+        Branch,
+        related_name="applied_mentor",
+        on_delete=models.CASCADE
+    )
+    year = models.CharField(
+        max_length=15,
+        blank=True,
+        null=True,
+        choices=year_choices
+    )
+    motivation = models.TextField(
+        max_length=1000,
+        blank=True,
+        null=True
+    )
+    qualities = models.TextField(
+        max_length=1000,
+        blank=True,
+        null=True
+    )
+    mobile = models.IntegerField(
+        null=True,
+        unique=True
+    )
+    resume = models.FileField(
+        upload_to=UploadToPathAndRename("mentors/applied/resume"),
+        null=True
     )

@@ -37,3 +37,9 @@ class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
         fields = "__all__"
+
+
+class MentorApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MentorApplication
+        fields = "__all__"

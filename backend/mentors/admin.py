@@ -45,3 +45,8 @@ class InterestsAdmin(ImportExportModelAdmin):
 class MentorAdmin(ImportExportModelAdmin):
     list_display = ('branch', 'name', 'photo', 'facebook', 'linkedin', )
     inlines = [InternInline, PlacementInline, AchievementInline]
+
+
+@register(MentorApplication)
+class MentorApplicationAdmin(ImportExportModelAdmin):
+    list_display = ('branch', 'name', 'year', 'enrollno')
