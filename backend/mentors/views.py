@@ -1,10 +1,14 @@
 import json
+import requests
 
 from django.db import transaction
 
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from pages.utils import get_client_ip
+from backend.settings import RECAPTCHA_SECRET_KEY
 
 from .models import *
 from .serializers import *
@@ -104,6 +108,21 @@ class InterestView (generics.ListCreateAPIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 
-class MentorApplicationView(generics.CreateAPIView):
-    queryset = MentorApplication.objects.all()
-    serializer_class = MentorApplicationSerializer
+class MentorApplicationView(APIView):
+
+    def post(self, request):
+        r = requests.post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            data={
+                'secret': RECAPTCHA_SECRET_KEY,
+                'response': request.data['g-recaptcha-response'],
+                'remoteip': get_client_ip(request),
+            }
+        )
+        if r.json()['success']:
+            serializer = MentorApplicationSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)

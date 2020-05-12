@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import Button from "../../components/Button";
 import styles from "./MentorApplicationForm.module.scss";
 import Select from "react-select";
@@ -20,6 +21,9 @@ const yearOptions = [
     value: "5th",
   },
 ];
+
+const recaptchaRef = React.createRef();
+
 class MentorApplicationForm extends Component {
   constructor() {
     super();
@@ -33,6 +37,8 @@ class MentorApplicationForm extends Component {
       qualities: "",
       mobile: "",
       resume: null,
+      captcha: false,
+      "g-recaptcha-response": "",
       isLoading: false,
       redirect: false,
     };
@@ -79,59 +85,73 @@ class MentorApplicationForm extends Component {
     });
   };
 
+  handleCaptcha = (key) => {
+    this.setState({
+      captcha: true,
+      "g-recaptcha-response": key,
+    });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ isLoading: true });
-    const {
-      email,
-      name,
-      enrollno,
-      branch,
-      year,
-      motivation,
-      qualities,
-      mobile,
-      resume,
-    } = this.state;
+    if (this.state.captcha) {
+      this.setState({ isLoading: true });
+      const {
+        email,
+        name,
+        enrollno,
+        branch,
+        year,
+        motivation,
+        qualities,
+        mobile,
+        resume,
+      } = this.state;
 
-    const data = {
-      email: email,
-      name: name,
-      enrollno: enrollno,
-      branch: branch,
-      year: year,
-      motivation: motivation,
-      qualities: qualities,
-      mobile: mobile,
-      resume: resume,
-    };
-    postMentorApplication(data)
-      .then((response) => {
-        if (response.status === 201) {
-          window.flash("Your response has been succesfully recorded");
+      const data = {
+        email: email,
+        name: name,
+        enrollno: enrollno,
+        branch: branch,
+        year: year,
+        motivation: motivation,
+        qualities: qualities,
+        mobile: mobile,
+        resume: resume,
+        "g-recaptcha-response": this.state["g-recaptcha-response"],
+      };
+      postMentorApplication(data)
+        .then((response) => {
+          if (response.status === 201) {
+            window.flash("Your response has been succesfully recorded");
+            this.setState({
+              email: "",
+              name: "",
+              enrollno: "",
+              branch: "",
+              year: "",
+              motivation: "",
+              qualities: "",
+              mobile: "",
+              resume: null,
+              redirect: true,
+              isLoading: false,
+            });
+          }
+        })
+        .catch((error) => {
+          const errorMsg =
+            "There was an error while submitting your application.\nPlease try again later";
+          window.flash(errorMsg, "error");
           this.setState({
-            email: "",
-            name: "",
-            enrollno: "",
-            branch: "",
-            year: "",
-            motivation: "",
-            qualities: "",
-            mobile: "",
-            resume: null,
-            redirect: true,
             isLoading: false,
           });
-        }
-      })
-      .catch((error) => {
-        const errorMsg =
-          "There was an error while submitting your application.\nPlease try again later";
-        window.flash(errorMsg, "error");
-        this.setState({
-          isLoading: false,
         });
-      });
+    } else {
+      window.flash("Please verify the ReCAPTCHA!", "warning");
+    }
+    recaptchaRef.current.reset();
+    this.setState({ captcha: false });
   };
   render() {
     const branchOptions =
@@ -303,6 +323,14 @@ class MentorApplicationForm extends Component {
                 accept="application/pdf"
               />
             </div>
+
+            <ReCAPTCHA
+              onChange={this.handleCaptcha}
+              ref={recaptchaRef}
+              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+              className={styles.captcha}
+            />
+
             <Button type="submit" className={styles["button"]} text="Submit" />
           </form>
         </div>
