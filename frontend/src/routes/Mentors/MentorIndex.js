@@ -43,12 +43,8 @@ class MentorIndex extends Component {
               }
             />
           </div>
-          <Link to="/mentors/becomeMentor">
-            <Button
-              className={styles.learnMore}
-              type="outline"
-              text="Learn More"
-            />
+          <Link to="/datacollection/mentors/apply">
+            <Button className={styles.applyBtn} type="outline" text="Apply" />
           </Link>
 
           <div className={styles.resourceHeading}>Mentor Resources</div>

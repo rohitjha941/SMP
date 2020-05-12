@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Button from "../../components/Button";
-import styles from "./MentorForm.module.scss";
+import styles from "./MentorRegistrationForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
@@ -24,7 +24,7 @@ const yearOptions = [
     value: "5th",
   },
 ];
-class MentorForm extends Component {
+class MentorRegistrationForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -672,4 +672,4 @@ class MentorForm extends Component {
   }
 }
 
-export default MentorForm;
+export default MentorRegistrationForm;

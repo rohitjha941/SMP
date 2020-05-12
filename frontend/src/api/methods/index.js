@@ -12,6 +12,7 @@ import {
   GROUPS,
   RAISE_QUERY,
   FRESHERS_GUIDE,
+  MENTOR_APPLICATION,
 } from "api/constants";
 import axios from "axios";
 
@@ -136,6 +137,41 @@ export const postQuery = (data) => {
 
 const CreateInterests = (interestData) => {
   return axios.post(INTERESTS, interestData);
+};
+
+export const postMentorApplication = (data) => {
+  const {
+    email,
+    name,
+    enrollno,
+    branch,
+    year,
+    motivation,
+    qualities,
+    mobile,
+    resume,
+  } = data;
+  let formData = new FormData();
+  formData.append("email", email);
+  formData.append("name", name);
+  formData.append("enrollno", enrollno);
+  formData.append("branch", branch);
+  formData.append("year", year);
+  formData.append("motivation", motivation);
+  formData.append("qualities", qualities);
+  formData.append("mobile", mobile);
+  formData.append("resume", resume);
+
+  return new Promise((resolve, reject) => {
+    axios
+      .post(MENTOR_APPLICATION, formData)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 };
 
 const postMentorFormData = (postData) => {

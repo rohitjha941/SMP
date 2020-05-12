@@ -158,10 +158,10 @@ export default class RouterView extends Component {
                 groups={this.props.groups}
                 branches={this.props.branches}
                 interests={this.props.interests}
-                fetch={() => {
-                  this.props.fetchers.groups();
-                  this.props.fetchers.branches();
-                  this.props.fetchers.interests();
+                fetchers={{
+                  groups: this.props.fetchers.groups,
+                  branches: this.props.fetchers.branches,
+                  interests: this.props.fetchers.interests,
                 }}
               />
             )}
