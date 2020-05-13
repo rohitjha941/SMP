@@ -1,0 +1,12 @@
+@import "../../style/colors.scss";
+.progressParent {
+  position: fixed;
+  width: 100%;
+  background: $progress-background;
+  z-index: 1;
+}
+.progress {
+  width: 0%;
+  height: 0.375rem;
+  background-color: $blue-text;
+}
