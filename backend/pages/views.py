@@ -7,7 +7,7 @@ from rest_framework import generics, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from pages.utils import get_client_ip
+from common.utils import get_client_ip
 
 from .models import *
 from .serializers import *

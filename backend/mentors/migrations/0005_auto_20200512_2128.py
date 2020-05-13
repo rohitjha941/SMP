@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                     blank=True, max_length=1000, null=True)),
                 ('mobile', models.IntegerField(null=True, unique=True)),
                 ('resume', models.FileField(
-                    null=True, upload_to=mentors.models.UploadToPathAndRename('mentors/applied/resume'))),
+                    null=True, upload_to=mentors.utils.UploadToPathAndRenameMentors('mentors/applied/resume'))),
                 ('branch', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
                                              related_name='applied_mentor', to='pages.Branch')),
             ],
@@ -38,12 +38,12 @@ class Migration(migrations.Migration):
             model_name='mentor',
             name='photo',
             field=models.ImageField(
-                max_length=200, upload_to=mentors.models.UploadToPathAndRename('mentors/images')),
+                max_length=200, upload_to=mentors.utils.UploadToPathAndRenameMentors('mentors/images')),
         ),
         migrations.AlterField(
             model_name='mentor',
             name='resume',
             field=models.FileField(
-                null=True, upload_to=mentors.models.UploadToPathAndRename('mentors/resume')),
+                null=True, upload_to=mentors.utils.UploadToPathAndRenameMentors('mentors/resume')),
         ),
     ]

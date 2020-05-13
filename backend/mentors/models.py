@@ -1,28 +1,8 @@
-import os
-
-from uuid import uuid4
-
 from django.db import models
-from django.utils.deconstruct import deconstructible
 
 from pages.models import Branch, CampusGroups
 
-
-@deconstructible
-class UploadToPathAndRename(object):
-
-    def __init__(self, path):
-        self.sub_path = path
-
-    def __call__(self, instance, filename):
-        ext = filename.split('.')[-1]
-
-        if instance.enrollno:
-            filename = '{}.{}'.format(instance.enrollno, ext)
-        else:
-            filename = '{}.{}'.format(uuid4().hex, ext)
-
-        return os.path.join(self.sub_path, filename)
+from .utils import *
 
 
 class Interest(models.Model):
@@ -59,11 +39,11 @@ class Mentor(models.Model):
         null=True
     )
     photo = models.ImageField(
-        upload_to=UploadToPathAndRename("mentors/images"),
+        upload_to=UploadToPathAndRenameMentors("mentors/images"),
         max_length=200
     )
     resume = models.FileField(
-        upload_to=UploadToPathAndRename("mentors/resume"),
+        upload_to=UploadToPathAndRenameMentors("mentors/resume"),
         null=True
     )
     email = models.EmailField(
@@ -203,6 +183,6 @@ class MentorApplication(models.Model):
         unique=True
     )
     resume = models.FileField(
-        upload_to=UploadToPathAndRename("mentors/applied/resume"),
+        upload_to=UploadToPathAndRenameMentors("mentors/applied/resume"),
         null=True
     )
