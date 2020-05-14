@@ -1,6 +1,7 @@
 @import "../../style/colors.scss";
 .progressParent {
   position: fixed;
+  top: 8%;
   width: 100%;
   background: $progress-background;
   z-index: 1;

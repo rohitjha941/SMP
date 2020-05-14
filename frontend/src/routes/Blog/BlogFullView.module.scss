@@ -1,10 +1,4 @@
 @import "../../style/common.scss";
-.progressBar {
-  margin-top: -1rem;
-  @media screen and (min-width: $break) {
-    margin-top: -2rem;
-  }
-}
 .mainDiv {
   margin: 1rem auto 0 auto;
   @media screen and (min-width: $break) {
