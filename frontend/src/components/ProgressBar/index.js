@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import styles from "./ProgressBar.module.scss";
 
 class ProgessBar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      progress: 0,
+    };
+  }
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
@@ -16,13 +22,17 @@ class ProgessBar extends Component {
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
     let scrolled = (winScroll / height) * 100;
-    document.getElementById("progress-bar").style.width = scrolled + "%";
+    this.setState({ progress: scrolled });
   };
   render() {
+    const progressBarWidth = this.state.progress;
     return (
       <>
         <div className={styles.progressParent + " " + this.props.className}>
-          <div id="progress-bar" className={styles.progress}></div>
+          <div
+            className={styles.progress}
+            style={{ width: progressBarWidth + "%" }}
+          ></div>
         </div>
       </>
     );
