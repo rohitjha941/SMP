@@ -1,8 +1,10 @@
+import re
+import requests
+
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-import re
 
-# method to get the client IP address
+from backend.settings import RECAPTCHA_SECRET_KEY
 
 
 def get_client_ip(request):
@@ -42,3 +44,17 @@ def validate_iitr_email(value):
             _('%(value)s is not an iitr email'),
             params={'value': value}
         )
+
+
+def verify_recaptcha(value):
+    r = requests.post(
+        'https://www.google.com/recaptcha/api/siteverify',
+        data={
+            'secret': RECAPTCHA_SECRET_KEY,
+            'response': value.data['g-recaptcha-response'],
+            'remoteip': get_client_ip(value),
+        }
+    )
+    if r.json()['success']:
+        return True
+    return False
