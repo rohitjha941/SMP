@@ -3,6 +3,7 @@ from django.db import models
 from pages.models import Branch, CampusGroups
 
 from .utils import *
+from common.utils import *
 
 
 class Interest(models.Model):
@@ -49,14 +50,17 @@ class Mentor(models.Model):
     email = models.EmailField(
         max_length=200,
         default="",
-        unique=True
+        unique=True,
+        validators=[validate_iitr_email]
     )
     mobile = models.IntegerField(
         null=True,
-        unique=True
+        unique=True,
+        validators=[validate_mobile]
     )
     enrollno = models.IntegerField(
-        unique=True
+        unique=True,
+        validators=[validate_enroll]
     )
     facebook = models.URLField(
         max_length=1000,

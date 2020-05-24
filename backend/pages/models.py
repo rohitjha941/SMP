@@ -2,6 +2,7 @@ from django.db import models
 from tinymce import models as tinymce_models
 
 from pages.utils import *
+from common.utils import *
 
 
 class Home(models.Model):
@@ -111,7 +112,8 @@ class StudentTeam(models.Model):
         blank=True
     )
     enrollno = models.IntegerField(
-        null=True
+        null=True,
+        validators=[validate_enroll]
     )
     # Field Containing linkedin URL
 
@@ -149,11 +151,13 @@ class StudentTeam(models.Model):
         choices=year_choices_team
     )
     mobile = models.IntegerField(
-        null=True
+        null=True,
+        validators=[validate_mobile]
     )
     email = models.CharField(
         default="",
         max_length=100,
+        validators=[validate_iitr_email]
     )
 
 
@@ -202,6 +206,7 @@ class ContactDetails(models.Model):
     mobile = models.CharField(
         default="",
         max_length=100,
+        validators=[validate_mobile]
     )
 
     email = models.CharField(
