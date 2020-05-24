@@ -151,7 +151,8 @@ class MentorApplication(models.Model):
     email = models.EmailField(
         max_length=200,
         default="",
-        unique=True
+        unique=True,
+        validators=[validate_iitr_email]
     )
     name = models.CharField(
         max_length=1000,
@@ -159,7 +160,8 @@ class MentorApplication(models.Model):
         null=True
     )
     enrollno = models.IntegerField(
-        unique=True
+        unique=True,
+        validators=[validate_enroll]
     )
     branch = models.ForeignKey(
         Branch,
@@ -184,7 +186,8 @@ class MentorApplication(models.Model):
     )
     mobile = models.IntegerField(
         null=True,
-        unique=True
+        unique=True,
+        validators=[validate_mobile]
     )
     resume = models.FileField(
         upload_to=UploadToPathAndRename("mentors/applied/resume", 'student'),

@@ -115,5 +115,6 @@ class MentorApplicationView(APIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_201_CREATED)
-            return Response(status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)

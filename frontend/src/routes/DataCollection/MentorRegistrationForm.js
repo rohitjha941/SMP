@@ -59,7 +59,6 @@ class MentorRegistrationForm extends Component {
   };
   handleCropBtn = () => {
     this.toggleCropper();
-    console.log("here");
   };
   handleChange = (e) => {
     const name = e.target.name;

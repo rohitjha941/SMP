@@ -126,8 +126,17 @@ class MentorApplicationForm extends Component {
           }
         })
         .catch((error) => {
-          const errorMsg =
-            "There was an error while submitting your application.\nPlease try again later";
+          const errorData = error.data;
+          let errorMsg = "";
+          if (errorData.email) {
+            errorMsg += errorData.email[0] + "\n";
+          }
+          if (errorData.mobile) {
+            errorMsg += errorData.mobile[0] + "\n";
+          }
+          if (errorData.enrollno) {
+            errorMsg += errorData.enrollno[0] + "\n";
+          }
           window.flash(errorMsg, "error");
           this.setState({
             isLoading: false,

@@ -29,6 +29,6 @@ def validate_iitr_email(value):
         match = re.findall('iitr.ac.in', org[1])
     if match is None or len(match) < 1:
         raise ValidationError(
-            _('%(value)s is not an iitr email'),
+            _('%(value)s should be a institute email address (.iitr.ac.in)'),
             params={'value': value}
         )

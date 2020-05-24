@@ -170,7 +170,7 @@ export const postMentorApplication = (data) => {
         resolve(response);
       })
       .catch((error) => {
-        reject(error);
+        reject(error.response);
       });
   });
 };
