@@ -6,21 +6,7 @@ import Select from "react-select";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
 import { postMentorApplication } from "api/methods";
-
-const yearOptions = [
-  {
-    label: "3rd Year",
-    value: "3rd",
-  },
-  {
-    label: "4th Year",
-    value: "4th",
-  },
-  {
-    label: "5th Year",
-    value: "5th",
-  },
-];
+import { yearOptions } from "utils/constants";
 
 const recaptchaRef = React.createRef();
 

@@ -2,8 +2,8 @@ from django.db import models
 
 from pages.models import Branch, CampusGroups
 
-from .utils import *
-from common.utils import *
+from common.rename import *
+from common.validators import *
 
 
 class Interest(models.Model):
@@ -40,11 +40,11 @@ class Mentor(models.Model):
         null=True
     )
     photo = models.ImageField(
-        upload_to=UploadToPathAndRenameMentors("mentors/images"),
+        upload_to=UploadToPathAndRename("mentors/images", 'student'),
         max_length=200
     )
     resume = models.FileField(
-        upload_to=UploadToPathAndRenameMentors("mentors/resume"),
+        upload_to=UploadToPathAndRename("mentors/resume", 'student'),
         null=True
     )
     email = models.EmailField(
@@ -187,6 +187,6 @@ class MentorApplication(models.Model):
         unique=True
     )
     resume = models.FileField(
-        upload_to=UploadToPathAndRenameMentors("mentors/applied/resume"),
+        upload_to=UploadToPathAndRename("mentors/applied/resume", 'student'),
         null=True
     )

@@ -3,6 +3,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import mentors.models
+import common.rename
 
 
 class Migration(migrations.Migration):
@@ -29,7 +30,7 @@ class Migration(migrations.Migration):
                     blank=True, max_length=1000, null=True)),
                 ('mobile', models.IntegerField(null=True, unique=True)),
                 ('resume', models.FileField(
-                    null=True, upload_to=mentors.utils.UploadToPathAndRenameMentors('mentors/applied/resume'))),
+                    null=True, upload_to=common.rename.UploadToPathAndRename('mentors/applied/resume', 'student'))),
                 ('branch', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
                                              related_name='applied_mentor', to='pages.Branch')),
             ],
@@ -38,12 +39,12 @@ class Migration(migrations.Migration):
             model_name='mentor',
             name='photo',
             field=models.ImageField(
-                max_length=200, upload_to=mentors.utils.UploadToPathAndRenameMentors('mentors/images')),
+                max_length=200, upload_to=common.rename.UploadToPathAndRename('mentors/images', 'student')),
         ),
         migrations.AlterField(
             model_name='mentor',
             name='resume',
             field=models.FileField(
-                null=True, upload_to=mentors.utils.UploadToPathAndRenameMentors('mentors/resume')),
+                null=True, upload_to=common.rename.UploadToPathAndRename('mentors/resume', 'student')),
         ),
     ]

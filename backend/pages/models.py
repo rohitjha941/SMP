@@ -1,8 +1,8 @@
 from django.db import models
 from tinymce import models as tinymce_models
 
-from pages.utils import *
-from common.utils import *
+from common.validators import *
+from common.rename import *
 
 
 class Home(models.Model):
@@ -24,7 +24,7 @@ class HomeVision(models.Model):
         default=""
     )
     image = models.ImageField(
-        upload_to=UploadToPathAndRename("home/"),
+        upload_to=UploadToPathAndRename("home/", None),
         blank=True,
         null=True
     )
@@ -100,7 +100,7 @@ class StudentTeam(models.Model):
 
     # Field Containing Images of members
     photo = models.ImageField(
-        upload_to=UploadToPathAndRenameStudentTeam("members/"),
+        upload_to=UploadToPathAndRename("members/", "student"),
         max_length=200
     )
 
@@ -244,7 +244,7 @@ class Blogs(models.Model):
     )
 
     thumbnail = models.ImageField(
-        upload_to=UploadToPathAndRenameBlogs("blogs/"),
+        upload_to=UploadToPathAndRename("blogs/", "blogs"),
         max_length=200,
         null=True,
         blank=True
@@ -279,7 +279,7 @@ class Events(models.Model):
         null=True
     )
     thumbnail = models.ImageField(
-        upload_to=UploadToPathAndRenameEvents("events/"),
+        upload_to=UploadToPathAndRename("events/", "events"),
         max_length=200,
         null=True,
         blank=True
