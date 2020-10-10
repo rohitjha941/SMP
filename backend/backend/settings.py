@@ -24,12 +24,13 @@ with open("config.yml", "r") as ymlfile:
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "=#wqe_vz%_xfh!zoqd^@)&*110-)ej8zqu^foy++&&du(u(&50"
+SECRET_KEY = cfg["security"]["django_secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if cfg["env"] == "dev" else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'] if cfg["env"] == "dev" else cfg["security"]["allowed_hosts"].split(" ")
 
 
 # Application definition

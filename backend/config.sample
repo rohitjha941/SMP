@@ -3,6 +3,12 @@ recaptcha:
 
 sendgrid:
   sendgrid_api_key :
-  from_email :
-  send_to_email :
-  receiver_name:
+  from_email :  # smp@iitr.ac.in
+  send_to_email : # email to which query is forwarded
+  receiver_name:  # Name of receiver
+
+security:
+  django_secret_key :
+  allowed_hosts:  #string of hostnames seperated by space
+
+env: # "dev" or "prod"
