@@ -1,0 +1,268 @@
+@import "../../style/common.scss";
+.mainWrapper {
+  width: 93.97%;
+  margin: auto;
+}
+.infoWrapper {
+  display: grid;
+  grid-template-columns: 28% 72%;
+  .imageWrapper {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding-top: 100%;
+    position: relative;
+    .mentorImage {
+      border-radius: 5%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+  }
+  .infoDetail {
+    margin-left: 5%;
+    position: relative;
+    .mentorName {
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 1.125rem;
+      color: $grey-level-0_7;
+      margin-bottom: 0.25rem;
+    }
+
+    .mentorMeta {
+      font-size: 0.75rem;
+      line-height: 1rem;
+      color: $grey-level-0_6;
+      margin-bottom: 0.75rem;
+    }
+    .mentorInterest {
+      font-size: 0.75rem;
+      line-height: 1rem;
+      position: absolute;
+      bottom: 0;
+      color: $grey-level-0_6;
+    }
+    @media screen and (min-width: $break) {
+      .mentorName {
+        font-size: 1.1rem;
+        line-height: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+      .mentorMeta {
+        font-size: 0.9rem;
+        margin-bottom: 1.3rem;
+      }
+      .mentorInterest {
+        font-size: 0.9rem;
+      }
+    }
+    @media screen and (min-width: $break-tablet) {
+      .mentorName {
+        margin-bottom: 1.2rem;
+      }
+      .mentorMeta {
+        margin-bottom: 3rem;
+      }
+    }
+  }
+  @media screen and (min-width: $break) {
+    grid-template-columns: 25% 75%;
+    margin: auto;
+    .infoDetail {
+      margin-left: 8%;
+    }
+  }
+  @media screen and (min-width: $break-tablet) {
+    grid-template-columns: 15% 85%;
+    .infoDetail {
+      margin-left: 3%;
+      .mentorName {
+        font-size: 1.4rem;
+      }
+      .mentorMeta {
+        font-size: 1.3rem;
+      }
+      .mentorInterest {
+        font-size: 1.3rem;
+        display: relative;
+        bottom: auto;
+      }
+    }
+  }
+}
+.contactChildCommon {
+  padding: 9% 0;
+  text-align: center;
+  img {
+    width: 44.44%;
+    display: block;
+    margin: auto;
+  }
+  div {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-top: 0.35rem;
+  }
+  @media screen and (min-width: $break) {
+    div {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+  @media screen and (min-width: $break-tablet) {
+    padding: 18%;
+    padding-left: 0;
+    div {
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
+  }
+}
+.contactWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 2rem auto;
+  .resume {
+    @extend .contactChildCommon;
+    img {
+      width: 39%;
+    }
+  }
+  .facebook {
+    @extend .contactChildCommon;
+  }
+  .linkedin {
+    @extend .contactChildCommon;
+  }
+  a {
+    &:nth-child(1) {
+      margin-right: 31%;
+    }
+    &:nth-child(2) {
+      margin: 0 15.5%;
+    }
+    &:nth-child(3) {
+      margin-left: 31%;
+    }
+  }
+  @media screen and (min-width: $break-tablet) {
+    a {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        margin-right: 31%;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+hr {
+  width: 100%;
+  margin: auto;
+}
+
+.categoryHeading {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.3125rem;
+  margin: 0.85rem auto;
+  color: $grey-level-0_7;
+  @media screen and (min-width: $break) {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+  @media screen and (min-width: $break-tablet) {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    margin: 1.5rem 0;
+  }
+}
+
+.bioWrapper {
+  .groupsTitle {
+    @extend .categoryHeading;
+  }
+  .internsTitle {
+    @extend .categoryHeading;
+  }
+  .placementsTitle {
+    @extend .categoryHeading;
+  }
+  .achievementsTitle {
+    @extend .categoryHeading;
+  }
+  .groupWrapper {
+    display: grid;
+    grid-template-columns: 8% 92%;
+    margin-bottom: 0.3rem;
+    color: $grey-level-0_6;
+    .groupIcon {
+      img {
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+    .groupNameParent {
+      display: table;
+      height: 100%;
+      margin-left: 3%;
+      .groupName {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 0.75rem;
+      }
+      @media screen and (min-width: $break) {
+        .groupName {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .internWrapper,
+  .placementWrapper,
+  .achievementsWrapper {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: $grey-level-0_6;
+    margin-bottom: 0.5rem;
+  }
+  .internCompany {
+    font-weight: 500;
+  }
+  .placementCompany {
+    font-weight: 500;
+  }
+  @media screen and (min-width: $break) {
+    .internWrapper,
+    .placementWrapper,
+    .achievementsWrapper {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-bottom: 0.9rem;
+    }
+  }
+  @media screen and (min-width: $break-tablet) {
+    .groupWrapper {
+      grid-template-columns: 5% 95%;
+      margin-bottom: 0.8rem;
+      .groupNameParent {
+        .groupName {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    .internWrapper,
+    .placementWrapper,
+    .achievementsWrapper {
+      font-size: 1.3rem;
+      line-height: 1.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

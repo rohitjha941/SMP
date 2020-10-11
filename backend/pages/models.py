@@ -160,6 +160,17 @@ class CampusGroups(models.Model):
         max_length=300,
         default=""
     )
+    thumbnail = models.ImageField(
+        upload_to="groups/",
+        max_length=200,
+        null=True
+    )
+    website = models.URLField(
+        max_length=1000,
+        db_index=True,
+
+        blank=True
+    )
 
     def __str__(self):
         return self.group_name

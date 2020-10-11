@@ -12,6 +12,9 @@ import {
   GROUPS,
   RAISE_QUERY,
   FRESHERS_GUIDE,
+  MENTOR_INTERNS,
+  MENTORS_PLACEMENTS,
+  MENTORS_ACHIEVEMENTS,
 } from "api/constants";
 import axios from "axios";
 
@@ -86,6 +89,60 @@ export const getMentors = function () {
           })
         );
       })
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorInterns = (querydata) => {
+  return new Promise((resolve, reject) => {
+    fetch(
+      MENTOR_INTERNS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorPlacements = (querydata) => {
+  return new Promise((resolve, reject) => {
+    fetch(
+      MENTORS_PLACEMENTS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorAchievements = (querydata) => {
+  return new Promise((resolve, reject) => {
+    fetch(
+      MENTORS_ACHIEVEMENTS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
   });
 };

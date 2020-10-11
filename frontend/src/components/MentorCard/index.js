@@ -3,6 +3,7 @@ import styles from "./MentorCard.module.scss";
 import arrow from "assets/images/down-arrow-2.svg";
 
 function WrappedComponent(props) {
+  const id = props.profile.id;
   const mentor = props.profile.image;
   const name = props.profile.name;
   const branch_name = props.profile.branch_name;
@@ -18,7 +19,12 @@ function WrappedComponent(props) {
             </div>
           </li>
           <li className={styles.mentorDetails}>
-            <img className={styles.arrow} src={arrow} alt="more" />
+            <img
+              className={styles.arrow}
+              src={arrow}
+              alt="more"
+              onClick={() => props.showMentorDetail(id)}
+            />
             <p className={styles.name}>{name}</p>
             <p className={styles.meta}>
               {branch_name + " • " + year + " Year"}
