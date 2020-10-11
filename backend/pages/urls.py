@@ -9,15 +9,13 @@ router = routers.SimpleRouter()
 router.register(r'blogs', BlogsView)
 
 urlpatterns = [
-    path('faq/', faqView.as_view()),
-    path("branch/", branchView.as_view()),
-    path('campusGroups/', CampusGroupsView.as_view()),
-    path('raise-query/', raisedQuery, name='raise_query'),
-    path("blogCategory/", BlogCategoryView.as_view()),
+    path('faq/', FaqView.as_view()),
+    path("branch/", BranchView.as_view()),
+    path('campus-groups/', CampusGroupsView.as_view()),
+    path('raise-query/', RaisedQueryView.as_view()),
+    path("blog-category/", BlogCategoryView.as_view()),
     path("team/", StudentTeamView.as_view()),
     path("events/", EventsView.as_view()),
-    path("interests/", InterestView.as_view()),
-    path("mentors/", MentorView.as_view()),
 ]
 
 urlpatterns += router.urls

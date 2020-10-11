@@ -1,16 +1,16 @@
 import {
-  BASE_MEDIA_URL,
+  BASE_URL,
   BLOGS,
   EVENTS,
   TEAM,
   MENTORS,
-  MENTORSDOCS,
+  MENTORS_DOCS,
   FAQS,
   BRANCH,
   INTERESTS,
-  BLOGCATEGORY,
+  BLOG_CATEGORY,
   GROUPS,
-  RAISEQUERY,
+  RAISE_QUERY,
   FRESHERS_GUIDE,
 } from "api/constants";
 import axios from "axios";
@@ -30,7 +30,7 @@ export const getBlogs = function () {
 export const getSingleBlog = (id) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(BLOGS + `/${id}/`)
+      .get(BLOGS + `${id}/`)
       .then((data) => resolve(data.data))
       .catch((e) => reject(e));
   });
@@ -38,7 +38,7 @@ export const getSingleBlog = (id) => {
 
 export const getBlogCategory = function () {
   return new Promise((resolve, reject) => {
-    fetch(BLOGCATEGORY)
+    fetch(BLOG_CATEGORY)
       .then((data) => data.json())
       .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
@@ -48,7 +48,18 @@ export const getEvents = function () {
   return new Promise((resolve, reject) => {
     fetch(EVENTS)
       .then((data) => data.json())
-      .then((jsonData) => resolve(jsonData))
+      .then((jsonData) => {
+        let events = {};
+        Object.keys(jsonData).forEach((name) => {
+          events[name] = jsonData[name].map((event) => {
+            return {
+              ...event,
+              thumbnail: BASE_URL + event.thumbnail,
+            };
+          });
+        });
+        resolve(events);
+      })
       .catch((e) => reject(e));
   });
 };
@@ -69,8 +80,8 @@ export const getMentors = function () {
           jsonData.map((profile) => {
             return {
               ...profile,
-              photo: BASE_MEDIA_URL + profile.photo,
-              resume: BASE_MEDIA_URL + profile.resume,
+              photo: BASE_URL + profile.photo,
+              resume: BASE_URL + profile.resume,
             };
           })
         );
@@ -81,7 +92,7 @@ export const getMentors = function () {
 
 export const getMentorsDocs = function () {
   return new Promise((resolve, reject) => {
-    fetch(MENTORSDOCS)
+    fetch(MENTORS_DOCS)
       .then((data) => data.json())
       .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
@@ -120,7 +131,7 @@ export const getGroups = function () {
   });
 };
 export const postQuery = (data) => {
-  return axios.post(RAISEQUERY, data);
+  return axios.post(RAISE_QUERY, data);
 };
 
 const CreateInterests = (interestData) => {
@@ -226,7 +237,7 @@ export const createMentor = (mentorData) => {
 export const getFreshersGuideUrl = () => {
   return new Promise((resolve, reject) => {
     axios.get(FRESHERS_GUIDE).then((response) => {
-      resolve(BASE_MEDIA_URL + response.data.document);
+      resolve(BASE_URL + response.data.document);
     });
   });
 };

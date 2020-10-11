@@ -20,10 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 with open("config.yml", "r") as ymlfile:
     cfg = yaml.safe_load(ymlfile)
 
-
-with open("config.yml", "r") as ymlfile:
-    cfg = yaml.safe_load(ymlfile)
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -47,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "pages",
     "docs",
+    "mentors",
+    "mail",
     "rest_framework",
     "corsheaders",
     "import_export",
@@ -134,7 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = "/static/"
-MEDIA_URL = "/backend/media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -143,10 +141,11 @@ CORS_ALLOW_CREDENTIALS = False
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"}
 
-# raise_query_email
+# EMAIL_DATA
 DEFAULT_FROM_EMAIL = cfg["sendgrid"]["from_email"]
 EMAIL_HOST_PASSWORD = cfg["sendgrid"]["sendgrid_api_key"]
 SEND_EMAIL_TO = cfg["sendgrid"]["send_to_email"]
+
 RECEIVER_NAME = cfg["sendgrid"]["receiver_name"]
 
 # ReCAPTCHA
