@@ -12,3 +12,10 @@ security:
   allowed_hosts:  #string of hostnames seperated by space
 
 env: # "dev" or "prod"
+
+database:
+  name:
+  user:
+  password:
+  host: 'localhost' # use localhost by default
+  port: '' # leave empty string if using localhost
