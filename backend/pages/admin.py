@@ -15,8 +15,8 @@ class HomeVisionAdmin(ImportExportModelAdmin):
     list_display = ('title', 'description', 'image', )
 
 
-@register(faq)
-class faqVisionAdmin(ImportExportModelAdmin):
+@register(Faq)
+class FaqVisionAdmin(ImportExportModelAdmin):
     list_display = ('_for', 'question', 'answer', )
 
 
@@ -26,20 +26,15 @@ class StudentTeamAdmin(ImportExportModelAdmin):
                     'branch', 'year', 'position',)
 
 
-@register(branch)
-class branchAdmin(ImportExportModelAdmin):
+@register(Branch)
+class BranchAdmin(ImportExportModelAdmin):
     list_display = ("branch_name",)
 
 
 @register(ContactDetails)
-class branchAdmin(ImportExportModelAdmin):
+class ContactDetailsAdmin(ImportExportModelAdmin):
     list_display = ('name', 'photo', 'facebook', 'linkedin',
                     'branch', 'year', 'mobile', 'email', )
-
-
-@register(Mentor)
-class MentorAdmin(ImportExportModelAdmin):
-    list_display = ('branch', 'name', 'photo', 'facebook', 'linkedin', )
 
 
 @register(BlogCategory)
@@ -57,11 +52,6 @@ class EventsAdmin(ImportExportModelAdmin):
     list_display = ('date', 'title', 'venue',)
 
 
-@register(Interest)
-class InterestsAdmin(ImportExportModelAdmin):
-    list_display = ("interest_name",)
-
-
 @register(CampusGroups)
 class CampusGroupsAdmin(ImportExportModelAdmin):
     list_display = ('group_name',)
@@ -70,18 +60,3 @@ class CampusGroupsAdmin(ImportExportModelAdmin):
 @register(RaisedQuery)
 class RaisedQuery(ImportExportModelAdmin):
     list_display = ('id', 'name', 'email', 'query')
-
-
-@register(MentorIntern)
-class MentorIntern(ImportExportModelAdmin):
-    list_display = ('mentor', 'company', 'duration', 'domain', )
-
-
-@register(MentorPlacement)
-class MentorPlacement(ImportExportModelAdmin):
-    list_display = ('mentor', 'company', 'job_title', )
-
-
-@register(MentorAchievement)
-class MentorAchievement(ImportExportModelAdmin):
-    list_display = ('mentor', 'achievement_name', )

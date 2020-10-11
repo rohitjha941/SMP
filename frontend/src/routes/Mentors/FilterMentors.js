@@ -156,6 +156,7 @@ class FilterMentors extends Component {
 
   onApply = (e) => {
     e.preventDefault();
+    if (this.props.mentorToggle) this.props.handleMentorToggle();
     const branch = this.state.selectedBranch;
     const year = this.state.selectedYear;
     const skill = this.state.selectedSkill;
@@ -169,7 +170,7 @@ class FilterMentors extends Component {
     };
 
     this.props.updateFilter(filterData);
-    this.props.handleToggle();
+    this.props.handleFilterToggle();
   };
   handleClose = () => {
     var selectedBranch,
@@ -195,7 +196,7 @@ class FilterMentors extends Component {
         allyears: allyears,
       },
       () => {
-        this.props.handleToggle();
+        this.props.handleFilterToggle();
       }
     );
   };

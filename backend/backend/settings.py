@@ -37,12 +37,13 @@ with open("config.yml", "r") as ymlfile:
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "=#wqe_vz%_xfh!zoqd^@)&*110-)ej8zqu^foy++&&du(u(&50"
+SECRET_KEY = cfg["security"]["django_secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if cfg["env"] == "dev" else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'] if cfg["env"] == "dev" else cfg["security"]["allowed_hosts"].split(" ")
 
 
 # Application definition
@@ -56,6 +57,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "pages",
     "docs",
+    "mentors",
+    "mail",
     "rest_framework",
     "corsheaders",
     "import_export",
@@ -143,7 +146,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = "/static/"
-MEDIA_URL = "/backend/media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -152,10 +155,11 @@ CORS_ALLOW_CREDENTIALS = False
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"}
 
-# raise_query_email
+# EMAIL_DATA
 DEFAULT_FROM_EMAIL = cfg["sendgrid"]["from_email"]
 EMAIL_HOST_PASSWORD = cfg["sendgrid"]["sendgrid_api_key"]
 SEND_EMAIL_TO = cfg["sendgrid"]["send_to_email"]
+
 RECEIVER_NAME = cfg["sendgrid"]["receiver_name"]
 
 # ReCAPTCHA

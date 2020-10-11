@@ -137,9 +137,14 @@ export default class RouterView extends Component {
             render={() => (
               <Mentors
                 mentors={this.props.mentors}
+                getMentorById={this.props.getMentorById}
                 branches={this.props.branches}
                 interests={this.props.interests}
                 docs={this.props.mentorsDocs}
+                groups={this.props.groups}
+                mentorInterns={this.props.mentorInterns}
+                mentorPlacements={this.props.mentorPlacements}
+                mentorAchievements={this.props.mentorAchievements}
                 fetch={() => {
                   this.props.fetchers.mentorDocs();
                 }}
@@ -147,6 +152,10 @@ export default class RouterView extends Component {
                   branches: this.props.fetchers.branches,
                   interests: this.props.fetchers.interests,
                   mentors: this.props.fetchers.mentors,
+                  groups: this.props.fetchers.groups,
+                  mentorInterns: this.props.fetchers.mentorInterns,
+                  mentorPlacements: this.props.fetchers.mentorPlacements,
+                  mentorAchievements: this.props.fetchers.mentorAchievements,
                 }}
               />
             )}

@@ -15,9 +15,9 @@ class HomeVisionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class faqSerializer(serializers.ModelSerializer):
+class FaqSerializer(serializers.ModelSerializer):
     class Meta:
-        model = faq
+        model = Faq
         fields = "__all__"
 
 
@@ -27,47 +27,15 @@ class StudentTeamSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class branchSerializer(serializers.ModelSerializer):
+class BranchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = branch
+        model = Branch
         fields = "__all__"
 
 
 class ContactDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactDetails
-        fields = "__all__"
-
-
-class MentorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Mentor
-        fields = "__all__"
-
-
-class MentorAchievementSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MentorAchievement
-        fields = "__all__"
-
-
-class MentorInternSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = MentorIntern
-        fields = "__all__"
-
-
-class MentorPlacementSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = MentorPlacement
-        fields = "__all__"
-
-
-class InterestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Interest
         fields = "__all__"
 
 
@@ -96,7 +64,6 @@ class RaisedQuerySerializer(serializers.ModelSerializer):
 
 
 class CampusGroupsSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = CampusGroups
         fields = "__all__"
