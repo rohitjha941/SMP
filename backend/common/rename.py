@@ -51,9 +51,9 @@ class UploadToPathAndRename(object):
     # Rename blogs image to {date}_{title}_{author}
     def rename_blogs(self):
         if self.instance.title and self.instance.created_at and self.instance.author:
-            dateToStr = self.instance.created_at.strftime("%d-%b-%Y")
+            date_to_str = self.instance.created_at.strftime("%d-%b-%Y")
             filename = '{}_{}_{}.{}'.format(
-                slugify(dateToStr), slugify(self.instance.title), slugify(self.instance.author), self.ext)
+                slugify(date_to_str), slugify(self.instance.title), slugify(self.instance.author), self.ext)
         else:
             filename = '{}.{}'.format(uuid4().hex, self.ext)
         return filename
@@ -61,8 +61,8 @@ class UploadToPathAndRename(object):
     # Rename events image to {date}_{title}
     def rename_events(self):
         if self.instance.date and self.instance.title:
-            dateToStr = self.instance.date.strftime("%d-%b-%Y")
-            filename = '{}-{}.{}'.format(slugify(dateToStr),
+            date_o_str = self.instance.date.strftime("%d-%b-%Y")
+            filename = '{}-{}.{}'.format(slugify(date_to_str),
                                          slugify(self.instance.title), self.ext)
         else:
             filename = '{}.{}'.format(uuid4().hex, self.ext)
