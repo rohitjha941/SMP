@@ -24,7 +24,7 @@ class HomeVision(models.Model):
         default=""
     )
     image = models.ImageField(
-        upload_to=UploadToPathAndRename("home/", None),
+        upload_to=FileUploader("home/", None),
         blank=True,
         null=True
     )
@@ -100,7 +100,7 @@ class StudentTeam(models.Model):
 
     # Field Containing Images of members
     photo = models.ImageField(
-        upload_to=UploadToPathAndRename("members/", "student"),
+        upload_to=FileUploader("members/", "student"),
         max_length=200
     )
 
@@ -255,7 +255,7 @@ class Blogs(models.Model):
     )
 
     thumbnail = models.ImageField(
-        upload_to=UploadToPathAndRename("blogs/", "blogs"),
+        upload_to=FileUploader("blogs/", "blogs"),
         max_length=200,
         null=True,
         blank=True
@@ -290,7 +290,7 @@ class Events(models.Model):
         null=True
     )
     thumbnail = models.ImageField(
-        upload_to=UploadToPathAndRename("events/", "events"),
+        upload_to=FileUploader("events/", "events"),
         max_length=200,
         null=True,
         blank=True

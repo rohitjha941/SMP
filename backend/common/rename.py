@@ -9,7 +9,7 @@ from backend.settings import MEDIA_ROOT
 
 
 @deconstructible
-class UploadToPathAndRename(object):
+class FileUploader(object):
     """Assigns single and unique filename to each file of each instance of models to prevent multiple occurances and hence save space"""
 
     def __init__(self, path, file_model):

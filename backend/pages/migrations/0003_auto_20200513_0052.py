@@ -15,24 +15,24 @@ class Migration(migrations.Migration):
             model_name='blogs',
             name='thumbnail',
             field=models.ImageField(blank=True, max_length=200, null=True,
-                                    upload_to=common.rename.UploadToPathAndRename('blogs/', 'blogs')),
+                                    upload_to=common.rename.FileUploader('blogs/', 'blogs')),
         ),
         migrations.AlterField(
             model_name='events',
             name='thumbnail',
             field=models.ImageField(blank=True, max_length=200, null=True,
-                                    upload_to=common.rename.UploadToPathAndRename('events/', 'events')),
+                                    upload_to=common.rename.FileUploader('events/', 'events')),
         ),
         migrations.AlterField(
             model_name='homevision',
             name='image',
             field=models.ImageField(
-                blank=True, null=True, upload_to=common.rename.UploadToPathAndRename('home/', None)),
+                blank=True, null=True, upload_to=common.rename.FileUploader('home/', None)),
         ),
         migrations.AlterField(
             model_name='studentteam',
             name='photo',
             field=models.ImageField(
-                max_length=200, upload_to=common.rename.UploadToPathAndRename('members/', 'student')),
+                max_length=200, upload_to=common.rename.FileUploader('members/', 'student')),
         ),
     ]

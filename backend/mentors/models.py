@@ -40,11 +40,11 @@ class Mentor(models.Model):
         null=True
     )
     photo = models.ImageField(
-        upload_to=UploadToPathAndRename("mentors/images", 'student'),
+        upload_to=FileUploader("mentors/images", 'student'),
         max_length=200
     )
     resume = models.FileField(
-        upload_to=UploadToPathAndRename("mentors/resume", 'student'),
+        upload_to=FileUploader("mentors/resume", 'student'),
         null=True
     )
     email = models.EmailField(
@@ -190,6 +190,6 @@ class MentorApplication(models.Model):
         validators=[validate_mobile]
     )
     resume = models.FileField(
-        upload_to=UploadToPathAndRename("mentors/applied/resume", 'student'),
+        upload_to=FileUploader("mentors/applied/resume", 'student'),
         null=True
     )
