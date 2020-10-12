@@ -18,8 +18,11 @@ import yaml
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+with open("config.yml", "r") as ymlfile:
+    cfg = yaml.safe_load(ymlfile)
+
 sentry_sdk.init(
-    dsn="https://e5ef111a5b494bbaad2d780dc85e2223@o386884.ingest.sentry.io/5221627",
+    dsn=cfg["sentry"]["dsn"],
     integrations=[DjangoIntegration()],
 
     # If you wish to associate users to errors (assuming you are using
@@ -30,8 +33,6 @@ sentry_sdk.init(
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-with open("config.yml", "r") as ymlfile:
-    cfg = yaml.safe_load(ymlfile)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
