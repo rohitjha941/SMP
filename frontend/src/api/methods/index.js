@@ -2,6 +2,7 @@ import {
   BASE_URL,
   BLOGS,
   EVENTS,
+  TEAM_POSITION,
   TEAM,
   MENTORS,
   MENTORS_DOCS,
@@ -67,6 +68,16 @@ export const getEvents = function () {
       .catch((e) => reject(e));
   });
 };
+
+export const getTeamPosition = function () {
+  return new Promise((resolve, reject) => {
+    fetch(TEAM_POSITION)
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
 export const getTeam = function () {
   return new Promise((resolve, reject) => {
     fetch(TEAM)

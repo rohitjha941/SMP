@@ -24,6 +24,7 @@ function App() {
   const [blogs, setBlogs] = useState({});
   const [blogCategory, setBlogCategory] = useState([]);
   const [events, setEvents] = useState({});
+  const [teamPosition, setTeamPosition] = useState([]);
   const [team, setTeam] = useState([]);
   const [mentors, setMentors] = useState({});
   const [mentorInterns, setMentorInterns] = useState([]);
@@ -39,6 +40,7 @@ function App() {
     blogs: true,
     blogCategory: true,
     events: true,
+    teamPosition: true,
     team: true,
     mentors: true,
     mentorInterns: {},
@@ -74,6 +76,12 @@ function App() {
     if (canFetch.events) {
       setFetchableStatus({ ...canFetch, events: false });
       methods.getEvents().then((data) => setEvents(data));
+    }
+  };
+  const fetchTeamPositionIfEmpty = () => {
+    if (canFetch.teamPosition) {
+      setFetchableStatus({ ...canFetch, teamPosition: false });
+      methods.getTeamPosition().then((data) => setTeamPosition(data));
     }
   };
   const fetchTeamIfEmpty = () => {
@@ -271,6 +279,7 @@ function App() {
   const fetcherCollection = {
     blogs: fetchBlogsIfEmpty,
     events: fetchEventsIfEmpty,
+    teamPosition: fetchTeamPositionIfEmpty,
     team: fetchTeamIfEmpty,
     mentors: fetchMentorsIfEmpty,
     mentorInterns: fetchMentorInternsIfEmpty,
@@ -295,6 +304,7 @@ function App() {
           getBlogById={getSingleBlog}
           events={events}
           blogCategory={blogCategory}
+          teamPosition={teamPosition}
           team={team}
           mentors={getMentorList()}
           getMentorById={getSingleMentor}

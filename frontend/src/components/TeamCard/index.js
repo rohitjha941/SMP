@@ -15,9 +15,7 @@ function WrappedComponent(props) {
         />
       </div>
       <div className={styles.name}>{props.member.name}</div>
-      <div className={styles.designation}>
-        {"(" + props.member.designation + ")"}
-      </div>
+      <div className={styles.designation}>{props.member.designation}</div>
       <div className={styles.contact}>
         <a href={props.member.fb}>
           <div className={styles.fb}>
