@@ -89,7 +89,14 @@ export default class RouterView extends Component {
           <Route
             path="/about"
             render={() => (
-              <About team={this.props.team} fetch={this.props.fetchers.team} />
+              <About
+                team={this.props.team}
+                teamPosition={this.props.teamPosition}
+                fetch={() => {
+                  this.props.fetchers.team();
+                  this.props.fetchers.teamPosition();
+                }}
+              />
             )}
           />
           <Route

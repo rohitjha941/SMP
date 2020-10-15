@@ -7,11 +7,17 @@ class Team extends Component {
     this.props.fetch();
   }
   render() {
+    const teamPosition = this.props.teamPosition;
     const member = this.props.team.map((value) => {
       return {
         name: value.name,
         image: value.photo,
-        designation: value.position,
+        designation:
+          teamPosition && teamPosition.length === 0
+            ? ""
+            : teamPosition.find((teamPosition) => {
+                return teamPosition.id === value.position;
+              }).position_name,
         fb: value.facebook,
         linkedin: value.linkeden,
         contact: value.mobile,

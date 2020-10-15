@@ -7,6 +7,7 @@ const apiConstants = {
   blogs: "blogs/",
   events: "events/",
   apply: "apply/",
+  teamPosition: "team-position/",
   team: "team/",
   mentorsDocs: "mentor-docs/",
   faqs: "faq/",
@@ -24,6 +25,7 @@ const apiConstants = {
 export const BLOGS = apiConstants.pages + apiConstants.blogs;
 export const BLOG_CATEGORY = apiConstants.pages + apiConstants.blogCategory;
 export const EVENTS = apiConstants.pages + apiConstants.events;
+export const TEAM_POSITION = apiConstants.pages + apiConstants.teamPosition;
 export const TEAM = apiConstants.pages + apiConstants.team;
 export const MENTORS = apiConstants.mentors;
 export const MENTOR_APPLICATION = apiConstants.mentors + apiConstants.apply;
