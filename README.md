@@ -9,6 +9,7 @@ Official Portal of SMP IIT Roorkee
 - Install python
 - Install pip [<https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/]>
 - Install virtualenvironment
+- Setup Postgres [<https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04>]
 
 ```sh
 - sudo pip3 install virtualenv
