@@ -1,6 +1,9 @@
 from django.db import models
 from tinymce import models as tinymce_models
 
+from common.validators import *
+from common.rename import *
+
 
 class Home(models.Model):
 
@@ -21,7 +24,7 @@ class HomeVision(models.Model):
         default=""
     )
     image = models.ImageField(
-        upload_to="home/",
+        upload_to=FileUploader("home/", None),
         blank=True,
         null=True
     )
@@ -97,7 +100,7 @@ class StudentTeam(models.Model):
 
     # Field Containing Images of members
     photo = models.ImageField(
-        upload_to="members/",
+        upload_to=FileUploader("members/", "student"),
         max_length=200
     )
 
@@ -109,7 +112,8 @@ class StudentTeam(models.Model):
         blank=True
     )
     enrollno = models.IntegerField(
-        null=True
+        null=True,
+        validators=[validate_enroll]
     )
     # Field Containing linkedin URL
 
@@ -147,11 +151,13 @@ class StudentTeam(models.Model):
         choices=year_choices_team
     )
     mobile = models.IntegerField(
-        null=True
+        null=True,
+        validators=[validate_mobile]
     )
     email = models.CharField(
         default="",
         max_length=100,
+        validators=[validate_iitr_email]
     )
 
 
@@ -211,6 +217,7 @@ class ContactDetails(models.Model):
     mobile = models.CharField(
         default="",
         max_length=100,
+        validators=[validate_mobile]
     )
 
     email = models.CharField(
@@ -248,7 +255,7 @@ class Blogs(models.Model):
     )
 
     thumbnail = models.ImageField(
-        upload_to="blogs/",
+        upload_to=FileUploader("blogs/", "blogs"),
         max_length=200,
         null=True,
         blank=True
@@ -283,7 +290,7 @@ class Events(models.Model):
         null=True
     )
     thumbnail = models.ImageField(
-        upload_to="events/",
+        upload_to=FileUploader("events/", "events"),
         max_length=200,
         null=True,
         blank=True

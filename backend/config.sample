@@ -1,6 +1,9 @@
 recaptcha:
   recaptcha_secret_key  :
 
+sentry:
+  dsn :
+
 sendgrid:
   sendgrid_api_key :
   from_email :  # smp@iitr.ac.in
@@ -9,7 +12,7 @@ sendgrid:
 
 security:
   django_secret_key :
-  allowed_hosts:  #string of hostnames seperated by space
+  allowed_hosts :  #string of hostnames seperated by space
 
 env: # "dev" or "prod"
 

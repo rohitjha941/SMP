@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Button from "../../components/Button";
-import styles from "./MentorForm.module.scss";
+import styles from "./MentorRegistrationForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
@@ -8,23 +8,9 @@ import { createMentor } from "api/methods";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
 import ImageCropper from "components/ImageCropper";
-
+import { yearOptions } from "utils/constants";
 const animatedComponents = makeAnimated();
-const yearOptions = [
-  {
-    label: "3rd Year",
-    value: "3rd",
-  },
-  {
-    label: "4th Year",
-    value: "4th",
-  },
-  {
-    label: "5th Year",
-    value: "5th",
-  },
-];
-class MentorForm extends Component {
+class MentorRegistrationForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -671,4 +657,4 @@ class MentorForm extends Component {
   }
 }
 
-export default MentorForm;
+export default MentorRegistrationForm;

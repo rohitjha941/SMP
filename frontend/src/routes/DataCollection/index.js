@@ -7,8 +7,12 @@ const PageNotFound = Loadable({
   loader: () => import("../../components/404/Index"),
   loading: () => <Loader />,
 });
-const MentorForm = Loadable({
-  loader: () => import("./MentorForm"),
+const MentorRegistrationForm = Loadable({
+  loader: () => import("./MentorRegistrationForm"),
+  loading: () => <Loader />,
+});
+const MentorApplicationForm = Loadable({
+  loader: () => import("./MentorApplicationForm"),
   loading: () => <Loader />,
 });
 
@@ -19,13 +23,29 @@ class DataCollection extends Component {
         <Switch>
           <Route
             exact
-            path="/datacollection/mentors"
+            path="/datacollection/mentors/register"
             render={() => (
-              <MentorForm
-                fetch={this.props.fetch}
+              <MentorRegistrationForm
+                fetch={() => {
+                  this.props.fetchers.groups();
+                  this.props.fetchers.branches();
+                  this.props.fetchers.interests();
+                }}
                 groups={this.props.groups}
                 branches={this.props.branches}
                 interests={this.props.interests}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/datacollection/mentors/apply"
+            render={() => (
+              <MentorApplicationForm
+                fetch={() => {
+                  this.props.fetchers.branches();
+                }}
+                branches={this.props.branches}
               />
             )}
           />

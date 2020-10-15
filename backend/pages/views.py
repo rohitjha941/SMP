@@ -1,13 +1,10 @@
-import requests
 import datetime
-
-from backend.settings import RECAPTCHA_SECRET_KEY
 
 from rest_framework import generics, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from pages.utils import get_client_ip
+from common.utils import verify_recaptcha
 
 from .models import *
 from .serializers import *
@@ -86,15 +83,8 @@ class EventsView(APIView):
 
 class RaisedQueryView(APIView):
     def post(self, request):
-        r = requests.post(
-            'https://www.google.com/recaptcha/api/siteverify',
-            data={
-                'secret': RECAPTCHA_SECRET_KEY,
-                'response': request.data['g-recaptcha-response'],
-                'remoteip': get_client_ip(request),
-            }
-        )
-        if r.json()['success']:
+        is_verified = verify_recaptcha(request)
+        if is_verified:
             serializer = RaisedQuerySerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
