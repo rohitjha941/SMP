@@ -20,6 +20,11 @@ class FaqVisionAdmin(ImportExportModelAdmin):
     list_display = ('_for', 'question', 'answer', )
 
 
+@register(TeamPosition)
+class TeamPositionAdmin(ImportExportModelAdmin):
+    list_display = ('position_name',)
+
+
 @register(StudentTeam)
 class StudentTeamAdmin(ImportExportModelAdmin):
     list_display = ('name', 'photo', 'facebook', 'linkedin',

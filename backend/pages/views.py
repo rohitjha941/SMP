@@ -27,6 +27,11 @@ class FaqView(generics.ListAPIView):
     serializer_class = FaqSerializer
 
 
+class TeamPositionView (generics.ListAPIView):
+    queryset = TeamPosition.objects.all()
+    serializer_class = TeamPositionSerializer
+
+
 class StudentTeamView (generics.ListAPIView):
     queryset = StudentTeam.objects.all()
     serializer_class = StudentTeamSerializer

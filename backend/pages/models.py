@@ -90,6 +90,16 @@ vertical_choices = (
 )
 
 
+class TeamPosition(models.Model):
+    position_name = models.CharField(
+        default="",
+        max_length=100,
+    )
+
+    def __str__(self):
+        return self.position_name
+
+
 class StudentTeam(models.Model):
 
     # Field Containing name.
@@ -124,18 +134,10 @@ class StudentTeam(models.Model):
         blank=True
     )
 
-    position = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        choices=position_choices
-    )
-
-    vertical = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        choices=vertical_choices
+    position = models.ForeignKey(
+        TeamPosition,
+        related_name="team_position",
+        on_delete=models.CASCADE,
     )
 
     branch = models.ForeignKey(
