@@ -38,9 +38,9 @@ function WrappedComponent(props) {
                 <Link to="/queries">
                   <li>FAQ's</li>
                 </Link>
-                <Link to="/mentors/becomeMentor">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTJvrf8RhphVktoT7iRhriEmepfHwod8zFiWUuM9FCcOpIhg/formResponse">
                   <li>Become a Mentor</li>
-                </Link>
+                </a>
               </ul>
             </div>
           </li>
