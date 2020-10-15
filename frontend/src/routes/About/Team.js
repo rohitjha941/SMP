@@ -13,11 +13,11 @@ class Team extends Component {
         name: value.name,
         image: value.photo,
         designation:
-          teamPosition && teamPosition.length === 0
-            ? ""
-            : teamPosition.find((teamPosition) => {
+          teamPosition && teamPosition.length !== 0
+            ? teamPosition.find((teamPosition) => {
                 return teamPosition.id === value.position;
-              }).position_name,
+              }).position_name
+            : "",
         fb: value.facebook,
         linkedin: value.linkeden,
         contact: value.mobile,
