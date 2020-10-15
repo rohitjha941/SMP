@@ -7,12 +7,6 @@ const MentorIndex = Loadable({
   loader: () => import("./MentorIndex"),
   loading: () => <Loader />,
 });
-
-const ComingSoon = Loadable({
-  loader: () => import("../../components/ComingSoon"),
-  loading: () => <Loader />,
-});
-
 const ShowMentors = Loadable({
   loader: () => import("./ShowMentors"),
   loading: () => <Loader />,
@@ -63,12 +57,6 @@ class Mentors extends Component {
             )}
           />
           {/*show all mentors or searched*/}
-          <Route
-            exact
-            path="/mentors/becomeMentor"
-            render={() => <ComingSoon />}
-          />
-          {/* procedure to become mentor*/}
           <Route to="*" component={PageNotFound} />
         </Switch>
       </React.Fragment>

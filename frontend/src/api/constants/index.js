@@ -6,6 +6,7 @@ const apiConstants = {
   docs: BASE_URL + "/documents/",
   blogs: "blogs/",
   events: "events/",
+  apply: "apply/",
   team: "team/",
   mentorsDocs: "mentor-docs/",
   faqs: "faq/",
@@ -25,6 +26,7 @@ export const BLOG_CATEGORY = apiConstants.pages + apiConstants.blogCategory;
 export const EVENTS = apiConstants.pages + apiConstants.events;
 export const TEAM = apiConstants.pages + apiConstants.team;
 export const MENTORS = apiConstants.mentors;
+export const MENTOR_APPLICATION = apiConstants.mentors + apiConstants.apply;
 export const MENTOR_INTERNS = apiConstants.mentors + apiConstants.interns;
 export const MENTORS_PLACEMENTS =
   apiConstants.mentors + apiConstants.placements;
