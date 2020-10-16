@@ -53,7 +53,9 @@ class Mentor(models.Model):
         unique=True,
         validators=[validate_iitr_email]
     )
-    mobile = models.IntegerField(
+    mobile = models.CharField(
+        max_length=10,
+        blank=True,
         null=True,
         unique=True,
         validators=[validate_mobile]
@@ -184,7 +186,9 @@ class MentorApplication(models.Model):
         blank=True,
         null=True
     )
-    mobile = models.IntegerField(
+    mobile = models.CharField(
+        max_length=10,
+        blank=True,
         null=True,
         unique=True,
         validators=[validate_mobile]
