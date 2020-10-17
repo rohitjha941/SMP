@@ -4,25 +4,26 @@ Official Portal of SMP IIT Roorkee
 
 ## Boiler Plate for Django - React app
 
-- Clone the Repository
+- Clone this Repository
 - Install yarn [<https://linuxize.com/post/how-to-install-yarn-on-ubuntu-18-04/]>
 - Install python
 - Install pip [<https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/]>
 - Install virtualenvironment
-- Setup Postgres [<https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04>]
 
 ```sh
 - sudo pip3 install virtualenv
 ```
 
-## Backend
+- Setup Postgres [<https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04>]
 
-- Setup Backend
+## Setup Backend
+
+- Create a virtual environment
 
 ```sh
 - cd backend/
-- virtualenv myenv
-- source myenv/bin/activate
+- virtualenv env
+- source env/bin/activate
 ```
 
 - Install requirements
@@ -31,34 +32,48 @@ Official Portal of SMP IIT Roorkee
 - pip3 install -r r.txt
 ```
 
-- Create Admin
+- Apply Migrations
 
 ```sh
-- python manage.py createsuperuser
+- ./manage.py migrate
 ```
 
-- Create Config File named config.yml file and populate it as config.sample
+- Generate Admin Credentials
 
-- Import all the sample databases ( from /backend/SampleDatabase )
-  into your local database [localhost:8000/backend/admin]
-- Configure your username and password for sending mail in backend/backend/settings.py
+```sh
+- ./manage.py createsuperuser
+```
+
+- Create config.yml file similar to config.sample and fill it accordingly
+
+```sh
+- cp config.sample config.yml
+```
+
 - Run the backend server
 
 ```sh
-- python manage.py runserver
+- ./manage.py runserver
 ```
 
-## Frontend
+- Import all the sample databases ( from /backend/SampleDatabase )
+  into your local database [localhost:8000/backend/admin]
 
-- Setup Frontend
-- In a new shell
+## Setup Frontend
+
+- In a new shell run the following commands
 
 ```sh
 - cd frontend/
 - yarn install
 ```
 
-- Make a .env file as .env.sample
+- Make a .env file as .env.example
+
+```sh
+- cp .env.example .env
+```
+
 - run frontend server
 
 ```sh
