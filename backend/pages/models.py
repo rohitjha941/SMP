@@ -152,8 +152,11 @@ class StudentTeam(models.Model):
         null=True,
         choices=year_choices_team
     )
-    mobile = models.IntegerField(
+    mobile = models.CharField(
+        max_length=10,
+        blank=True,
         null=True,
+        unique=True,
         validators=[validate_mobile]
     )
     email = models.CharField(
