@@ -75,7 +75,7 @@ class Contact extends Component {
     return (
       <>
         {this.state.isLoading ? <LoadingOverlay /> : null}
-        <div className={styles.contact} id={"contactUs"}>
+        <div className={styles.contact} id={"contact-us"}>
           <div className={styles.contactTitle}>
             Need More Help? <span className="color-red">Contact Us</span>
           </div>

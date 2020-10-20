@@ -43,7 +43,7 @@ function WrappedComponent(props) {
       display: "Fresher Section",
     },
     {
-      to: "/queries#contactUs",
+      to: "/queries#contact-us",
       display: "Contact Us",
     },
     {

@@ -33,7 +33,7 @@ function WrappedComponent(props) {
             <div>
               <ul>
                 <li className={styles.categoryHeading}>Help</li>
-                <Link to="/queries#contactUs">
+                <Link to="/queries#contact-us">
                   <li>Contact Us</li>
                 </Link>
                 <Link to="/queries" onClick={() => scrollToTop(250)}>
