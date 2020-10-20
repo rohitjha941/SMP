@@ -18,8 +18,16 @@ export default class Queries extends Component {
     this.setState({ activeTab: value });
   };
 
+  jump = (id) => {
+    const el = document.getElementById(id);
+    window.scrollTo(0, el.offsetTop);
+  };
   componentDidMount() {
     this.props.fetch();
+    const hash = window.location.hash;
+    if (hash) {
+      this.jump(hash.substring(1, hash.length));
+    }
   }
   render() {
     return (

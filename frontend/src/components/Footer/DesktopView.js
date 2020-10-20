@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./DesktopView.module.scss";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
+import { scrollToTop } from "./ScrollToTop";
 
 function WrappedComponent(props) {
   return (
@@ -32,10 +33,10 @@ function WrappedComponent(props) {
             <div>
               <ul>
                 <li className={styles.categoryHeading}>Help</li>
-                <Link to="/">
+                <Link to="/queries#contact-us">
                   <li>Contact Us</li>
                 </Link>
-                <Link to="/queries">
+                <Link to="/queries" onClick={() => scrollToTop(250)}>
                   <li>FAQ's</li>
                 </Link>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTJvrf8RhphVktoT7iRhriEmepfHwod8zFiWUuM9FCcOpIhg/formResponse">

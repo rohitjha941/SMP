@@ -43,7 +43,7 @@ function WrappedComponent(props) {
       display: "Fresher Section",
     },
     {
-      to: "/contact",
+      to: "/queries#contact-us",
       display: "Contact Us",
     },
     {
@@ -69,7 +69,9 @@ function WrappedComponent(props) {
               display={value.display}
               index={index}
               key={index}
-              onClick={() => scrollToTop(250)}
+              onClick={
+                value.display === "Contact Us" ? null : () => scrollToTop(250)
+              }
             />
           );
         })}
