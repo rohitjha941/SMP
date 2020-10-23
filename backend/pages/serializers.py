@@ -21,6 +21,12 @@ class FaqSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class TeamPositionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeamPosition
+        fields = "__all__"
+
+
 class StudentTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentTeam

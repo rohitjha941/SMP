@@ -14,22 +14,37 @@ import os
 
 import yaml
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Sentry
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 with open("config.yml", "r") as ymlfile:
     cfg = yaml.safe_load(ymlfile)
+
+sentry_sdk.init(
+    dsn=cfg["sentry"]["dsn"],
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "=#wqe_vz%_xfh!zoqd^@)&*110-)ej8zqu^foy++&&du(u(&50"
+SECRET_KEY = cfg["security"]["django_secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if cfg["env"] == "dev" else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'] if cfg["env"] == "dev" else cfg["security"]["allowed_hosts"].split(" ")
 
 
 # Application definition
@@ -41,6 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "common",
     "pages",
     "docs",
     "mentors",
@@ -92,13 +108,24 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+if cfg["env"] == "dev":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": cfg["database"]["name"],
+            "USER": cfg["database"]["user"],
+            "PASSWORD": cfg["database"]["password"],
+            "HOST": cfg["database"]["host"],
+            "PORT": cfg["database"]["port"]
+        }
+    }
 
 
 # Password validation

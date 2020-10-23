@@ -24,8 +24,12 @@ function App() {
   const [blogs, setBlogs] = useState({});
   const [blogCategory, setBlogCategory] = useState([]);
   const [events, setEvents] = useState({});
+  const [teamPosition, setTeamPosition] = useState([]);
   const [team, setTeam] = useState([]);
-  const [mentors, setMentors] = useState([]);
+  const [mentors, setMentors] = useState({});
+  const [mentorInterns, setMentorInterns] = useState([]);
+  const [mentorPlacements, setMentorPlacements] = useState([]);
+  const [mentorAchievements, setMentorAchievements] = useState([]);
   const [mentorsDocs, setMentorsDocs] = useState([]);
   const [faqs, setFaqs] = useState([]);
   const [branches, setBranches] = useState([]);
@@ -36,8 +40,12 @@ function App() {
     blogs: true,
     blogCategory: true,
     events: true,
+    teamPosition: true,
     team: true,
     mentors: true,
+    mentorInterns: {},
+    mentorPlacements: {},
+    mentorAchievements: {},
     mentorDocs: true,
     faqs: true,
     branches: true,
@@ -70,6 +78,12 @@ function App() {
       methods.getEvents().then((data) => setEvents(data));
     }
   };
+  const fetchTeamPositionIfEmpty = () => {
+    if (canFetch.teamPosition) {
+      setFetchableStatus({ ...canFetch, teamPosition: false });
+      methods.getTeamPosition().then((data) => setTeamPosition(data));
+    }
+  };
   const fetchTeamIfEmpty = () => {
     if (canFetch.team) {
       setFetchableStatus({ ...canFetch, team: false });
@@ -78,8 +92,70 @@ function App() {
   };
   const fetchMentorsIfEmpty = () => {
     if (canFetch.mentors) {
-      setFetchableStatus({ ...canFetch, mentors: false });
-      methods.getMentors().then((data) => setMentors(data));
+      const mentorListToMap = (mentorList) => {
+        const mentorsMap = {};
+        const mentorsDataMap = {};
+        mentorList.forEach((mentor) => {
+          mentorsMap[mentor.id] = mentor;
+          mentorsDataMap[mentor.id] = true;
+        });
+        return [mentorsMap, mentorsDataMap];
+      };
+      methods.getMentors().then((data) => {
+        const [mentors, mentorsData] = mentorListToMap(data);
+        setMentors(mentors);
+        setFetchableStatus({
+          ...canFetch,
+          mentors: false,
+          mentorInterns: { ...mentorsData },
+          mentorAchievements: { ...mentorsData },
+          mentorPlacements: { ...mentorsData },
+        });
+      });
+    }
+  };
+  const fetchMentorInternsIfEmpty = (id) => {
+    if (canFetch.mentorInterns[id] && !canFetch.mentors) {
+      let mentorInternFetch = { ...canFetch.mentorInterns };
+      mentorInternFetch[id] = false;
+      setFetchableStatus({ ...canFetch, mentorInterns: mentorInternFetch });
+      methods.getMentorInterns(mentors[id].mentor_intern).then((data) => {
+        let mentorIntern = { ...mentorInterns };
+        mentorIntern[id] = data;
+        setMentorInterns(mentorIntern);
+      });
+    }
+  };
+  const fetchMentorPlacementsIfEmpty = (id) => {
+    if (canFetch.mentorPlacements[id] && !canFetch.mentors) {
+      let mentorPlacementFetch = { ...canFetch.mentorPlacements };
+      mentorPlacementFetch[id] = false;
+      setFetchableStatus({
+        ...canFetch,
+        mentorPlacements: mentorPlacementFetch,
+      });
+      methods.getMentorPlacements(mentors[id].mentor_placement).then((data) => {
+        let mentorPlacement = { ...mentorPlacements };
+        mentorPlacement[id] = data;
+        setMentorPlacements(mentorPlacement);
+      });
+    }
+  };
+  const fetchMentorAchievementsIfEmpty = (id) => {
+    if (canFetch.mentorAchievements[id] && !canFetch.mentors) {
+      let mentorAchievementFetch = { ...canFetch.mentorAchievements };
+      mentorAchievementFetch[id] = false;
+      setFetchableStatus({
+        ...canFetch,
+        mentorAchievements: mentorAchievementFetch,
+      });
+      methods
+        .getMentorAchievements(mentors[id].mentor_achievement)
+        .then((data) => {
+          let mentorAchievement = { ...mentorAchievements };
+          mentorAchievement[id] = data;
+          setMentorAchievements(mentorAchievement);
+        });
     }
   };
   const fetchMentorsDocsIfEmpty = () => {
@@ -147,6 +223,9 @@ function App() {
   const getBlogList = () => {
     return Object.keys(blogs).map((id) => blogs[id]);
   };
+  const getMentorList = () => {
+    return Object.keys(mentors).map((id) => mentors[id]);
+  };
   const getSingleBlog = (id) => {
     if (`${id}` in blogs) {
       return { ...blogs[id], error: false };
@@ -157,11 +236,55 @@ function App() {
       };
     }
   };
+  const getSingleMentor = (id) => {
+    if (`${id}` in mentors) {
+      return { ...mentors[id], error: false };
+    } else {
+      return {
+        error: true,
+        message: "Does not exist",
+      };
+    }
+  };
+  const getMentorInterns = (id) => {
+    if (`${id}` in mentorInterns) {
+      return { data: [...mentorInterns[id]], error: false };
+    } else {
+      return {
+        error: true,
+        message: "Does not exist",
+      };
+    }
+  };
+  const getMentorPlacement = (id) => {
+    if (`${id}` in mentorPlacements) {
+      return { data: [...mentorPlacements[id]], error: false };
+    } else {
+      return {
+        error: true,
+        message: "Does not exist",
+      };
+    }
+  };
+  const getMentorAchievement = (id) => {
+    if (`${id}` in mentorAchievements) {
+      return { data: [...mentorAchievements[id]], error: false };
+    } else {
+      return {
+        error: true,
+        message: "Does not exist",
+      };
+    }
+  };
   const fetcherCollection = {
     blogs: fetchBlogsIfEmpty,
     events: fetchEventsIfEmpty,
+    teamPosition: fetchTeamPositionIfEmpty,
     team: fetchTeamIfEmpty,
     mentors: fetchMentorsIfEmpty,
+    mentorInterns: fetchMentorInternsIfEmpty,
+    mentorPlacements: fetchMentorPlacementsIfEmpty,
+    mentorAchievements: fetchMentorAchievementsIfEmpty,
     mentorDocs: fetchMentorsDocsIfEmpty,
     faq: fetchFAQsIfEmpty,
     branches: fetchBranchesIfEmpty,
@@ -181,8 +304,13 @@ function App() {
           getBlogById={getSingleBlog}
           events={events}
           blogCategory={blogCategory}
+          teamPosition={teamPosition}
           team={team}
-          mentors={mentors}
+          mentors={getMentorList()}
+          getMentorById={getSingleMentor}
+          mentorInterns={getMentorInterns}
+          mentorPlacements={getMentorPlacement}
+          mentorAchievements={getMentorAchievement}
           mentorsDocs={mentorsDocs}
           faqs={faqs}
           branches={branches}

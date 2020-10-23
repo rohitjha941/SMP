@@ -6,6 +6,8 @@ from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from common.utils import verify_recaptcha
+
 from .models import *
 from .serializers import *
 
@@ -102,3 +104,62 @@ class InterestView (generics.ListCreateAPIView):
             'interest_ids': interest_ids
         }
         return Response(data, status=status.HTTP_201_CREATED)
+
+
+class MentorApplicationView(APIView):
+
+    def post(self, request):
+        is_verified = verify_recaptcha(request)
+        if is_verified:
+            serializer = MentorApplicationSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
+class MentorInternView (generics.ListAPIView):
+    serializer_class = MentorInternSerializer
+
+    def get_queryset(self):
+        ids = self.request.query_params.get('ids', None)
+        queryset = MentorIntern.objects.all()
+        if ids == '':
+            queryset = MentorIntern.objects.none()
+        elif ids is not None:
+            ids_list = ids.split(",")
+            queryset = MentorIntern.objects.filter(id__in=ids_list)
+
+        return queryset
+
+
+class MentorPlacementView (generics.ListAPIView):
+    serializer_class = MentorPlacementSerializer
+
+    def get_queryset(self):
+        ids = self.request.query_params.get('ids', None)
+        queryset = MentorPlacement.objects.all()
+        if ids == '':
+            queryset = MentorPlacement.objects.none()
+        elif ids is not None:
+            ids_list = ids.split(",")
+            queryset = MentorPlacement.objects.filter(id__in=ids_list)
+
+        return queryset
+
+
+class MentorAchievementView (generics.ListAPIView):
+    serializer_class = MentorAchievementSerializer
+
+    def get_queryset(self):
+        ids = self.request.query_params.get('ids', None)
+        queryset = MentorAchievement.objects.all()
+        if ids == '':
+            queryset = MentorAchievement.objects.none()
+        elif ids is not None:
+            ids_list = ids.split(",")
+            queryset = MentorAchievement.objects.filter(id__in=ids_list)
+
+        return queryset

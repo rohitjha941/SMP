@@ -2,21 +2,31 @@ import React, { Component } from "react";
 import styles from "./About.module.scss";
 import TeamCard from "../../components/TeamCard";
 // import Button from "../../components/Button";
+import { sortTeam } from "../../utils/index";
+
 class Team extends Component {
   componentDidMount() {
     this.props.fetch();
   }
   render() {
+    const teamPosition = this.props.teamPosition;
     const member = this.props.team.map((value) => {
       return {
         name: value.name,
         image: value.photo,
-        designation: value.position,
+        year: value.year,
+        designation:
+          teamPosition && teamPosition.length !== 0
+            ? teamPosition.find((teamPosition) => {
+                return teamPosition.id === value.position;
+              }).position_name
+            : "",
         fb: value.facebook,
-        linkedin: value.linkeden,
+        linkedin: value.linkedin,
         contact: value.mobile,
       };
     });
+    const sortedTeam = sortTeam(member);
     return (
       <>
         <div className={styles.teamHeading}>
@@ -24,8 +34,8 @@ class Team extends Component {
         </div>
         <div className={styles.teamCardContainer}>
           <ul>
-            {member && member.length > 0
-              ? member.map((member, i) => {
+            {sortedTeam && sortedTeam.length > 0
+              ? sortedTeam.map((member, i) => {
                   return (
                     <li key={i}>
                       <TeamCard key={i} member={member} />

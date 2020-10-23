@@ -3,6 +3,8 @@ import styles from "./BlogFullView.module.scss";
 import { calculateReadingTime } from "utils";
 import PageNotFound from "../../components/404/Index";
 import Loader from "components/Loader";
+import ProgressBar from "components/ProgressBar";
+
 class BlogFullView extends Component {
   constructor() {
     super();
@@ -50,34 +52,38 @@ class BlogFullView extends Component {
         {found ? (
           <>
             {blogData && !isPending ? (
-              <div className={styles.mainDiv}>
-                <div className={styles.mainImageDiv}>
-                  <img
-                    className={styles.mainImage}
-                    src={blogData.imgSrc}
-                    alt={blogData.imgAlt || blogData.Title}
-                  />
-                </div>
-                <div className={styles.contentDiv}>
-                  <div className={styles.blogHeading}>{blogData.heading}</div>
-                  <div className={styles.metadata}>
-                    {blogData.metadata
-                      ? blogData.metadata.d1 +
-                        " • " +
-                        blogData.metadata.d2 +
-                        " • " +
-                        blogData.metadata.d3
-                      : null}
+              <div>
+                <ProgressBar className={styles.progressBar} />
+
+                <div className={styles.mainDiv}>
+                  <div className={styles.mainImageDiv}>
+                    <img
+                      className={styles.mainImage}
+                      src={blogData.imgSrc}
+                      alt={blogData.imgAlt || blogData.Title}
+                    />
                   </div>
-                  <div className={styles.blogText}>
-                    <div
-                      dangerouslySetInnerHTML={{ __html: blogData.text }}
-                    ></div>
+                  <div className={styles.contentDiv}>
+                    <div className={styles.blogHeading}>{blogData.heading}</div>
+                    <div className={styles.metadata}>
+                      {blogData.metadata
+                        ? blogData.metadata.d1 +
+                          " • " +
+                          blogData.metadata.d2 +
+                          " • " +
+                          blogData.metadata.d3
+                        : null}
+                    </div>
+                    <div className={styles.blogText}>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: blogData.text }}
+                      ></div>
+                    </div>
+                    <div className={styles.thanks}>
+                      Thanks a lot for your time.
+                    </div>
+                    <hr className={styles.hr} />
                   </div>
-                  <div className={styles.thanks}>
-                    Thanks a lot for your time.
-                  </div>
-                  <hr className={styles.hr} />
                 </div>
               </div>
             ) : (

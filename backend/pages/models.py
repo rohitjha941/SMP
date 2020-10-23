@@ -1,6 +1,9 @@
 from django.db import models
 from tinymce import models as tinymce_models
 
+from common.validators import *
+from common.rename import *
+
 
 class Home(models.Model):
 
@@ -21,7 +24,7 @@ class HomeVision(models.Model):
         default=""
     )
     image = models.ImageField(
-        upload_to="home/",
+        upload_to=FileUploader("home/", None),
         blank=True,
         null=True
     )
@@ -87,6 +90,16 @@ vertical_choices = (
 )
 
 
+class TeamPosition(models.Model):
+    position_name = models.CharField(
+        default="",
+        max_length=100,
+    )
+
+    def __str__(self):
+        return self.position_name
+
+
 class StudentTeam(models.Model):
 
     # Field Containing name.
@@ -97,7 +110,7 @@ class StudentTeam(models.Model):
 
     # Field Containing Images of members
     photo = models.ImageField(
-        upload_to="members/",
+        upload_to=FileUploader("members/", "student"),
         max_length=200
     )
 
@@ -109,7 +122,8 @@ class StudentTeam(models.Model):
         blank=True
     )
     enrollno = models.IntegerField(
-        null=True
+        null=True,
+        validators=[validate_enroll]
     )
     # Field Containing linkedin URL
 
@@ -120,18 +134,10 @@ class StudentTeam(models.Model):
         blank=True
     )
 
-    position = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        choices=position_choices
-    )
-
-    vertical = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        choices=vertical_choices
+    position = models.ForeignKey(
+        TeamPosition,
+        related_name="team_position",
+        on_delete=models.CASCADE,
     )
 
     branch = models.ForeignKey(
@@ -146,12 +152,17 @@ class StudentTeam(models.Model):
         null=True,
         choices=year_choices_team
     )
-    mobile = models.IntegerField(
-        null=True
+    mobile = models.CharField(
+        max_length=10,
+        blank=True,
+        null=True,
+        unique=True,
+        validators=[validate_mobile]
     )
     email = models.CharField(
         default="",
         max_length=100,
+        validators=[validate_iitr_email]
     )
 
 
@@ -159,6 +170,17 @@ class CampusGroups(models.Model):
     group_name = models.CharField(
         max_length=300,
         default=""
+    )
+    thumbnail = models.ImageField(
+        upload_to="groups/",
+        max_length=200,
+        null=True
+    )
+    website = models.URLField(
+        max_length=1000,
+        db_index=True,
+
+        blank=True
     )
 
     def __str__(self):
@@ -200,6 +222,7 @@ class ContactDetails(models.Model):
     mobile = models.CharField(
         default="",
         max_length=100,
+        validators=[validate_mobile]
     )
 
     email = models.CharField(
@@ -237,7 +260,7 @@ class Blogs(models.Model):
     )
 
     thumbnail = models.ImageField(
-        upload_to="blogs/",
+        upload_to=FileUploader("blogs/", "blogs"),
         max_length=200,
         null=True,
         blank=True
@@ -272,7 +295,7 @@ class Events(models.Model):
         null=True
     )
     thumbnail = models.ImageField(
-        upload_to="events/",
+        upload_to=FileUploader("events/", "events"),
         max_length=200,
         null=True,
         blank=True

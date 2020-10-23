@@ -7,12 +7,6 @@ const MentorIndex = Loadable({
   loader: () => import("./MentorIndex"),
   loading: () => <Loader />,
 });
-
-const ComingSoon = Loadable({
-  loader: () => import("../../components/ComingSoon"),
-  loading: () => <Loader />,
-});
-
 const ShowMentors = Loadable({
   loader: () => import("./ShowMentors"),
   loading: () => <Loader />,
@@ -43,21 +37,26 @@ class Mentors extends Component {
                 branches={this.props.branches}
                 interests={this.props.interests}
                 mentors={this.props.mentors}
+                getMentorById={this.props.getMentorById}
+                groups={this.props.groups}
+                mentorInterns={this.props.mentorInterns}
+                mentorPlacements={this.props.mentorPlacements}
+                mentorAchievements={this.props.mentorAchievements}
                 fetch={() => {
                   this.props.fetchers.branches();
                   this.props.fetchers.interests();
                   this.props.fetchers.mentors();
                 }}
+                fetchers={{
+                  groups: this.props.fetchers.groups,
+                  mentorInterns: this.props.fetchers.mentorInterns,
+                  mentorPlacements: this.props.fetchers.mentorPlacements,
+                  mentorAchievements: this.props.fetchers.mentorAchievements,
+                }}
               />
             )}
           />
           {/*show all mentors or searched*/}
-          <Route
-            exact
-            path="/mentors/becomeMentor"
-            render={() => <ComingSoon />}
-          />
-          {/* procedure to become mentor*/}
           <Route to="*" component={PageNotFound} />
         </Switch>
       </React.Fragment>

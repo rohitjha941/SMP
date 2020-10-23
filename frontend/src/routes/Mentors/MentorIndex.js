@@ -43,13 +43,9 @@ class MentorIndex extends Component {
               }
             />
           </div>
-          <Link to="/mentors/becomeMentor">
-            <Button
-              className={styles.learnMore}
-              type="outline"
-              text="Learn More"
-            />
-          </Link>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdTJvrf8RhphVktoT7iRhriEmepfHwod8zFiWUuM9FCcOpIhg/formResponse">
+            <Button className={styles.applyBtn} type="outline" text="Apply" />
+          </a>
 
           <div className={styles.resourceHeading}>Mentor Resources</div>
           <div className={styles.impLinks}>

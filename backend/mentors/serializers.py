@@ -5,7 +5,7 @@ from .models import *
 class MentorGETSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mentor
-        fields = ['name', 'branch', 'year', 'photo', 'interest',
+        fields = ['id', 'name', 'branch', 'year', 'photo', 'interest', 'groups', 'facebook', 'linkedin', 'resume',
                   'mentor_intern', 'mentor_placement', 'mentor_achievement']
 
 
@@ -36,4 +36,10 @@ class MentorPlacementSerializer(serializers.ModelSerializer):
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
+        fields = "__all__"
+
+
+class MentorApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MentorApplication
         fields = "__all__"

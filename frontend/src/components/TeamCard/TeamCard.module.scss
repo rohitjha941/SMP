@@ -50,11 +50,18 @@
 .contact {
   margin-top: 0.9375rem;
   display: block;
-  // padding:auto;
   text-align: center;
 }
 
-.fb {
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  a {
+    pointer-events: none;
+  }
+}
+
+.commonIcons {
   height: 1.75rem;
   width: 1.75rem;
   background: $white;
@@ -67,25 +74,20 @@
     height: 2.1875rem;
     width: 2.1875rem;
   }
-}
-.call {
-  height: 1.75rem;
-  width: 1.75rem;
-  background: $white;
-  border: 0.0446 solid $grey-level-0_3;
-  box-sizing: border-box;
-  border-radius: 0.2843em;
-  display: inline-block;
-  margin: auto auto auto 0.5rem;
-  @media screen and (min-width: $break-tablet) {
-    height: 2.1875rem;
-    width: 2.1875rem;
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 70%;
+    width: 70%;
+    margin-top: 15%;
   }
 }
-.commonIcon {
-  display: inline-block;
-  vertical-align: middle;
-  height: 70%;
-  width: 70%;
-  margin-top: 15%;
+.fb {
+  @extend .commonIcons;
+}
+.linkedin {
+  @extend .commonIcons;
+}
+.call {
+  @extend .commonIcons;
 }

@@ -2,6 +2,7 @@ import {
   BASE_URL,
   BLOGS,
   EVENTS,
+  TEAM_POSITION,
   TEAM,
   MENTORS,
   MENTORS_DOCS,
@@ -12,6 +13,10 @@ import {
   GROUPS,
   RAISE_QUERY,
   FRESHERS_GUIDE,
+  MENTOR_APPLICATION,
+  MENTOR_INTERNS,
+  MENTORS_PLACEMENTS,
+  MENTORS_ACHIEVEMENTS,
 } from "api/constants";
 import axios from "axios";
 
@@ -63,6 +68,16 @@ export const getEvents = function () {
       .catch((e) => reject(e));
   });
 };
+
+export const getTeamPosition = function () {
+  return new Promise((resolve, reject) => {
+    fetch(TEAM_POSITION)
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
 export const getTeam = function () {
   return new Promise((resolve, reject) => {
     fetch(TEAM)
@@ -86,6 +101,60 @@ export const getMentors = function () {
           })
         );
       })
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorInterns = (querydata) => {
+  return new Promise((resolve, reject) => {
+    fetch(
+      MENTOR_INTERNS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorPlacements = (querydata) => {
+  return new Promise((resolve, reject) => {
+    fetch(
+      MENTORS_PLACEMENTS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
+      .catch((e) => reject(e));
+  });
+};
+
+export const getMentorAchievements = (querydata) => {
+  return new Promise((resolve, reject) => {
+    fetch(
+      MENTORS_ACHIEVEMENTS +
+        `?ids=${
+          querydata && querydata.length > 0
+            ? querydata.map((id) => {
+                return id;
+              })
+            : ""
+        }`
+    )
+      .then((data) => data.json())
+      .then((jsonData) => resolve(jsonData))
       .catch((e) => reject(e));
   });
 };
@@ -136,6 +205,42 @@ export const postQuery = (data) => {
 
 const CreateInterests = (interestData) => {
   return axios.post(INTERESTS, interestData);
+};
+
+export const postMentorApplication = (data) => {
+  const {
+    email,
+    name,
+    enrollno,
+    branch,
+    year,
+    motivation,
+    qualities,
+    mobile,
+    resume,
+  } = data;
+  let formData = new FormData();
+  formData.append("email", email);
+  formData.append("name", name);
+  formData.append("enrollno", enrollno);
+  formData.append("branch", branch);
+  formData.append("year", year);
+  formData.append("motivation", motivation);
+  formData.append("qualities", qualities);
+  formData.append("mobile", mobile);
+  formData.append("resume", resume);
+  formData.append("g-recaptcha-response", data["g-recaptcha-response"]);
+
+  return new Promise((resolve, reject) => {
+    axios
+      .post(MENTOR_APPLICATION, formData)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error.response);
+      });
+  });
 };
 
 const postMentorFormData = (postData) => {

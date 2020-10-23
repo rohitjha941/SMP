@@ -14,6 +14,7 @@ urlpatterns = [
     path('campus-groups/', CampusGroupsView.as_view()),
     path('raise-query/', RaisedQueryView.as_view()),
     path("blog-category/", BlogCategoryView.as_view()),
+    path("team-position/", TeamPositionView.as_view()),
     path("team/", StudentTeamView.as_view()),
     path("events/", EventsView.as_view()),
 ]

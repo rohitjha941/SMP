@@ -2,6 +2,9 @@ from django.db import models
 
 from pages.models import Branch, CampusGroups
 
+from common.rename import *
+from common.validators import *
+
 
 class Interest(models.Model):
     interest_name = models.CharField(
@@ -37,24 +40,29 @@ class Mentor(models.Model):
         null=True
     )
     photo = models.ImageField(
-        upload_to="mentors/images",
+        upload_to=FileUploader("mentors/images", 'student'),
         max_length=200
     )
     resume = models.FileField(
-        upload_to="mentors/resume",
+        upload_to=FileUploader("mentors/resume", 'student'),
         null=True
     )
     email = models.EmailField(
         max_length=200,
         default="",
-        unique=True
+        unique=True,
+        validators=[validate_iitr_email]
     )
-    mobile = models.IntegerField(
+    mobile = models.CharField(
+        max_length=10,
+        blank=True,
         null=True,
-        unique=True
+        unique=True,
+        validators=[validate_mobile]
     )
     enrollno = models.IntegerField(
-        unique=True
+        unique=True,
+        validators=[validate_enroll]
     )
     facebook = models.URLField(
         max_length=1000,
@@ -138,4 +146,54 @@ class MentorPlacement(models.Model):
         max_length=500,
         blank=True,
         null=True,
+    )
+
+
+class MentorApplication(models.Model):
+    email = models.EmailField(
+        max_length=200,
+        default="",
+        unique=True,
+        validators=[validate_iitr_email]
+    )
+    name = models.CharField(
+        max_length=1000,
+        blank=True,
+        null=True
+    )
+    enrollno = models.IntegerField(
+        unique=True,
+        validators=[validate_enroll]
+    )
+    branch = models.ForeignKey(
+        Branch,
+        related_name="applied_mentor",
+        on_delete=models.CASCADE
+    )
+    year = models.CharField(
+        max_length=15,
+        blank=True,
+        null=True,
+        choices=year_choices
+    )
+    motivation = models.TextField(
+        max_length=1000,
+        blank=True,
+        null=True
+    )
+    qualities = models.TextField(
+        max_length=1000,
+        blank=True,
+        null=True
+    )
+    mobile = models.CharField(
+        max_length=10,
+        blank=True,
+        null=True,
+        unique=True,
+        validators=[validate_mobile]
+    )
+    resume = models.FileField(
+        upload_to=FileUploader("mentors/applied/resume", 'student'),
+        null=True
     )

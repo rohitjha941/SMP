@@ -18,7 +18,8 @@ function getCurrentSession() {
 function WrappedComponent(props) {
   const routeData = [
     {
-      to: "/become-a-mentor",
+      to:
+        "https://docs.google.com/forms/d/e/1FAIpQLSdTJvrf8RhphVktoT7iRhriEmepfHwod8zFiWUuM9FCcOpIhg/formResponse",
       display: "Become a Mentor",
     },
     {
@@ -42,7 +43,7 @@ function WrappedComponent(props) {
       display: "Fresher Section",
     },
     {
-      to: "/contact",
+      to: "/queries#contact-us",
       display: "Contact Us",
     },
     {
@@ -58,13 +59,19 @@ function WrappedComponent(props) {
     <div className={styles.sitemapContainer}>
       <ul>
         {routeData.map((value, index) => {
-          return (
+          return value.display === "Become a Mentor" ? (
+            <a key={index} href={value.to}>
+              <li key={index}>{value.display}</li>
+            </a>
+          ) : (
             <RouteLink
               to={value.to}
               display={value.display}
               index={index}
               key={index}
-              onClick={() => scrollToTop(250)}
+              onClick={
+                value.display === "Contact Us" ? null : () => scrollToTop(250)
+              }
             />
           );
         })}

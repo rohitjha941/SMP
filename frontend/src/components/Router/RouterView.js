@@ -94,7 +94,14 @@ export default class RouterView extends Component {
           <Route
             path="/about"
             render={() => (
-              <About team={this.props.team} fetch={this.props.fetchers.team} />
+              <About
+                team={this.props.team}
+                teamPosition={this.props.teamPosition}
+                fetch={() => {
+                  this.props.fetchers.team();
+                  this.props.fetchers.teamPosition();
+                }}
+              />
             )}
           />
           <Route
@@ -142,9 +149,14 @@ export default class RouterView extends Component {
             render={() => (
               <Mentors
                 mentors={this.props.mentors}
+                getMentorById={this.props.getMentorById}
                 branches={this.props.branches}
                 interests={this.props.interests}
                 docs={this.props.mentorsDocs}
+                groups={this.props.groups}
+                mentorInterns={this.props.mentorInterns}
+                mentorPlacements={this.props.mentorPlacements}
+                mentorAchievements={this.props.mentorAchievements}
                 fetch={() => {
                   this.props.fetchers.mentorDocs();
                 }}
@@ -152,6 +164,10 @@ export default class RouterView extends Component {
                   branches: this.props.fetchers.branches,
                   interests: this.props.fetchers.interests,
                   mentors: this.props.fetchers.mentors,
+                  groups: this.props.fetchers.groups,
+                  mentorInterns: this.props.fetchers.mentorInterns,
+                  mentorPlacements: this.props.fetchers.mentorPlacements,
+                  mentorAchievements: this.props.fetchers.mentorAchievements,
                 }}
               />
             )}
@@ -163,10 +179,10 @@ export default class RouterView extends Component {
                 groups={this.props.groups}
                 branches={this.props.branches}
                 interests={this.props.interests}
-                fetch={() => {
-                  this.props.fetchers.groups();
-                  this.props.fetchers.branches();
-                  this.props.fetchers.interests();
+                fetchers={{
+                  groups: this.props.fetchers.groups,
+                  branches: this.props.fetchers.branches,
+                  interests: this.props.fetchers.interests,
                 }}
               />
             )}
