@@ -58,6 +58,11 @@ const Freshers = Loadable({
   loading: () => <Loader />,
 });
 
+const GoogleSignin = Loadable({
+  loader: () => import("../../routes/GoogleSignin"),
+  loading: () => <Loader />,
+});
+
 export default class RouterView extends Component {
   render() {
     return (
@@ -166,6 +171,7 @@ export default class RouterView extends Component {
               />
             )}
           />
+          <Route exact path="/g-signin" render={() => <GoogleSignin />} />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </div>
