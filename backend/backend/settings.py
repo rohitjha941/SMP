@@ -21,14 +21,15 @@ from sentry_sdk.integrations.django import DjangoIntegration
 with open("config.yml", "r") as ymlfile:
     cfg = yaml.safe_load(ymlfile)
 
-sentry_sdk.init(
-    dsn=cfg["sentry"]["dsn"],
-    integrations=[DjangoIntegration()],
+if(cfg["env"] == "prod"):
+    sentry_sdk.init(
+        dsn=cfg["sentry"]["dsn"],
+        integrations=[DjangoIntegration()],
 
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
+    )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'oauth',
     "common",
     "pages",
     "docs",
@@ -166,7 +168,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
 
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"}
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 # EMAIL_DATA
 DEFAULT_FROM_EMAIL = cfg["sendgrid"]["from_email"]
@@ -177,3 +183,6 @@ RECEIVER_NAME = cfg["sendgrid"]["receiver_name"]
 
 # ReCAPTCHA
 RECAPTCHA_SECRET_KEY = cfg["recaptcha"]["recaptcha_secret_key"]
+
+# OAuth
+GOOGLE_OAUTH_CLIENT_ID = cfg["oauth"]["google_client_id"]

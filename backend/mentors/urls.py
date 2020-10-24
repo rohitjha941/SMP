@@ -7,5 +7,6 @@ urlpatterns = [
     path("interns/", MentorInternView.as_view()),
     path("placements/", MentorPlacementView.as_view()),
     path("achievements/", MentorAchievementView.as_view()),
+    path("<int:pk>/", MentorView.as_view()),
     path("", MentorView.as_view()),
 ]

@@ -17,8 +17,12 @@ import {
   MENTOR_INTERNS,
   MENTORS_PLACEMENTS,
   MENTORS_ACHIEVEMENTS,
+  EXHCANGE_TOKEN,
+  REFRESH_TOKEN,
 } from "api/constants";
 import axios from "axios";
+import AuthService from "handlers/AuthService";
+import qs from "qs";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -243,7 +247,7 @@ export const postMentorApplication = (data) => {
   });
 };
 
-const postMentorFormData = (postData) => {
+const postMentorFormData = (postData, access_token) => {
   const {
     name,
     year,
@@ -292,7 +296,11 @@ const postMentorFormData = (postData) => {
   formData.append("interns", JSON.stringify(internships));
   formData.append("placement", JSON.stringify(placement));
 
-  return axios.post(MENTORS, formData);
+  return axios.put(MENTORS, formData, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
 };
 
 export const createMentor = (mentorData) => {
@@ -344,5 +352,38 @@ export const getFreshersGuideUrl = () => {
     axios.get(FRESHERS_GUIDE).then((response) => {
       resolve(BASE_URL + response.data.document);
     });
+  });
+};
+
+export const getExchangeToken = (id_token) => {
+  const data = {
+    token: id_token,
+  };
+  return axios.post(EXHCANGE_TOKEN, qs.stringify(data), {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  });
+};
+
+export const getRefreshAccessToken = (refresh_token) => {
+  const data = {
+    refresh: refresh_token,
+  };
+  const auth = new AuthService();
+  return new Promise((resolve, reject) => {
+    axios
+      .post(REFRESH_TOKEN, qs.stringify(data), {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((res) => {
+        auth.setAccessToken(res.data.token);
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 };

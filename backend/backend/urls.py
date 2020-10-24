@@ -11,6 +11,7 @@ API_DESCRIPTION = ""
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("oauth/", include("oauth.urls")),
     path("pages/", include("pages.urls")),
     path("mentors/", include("mentors.urls")),
     path("docs/", include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),

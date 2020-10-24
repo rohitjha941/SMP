@@ -22,3 +22,6 @@ database:
   password:
   host: 'localhost' # use localhost by default
   port: '' # leave empty string if using localhost
+
+oauth:
+  google_client_id :

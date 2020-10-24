@@ -3,6 +3,8 @@ import styles from "./GoogleSignin.module.scss";
 import Button from "components/Button";
 import Loader from "components/Loader";
 
+import AuthService from "handlers/AuthService";
+import { getExchangeToken } from "api/methods/index";
 class GoogleSignin extends Component {
   constructor() {
     super();
@@ -13,17 +15,61 @@ class GoogleSignin extends Component {
       username: "",
       authToken: null,
     };
+    this.Auth = new AuthService();
   }
   onGoogleSiginIn = (googleUser) => {
-    if (!this.state.isAuthenticated) {
-      window.flash("Logged in Successfully!");
+    const id_token = googleUser.getAuthResponse().id_token;
+    const username = googleUser.getBasicProfile().getName();
+    if (!this.Auth.hasAccessToken()) {
+      this.setState({ isLoading: true });
+      getExchangeToken(id_token)
+        .then((res) => {
+          const user = {
+            access_token: res.data.access_token,
+            refresh_token: res.data.refresh_token,
+            user_id: res.data.user,
+            username: username,
+          };
+          this.Auth.setUser(user);
+          const msg = res.data.msg;
+          this.setState({
+            isAuthenticated: true,
+            username: username,
+            authToken: id_token,
+            isLoading: false,
+          });
+          window.flash(msg);
+        })
+        .catch((err) => {
+          this.setState({
+            isAuthenticated: false,
+            username: "",
+            isLoading: false,
+          });
+
+          window.gapi.auth2
+            .getAuthInstance()
+            .signOut()
+            .then(() => {
+              window.flash(
+                err.data !== undefined && err.data.msg !== undefined
+                  ? err.data.msg
+                  : "There was some issue logging in. \n Please Try Again Later!",
+                "error"
+              );
+            });
+        });
+    } else {
+      this.setState({
+        isAuthenticated: true,
+        username: username,
+        isLoading: false,
+      });
     }
-    this.setState({
-      isAuthenticated: true,
-      username: googleUser.getBasicProfile().getName(),
-      authToken: googleUser.getAuthResponse().id_token,
-      isLoading: false,
-    });
+  };
+  onUserSignOut = () => {
+    this.Auth.logout();
+    this.onGoogleSignOut();
   };
   onGoogleSignOut = () => {
     this.setState({ isLoading: true });
@@ -109,7 +155,7 @@ class GoogleSignin extends Component {
                     <div className={styles.regBtnParent}>
                       <Button
                         text="Sign Out"
-                        onClick={this.onGoogleSignOut}
+                        onClick={this.onUserSignOut}
                         className={styles.gSigninBtn}
                       />
                     </div>

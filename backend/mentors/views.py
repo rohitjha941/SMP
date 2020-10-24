@@ -3,21 +3,27 @@ import json
 from django.db import transaction
 
 from rest_framework import generics, status
+from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from common.utils import verify_recaptcha
 
+from .permissions import IsOwnerOrReadOnly
 from .models import *
 from .serializers import *
 
 
 # Create your views here.
 class MentorView (APIView):
+    queryset = Mentor.objects.all()
+    serializer_class = MentorPOSTSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
+
     def get(self, request):
         return Response(MentorGETSerializer(Mentor.objects.all(), many=True).data, status=status.HTTP_200_OK)
 
-    def post(self, request):
+    def put(self, request, pk):
         last_used_serializer = None
         try:
             # We will include serializer checks and raise Exception explicitly
@@ -25,7 +31,14 @@ class MentorView (APIView):
             # avoiding inconsistent mentor data in case of query failure.
             with transaction.atomic():
                 request_data = request.data
-                mentor_serializer = MentorPOSTSerializer(data=request_data)
+                try:
+                    mentor_object = Mentor.objects.get(pk=pk)
+                except:
+                    return Response({'msg': 'Mentor Not Found', 'error': True}, status=status.HTTP_404_NOT_FOUND)
+                if(request.user != mentor_object.user):
+                    return Response({'msg': 'You are not authorized to make changes', 'error': 'True'}, status=status.HTTP_401_UNAUTHORIZED)
+                mentor_serializer = MentorPOSTSerializer(
+                    mentor_object, data=request_data)
                 last_used_serializer = mentor_serializer
                 if mentor_serializer.is_valid():
                     mentor_serializer.save()
