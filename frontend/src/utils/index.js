@@ -45,3 +45,7 @@ export function sortTeam(team) {
   ];
   return sortedTeam;
 }
+
+export const isAccessTokenValid = (exp_time) => {
+  return Date.now() < exp_time * 1000;
+};

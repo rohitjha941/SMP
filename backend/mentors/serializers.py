@@ -42,4 +42,5 @@ class InterestSerializer(serializers.ModelSerializer):
 class MentorApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MentorApplication
-        fields = "__all__"
+        fields = ['id', 'name', 'email', 'enrollno', 'branch',
+                  'year', 'qualities', 'motivation', 'mobile', 'resume']

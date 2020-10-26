@@ -19,10 +19,13 @@ import {
   MENTORS_ACHIEVEMENTS,
   EXHCANGE_TOKEN,
   REFRESH_TOKEN,
+  CHECK_MENTOR_HAS_APPLIED,
+  CHECK_MENTOR_IS_SELECTED,
 } from "api/constants";
 import axios from "axios";
 import AuthService from "handlers/AuthService";
 import qs from "qs";
+import { isAccessTokenValid } from "utils";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -211,7 +214,11 @@ const CreateInterests = (interestData) => {
   return axios.post(INTERESTS, interestData);
 };
 
-export const postMentorApplication = (data) => {
+export const postMentorApplication = async (data) => {
+  const auth = new AuthService();
+  if (!isAccessTokenValid(auth.getTokenExp())) {
+    await getRefreshAccessToken();
+  }
   const {
     email,
     name,
@@ -234,10 +241,14 @@ export const postMentorApplication = (data) => {
   formData.append("mobile", mobile);
   formData.append("resume", resume);
   formData.append("g-recaptcha-response", data["g-recaptcha-response"]);
-
+  formData.append("user", auth.getUserId());
   return new Promise((resolve, reject) => {
     axios
-      .post(MENTOR_APPLICATION, formData)
+      .post(MENTOR_APPLICATION, formData, {
+        headers: {
+          Authorizarion: `Bearer ${auth.getAccessToken()}`,
+        },
+      })
       .then((response) => {
         resolve(response);
       })
@@ -355,9 +366,9 @@ export const getFreshersGuideUrl = () => {
   });
 };
 
-export const getExchangeToken = (id_token) => {
+export const getExchangeToken = (google_id_token) => {
   const data = {
-    token: id_token,
+    token: google_id_token,
   };
   return axios.post(EXHCANGE_TOKEN, qs.stringify(data), {
     headers: {
@@ -379,11 +390,55 @@ export const getRefreshAccessToken = (refresh_token) => {
         },
       })
       .then((res) => {
-        auth.setAccessToken(res.data.token);
+        auth.setAccessToken(res.data.access);
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const checkMentorHasApplied = (user_id) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(CHECK_MENTOR_HAS_APPLIED + user_id + "/")
+      .then((res) => {
         resolve(res);
       })
       .catch((err) => {
         reject(err);
       });
+  });
+};
+
+export const checkMentorIsSelected = (user_id) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(CHECK_MENTOR_IS_SELECTED + user_id + "/")
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const withdrawApplication = async () => {
+  const auth = new AuthService();
+  if (!isAccessTokenValid(auth.getTokenExp())) {
+    await getRefreshAccessToken(auth.getRefreshToken());
+  }
+  const access_token = auth.getAccessToken();
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(MENTOR_APPLICATION + auth.getUserId() + "/", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
   });
 };

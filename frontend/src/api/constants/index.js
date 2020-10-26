@@ -23,6 +23,8 @@ const apiConstants = {
   achievements: "achievements/",
   refresh: "refresh/",
   token: "token/",
+  checkHasApplied: "check-has-applied/",
+  checkIsSelected: "check-is-selected/",
 };
 
 export const BLOGS = apiConstants.pages + apiConstants.blogs;
@@ -47,3 +49,7 @@ export const FRESHERS_GUIDE = apiConstants.docs + apiConstants.freshersGuide;
 export const EXHCANGE_TOKEN = apiConstants.oauth + apiConstants.token;
 export const REFRESH_TOKEN =
   apiConstants.oauth + apiConstants.token + apiConstants.refresh;
+export const CHECK_MENTOR_HAS_APPLIED =
+  apiConstants.mentors + apiConstants.checkHasApplied;
+export const CHECK_MENTOR_IS_SELECTED =
+  apiConstants.mentors + apiConstants.checkIsSelected;

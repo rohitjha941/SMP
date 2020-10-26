@@ -120,6 +120,9 @@ class InterestView (generics.ListCreateAPIView):
 
 
 class MentorApplicationView(APIView):
+    queryset = MentorApplication.objects.all()
+    serializer_class = MentorApplicationSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
     def post(self, request):
         is_verified = verify_recaptcha(request)
@@ -131,6 +134,20 @@ class MentorApplicationView(APIView):
             print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    def delete(self, request, pk):
+        try:
+            mentor_application = MentorApplication.objects.get(user=pk)
+            try:
+                if(request.user == mentor_application.user):
+                    mentor_application.delete()
+                    return Response({'msg': 'Deleted Successfully!', 'err': False}, status=status.HTTP_200_OK)
+                else:
+                    return Response({'msg': 'You are not authorized!', 'err': True}, status=status.HTTP_401_UNAUTHORIZED)
+            except:
+                return Response({'msg': 'User credentials were not provided', 'err': True}, status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response({'msg': 'Mentor Application Was Not Found!', 'err': True}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MentorInternView (generics.ListAPIView):
@@ -176,3 +193,21 @@ class MentorAchievementView (generics.ListAPIView):
             queryset = MentorAchievement.objects.filter(id__in=ids_list)
 
         return queryset
+
+
+class CheckHasApplied(APIView):
+    def get(self, request, pk):
+        try:
+            num_results = MentorApplication.objects.filter(user=pk).count()
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response({'status': True if num_results > 0 else False, 'err': False}, status=status.HTTP_200_OK)
+
+
+class CheckIsSelected(APIView):
+    def get(self, request, pk):
+        try:
+            mentor_application = MentorApplication.objects.get(user=pk)
+            return Response({'status': mentor_application.isAccepted, 'err': False}, status=status.HTTP_200_OK)
+        except:
+            return Response({'status': False, 'msg': 'Application not Found!', 'err': True}, status=status.HTTP_200_OK)

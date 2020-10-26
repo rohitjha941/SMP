@@ -46,6 +46,7 @@ class ExchangeToken(APIView):
                 access_token=str(token.access_token),
                 refresh_token=str(token),
                 user=user.id,
+                exp_time=token.access_token.payload['exp'],
                 msg='Successfully Logged In'
             )
             return Response(response, status=status.HTTP_200_OK)

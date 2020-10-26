@@ -63,6 +63,10 @@ const GoogleSignin = Loadable({
   loading: () => <Loader />,
 });
 
+const UserDashboard = Loadable({
+  loader: () => import("../../routes/UserDashboard"),
+  loading: () => <Loader />,
+});
 export default class RouterView extends Component {
   render() {
     return (
@@ -188,6 +192,11 @@ export default class RouterView extends Component {
             )}
           />
           <Route exact path="/g-signin" render={() => <GoogleSignin />} />
+          <Route
+            exact
+            path="/user-dashboard"
+            render={() => <UserDashboard />}
+          />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </div>

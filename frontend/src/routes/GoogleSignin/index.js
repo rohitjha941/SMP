@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import styles from "./GoogleSignin.module.scss";
-import Button from "components/Button";
 import Loader from "components/Loader";
 
 import AuthService from "handlers/AuthService";
 import { getExchangeToken } from "api/methods/index";
+import { Redirect } from "react-router-dom";
 class GoogleSignin extends Component {
   constructor() {
     super();
@@ -28,17 +28,23 @@ class GoogleSignin extends Component {
             access_token: res.data.access_token,
             refresh_token: res.data.refresh_token,
             user_id: res.data.user,
+            exp_time: res.data.exp_time,
             username: username,
           };
           this.Auth.setUser(user);
           const msg = res.data.msg;
-          this.setState({
-            isAuthenticated: true,
-            username: username,
-            authToken: id_token,
-            isLoading: false,
-          });
-          window.flash(msg);
+          window.gapi.auth2
+            .getAuthInstance()
+            .signOut()
+            .then(() => {
+              this.setState({
+                isAuthenticated: true,
+                username: username,
+                authToken: id_token,
+                isLoading: false,
+              });
+              window.flash(msg);
+            });
         })
         .catch((err) => {
           this.setState({
@@ -140,9 +146,7 @@ class GoogleSignin extends Component {
           <div className={styles.head}>
             <div className={styles.loginParent}>
               {this.state.isAuthenticated ? (
-                <div className={styles.greetingText}>
-                  Welcome {this.state.username}
-                </div>
+                <Redirect to="/user-dashboard" />
               ) : (
                 <div className={styles.greetingText}>
                   Welcome to <span className={"color-red"}>SMP</span>
@@ -150,23 +154,9 @@ class GoogleSignin extends Component {
                 </div>
               )}
               <div className={styles.loginBtnParent}>
-                {this.state.isAuthenticated ? (
-                  <>
-                    <div className={styles.regBtnParent}>
-                      <Button
-                        text="Sign Out"
-                        onClick={this.onUserSignOut}
-                        className={styles.gSigninBtn}
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className={styles.gSigninBtn}>
-                      <div id="g-signin2" />
-                    </div>
-                  </>
-                )}
+                <div className={styles.gSigninBtn}>
+                  <div id="g-signin2" />
+                </div>
               </div>
             </div>
           </div>
