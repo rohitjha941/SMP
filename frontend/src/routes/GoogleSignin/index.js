@@ -5,6 +5,7 @@ import Loader from "components/Loader";
 import AuthService from "handlers/AuthService";
 import { getExchangeToken } from "api/methods/index";
 import { Redirect } from "react-router-dom";
+import { parseJwt } from "utils";
 class GoogleSignin extends Component {
   constructor() {
     super();
@@ -24,11 +25,12 @@ class GoogleSignin extends Component {
       this.setState({ isLoading: true });
       getExchangeToken(id_token)
         .then((res) => {
+          const payload = parseJwt(res.data.access_token);
           const user = {
             access_token: res.data.access_token,
             refresh_token: res.data.refresh_token,
-            user_id: res.data.user,
-            exp_time: res.data.exp_time,
+            user_id: payload.user_id,
+            exp_time: payload.exp,
             username: username,
           };
           this.Auth.setUser(user);
@@ -63,6 +65,9 @@ class GoogleSignin extends Component {
                   : "There was some issue logging in. \n Please Try Again Later!",
                 "error"
               );
+              window.gapi.load("signin2", () => {
+                this.renderBtn("g-signin2");
+              });
             });
         });
     } else {

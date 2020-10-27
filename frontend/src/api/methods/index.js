@@ -25,7 +25,7 @@ import {
 import axios from "axios";
 import AuthService from "handlers/AuthService";
 import qs from "qs";
-import { isAccessTokenValid } from "utils";
+import { isTokenValid } from "utils";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -216,7 +216,7 @@ const CreateInterests = (interestData) => {
 
 export const postMentorApplication = async (data) => {
   const auth = new AuthService();
-  if (!isAccessTokenValid(auth.getTokenExp())) {
+  if (!isTokenValid(auth.getAccessToken())) {
     await getRefreshAccessToken();
   }
   const {
@@ -377,12 +377,18 @@ export const getExchangeToken = (google_id_token) => {
   });
 };
 
-export const getRefreshAccessToken = (refresh_token) => {
-  const data = {
-    refresh: refresh_token,
-  };
+export const getRefreshAccessToken = () => {
   const auth = new AuthService();
   return new Promise((resolve, reject) => {
+    if (!isTokenValid(auth.getRefreshToken())) {
+      auth.logout();
+      reject({
+        err: "Please Login Again",
+      });
+    }
+    const data = {
+      refresh: auth.getRefreshToken(),
+    };
     axios
       .post(REFRESH_TOKEN, qs.stringify(data), {
         headers: {
@@ -427,11 +433,11 @@ export const checkMentorIsSelected = (user_id) => {
 
 export const withdrawApplication = async () => {
   const auth = new AuthService();
-  if (!isAccessTokenValid(auth.getTokenExp())) {
-    await getRefreshAccessToken(auth.getRefreshToken());
+  if (!isTokenValid(auth.getAccessToken())) {
+    await getRefreshAccessToken();
   }
-  const access_token = auth.getAccessToken();
   return new Promise((resolve, reject) => {
+    const access_token = auth.getAccessToken();
     axios
       .delete(MENTOR_APPLICATION + auth.getUserId() + "/", {
         headers: {

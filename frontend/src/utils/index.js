@@ -46,6 +46,23 @@ export function sortTeam(team) {
   return sortedTeam;
 }
 
-export const isAccessTokenValid = (exp_time) => {
+export const parseJwt = (token) => {
+  // Function to prase jwt payload to json
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+};
+
+export const isTokenValid = (token) => {
+  const exp_time = parseJwt(token).exp;
   return Date.now() < exp_time * 1000;
 };

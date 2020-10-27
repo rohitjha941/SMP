@@ -21,14 +21,10 @@ export default class AuthService extends React.Component {
   getUsername() {
     return localStorage.getItem("user_name");
   }
-  getTokenExp() {
-    return localStorage.getItem("user_token_exp");
-  }
   getUser() {
     const user = {
       user_id: this.getUserId(),
       user_name: this.getUsername(),
-      user_token_exp: this.getTokenExp(),
       user_access_token: this.getAccessToken(),
       user_refresh_token: this.getRefreshToken(),
     };
@@ -40,7 +36,6 @@ export default class AuthService extends React.Component {
   setUser(user) {
     localStorage.setItem("user_id", user.user_id);
     localStorage.setItem("user_name", user.username);
-    localStorage.setItem("user_token_exp", user.exp_time);
     localStorage.setItem("user_access_token", user.access_token);
     localStorage.setItem("user_refresh_token", user.refresh_token);
   }
@@ -48,7 +43,6 @@ export default class AuthService extends React.Component {
     if (this.getAccessToken()) {
       localStorage.removeItem("user_id");
       localStorage.removeItem("user_name");
-      localStorage.removeItem("user_token_exp");
       localStorage.removeItem("user_access_token");
       localStorage.removeItem("user_refresh_token");
     }
