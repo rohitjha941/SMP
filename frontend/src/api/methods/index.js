@@ -210,8 +210,16 @@ export const postQuery = (data) => {
   return axios.post(RAISE_QUERY, data);
 };
 
-const CreateInterests = (interestData) => {
-  return axios.post(INTERESTS, interestData);
+const CreateInterests = async (interestData) => {
+  const auth = new AuthService();
+  if (!isTokenValid(auth.getAccessToken())) {
+    await getRefreshAccessToken();
+  }
+  return axios.post(INTERESTS, interestData, {
+    headers: {
+      authorization: `Bearer ${auth.getAccessToken()}`,
+    },
+  });
 };
 
 export const postMentorApplication = async (data) => {
@@ -246,7 +254,7 @@ export const postMentorApplication = async (data) => {
     axios
       .post(MENTOR_APPLICATION, formData, {
         headers: {
-          Authorizarion: `Bearer ${auth.getAccessToken()}`,
+          authorization: `Bearer ${auth.getAccessToken()}`,
         },
       })
       .then((response) => {
@@ -258,7 +266,11 @@ export const postMentorApplication = async (data) => {
   });
 };
 
-const postMentorFormData = (postData, access_token) => {
+const postMentorFormData = async (postData) => {
+  const auth = new AuthService();
+  if (!isTokenValid(auth.getAccessToken())) {
+    await getRefreshAccessToken();
+  }
   const {
     name,
     year,
@@ -307,9 +319,9 @@ const postMentorFormData = (postData, access_token) => {
   formData.append("interns", JSON.stringify(internships));
   formData.append("placement", JSON.stringify(placement));
 
-  return axios.put(MENTORS, formData, {
+  return axios.put(MENTORS + auth.getUserId() + "/", formData, {
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      authorization: `Bearer ${auth.getAccessToken()}`,
     },
   });
 };
@@ -440,6 +452,24 @@ export const withdrawApplication = async () => {
     const access_token = auth.getAccessToken();
     axios
       .delete(MENTOR_APPLICATION + auth.getUserId() + "/", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getMentorFormData = async () => {
+  const auth = new AuthService();
+  if (!isTokenValid(auth.getAccessToken())) {
+    await getRefreshAccessToken();
+  }
+  return new Promise((resolve, reject) => {
+    const access_token = auth.getAccessToken();
+    axios
+      .get(MENTORS + auth.getUserId() + "/", {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },

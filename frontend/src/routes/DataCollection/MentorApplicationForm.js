@@ -5,9 +5,10 @@ import styles from "./MentorApplicationForm.module.scss";
 import Select from "react-select";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
-import { postMentorApplication } from "api/methods";
+import { postMentorApplication, checkMentorHasApplied } from "api/methods";
 import { yearOptions } from "utils/constants";
 import AuthService from "handlers/AuthService";
+import Loader from "components/Loader";
 
 const recaptchaRef = React.createRef();
 
@@ -27,14 +28,22 @@ class MentorApplicationForm extends Component {
       resume: null,
       captcha: false,
       "g-recaptcha-response": "",
-      isLoading: false,
+      isLoading: true,
+      isLoadingSubmission: false,
       redirect: false,
       isAuthenticated: this.Auth.hasAccessToken(),
+      hasApplied: false,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.fetch();
+    await checkMentorHasApplied(this.Auth.getUserId()).then((res) => {
+      this.setState({
+        isLoading: false,
+        hasApplied: res.data.status,
+      });
+    });
   }
 
   checkKey = (e) => {
@@ -152,6 +161,18 @@ class MentorApplicationForm extends Component {
     this.setState({ captcha: false });
   };
   render() {
+    if (this.state.isLoading) {
+      return <Loader />;
+    }
+    if (this.state.isLoadingSubmission) {
+      return <LoadingOverlay />;
+    }
+    if (this.state.redirect || this.state.hasApplied) {
+      return <Redirect to="/user-dashboard" />;
+    }
+    if (!this.state.isAuthenticated) {
+      return <Redirect to="/g-signin" />;
+    }
     const branchOptions =
       this.props.branches && this.props.branches.length > 0
         ? this.props.branches.map((branch) => {
@@ -162,188 +183,172 @@ class MentorApplicationForm extends Component {
             return option;
           })
         : [];
-    if (this.state.redirect || this.state.applicationExists) {
-      // on Submitting Application
-      return <Redirect to="/user-dashboard" />;
-    }
     return (
       <>
-        {!this.state.isAuthenticated ? (
-          // if user is not logged in
-          <Redirect to="/g-signin" />
-        ) : (
-          <>
-            {this.state.isLoading ? <LoadingOverlay /> : null}
-            <div className={styles.MainWrapper}>
-              <h2 className={styles.heading}>
-                Become a <span className="color-red">Mentor</span>
-              </h2>
-              <form onSubmit={this.handleSubmit}>
-                <div className={styles["form-group"]}>
-                  <label htmlFor="name">
-                    Name<span className="color-red">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className={styles["form-control"]}
-                    name="name"
-                    value={this.state.name}
-                    id="name"
-                    placeholder="Enter your Name"
-                    onChange={this.handleChange}
-                    required
-                  />
-                </div>
-
-                <div className={styles["form-group"]}>
-                  <label htmlFor="enrollno">
-                    Enrollment Number<span className="color-red">*</span>
-                  </label>
-                  <input
-                    type="number"
-                    className={styles["form-control"]}
-                    name="enrollno"
-                    value={this.state.enrollno}
-                    id="enrollno"
-                    minLength="8"
-                    maxLength="8"
-                    placeholder="Enter your Enrollment Number"
-                    onChange={this.handleChange}
-                    onKeyDown={this.checkKey}
-                    onWheel={(e) => e.target.blur()}
-                    required
-                  />
-                </div>
-
-                <div className={styles["form-group"]}>
-                  <label htmlFor="email">
-                    Email address <span className="color-red">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    className={styles["form-control"]}
-                    value={this.state.email}
-                    id="email"
-                    name="email"
-                    placeholder="Enter your Email Address"
-                    onChange={this.handleChange}
-                    required
-                  />
-                </div>
-
-                <div className={styles["form-group"]}>
-                  <label htmlFor="branch">
-                    Branch<span className="color-red">*</span>
-                  </label>
-                  <Select
-                    id="branch"
-                    onChange={this.handleChangeBranch}
-                    options={branchOptions}
-                    required
-                  />
-                </div>
-
-                <div className={styles["form-group"]}>
-                  <label htmlFor="year">
-                    Year<span className="color-red">*</span>
-                  </label>
-                  <Select
-                    id="year"
-                    onChange={this.handleChangeYear}
-                    options={yearOptions}
-                    required
-                  />
-                </div>
-
-                <div className={styles["form-group"]}>
-                  <label htmlFor="motivation">
-                    Why do you want to be a mentor?
-                    <span className="color-red">*</span>
-                  </label>
-                  <textarea
-                    type="text"
-                    className={styles["form-control"]}
-                    name="motivation"
-                    value={this.state.motivation}
-                    id="motivation"
-                    onChange={this.handleChange}
-                    rows="4"
-                    required
-                  />
-                </div>
-
-                <div className={styles["form-group"]}>
-                  <label htmlFor="qualities">
-                    Which of your qualities may help you to be a good mentor?
-                    <span className="color-red">*</span>
-                  </label>
-                  <textarea
-                    type="text"
-                    className={styles["form-control"]}
-                    name="qualities"
-                    value={this.state.qualities}
-                    id="qualities"
-                    onChange={this.handleChange}
-                    rows="4"
-                    required
-                  />
-                </div>
-
-                <div className={styles["form-group"]}>
-                  <label htmlFor="mobile">
-                    Contact Number<span className="color-red">*</span>
-                  </label>
-                  <div className={styles["input-group"]}>
-                    <div className={styles["input-group-prepend"]}>
-                      <div className={styles["input-group-text"]}>+91</div>
-                    </div>
-                    <input
-                      type="number"
-                      className={styles["form-control"]}
-                      name="mobile"
-                      value={this.state.mobile}
-                      id="mobile"
-                      minLength="10"
-                      maxLength="10"
-                      placeholder="Enter your Mobile Number"
-                      onChange={this.handleChange}
-                      onKeyDown={this.checkKey}
-                      onWheel={(e) => e.target.blur()}
-                    />
-                  </div>
-                </div>
-
-                <div className={styles["form-group"]}>
-                  <label htmlFor="resume">
-                    Resume<span className="color-red">*</span>
-                  </label>
-                  <input
-                    type="file"
-                    className={styles["form-control-file"]}
-                    name="resume"
-                    id="resume"
-                    required
-                    onChange={this.handleResume}
-                    accept="application/pdf"
-                  />
-                </div>
-
-                <ReCAPTCHA
-                  onChange={this.handleCaptcha}
-                  ref={recaptchaRef}
-                  sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-                  className={styles.captcha}
-                />
-
-                <Button
-                  type="submit"
-                  className={styles["button"]}
-                  text="Submit"
-                />
-              </form>
+        <div className={styles.MainWrapper}>
+          <h2 className={styles.heading}>
+            Become a <span className="color-red">Mentor</span>
+          </h2>
+          <form onSubmit={this.handleSubmit}>
+            <div className={styles["form-group"]}>
+              <label htmlFor="name">
+                Name<span className="color-red">*</span>
+              </label>
+              <input
+                type="text"
+                className={styles["form-control"]}
+                name="name"
+                value={this.state.name}
+                id="name"
+                placeholder="Enter your Name"
+                onChange={this.handleChange}
+                required
+              />
             </div>
-          </>
-        )}
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="enrollno">
+                Enrollment Number<span className="color-red">*</span>
+              </label>
+              <input
+                type="number"
+                className={styles["form-control"]}
+                name="enrollno"
+                value={this.state.enrollno}
+                id="enrollno"
+                minLength="8"
+                maxLength="8"
+                placeholder="Enter your Enrollment Number"
+                onChange={this.handleChange}
+                onKeyDown={this.checkKey}
+                onWheel={(e) => e.target.blur()}
+                required
+              />
+            </div>
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="email">
+                Email address <span className="color-red">*</span>
+              </label>
+              <input
+                type="email"
+                className={styles["form-control"]}
+                value={this.state.email}
+                id="email"
+                name="email"
+                placeholder="Enter your Email Address"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="branch">
+                Branch<span className="color-red">*</span>
+              </label>
+              <Select
+                id="branch"
+                onChange={this.handleChangeBranch}
+                options={branchOptions}
+                required
+              />
+            </div>
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="year">
+                Year<span className="color-red">*</span>
+              </label>
+              <Select
+                id="year"
+                onChange={this.handleChangeYear}
+                options={yearOptions}
+                required
+              />
+            </div>
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="motivation">
+                Why do you want to be a mentor?
+                <span className="color-red">*</span>
+              </label>
+              <textarea
+                type="text"
+                className={styles["form-control"]}
+                name="motivation"
+                value={this.state.motivation}
+                id="motivation"
+                onChange={this.handleChange}
+                rows="4"
+                required
+              />
+            </div>
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="qualities">
+                Which of your qualities may help you to be a good mentor?
+                <span className="color-red">*</span>
+              </label>
+              <textarea
+                type="text"
+                className={styles["form-control"]}
+                name="qualities"
+                value={this.state.qualities}
+                id="qualities"
+                onChange={this.handleChange}
+                rows="4"
+                required
+              />
+            </div>
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="mobile">
+                Contact Number<span className="color-red">*</span>
+              </label>
+              <div className={styles["input-group"]}>
+                <div className={styles["input-group-prepend"]}>
+                  <div className={styles["input-group-text"]}>+91</div>
+                </div>
+                <input
+                  type="number"
+                  className={styles["form-control"]}
+                  name="mobile"
+                  value={this.state.mobile}
+                  id="mobile"
+                  minLength="10"
+                  maxLength="10"
+                  placeholder="Enter your Mobile Number"
+                  onChange={this.handleChange}
+                  onKeyDown={this.checkKey}
+                  onWheel={(e) => e.target.blur()}
+                />
+              </div>
+            </div>
+
+            <div className={styles["form-group"]}>
+              <label htmlFor="resume">
+                Resume<span className="color-red">*</span>
+              </label>
+              <input
+                type="file"
+                className={styles["form-control-file"]}
+                name="resume"
+                id="resume"
+                required
+                onChange={this.handleResume}
+                accept="application/pdf"
+              />
+            </div>
+
+            <ReCAPTCHA
+              onChange={this.handleCaptcha}
+              ref={recaptchaRef}
+              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+              className={styles.captcha}
+            />
+
+            <Button type="submit" className={styles["button"]} text="Submit" />
+          </form>
+        </div>
       </>
     );
   }

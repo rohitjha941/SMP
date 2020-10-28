@@ -165,6 +165,7 @@ class MentorView (APIView):
 class InterestView (generics.ListCreateAPIView):
     queryset = Interest.objects.all().order_by('interest_name')
     serializer_class = InterestSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def create(self, request):
         interests = []

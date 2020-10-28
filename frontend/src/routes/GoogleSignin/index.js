@@ -10,13 +10,13 @@ class GoogleSignin extends Component {
   constructor() {
     super();
     this.clientID = process.env.REACT_APP_GAPI_CLIENT_ID;
+    this.Auth = new AuthService();
     this.state = {
-      isAuthenticated: false,
+      isAuthenticated: this.Auth.hasAccessToken(),
       isLoading: true,
       username: "",
       authToken: null,
     };
-    this.Auth = new AuthService();
   }
   onGoogleSiginIn = (googleUser) => {
     const id_token = googleUser.getAuthResponse().id_token;

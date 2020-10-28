@@ -4,15 +4,22 @@ import styles from "./MentorRegistrationForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import { createMentor } from "api/methods";
+import {
+  checkMentorIsSelected,
+  createMentor,
+  getMentorFormData,
+} from "api/methods";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
 import ImageCropper from "components/ImageCropper";
 import { yearOptions } from "utils/constants";
+import AuthService from "handlers/AuthService";
+import Loader from "components/Loader";
 const animatedComponents = makeAnimated();
 class MentorRegistrationForm extends Component {
   constructor() {
     super();
+    this.Auth = new AuthService();
     this.state = {
       name: "",
       year: "",
@@ -34,15 +41,43 @@ class MentorRegistrationForm extends Component {
       career: "",
       groups: [],
       createdInterest: [],
-      isLoading: false,
+      isLoading: true,
+      isLoadingSubmission: false,
       redirect: false,
       src: null,
       croppedSrc: null,
       cropperToggle: false,
+      isAuthenticated: this.Auth.hasAccessToken(),
+      isSelected: false,
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.props.fetch();
+    await checkMentorIsSelected(this.Auth.getUserId()).then((res) => {
+      this.setState({
+        isLoading: false,
+        isSelected: res.data.status,
+      });
+    });
+    if (this.state.isSelected) {
+      await getMentorFormData().then((res) => {
+        const user = res.data.user;
+        console.log(user);
+        this.setState({
+          name: user.name,
+          email: user.email,
+          year: user.year,
+          enrollno: user.enrollno,
+          career: user.career,
+          facebook: user.facebook,
+          linkedin: user.linkedin,
+          mobile: user.mobile,
+          branch: user.branch,
+          groups: user.groups,
+          interests: user.interest,
+        });
+      });
+    }
   }
   setCroppedSrc = (croppedImageURL) => {
     this.setState({ croppedSrc: croppedImageURL });
@@ -158,7 +193,7 @@ class MentorRegistrationForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ isLoading: true });
+    this.setState({ isLoadingSubmission: true });
     const {
       name,
       year,
@@ -217,7 +252,7 @@ class MentorRegistrationForm extends Component {
             internships: [],
             placement: { company: "", job_title: "" },
             redirect: true,
-            isLoading: false,
+            isLoadingSubmission: false,
             career: "",
           });
         }
@@ -236,11 +271,15 @@ class MentorRegistrationForm extends Component {
         }
         window.flash(errorMessage, "error");
         this.setState({
-          isLoading: false,
+          isLoadingSubmission: false,
         });
       });
   };
   render() {
+    if (this.state.isLoading) return <Loader />;
+    if (this.state.isLoadingSubmission) return <LoadingOverlay />;
+    if (!this.state.isAuthenticated) return <Redirect to="/g-signin" />;
+    if (this.state.redirect) return <Redirect to="/user-dashboard" />;
     const branchOptions =
       this.props.branches && this.props.branches.length > 0
         ? this.props.branches.map((branch) => {
@@ -271,12 +310,8 @@ class MentorRegistrationForm extends Component {
             return option;
           })
         : [];
-    if (this.state.redirect) {
-      return <Redirect to="/mentors/show" />;
-    }
     return (
       <>
-        {this.state.isLoading ? <LoadingOverlay /> : null}
         <div className={styles.MainWrapper}>
           <h2 className={styles.heading}>
             Mentors' <span className="color-red">Data</span>
@@ -322,6 +357,9 @@ class MentorRegistrationForm extends Component {
               </label>
               <Select
                 id="year"
+                value={yearOptions.filter(
+                  (option) => option.value === this.state.year
+                )}
                 onChange={this.handleChangeYear}
                 options={yearOptions}
                 required
@@ -333,6 +371,9 @@ class MentorRegistrationForm extends Component {
               </label>
               <Select
                 id="branch"
+                value={branchOptions.filter(
+                  (option) => option.value === this.state.branch
+                )}
                 onChange={this.handleChangeBranch}
                 options={branchOptions}
                 required
@@ -345,6 +386,9 @@ class MentorRegistrationForm extends Component {
               </label>
               <Select
                 id="groups"
+                value={groupsOptions.filter((option) =>
+                  this.state.groups.includes(option.value)
+                )}
                 isMulti
                 components={animatedComponents}
                 onChange={this.handleChangeGroups}
@@ -375,6 +419,9 @@ class MentorRegistrationForm extends Component {
               </label>
               <CreatableSelect
                 id="interests"
+                value={interestOptions.filter((option) =>
+                  this.state.interests.includes(option.value)
+                )}
                 options={interestOptions}
                 closeMenuOnSelect={false}
                 isMulti
