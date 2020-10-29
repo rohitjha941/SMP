@@ -73,30 +73,38 @@ class MentorRegistrationForm extends Component {
       await getMentorFormData()
         .then((res) => {
           const user = res;
-          this.setState({
-            name: user.name,
-            email: user.email,
-            year: user.year,
-            enrollno: user.enrollno,
-            career: user.career,
-            facebook: user.facebook,
-            linkedin: user.linkedin,
-            mobile: parseInt(user.mobile),
-            branch: user.branch,
-            groups: user.groups,
-            interests: user.interest,
-            internships: user.interns,
-            placement: user.placement[0] ? user.placement[0] : [],
-            achievements:
-              user.achievements && user.achievements.length > 0
-                ? user.achievements.map((item) => {
-                    return item.achievement_name;
-                  })
-                : [],
-            currentPhoto: user.photo ? BASE_URL + user.photo : null,
-            currentResume: user.resume ? BASE_URL + user.resume : null,
-            isLoading: false,
-          });
+          if (user) {
+            this.setState({
+              name: user.name ? user.name : "",
+              email: user.email ? user.email : "",
+              year: user.year ? user.year : "",
+              enrollno: user.enrollno ? user.enrollno : "",
+              career: user.career ? user.career : "",
+              facebook: user.facebook ? user.facebook : "",
+              linkedin: user.linkedin ? user.linkedin : "",
+              mobile: user.mobile ? parseInt(user.mobile) : "",
+              branch: user.branch ? user.branch : "",
+              groups: user.groups ? user.groups : [],
+              interests: user.interest ? user.interest : [],
+              internships: user.interns ? user.interns : [],
+              placement:
+                user.placement && user.placement.length > 0
+                  ? user.placement[0]
+                  : {
+                      company: "",
+                      job_title: "",
+                    },
+              achievements:
+                user.achievements && user.achievements.length > 0
+                  ? user.achievements.map((item) => {
+                      return item.achievement_name;
+                    })
+                  : [],
+              currentPhoto: user.photo ? BASE_URL + user.photo : null,
+              currentResume: user.resume ? BASE_URL + user.resume : null,
+              isLoading: false,
+            });
+          }
         })
         .catch((err) => {
           window.flash("Unable to connect to server");
@@ -165,24 +173,34 @@ class MentorRegistrationForm extends Component {
     });
   };
   handleChangeGroups = (option) => {
-    const value = option.map((group) => {
-      return group.value;
-    });
+    const value =
+      option && option.length > 0
+        ? option.map((group) => {
+            return group.value;
+          })
+        : [];
     this.setState({
       groups: value,
     });
   };
   handleChangeInterests = (option) => {
-    const value = option
-      ? option.map((interest) => {
-          return interest.value;
-        })
-      : [];
+    const value =
+      option && option.length > 0
+        ? option.map((interest) => {
+            return interest.value;
+          })
+        : [];
+    // to accomodate created options in CreateSelect
+    const created =
+      option && option.length > 0
+        ? option.filter((i) => typeof i.value === "string")
+        : [];
+
     this.setState({
-      interest: value,
+      interests: value,
+      createdInterest: created,
     });
   };
-
   handleAddAchievement = (e) => {
     e.preventDefault();
     this.setState({
@@ -282,6 +300,7 @@ class MentorRegistrationForm extends Component {
             groups: [],
             achievements: [],
             internships: [],
+            createdInterest: [],
             placement: { company: "", job_title: "" },
             redirect: true,
             isLoadingSubmission: false,
@@ -458,9 +477,12 @@ class MentorRegistrationForm extends Component {
               </label>
               <CreatableSelect
                 id="interests"
-                value={interestOptions.filter((option) =>
-                  this.state.interests.includes(option.value)
-                )}
+                value={[
+                  ...interestOptions.filter((option) =>
+                    this.state.interests.includes(option.value)
+                  ),
+                  ...this.state.createdInterest,
+                ]}
                 options={interestOptions}
                 closeMenuOnSelect={false}
                 isMulti
