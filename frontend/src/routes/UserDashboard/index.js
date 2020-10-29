@@ -34,11 +34,23 @@ class UserDashboard extends Component {
       "Are you sure and want to withraw your application!"
     );
     if (r === true) {
-      withdrawApplication().then((res) => {
-        this.setState({
-          hasApplied: false,
+      withdrawApplication()
+        .then((res) => {
+          this.setState({
+            hasApplied: false,
+            isAccepted: false,
+          });
+        })
+        .catch((error) => {
+          if (error && error.logout === true) {
+            window.flash(error.msg, "error");
+            this.setState({
+              isAuthenticated: false,
+            });
+          } else {
+            window.flash("Unable to connect to server");
+          }
         });
-      });
     }
   };
   componentDidMount() {

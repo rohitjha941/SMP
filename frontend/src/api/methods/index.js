@@ -212,21 +212,25 @@ export const postQuery = (data) => {
 
 const CreateInterests = async (interestData) => {
   const auth = new AuthService();
-  if (!isTokenValid(auth.getAccessToken())) {
-    await getRefreshAccessToken();
-  }
-  return axios.post(INTERESTS, interestData, {
-    headers: {
-      authorization: `Bearer ${auth.getAccessToken()}`,
-    },
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => {
+        reject(err);
+      });
+    }
+    axios
+      .post(INTERESTS, interestData, {
+        headers: {
+          authorization: `Bearer ${auth.getAccessToken()}`,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
   });
 };
 
 export const postMentorApplication = async (data) => {
   const auth = new AuthService();
-  if (!isTokenValid(auth.getAccessToken())) {
-    await getRefreshAccessToken();
-  }
   const {
     email,
     name,
@@ -250,11 +254,15 @@ export const postMentorApplication = async (data) => {
   formData.append("resume", resume);
   formData.append("g-recaptcha-response", data["g-recaptcha-response"]);
   formData.append("user", auth.getUserId());
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const access_token = auth.getAccessToken();
     axios
       .post(MENTOR_APPLICATION, formData, {
         headers: {
-          authorization: `Bearer ${auth.getAccessToken()}`,
+          authorization: `Bearer ${access_token}`,
         },
       })
       .then((response) => {
@@ -268,9 +276,6 @@ export const postMentorApplication = async (data) => {
 
 const postMentorFormData = async (postData) => {
   const auth = new AuthService();
-  if (!isTokenValid(auth.getAccessToken())) {
-    await getRefreshAccessToken();
-  }
   const {
     name,
     year,
@@ -323,11 +328,19 @@ const postMentorFormData = async (postData) => {
   formData.append("achievements", JSON.stringify(achievements));
   formData.append("interns", JSON.stringify(internships));
   formData.append("placement", JSON.stringify(placement));
-
-  return axios.put(MENTORS + auth.getUserId() + "/", formData, {
-    headers: {
-      authorization: `Bearer ${auth.getAccessToken()}`,
-    },
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const access_token = auth.getAccessToken();
+    axios
+      .put(MENTORS + auth.getUserId() + "/", formData, {
+        headers: {
+          authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
   });
 };
 
@@ -400,7 +413,8 @@ export const getRefreshAccessToken = () => {
     if (!isTokenValid(auth.getRefreshToken())) {
       auth.logout();
       reject({
-        err: "Please Login Again",
+        msg: "Please Login Again!",
+        logout: true,
       });
     }
     const data = {
@@ -417,7 +431,11 @@ export const getRefreshAccessToken = () => {
         resolve(res.data);
       })
       .catch((err) => {
-        reject(err);
+        auth.logout();
+        reject({
+          msg: "Please Login Again!",
+          logout: true,
+        });
       });
   });
 };
@@ -450,10 +468,10 @@ export const checkMentorIsSelected = (user_id) => {
 
 export const withdrawApplication = async () => {
   const auth = new AuthService();
-  if (!isTokenValid(auth.getAccessToken())) {
-    await getRefreshAccessToken();
-  }
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
     const access_token = auth.getAccessToken();
     axios
       .delete(MENTOR_APPLICATION + auth.getUserId() + "/", {
@@ -468,11 +486,11 @@ export const withdrawApplication = async () => {
 
 export const getMentorFormData = async () => {
   const auth = new AuthService();
-  if (!isTokenValid(auth.getAccessToken())) {
-    await getRefreshAccessToken();
-  }
-  const access_token = auth.getAccessToken();
   return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const access_token = auth.getAccessToken();
     axios
       .get(MENTORS + auth.getUserId() + "/", {
         headers: {

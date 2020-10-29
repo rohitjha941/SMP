@@ -106,12 +106,21 @@ class MentorRegistrationForm extends Component {
             });
           }
         })
-        .catch((err) => {
-          window.flash("Unable to connect to server");
-          this.setState({
-            redirect: true,
-            isLoading: false,
-          });
+        .catch((error) => {
+          if (error && error.logout === true) {
+            window.flash(error.msg, "error");
+            this.setState({
+              isAuthenticated: false,
+              redirect: true,
+              isLoading: false,
+            });
+          } else {
+            window.flash("Unable to connect to server");
+            this.setState({
+              redirect: true,
+              isLoading: false,
+            });
+          }
         });
     } else {
       this.setState({
@@ -309,35 +318,43 @@ class MentorRegistrationForm extends Component {
         }
       })
       .catch((error) => {
-        this.setState({
-          croppedSrc: null,
-        });
-        let errorMessage = "";
-        if (error && error.data) {
-          const errorData = error.data;
-          if (errorData.email) {
-            errorMessage += "This Email is already in use.\n";
-          }
-          if (errorData.enrollno) {
-            errorMessage += "This Enrollment No. is already in use.\n";
-          }
-          if (errorData.mobile) {
-            errorMessage += "This Mobile No. is already in use.";
-          }
+        if (error && error.logout === true) {
+          window.flash(error.msg, "error");
+          this.setState({
+            isAuthenticated: false,
+            isLoadingSubmission: false,
+          });
         } else {
-          errorMessage = "Unable to connect to server";
+          this.setState({
+            croppedSrc: null,
+          });
+          let errorMessage = "";
+          if (error && error.data) {
+            const errorData = error.data;
+            if (errorData.email) {
+              errorMessage += "This Email is already in use.\n";
+            }
+            if (errorData.enrollno) {
+              errorMessage += "This Enrollment No. is already in use.\n";
+            }
+            if (errorData.mobile) {
+              errorMessage += "This Mobile No. is already in use.";
+            }
+          } else {
+            errorMessage = "Unable to connect to server";
+          }
+          window.flash(errorMessage, "error");
+          this.setState({
+            isLoadingSubmission: false,
+          });
         }
-        window.flash(errorMessage, "error");
-        this.setState({
-          isLoadingSubmission: false,
-        });
       });
   };
   render() {
-    if (this.state.isLoading) return <Loader />;
-    if (this.state.isLoadingSubmission) return <LoadingOverlay />;
     if (!this.state.isAuthenticated) return <Redirect to="/g-signin" />;
     if (this.state.redirect) return <Redirect to="/user-dashboard" />;
+    if (this.state.isLoading) return <Loader />;
+    if (this.state.isLoadingSubmission) return <LoadingOverlay />;
     const branchOptions =
       this.props.branches && this.props.branches.length > 0
         ? this.props.branches.map((branch) => {

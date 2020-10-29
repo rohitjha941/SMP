@@ -146,25 +146,32 @@ class MentorApplicationForm extends Component {
           }
         })
         .catch((error) => {
-          let errorMsg = "";
-          if (error && error.data) {
-            const errorData = error.data;
-            if (errorData.email) {
-              errorMsg += errorData.email[0] + "\n";
-            }
-            if (errorData.mobile) {
-              errorMsg += errorData.mobile[0] + "\n";
-            }
-            if (errorData.enrollno) {
-              errorMsg += errorData.enrollno[0] + "\n";
-            }
+          if (error && error.logout === true) {
+            window.flash(error.msg, "error");
+            this.setState({
+              isAuthenticated: false,
+            });
           } else {
-            errorMsg = "Unable to Connect to Server";
+            let errorMsg = "";
+            if (error && error.data) {
+              const errorData = error.data;
+              if (errorData.email) {
+                errorMsg += errorData.email[0] + "\n";
+              }
+              if (errorData.mobile) {
+                errorMsg += errorData.mobile[0] + "\n";
+              }
+              if (errorData.enrollno) {
+                errorMsg += errorData.enrollno[0] + "\n";
+              }
+            } else {
+              errorMsg = "Unable to Connect to Server";
+            }
+            window.flash(errorMsg, "error");
+            this.setState({
+              isLoading: false,
+            });
           }
-          window.flash(errorMsg, "error");
-          this.setState({
-            isLoading: false,
-          });
         });
     } else {
       window.flash("Please verify the ReCAPTCHA!", "warning");
@@ -173,17 +180,17 @@ class MentorApplicationForm extends Component {
     this.setState({ captcha: false });
   };
   render() {
+    if (!this.state.isAuthenticated) {
+      return <Redirect to="/g-signin" />;
+    }
+    if (this.state.redirect || this.state.hasApplied) {
+      return <Redirect to="/user-dashboard" />;
+    }
     if (this.state.isLoading) {
       return <Loader />;
     }
     if (this.state.isLoadingSubmission) {
       return <LoadingOverlay />;
-    }
-    if (this.state.redirect || this.state.hasApplied) {
-      return <Redirect to="/user-dashboard" />;
-    }
-    if (!this.state.isAuthenticated) {
-      return <Redirect to="/g-signin" />;
     }
     const branchOptions =
       this.props.branches && this.props.branches.length > 0
