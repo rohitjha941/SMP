@@ -15,6 +15,7 @@ import ImageCropper from "components/ImageCropper";
 import { yearOptions } from "utils/constants";
 import AuthService from "handlers/AuthService";
 import Loader from "components/Loader";
+import { BASE_URL } from "api/constants";
 const animatedComponents = makeAnimated();
 class MentorRegistrationForm extends Component {
   constructor() {
@@ -49,33 +50,64 @@ class MentorRegistrationForm extends Component {
       cropperToggle: false,
       isAuthenticated: this.Auth.hasAccessToken(),
       isSelected: false,
+      currentPhoto: null,
+      currentResume: null,
     };
   }
   async componentDidMount() {
     this.props.fetch();
-    await checkMentorIsSelected(this.Auth.getUserId()).then((res) => {
+    await checkMentorIsSelected(this.Auth.getUserId())
+      .then((res) => {
+        this.setState({
+          isSelected: res.data.status,
+        });
+      })
+      .catch((err) => {
+        window.flash("Unable to connect to server", "err");
+        this.setState({
+          redirect: true,
+          isLoading: false,
+        });
+      });
+    if (this.state.isSelected) {
+      await getMentorFormData()
+        .then((res) => {
+          const user = res;
+          this.setState({
+            name: user.name,
+            email: user.email,
+            year: user.year,
+            enrollno: user.enrollno,
+            career: user.career,
+            facebook: user.facebook,
+            linkedin: user.linkedin,
+            mobile: parseInt(user.mobile),
+            branch: user.branch,
+            groups: user.groups,
+            interests: user.interest,
+            internships: user.interns,
+            placement: user.placement[0] ? user.placement[0] : [],
+            achievements:
+              user.achievements && user.achievements.length > 0
+                ? user.achievements.map((item) => {
+                    return item.achievement_name;
+                  })
+                : [],
+            currentPhoto: user.photo ? BASE_URL + user.photo : null,
+            currentResume: user.resume ? BASE_URL + user.resume : null,
+            isLoading: false,
+          });
+        })
+        .catch((err) => {
+          window.flash("Unable to connect to server");
+          this.setState({
+            redirect: true,
+            isLoading: false,
+          });
+        });
+    } else {
       this.setState({
         isLoading: false,
-        isSelected: res.data.status,
-      });
-    });
-    if (this.state.isSelected) {
-      await getMentorFormData().then((res) => {
-        const user = res.data.user;
-        console.log(user);
-        this.setState({
-          name: user.name,
-          email: user.email,
-          year: user.year,
-          enrollno: user.enrollno,
-          career: user.career,
-          facebook: user.facebook,
-          linkedin: user.linkedin,
-          mobile: user.mobile,
-          branch: user.branch,
-          groups: user.groups,
-          interests: user.interest,
-        });
       });
     }
   }
@@ -199,7 +231,7 @@ class MentorRegistrationForm extends Component {
       year,
       enrollno,
       branch,
-      interest,
+      interests,
       email,
       mobile,
       image,
@@ -218,7 +250,7 @@ class MentorRegistrationForm extends Component {
       year: year,
       enrollno: enrollno,
       branch: branch,
-      interest: interest,
+      interest: interests,
       email: email,
       mobile: mobile,
       image: image,
@@ -258,16 +290,23 @@ class MentorRegistrationForm extends Component {
         }
       })
       .catch((error) => {
-        const errorData = error.data;
+        this.setState({
+          croppedSrc: null,
+        });
         let errorMessage = "";
-        if (errorData.email) {
-          errorMessage += "This Email is already in use.\n";
-        }
-        if (errorData.enrollno) {
-          errorMessage += "This Enrollment No. is already in use.\n";
-        }
-        if (errorData.mobile) {
-          errorMessage += "This Mobile No. is already in use.";
+        if (error && error.data) {
+          const errorData = error.data;
+          if (errorData.email) {
+            errorMessage += "This Email is already in use.\n";
+          }
+          if (errorData.enrollno) {
+            errorMessage += "This Enrollment No. is already in use.\n";
+          }
+          if (errorData.mobile) {
+            errorMessage += "This Mobile No. is already in use.";
+          }
+        } else {
+          errorMessage = "Unable to connect to server";
         }
         window.flash(errorMessage, "error");
         this.setState({
@@ -468,15 +507,31 @@ class MentorRegistrationForm extends Component {
             </div>
             <div className={styles["form-group"]}>
               <label htmlFor="photo">
-                Photograph<span className="color-red">*</span>
+                Photograph{" "}
+                {!this.state.currentPhoto ? (
+                  <span className="color-red">*</span>
+                ) : null}
               </label>
+              <br />
+              {this.state.currentPhoto ? (
+                <label>
+                  Currently :{" "}
+                  <a
+                    href={this.state.currentPhoto}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {this.state.currentPhoto}
+                  </a>
+                </label>
+              ) : null}
               <input
                 type="file"
                 className={styles["form-control-file"]}
                 name="photo"
                 id="photo"
                 accept="image/*"
-                required
+                required={this.state.currentPhoto ? false : true}
                 onChange={this.handleImage}
               />
             </div>
@@ -505,14 +560,30 @@ class MentorRegistrationForm extends Component {
             )}
             <div className={styles["form-group"]}>
               <label htmlFor="resume">
-                Resume<span className="color-red">*</span>
+                Resume
+                {!this.state.currentResume ? (
+                  <span className="color-red">*</span>
+                ) : null}
               </label>
+              <br />
+              {this.state.currentResume ? (
+                <label>
+                  Currently :{" "}
+                  <a
+                    href={this.state.currentResume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {this.state.currentResume}
+                  </a>
+                </label>
+              ) : null}
               <input
                 type="file"
                 className={styles["form-control-file"]}
                 name="resume"
                 id="resume"
-                required
+                required={this.state.currentResume ? false : true}
                 onChange={this.handleResume}
                 accept="application/pdf"
               />
@@ -664,7 +735,7 @@ class MentorRegistrationForm extends Component {
                   <input
                     type="text"
                     className={styles["form-control"]}
-                    value={this.state.placement.domain}
+                    value={this.state.placement.job_title}
                     id={"job_title"}
                     onChange={(e) => this.handleChangePlacement(e, "job_title")}
                   />

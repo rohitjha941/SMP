@@ -47,7 +47,8 @@ class Mentor(models.Model):
     )
     photo = models.ImageField(
         upload_to=FileUploader("mentors/images", 'student'),
-        max_length=200
+        max_length=200,
+        null=True
     )
     resume = models.FileField(
         upload_to=FileUploader("mentors/resume", 'student'),

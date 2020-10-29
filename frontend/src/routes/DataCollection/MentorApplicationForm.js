@@ -38,12 +38,20 @@ class MentorApplicationForm extends Component {
 
   async componentDidMount() {
     this.props.fetch();
-    await checkMentorHasApplied(this.Auth.getUserId()).then((res) => {
-      this.setState({
-        isLoading: false,
-        hasApplied: res.data.status,
+    await checkMentorHasApplied(this.Auth.getUserId())
+      .then((res) => {
+        this.setState({
+          isLoading: false,
+          hasApplied: res.data.status,
+        });
+      })
+      .catch((err) => {
+        window.flash("Unable to connect to server", "error");
+        this.setState({
+          redirect: true,
+          isLoading: false,
+        });
       });
-    });
   }
 
   checkKey = (e) => {
@@ -138,16 +146,20 @@ class MentorApplicationForm extends Component {
           }
         })
         .catch((error) => {
-          const errorData = error.data;
           let errorMsg = "";
-          if (errorData.email) {
-            errorMsg += errorData.email[0] + "\n";
-          }
-          if (errorData.mobile) {
-            errorMsg += errorData.mobile[0] + "\n";
-          }
-          if (errorData.enrollno) {
-            errorMsg += errorData.enrollno[0] + "\n";
+          if (error && error.data) {
+            const errorData = error.data;
+            if (errorData.email) {
+              errorMsg += errorData.email[0] + "\n";
+            }
+            if (errorData.mobile) {
+              errorMsg += errorData.mobile[0] + "\n";
+            }
+            if (errorData.enrollno) {
+              errorMsg += errorData.enrollno[0] + "\n";
+            }
+          } else {
+            errorMsg = "Unable to Connect to Server";
           }
           window.flash(errorMsg, "error");
           this.setState({

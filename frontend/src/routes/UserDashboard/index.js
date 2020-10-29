@@ -19,6 +19,7 @@ class UserDashboard extends Component {
       username: "",
       hasApplied: false,
       isAccepted: false,
+      isServerError: true,
     };
   }
   onUserSignOut = () => {
@@ -45,16 +46,35 @@ class UserDashboard extends Component {
       username: this.Auth.getUsername(),
     });
     const checkPrivileges = async (user_id) => {
-      await checkMentorHasApplied(user_id).then((res) => {
-        this.setState({
-          hasApplied: res.data.status,
+      await checkMentorHasApplied(user_id)
+        .then((res) => {
+          this.setState({
+            hasApplied: res.data.status,
+          });
+        })
+        .catch((err) => {
+          window.flash("Unable to connect to server", "error");
+          this.setState({
+            redirect: true,
+            isLoading: false,
+            isServerError: true,
+          });
         });
-      });
-      await checkMentorIsSelected(user_id).then((res) => {
-        this.setState({
-          isAccepted: res.data.status,
+      await checkMentorIsSelected(user_id)
+        .then((res) => {
+          this.setState({
+            isAccepted: res.data.status,
+            isServerError: false,
+          });
+        })
+        .catch((err) => {
+          window.flash("Unable to connect to server", "error");
+          this.setState({
+            redirect: true,
+            isLoading: false,
+            isServerError: true,
+          });
         });
-      });
     };
     checkPrivileges(this.Auth.getUserId());
   }
@@ -77,31 +97,35 @@ class UserDashboard extends Component {
                   className={styles.commonBtn}
                 />
                 <br />
-                {this.state.hasApplied ? (
+                {!this.state.isServerError ? (
                   <>
-                    {this.state.isAccepted ? (
-                      <Link to="/datacollection/mentors/register">
+                    {this.state.hasApplied ? (
+                      <>
+                        {this.state.isAccepted ? (
+                          <Link to="/datacollection/mentors/register">
+                            <Button
+                              className={styles.commonBtn}
+                              text="Create / Update your profile"
+                            />
+                          </Link>
+                        ) : (
+                          <Button
+                            onClick={this.onClickWithdraw}
+                            className={styles.commonBtn}
+                            text="With Draw Application"
+                          />
+                        )}
+                      </>
+                    ) : (
+                      <Link to="/datacollection/mentors/apply">
                         <Button
                           className={styles.commonBtn}
-                          text="Create / Update your profile"
+                          text="Apply to become a mentor"
                         />
                       </Link>
-                    ) : (
-                      <Button
-                        onClick={this.onClickWithdraw}
-                        className={styles.commonBtn}
-                        text="With Draw Application"
-                      />
                     )}
                   </>
-                ) : (
-                  <Link to="/datacollection/mentors/apply">
-                    <Button
-                      className={styles.commonBtn}
-                      text="Apply to become a mentor"
-                    />
-                  </Link>
-                )}
+                ) : null}
               </div>
             </div>
           </div>

@@ -296,8 +296,13 @@ const postMentorFormData = async (postData) => {
   formData.append("branch", branch);
   formData.append("email", email);
   formData.append("mobile", mobile);
-  formData.append("photo", image);
-  formData.append("resume", resume);
+  // Prevent sending null data
+  if (image) {
+    formData.append("photo", image);
+  }
+  if (resume) {
+    formData.append("resume", resume);
+  }
   formData.append("facebook", facebook);
   formData.append("linkedin", linkedin);
   formData.append("career", career);
@@ -466,15 +471,34 @@ export const getMentorFormData = async () => {
   if (!isTokenValid(auth.getAccessToken())) {
     await getRefreshAccessToken();
   }
-  return new Promise((resolve, reject) => {
-    const access_token = auth.getAccessToken();
+  const access_token = auth.getAccessToken();
+  return new Promise(async (resolve, reject) => {
     axios
       .get(MENTORS + auth.getUserId() + "/", {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
       })
-      .then((res) => resolve(res))
-      .catch((err) => reject(err));
+      .then(async (res) => {
+        const tmpUser = res.data.user;
+
+        // Load this info here instead of App.js because it needs regular updates and is only component specific data
+        const interns = await getMentorInterns(tmpUser.mentor_intern);
+        const placement = await getMentorPlacements(tmpUser.mentor_placement);
+        const achievements = await getMentorAchievements(
+          tmpUser.mentor_achievement
+        );
+
+        const user = {
+          ...tmpUser,
+          interns: interns,
+          placement: placement,
+          achievements: achievements,
+        };
+        resolve(user);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 };

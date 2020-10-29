@@ -12,7 +12,8 @@ class MentorGETSerializer(serializers.ModelSerializer):
 class MentorPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mentor
-        fields = "__all__"
+        fields = ['id', 'name', 'branch', 'year', 'photo', 'interest', 'groups', 'facebook', 'linkedin', 'resume',
+                  'email', 'career', 'mobile', 'enrollno', 'mentor_intern', 'mentor_placement', 'mentor_achievement']
 
 
 class MentorAchievementSerializer(serializers.ModelSerializer):

@@ -101,6 +101,16 @@ class MentorView (APIView):
                         last_used_serializer = mentor_serializer
                         if mentor_serializer.is_valid():
                             mentor_serializer.save()
+
+                            # delete previously existing data
+                            MentorAchievement.objects.filter(
+                                mentor=mentor_serializer.data.get('id')).delete()
+                            MentorIntern.objects.filter(
+                                mentor=mentor_serializer.data.get('id')).delete()
+                            MentorPlacement.objects.filter(
+                                mentor=mentor_serializer.data.get('id')).delete()
+
+                            # add new data by mentor
                             if 'achievements' in request_data:
                                 achievements = json.loads(
                                     request_data.get('achievements'))
