@@ -440,10 +440,10 @@ export const getRefreshAccessToken = () => {
   });
 };
 
-export const checkMentorHasApplied = (user_id) => {
+export const checkMentorHasApplied = (userID) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(CHECK_MENTOR_HAS_APPLIED + user_id + "/")
+      .get(CHECK_MENTOR_HAS_APPLIED + userID + "/")
       .then((res) => {
         resolve(res);
       })
@@ -453,10 +453,10 @@ export const checkMentorHasApplied = (user_id) => {
   });
 };
 
-export const checkMentorIsSelected = (user_id) => {
+export const checkMentorIsSelected = (userID) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(CHECK_MENTOR_IS_SELECTED + user_id + "/")
+      .get(CHECK_MENTOR_IS_SELECTED + userID + "/")
       .then((res) => {
         resolve(res);
       })

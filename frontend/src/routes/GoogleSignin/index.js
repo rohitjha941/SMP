@@ -27,10 +27,9 @@ class GoogleSignin extends Component {
         .then((res) => {
           const payload = parseJwt(res.data.access_token);
           const user = {
-            access_token: res.data.access_token,
-            refresh_token: res.data.refresh_token,
-            user_id: payload.user_id,
-            exp_time: payload.exp,
+            userAccessToken: res.data.access_token,
+            userRefreshToken: res.data.refresh_token,
+            userID: payload.user_id,
             username: username,
           };
           this.Auth.setUser(user);

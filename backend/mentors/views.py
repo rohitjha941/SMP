@@ -45,7 +45,7 @@ class MentorView (APIView):
 
         if request.user != mentor_application.user:
             return Response({'status': 'You are not authorized', 'err': True}, status=status.HTTP_401_UNAUTHORIZED)
-        if mentor_application.isAccepted:
+        if mentor_application.is_accepted:
             try:
                 mentor_object = Mentor.objects.get(user=pk)
             except:
@@ -80,7 +80,7 @@ class MentorView (APIView):
 
             with transaction.atomic():
                 request_data = request.data
-                if mentor_application.isAccepted:
+                if mentor_application.is_accepted:
                     try:
                         mentor_object = Mentor.objects.get(user=pk)
                     except:
@@ -308,6 +308,6 @@ class CheckIsSelected(APIView):
     def get(self, request, pk):
         try:
             mentor_application = MentorApplication.objects.get(user=pk)
-            return Response({'status': mentor_application.isAccepted, 'err': False}, status=status.HTTP_200_OK)
+            return Response({'status': mentor_application.is_accepted, 'err': False}, status=status.HTTP_200_OK)
         except:
             return Response({'status': False, 'msg': 'Application not Found!', 'err': True}, status=status.HTTP_200_OK)

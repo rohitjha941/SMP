@@ -57,8 +57,8 @@ class UserDashboard extends Component {
     this.setState({
       username: this.Auth.getUsername(),
     });
-    const checkPrivileges = async (user_id) => {
-      await checkMentorHasApplied(user_id)
+    const checkPrivileges = async (userID) => {
+      await checkMentorHasApplied(userID)
         .then((res) => {
           this.setState({
             hasApplied: res.data.status,
@@ -72,7 +72,7 @@ class UserDashboard extends Component {
             isServerError: true,
           });
         });
-      await checkMentorIsSelected(user_id)
+      await checkMentorIsSelected(userID)
         .then((res) => {
           this.setState({
             isAccepted: res.data.status,

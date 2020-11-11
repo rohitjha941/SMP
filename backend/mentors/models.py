@@ -162,7 +162,7 @@ class MentorApplication(models.Model):
         related_name='mentor_application',
         on_delete=models.CASCADE,
     )
-    isAccepted = models.BooleanField(
+    is_accepted = models.BooleanField(
         default=False,
     )
     email = models.EmailField(
