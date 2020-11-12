@@ -1,3 +1,5 @@
+import rs from "jsrsasign";
+
 export function calculateReadingTime(text) {
   const wordsPerMinute = 200;
   const textLength = text.split(" ").length;
@@ -47,19 +49,7 @@ export function sortTeam(team) {
 }
 
 export const parseJwt = (token) => {
-  // Function to prase jwt payload to json
-  var base64Url = token.split(".")[1];
-  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  var jsonPayload = decodeURIComponent(
-    atob(base64)
-      .split("")
-      .map(function (c) {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join("")
-  );
-
-  return JSON.parse(jsonPayload);
+  return rs.jws.JWS.readSafeJSONString(rs.b64utoutf8(token.split(".")[1]));
 };
 
 export const isTokenValid = (token) => {
