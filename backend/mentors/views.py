@@ -95,7 +95,7 @@ class MentorView (APIView):
                         mentor_object.email = mentor_application.email
                         mentor_object.save()
 
-                    if(request.user == mentor_object.user):
+                    if request.user == mentor_object.user:
                         mentor_serializer = MentorPOSTSerializer(
                             mentor_object, data=request_data)
                         last_used_serializer = mentor_serializer
@@ -231,7 +231,7 @@ class MentorApplicationView(APIView):
         try:
             mentor_application = MentorApplication.objects.get(user=pk)
             try:
-                if(request.user == mentor_application.user):
+                if request.user == mentor_application.user:
                     mentor_application.delete()
                     return Response({'msg': 'Deleted Successfully!', 'err': False}, status=status.HTTP_200_OK)
                 else:

@@ -21,7 +21,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 with open("config.yml", "r") as ymlfile:
     cfg = yaml.safe_load(ymlfile)
 
-if(cfg["env"] == "prod"):
+if cfg["env"] == "prod":
     sentry_sdk.init(
         dsn=cfg["sentry"]["dsn"],
         integrations=[DjangoIntegration()],
