@@ -1,4 +1,5 @@
 import rs from "jsrsasign";
+const CHIEF_SECRETARY = "Chief Secretary";
 
 export function calculateReadingTime(text) {
   const wordsPerMinute = 200;
@@ -11,6 +12,13 @@ const compareTeamByName = (a, b) => {
   if (a.name < b.name) return -1;
   else if (a.name > b.name) return 1;
   else return 0;
+};
+const compareFourthYear = (a, b) => {
+  if (a.designation === CHIEF_SECRETARY) return -1;
+  if (b.designation === CHIEF_SECRETARY) return 1;
+  if (a.name < b.name) return -1;
+  if (a.name > b.name) return 1;
+  return 0;
 };
 export function sortTeam(team) {
   const firstYear = team
@@ -32,7 +40,7 @@ export function sortTeam(team) {
     .filter((person) => {
       return person.year === "4th";
     })
-    .sort(compareTeamByName);
+    .sort(compareFourthYear);
   const fifthYear = team
     .filter((person) => {
       return person.year === "5th";
