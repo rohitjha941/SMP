@@ -31,7 +31,8 @@ def is_iitr_email(email):
     org = email.split('@')
     match = None
     if len(org) > 1:
-        match = re.findall('iitr.ac.in', org[1])
+        domain = org[1]
+        match = re.findall('iitr.ac.in', domain)
     if match is None or len(match) < 1:
         return False
     return True
