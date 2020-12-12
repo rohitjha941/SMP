@@ -71,8 +71,9 @@
             a {
               color: $grey-level-0_7;
             }
-            a.active-route {
+            a.activeRoute {
               color: $active-route-color;
+              border-bottom: 1px solid $active-route-color;
             }
           }
         }

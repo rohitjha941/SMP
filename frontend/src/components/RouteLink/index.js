@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import styles from "../../components/Header/Header.module.scss";
 
 function WrappedComponent(props) {
   return (
     <li key={props.index}>
       <NavLink
-        activeClassName="active-route"
+        activeClassName={styles.activeRoute}
         to={props.to}
         onClick={props.onClick}
       >
