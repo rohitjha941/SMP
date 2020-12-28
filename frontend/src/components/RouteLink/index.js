@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styles from "../../components/Header/Header.module.scss";
+import styles from "./RouteLink.module.scss";
 
 function WrappedComponent(props) {
   return (
