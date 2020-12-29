@@ -65,16 +65,6 @@
           @media screen and (min-width: $break) {
             flex-direction: row;
           }
-
-          li {
-            text-align: center;
-            a {
-              color: $grey-level-0_7;
-            }
-            a.active-route {
-              color: $active-route-color;
-            }
-          }
         }
       }
     }
