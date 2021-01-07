@@ -25,3 +25,8 @@ database:
 
 oauth:
   google_client_id :
+
+simple_jwt:
+  secret_signing_key :
+  exp_access : 15
+  exp_refresh : 1

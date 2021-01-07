@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+from datetime import timedelta
 import yaml
 
 # Sentry
@@ -142,6 +142,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
+# Rest Framework Simple JWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=int(cfg["simple_jwt"]["exp_access"]),),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(cfg["simple_jwt"]["exp_refresh"]),),
+
+    'SIGNING_KEY': cfg["simple_jwt"]["secret_signing_key"],
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
