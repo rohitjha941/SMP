@@ -269,7 +269,7 @@ export const postMentorApplication = async (data) => {
         resolve(response);
       })
       .catch((error) => {
-        reject(error.response);
+        reject(error);
       });
   });
 };
@@ -370,11 +370,11 @@ export const createMentor = (mentorData) => {
               resolve(response);
             })
             .catch((error) => {
-              reject(error.response);
+              reject(error);
             });
         })
         .catch((error) => {
-          reject(error.response);
+          reject(error);
         });
     } else {
       postMentorFormData(mentorData)
@@ -382,7 +382,7 @@ export const createMentor = (mentorData) => {
           resolve(response);
         })
         .catch((error) => {
-          reject(error.response);
+          reject(error);
         });
     }
   });

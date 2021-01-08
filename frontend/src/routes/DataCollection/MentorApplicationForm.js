@@ -154,7 +154,7 @@ class MentorApplicationForm extends Component {
           } else {
             let errorMsg = "";
             if (error && error.data) {
-              const errorData = error.data;
+              const errorData = error.response.data;
               if (errorData.email) {
                 errorMsg += errorData.email[0] + "\n";
               }

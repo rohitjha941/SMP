@@ -91,57 +91,56 @@ class UserDashboard extends Component {
     checkPrivileges(this.Auth.getUserId());
   }
   render() {
+    if (!this.state.isAuthenticated) {
+      return <Redirect to="/g-signin" />;
+    }
     return (
       <>
-        {!this.state.isAuthenticated ? (
-          <Redirect to="/g-signin" />
-        ) : (
-          <div className={styles.head}>
-            <div className={styles.dashboardParent}>
-              <div className={styles.greetingText}>
-                Welcome{" "}
-                <span className={"color-red"}>{this.state.username}</span>
-              </div>
-              <div className={styles.userOptions}>
-                <Button
-                  text="Sign Out"
-                  onClick={this.onUserSignOut}
-                  className={styles.commonBtn}
-                />
-                <br />
-                {!this.state.isServerError ? (
-                  <>
-                    {this.state.hasApplied ? (
-                      <>
-                        {this.state.isAccepted ? (
-                          <Link to="/datacollection/mentors/register">
-                            <Button
-                              className={styles.commonBtn}
-                              text="Create / Update your profile"
-                            />
-                          </Link>
-                        ) : (
+        <div className={styles.head}>
+          <div className={styles.dashboardParent}>
+            <div className={styles.greetingText}>
+              {"Welcome "}
+              <span className={"color-red"}>{this.state.username}</span>
+            </div>
+            <div className={styles.userOptions}>
+              <Button
+                text="Sign Out"
+                onClick={this.onUserSignOut}
+                className={styles.commonBtn}
+              />
+              <br />
+              {!this.state.isServerError ? (
+                <>
+                  {this.state.hasApplied ? (
+                    <>
+                      {this.state.isAccepted ? (
+                        <Link to="/datacollection/mentors/register">
                           <Button
-                            onClick={this.onClickWithdraw}
                             className={styles.commonBtn}
-                            text="With Draw Application"
+                            text="Create / Update your profile"
                           />
-                        )}
-                      </>
-                    ) : (
-                      <Link to="/datacollection/mentors/apply">
+                        </Link>
+                      ) : (
                         <Button
+                          onClick={this.onClickWithdraw}
                           className={styles.commonBtn}
-                          text="Apply to become a mentor"
+                          text="With Draw Application"
                         />
-                      </Link>
-                    )}
-                  </>
-                ) : null}
-              </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link to="/datacollection/mentors/apply">
+                      <Button
+                        className={styles.commonBtn}
+                        text="Apply to become a mentor"
+                      />
+                    </Link>
+                  )}
+                </>
+              ) : null}
             </div>
           </div>
-        )}
+        </div>
       </>
     );
   }

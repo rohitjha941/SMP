@@ -330,7 +330,7 @@ class MentorRegistrationForm extends Component {
           });
           let errorMessage = "";
           if (error && error.data) {
-            const errorData = error.data;
+            const errorData = error.response.data;
             if (errorData.email) {
               errorMessage += "This Email is already in use.\n";
             }
