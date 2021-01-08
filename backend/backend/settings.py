@@ -44,8 +44,7 @@ SECRET_KEY = cfg["security"]["django_secret_key"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if cfg["env"] == "dev" else False
 
-ALLOWED_HOSTS = [
-    '*'] if cfg["env"] == "dev" else cfg["security"]["allowed_hosts"].split(" ")
+ALLOWED_HOSTS = ['*'] if DEBUG else cfg["security"]["allowed_hosts"].split(" ")
 
 
 # Application definition
@@ -110,7 +109,7 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-if cfg["env"] == "dev":
+if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",

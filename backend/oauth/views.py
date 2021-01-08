@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from backend.settings import GOOGLE_OAUTH_CLIENT_ID
+from backend.settings import GOOGLE_OAUTH_CLIENT_ID, DEBUG
 
 from google.oauth2 import id_token
 from google.auth.transport import requests
@@ -24,14 +24,15 @@ class ExchangeToken(APIView):
         """
 
         google_token = request.data['token']
-        CLIENT_ID = GOOGLE_OAUTH_CLIENT_ID
+        client_id = GOOGLE_OAUTH_CLIENT_ID
         try:
-            idinfo = id_token.verify_oauth2_token(
-                google_token, requests.Request(), CLIENT_ID)
-            user_email = idinfo['email']
-            # if not is_iitr_email(user_email):
-            #     return Response({'msg': 'Please use institute email ID', 'success': False},
-            #                     status=status.HTTP_401_UNAUTHORIZED)
+            id_info = id_token.verify_oauth2_token(
+                google_token, requests.Request(), client_id)
+            user_email = id_info['email']
+            if not DEBUG:  # Check for IITR Emails only in production
+                if not is_iitr_email(user_email):
+                    return Response({'msg': 'Please use institute email ID', 'success': False},
+                                    status=status.HTTP_401_UNAUTHORIZED)
             try:
                 user = User.objects.get(email=user_email)
             except User.DoesNotExist:
