@@ -43,10 +43,41 @@ class InterestsAdmin(ImportExportModelAdmin):
 
 @register(Mentor)
 class MentorAdmin(ImportExportModelAdmin):
-    list_display = ('branch', 'name', 'photo', 'facebook', 'linkedin', )
+    list_display = ('get_branch', 'get_name',
+                    'photo', 'facebook', 'linkedin', )
     inlines = [InternInline, PlacementInline, AchievementInline]
+
+    def get_branch(self, obj):
+        return obj.student.branch
+
+    def get_name(self, obj):
+        return obj.student.name
+
+    get_branch.short_description = 'Branch'
+    get_branch.admin_order_field = 'student__branch'
+
+    get_name.short_description = 'Name'
+    get_name.admin_order_field = 'student__name'
 
 
 @register(MentorApplication)
 class MentorApplicationAdmin(ImportExportModelAdmin):
-    list_display = ('branch', 'name', 'year', 'enrollno')
+    list_display = ('get_branch', 'get_name', 'year', 'get_enroll_no')
+
+    def get_branch(self, obj):
+        return obj.student.branch
+
+    def get_name(self, obj):
+        return obj.student.name
+
+    def get_enroll_no(self, obj):
+        return obj.student.enroll_no
+
+    get_branch.short_description = 'Branch'
+    get_branch.admin_order_field = 'student__branch'
+
+    get_name.short_description = 'Name'
+    get_name.admin_order_field = 'student__name'
+
+    get_enroll_no.short_description = 'Enrollment Number'
+    get_enroll_no.admin_order_field = 'student__enroll_no'

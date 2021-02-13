@@ -27,13 +27,20 @@ class TeamPositionAdmin(ImportExportModelAdmin):
 
 @register(StudentTeam)
 class StudentTeamAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'photo', 'facebook', 'linkedin',
-                    'branch', 'year', 'position',)
+    list_display = ('get_name', 'photo', 'facebook', 'linkedin',
+                    'get_branch', 'year', 'position',)
 
+    def get_branch(self, obj):
+        return obj.student.branch
 
-@register(Branch)
-class BranchAdmin(ImportExportModelAdmin):
-    list_display = ("branch_name",)
+    def get_name(self, obj):
+        return obj.student.name
+
+    get_branch.short_description = 'Branch'
+    get_branch.admin_order_field = 'student__branch'
+
+    get_name.short_description = 'Name'
+    get_name.admin_order_field = 'student__name'
 
 
 @register(ContactDetails)
@@ -47,18 +54,18 @@ class BlogCategoryAdmin(ImportExportModelAdmin):
     list_display = ("category_name",)
 
 
-@register(Blogs)
-class BlogsAdmin(ImportExportModelAdmin):
+@register(Blog)
+class BlogAdmin(ImportExportModelAdmin):
     list_display = ('created_at', 'title', 'author',)
 
 
-@register(Events)
-class EventsAdmin(ImportExportModelAdmin):
+@register(Event)
+class EventAdmin(ImportExportModelAdmin):
     list_display = ('date', 'title', 'venue',)
 
 
-@register(CampusGroups)
-class CampusGroupsAdmin(ImportExportModelAdmin):
+@register(CampusGroup)
+class CampusGroupAdmin(ImportExportModelAdmin):
     list_display = ('group_name',)
 
 

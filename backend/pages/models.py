@@ -3,6 +3,7 @@ from tinymce import models as tinymce_models
 
 from common.validators import *
 from common.rename import *
+from common.models import Student
 
 
 class Home(models.Model):
@@ -11,6 +12,9 @@ class Home(models.Model):
         max_length=1000,
         default=""
     )
+
+    class Meta:
+        verbose_name_plural = "Home"
 
 
 class HomeVision(models.Model):
@@ -28,6 +32,9 @@ class HomeVision(models.Model):
         blank=True,
         null=True
     )
+
+    class Meta:
+        verbose_name_plural = "Home Vision"
 
 
 class Faq(models.Model):
@@ -57,36 +64,12 @@ class Faq(models.Model):
         return self.question
 
 
-class Branch(models.Model):
-    branch_name = models.CharField(
-        max_length=100,
-        default=""
-    )
-
-    def __str__(self):
-        return self.branch_name
-
-
 year_choices_team = (
     ("1st", "1st Year"),
     ("2nd", "2nd Year"),
     ("3rd", "3rd Year"),
     ("4th", "4th Year"),
     ("5th", "5th Year"),
-)
-
-position_choices = (
-    ('Manager', "Manager"),
-    ('Coordinator', 'Coordinator')
-)
-
-vertical_choices = (
-    ('Admin', 'Admin'),
-    ('Operations', 'Operations'),
-    ('WebD', 'WebD'),
-    ('Events', 'Events'),
-    ('Content', 'Content'),
-    ('Design', 'Design'),
 )
 
 
@@ -101,32 +84,20 @@ class TeamPosition(models.Model):
 
 
 class StudentTeam(models.Model):
-
-    # Field Containing name.
-    name = models.CharField(
-        default="",
-        max_length=100,
+    student = models.ForeignKey(
+        Student,
+        related_name="team_student",
+        on_delete=models.CASCADE
     )
-
-    # Field Containing Images of members
     photo = models.ImageField(
         upload_to=FileUploader("members/", "student"),
         max_length=200
     )
-
-    # Field Containing Facebook URL
     facebook = models.URLField(
         max_length=1000,
         db_index=True,
-
         blank=True
     )
-    enrollno = models.IntegerField(
-        null=True,
-        validators=[validate_enroll]
-    )
-    # Field Containing linkedin URL
-
     linkedin = models.URLField(
         max_length=1000,
         db_index=True,
@@ -139,13 +110,6 @@ class StudentTeam(models.Model):
         related_name="team_position",
         on_delete=models.CASCADE,
     )
-
-    branch = models.ForeignKey(
-        Branch,
-        related_name="teams",
-        on_delete=models.CASCADE,
-    )
-
     year = models.CharField(
         max_length=100,
         blank=True,
@@ -159,27 +123,21 @@ class StudentTeam(models.Model):
         unique=True,
         validators=[validate_mobile]
     )
-    email = models.CharField(
-        default="",
-        max_length=100,
-        validators=[validate_iitr_email]
-    )
 
 
-class CampusGroups(models.Model):
+class CampusGroup(models.Model):
     group_name = models.CharField(
         max_length=300,
         default=""
     )
     thumbnail = models.ImageField(
-        upload_to="groups/",
+        upload_to="campus_groups/",
         max_length=200,
         null=True
     )
     website = models.URLField(
         max_length=1000,
         db_index=True,
-
         blank=True
     )
 
@@ -200,13 +158,11 @@ class ContactDetails(models.Model):
     facebook = models.URLField(
         max_length=1000,
         db_index=True,
-
         blank=True
     )
     linkedin = models.URLField(
         max_length=1000,
         db_index=True,
-
         blank=True
     )
     branch = models.CharField(
@@ -230,6 +186,9 @@ class ContactDetails(models.Model):
         max_length=100,
     )
 
+    class Meta:
+        verbose_name_plural = "Contact Details"
+
 
 class BlogCategory(models.Model):
     category_name = models.CharField(
@@ -242,8 +201,11 @@ class BlogCategory(models.Model):
     def __str__(self):
         return self.category_name
 
+    class Meta:
+        verbose_name_plural = "Blog Categories"
 
-class Blogs(models.Model):
+
+class Blog(models.Model):
     title = models.CharField(
         default="",
         max_length=100,
@@ -268,10 +230,9 @@ class Blogs(models.Model):
     is_featured = models.BooleanField(
         default=False,
     )
-    is_featured = models.BooleanField(default=False,)
     category = models.ForeignKey(
         BlogCategory,
-        related_name="blogs_category",
+        related_name="blog_category",
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -280,7 +241,7 @@ class Blogs(models.Model):
     content = tinymce_models.HTMLField()
 
 
-class Events(models.Model):
+class Event(models.Model):
     title = models.CharField(
         default="",
         max_length=150,
@@ -304,7 +265,6 @@ class Events(models.Model):
         default="",
         max_length=100
     )
-    venue = models.CharField(default="", max_length=100)
     content = tinymce_models.HTMLField()
 
 
@@ -312,3 +272,6 @@ class RaisedQuery(models.Model):
     name = models.CharField(default="", max_length=100)
     email = models.EmailField(max_length=254,)
     query = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Raised Queries"
