@@ -1,0 +1,11 @@
+@import "style/colors.scss";
+li {
+  text-align: center;
+  a {
+    color: $grey-level-0_7;
+  }
+  .activeRoute {
+    color: $active-route-color;
+    border-bottom: 1px solid $active-route-color;
+  }
+}
