@@ -6,6 +6,7 @@ from rest_framework import generics, status
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from common.utils import verify_recaptcha
 
@@ -28,7 +29,7 @@ class MentorListView(APIView):
 class MentorView (APIView):
     queryset = Mentor.objects.all()
     serializer_class = MentorPOSTSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly, ]
     """
     Endpoint for Mentor Registration Portal
     """
@@ -178,7 +179,6 @@ class InterestView (generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def create(self, request):
-        interests = []
         interest_ids = []
         try:
             interests = request.data["interests"]
@@ -210,8 +210,7 @@ class MentorApplicationView(APIView):
         """
         # No two applications can be created for same user as there is one to one relationship between the two
 
-        # is_verified = verify_recaptcha(request)
-        is_verified = True
+        is_verified = verify_recaptcha(request)
         if is_verified:
             serializer = MentorApplicationSerializer(data=request.data)
             if serializer.is_valid():
@@ -285,29 +284,3 @@ class MentorAchievementView (generics.ListAPIView):
             queryset = MentorAchievement.objects.filter(id__in=ids_list)
 
         return queryset
-
-
-class CheckHasApplied(APIView):
-    """
-    Check whether a user has applied
-    """
-
-    def get(self, request, pk):
-        try:
-            num_results = MentorApplication.objects.filter(user=pk).count()
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        return Response({'status': True if num_results > 0 else False, 'err': False}, status=status.HTTP_200_OK)
-
-
-class CheckIsSelected(APIView):
-    """
-    Check whether mentor application is selected
-    """
-
-    def get(self, request, pk):
-        try:
-            mentor_application = MentorApplication.objects.get(user=pk)
-            return Response({'status': mentor_application.is_accepted, 'err': False}, status=status.HTTP_200_OK)
-        except:
-            return Response({'status': False, 'msg': 'Application not Found!', 'err': True}, status=status.HTTP_200_OK)

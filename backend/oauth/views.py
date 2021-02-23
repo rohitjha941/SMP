@@ -11,7 +11,6 @@ from backend.settings import GOOGLE_OAUTH_CLIENT_ID, DEBUG
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
-from mentors.models import MentorApplication
 from common.utils import is_iitr_email
 
 
@@ -39,11 +38,11 @@ class ExchangeToken(APIView):
                 user = User()
                 user.username = user_email
                 user.email = user_email
+                user.first_name = id_info['name']
                 user.save()
             token = RefreshToken.for_user(user)
 
             response = dict(
-                username=user.username,
                 access_token=str(token.access_token),
                 refresh_token=str(token),
                 msg='Successfully Logged In'

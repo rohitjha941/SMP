@@ -5,7 +5,7 @@ import styles from "./MentorApplicationForm.module.scss";
 import Select from "react-select";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
-import { postMentorApplication, checkMentorHasApplied } from "api/methods";
+import { postMentorApplication, getUserDetails } from "api/methods";
 import { yearOptions } from "utils/constants";
 import AuthService from "handlers/AuthService";
 import Loader from "components/Loader";
@@ -37,12 +37,13 @@ class MentorApplicationForm extends Component {
   }
 
   async componentDidMount() {
-    this.props.fetch();
-    await checkMentorHasApplied(this.Auth.getUserId())
+    await getUserDetails()
       .then((res) => {
         this.setState({
           isLoading: false,
-          hasApplied: res.data.status,
+          hasApplied: res.has_applied,
+          email: res.email,
+          name: res.name,
         });
       })
       .catch((err) => {
@@ -103,6 +104,7 @@ class MentorApplicationForm extends Component {
     if (this.state.captcha) {
       this.setState({ isLoading: true });
       const {
+        userId,
         email,
         name,
         enrollno,
@@ -115,6 +117,7 @@ class MentorApplicationForm extends Component {
       } = this.state;
 
       const data = {
+        userId: userId,
         email: email,
         name: name,
         enrollno: enrollno,
@@ -131,6 +134,7 @@ class MentorApplicationForm extends Component {
           if (response.status === 201) {
             window.flash("Your response has been succesfully recorded");
             this.setState({
+              userId: 0,
               email: "",
               name: "",
               enrollno: "",

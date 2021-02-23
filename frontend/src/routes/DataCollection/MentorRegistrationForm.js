@@ -4,11 +4,7 @@ import styles from "./MentorRegistrationForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import {
-  checkMentorIsSelected,
-  createMentor,
-  getMentorFormData,
-} from "api/methods";
+import { getUserDetails, createMentor, getMentorFormData } from "api/methods";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
 import ImageCropper from "components/ImageCropper";
@@ -22,6 +18,7 @@ class MentorRegistrationForm extends Component {
     super();
     this.Auth = new AuthService();
     this.state = {
+      userId: 0,
       name: "",
       year: "",
       enrollno: "",
@@ -56,10 +53,11 @@ class MentorRegistrationForm extends Component {
   }
   async componentDidMount() {
     this.props.fetch();
-    await checkMentorIsSelected(this.Auth.getUserId())
+    await getUserDetails()
       .then((res) => {
         this.setState({
-          isSelected: res.data.status,
+          isSelected: res.is_mentor,
+          userId: res.user_id,
         });
       })
       .catch((err) => {
@@ -70,7 +68,7 @@ class MentorRegistrationForm extends Component {
         });
       });
     if (this.state.isSelected) {
-      await getMentorFormData()
+      await getMentorFormData(this.state.userId)
         .then((res) => {
           const user = res;
           if (user) {
@@ -254,6 +252,7 @@ class MentorRegistrationForm extends Component {
     e.preventDefault();
     this.setState({ isLoadingSubmission: true });
     const {
+      userId,
       name,
       year,
       enrollno,
@@ -273,6 +272,7 @@ class MentorRegistrationForm extends Component {
     } = this.state;
 
     const data = {
+      userId: userId,
       name: name,
       year: year,
       enrollno: enrollno,

@@ -5,7 +5,6 @@ import Loader from "components/Loader";
 import AuthService from "handlers/AuthService";
 import { getExchangeToken } from "api/methods/index";
 import { Redirect } from "react-router-dom";
-import { parseJwt } from "utils";
 class GoogleSignin extends Component {
   constructor() {
     super();
@@ -25,12 +24,9 @@ class GoogleSignin extends Component {
       this.setState({ isLoading: true });
       getExchangeToken(id_token)
         .then((res) => {
-          const payload = parseJwt(res.data.access_token);
           const user = {
             userAccessToken: res.data.access_token,
             userRefreshToken: res.data.refresh_token,
-            userID: payload.user_id,
-            username: username,
           };
           this.Auth.setUser(user);
           const msg = res.data.msg;
@@ -40,7 +36,6 @@ class GoogleSignin extends Component {
             .then(() => {
               this.setState({
                 isAuthenticated: true,
-                username: username,
                 authToken: id_token,
                 isLoading: false,
               });
@@ -76,28 +71,6 @@ class GoogleSignin extends Component {
         isLoading: false,
       });
     }
-  };
-  onUserSignOut = () => {
-    this.Auth.logout();
-    this.onGoogleSignOut();
-  };
-  onGoogleSignOut = () => {
-    this.setState({ isLoading: true });
-    window.gapi.auth2
-      .getAuthInstance()
-      .signOut()
-      .then(() => {
-        this.setState(
-          {
-            isAuthenticated: false,
-            isLoading: false,
-          },
-          () => {
-            this.renderBtn("g-signin2");
-            window.flash("Signed Out Successfully");
-          }
-        );
-      });
   };
   onGoogleFailure = () => {
     window.flash(

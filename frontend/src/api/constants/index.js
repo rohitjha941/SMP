@@ -5,6 +5,7 @@ const apiConstants = {
   mentors: BASE_URL + "/mentors/",
   docs: BASE_URL + "/documents/",
   oauth: BASE_URL + "/oauth/",
+  common: BASE_URL + "/common/",
   blogs: "blogs/",
   events: "events/",
   apply: "apply/",
@@ -23,8 +24,7 @@ const apiConstants = {
   achievements: "achievements/",
   refresh: "refresh/",
   token: "token/",
-  checkHasApplied: "check-has-applied/",
-  checkIsSelected: "check-is-selected/",
+  userDetails: "user-details/",
 };
 
 export const BLOGS = apiConstants.pages + apiConstants.blogs;
@@ -41,7 +41,7 @@ export const MENTORS_ACHIEVEMENTS =
   apiConstants.mentors + apiConstants.achievements;
 export const MENTORS_DOCS = apiConstants.docs + apiConstants.mentorsDocs;
 export const FAQS = apiConstants.pages + apiConstants.faqs;
-export const BRANCH = apiConstants.pages + apiConstants.branch;
+export const BRANCH = apiConstants.common + apiConstants.branch;
 export const INTERESTS = apiConstants.mentors + apiConstants.interests;
 export const GROUPS = apiConstants.pages + apiConstants.groups;
 export const RAISE_QUERY = apiConstants.pages + apiConstants.raiseQuery;
@@ -49,7 +49,4 @@ export const FRESHERS_GUIDE = apiConstants.docs + apiConstants.freshersGuide;
 export const EXHCANGE_TOKEN = apiConstants.oauth + apiConstants.token;
 export const REFRESH_TOKEN =
   apiConstants.oauth + apiConstants.token + apiConstants.refresh;
-export const CHECK_MENTOR_HAS_APPLIED =
-  apiConstants.mentors + apiConstants.checkHasApplied;
-export const CHECK_MENTOR_IS_SELECTED =
-  apiConstants.mentors + apiConstants.checkIsSelected;
+export const USER_DETAILS = apiConstants.common + apiConstants.userDetails;
