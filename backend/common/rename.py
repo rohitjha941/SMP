@@ -80,7 +80,7 @@ class FileUploader(object):
         """Rename events image to {date}_{title}"""
 
         if self.instance.date and self.instance.title:
-            date_o_str = self.instance.date.strftime("%d-%b-%Y")
+            date_to_str = self.instance.date.strftime("%d-%b-%Y")
             filename = '{}-{}.{}'.format(slugify(date_to_str),
                                          slugify(self.instance.title), self.ext)
         else:
@@ -88,11 +88,11 @@ class FileUploader(object):
         return filename
 
     def rename_student(self):
-        """Rename student image to enrollno"""
+        """Rename student image to enroll_no"""
 
-        if self.instance.enrollno:
+        if self.instance.student.enroll_no:
             filename = '{}.{}'.format(
-                slugify(self.instance.enrollno), self.ext)
+                slugify(self.instance.student.enroll_no), self.ext)
         else:
             filename = '{}.{}'.format(uuid4().hex, self.ext)
         return filename

@@ -231,10 +231,7 @@ const CreateInterests = async (interestData) => {
 export const postMentorApplication = async (data) => {
   const auth = new AuthService();
   const {
-    userId,
-    email,
-    name,
-    enrollno,
+    enroll_no,
     branch,
     year,
     motivation,
@@ -243,9 +240,7 @@ export const postMentorApplication = async (data) => {
     resume,
   } = data;
   let formData = new FormData();
-  formData.append("email", email);
-  formData.append("name", name);
-  formData.append("enrollno", enrollno);
+  formData.append("enroll_no", enroll_no);
   formData.append("branch", branch);
   formData.append("year", year);
   formData.append("motivation", motivation);
@@ -253,7 +248,6 @@ export const postMentorApplication = async (data) => {
   formData.append("mobile", mobile);
   formData.append("resume", resume);
   formData.append("g-recaptcha-response", data["g-recaptcha-response"]);
-  formData.append("user", userId);
   return new Promise(async (resolve, reject) => {
     if (!isTokenValid(auth.getAccessToken())) {
       await getRefreshAccessToken().catch((err) => reject(err));

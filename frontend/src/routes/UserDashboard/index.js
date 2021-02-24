@@ -63,6 +63,8 @@ class UserDashboard extends Component {
       })
       .catch((err) => {
         this.setState({
+          redirect: true,
+          isLoading: false,
           isServerError: true,
         });
       });

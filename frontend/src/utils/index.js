@@ -61,6 +61,8 @@ export const parseJwt = (token) => {
 };
 
 export const isTokenValid = (token) => {
-  const exp_time = parseJwt(token).exp;
-  return Date.now() < exp_time * 1000;
+  if (token) {
+    const exp_time = parseJwt(token).exp;
+    return Date.now() - 5000 < exp_time * 1000; // check validity upto 5 seconds
+  } else return false;
 };

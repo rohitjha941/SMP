@@ -7,6 +7,7 @@ from .models import *
 @register(Branch)
 class BranchAdmin(ImportExportModelAdmin):
     list_display = ("branch_name",)
+    ordering = ("branch_name",)
 
 
 @register(Student)
