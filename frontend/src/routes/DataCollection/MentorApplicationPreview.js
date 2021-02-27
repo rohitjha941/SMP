@@ -29,7 +29,9 @@ const MentorApplicationPreview = (props) => {
 
   useEffect(() => {
     props.fetch();
-    (async () => {
+  });
+  useEffect(() => {
+    const fetchUserData = async () => {
       let userId = null;
       await getUserDetails()
         .then(async (res) => {
@@ -62,8 +64,9 @@ const MentorApplicationPreview = (props) => {
             setRedirect(true);
             setIsLoading(false);
           });
-    })();
-  });
+    };
+    fetchUserData();
+  }, []);
   useEffect(() => {
     if (
       props.branches &&
