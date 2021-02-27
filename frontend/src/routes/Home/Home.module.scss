@@ -35,9 +35,9 @@
 
 .learnMore {
   margin: 5% auto 8.21% auto;
-  display: block;
+  display: block !important;
   @media screen and (min-width: $break-tablet) {
-    display: none;
+    display: none !important;
   }
 }
 
