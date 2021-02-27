@@ -42,28 +42,27 @@ class MentorView (APIView):
         Method for requesting for data for prepopulation
         """
         try:
-            mentor_application = MentorApplication.objects.get(user=pk)
+            student_object = Student.objects.get(user=pk)
+            mentor_application = MentorApplication.objects.get(
+                student=student_object.id)
         except:
             return Response({'msg': 'You have not applied', 'error': True}, status=status.HTTP_404_NOT_FOUND)
 
-        if request.user != mentor_application.user:
+        if request.user != student_object.user:
             return Response({'status': 'You are not authorized', 'err': True}, status=status.HTTP_401_UNAUTHORIZED)
         if mentor_application.is_accepted:
             try:
-                mentor_object = Mentor.objects.get(user=pk)
+                mentor_object = Mentor.objects.get(student=student_object.id)
             except:
                 mentor_object = Mentor()
-                mentor_object.name = mentor_application.name
-                mentor_object.user = mentor_application.user
-                mentor_object.enrollno = mentor_application.enrollno
+                mentor_object.student = mentor_application.student
                 mentor_object.resume = mentor_application.resume
-                mentor_object.branch = mentor_application.branch
                 mentor_object.year = mentor_application.year
-                mentor_object.mobile = mentor_application.mobile
-                mentor_object.email = mentor_application.email
                 mentor_object.save()
+            student_serializer = StudentSerializer(student_object)
             mentor_serializer = MentorPOSTSerializer(mentor_object)
-            return Response({'user': mentor_serializer.data, 'err': False}, status=status.HTTP_200_OK)
+            data = {**student_serializer.data, **mentor_serializer.data}
+            return Response({'user': data, 'err': False}, status=status.HTTP_200_OK)
         else:
             return Response({'status': 'Application Not Accepted', 'err': True}, status=status.HTTP_404_NOT_FOUND)
 
@@ -77,7 +76,9 @@ class MentorView (APIView):
             # if they fail. Using atomic transaction will cause complete rollback
             # avoiding inconsistent mentor data in case of query failure.
             try:
-                mentor_application = MentorApplication.objects.get(user=pk)
+                student_object = Student.objects.get(user=pk)
+                mentor_application = MentorApplication.objects.get(
+                    student=student_object.id)
             except:
                 return Response({'msg': 'You have not applied', 'error': True}, status=status.HTTP_404_NOT_FOUND)
 
@@ -85,20 +86,16 @@ class MentorView (APIView):
                 request_data = request.data
                 if mentor_application.is_accepted:
                     try:
-                        mentor_object = Mentor.objects.get(user=pk)
+                        mentor_object = Mentor.objects.get(
+                            student=student_object.id)
                     except:
                         mentor_object = Mentor()
-                        mentor_object.name = mentor_application.name
-                        mentor_object.user = mentor_application.user
-                        mentor_object.enrollno = mentor_application.enrollno
+                        mentor_object.student = mentor_application.student
                         mentor_object.resume = mentor_application.resume
-                        mentor_object.branch = mentor_application.branch
                         mentor_object.year = mentor_application.year
-                        mentor_object.mobile = mentor_application.mobile
-                        mentor_object.email = mentor_application.email
                         mentor_object.save()
 
-                    if request.user == mentor_object.user:
+                    if request.user == student_object.user:
                         mentor_serializer = MentorPOSTSerializer(
                             mentor_object, data=request_data)
                         last_used_serializer = mentor_serializer
@@ -222,8 +219,8 @@ class MentorApplicationView(APIView):
                     student_object = Student.objects.get(
                         id=application_serializer.data.get('student'))
                     student_serializer = StudentSerializer(student_object)
-                    data = {**application_serializer.data,
-                            **student_serializer.data}
+                    data = {**student_serializer.data,
+                            **application_serializer.data}
                     return Response({'msg': 'Application Found', 'data': data}, status=status.HTTP_200_OK)
                 else:
                     return Response({'msg': 'Application Not Found'}, status=status.HTTP_404_NOT_FOUND)

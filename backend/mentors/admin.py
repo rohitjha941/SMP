@@ -43,7 +43,7 @@ class InterestsAdmin(ImportExportModelAdmin):
 
 @register(Mentor)
 class MentorAdmin(ImportExportModelAdmin):
-    list_display = ('get_branch', 'get_name',
+    list_display = ('id', 'get_branch', 'get_name',
                     'photo', 'facebook', 'linkedin', )
     inlines = [InternInline, PlacementInline, AchievementInline]
 

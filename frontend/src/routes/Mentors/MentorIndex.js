@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import ImageText from "components/ImageText";
 import becomeAMentor from "assets/images/become_a_mentor.jpeg";
+import { getCurrentSession } from "utils";
 
 class MentorIndex extends Component {
   render() {
@@ -29,7 +30,7 @@ class MentorIndex extends Component {
           <Link to="/mentors/show">
             <Button
               className={styles.viewMentorsButton}
-              text="View Mentors '19"
+              text={`View Mentors '${getCurrentSession()}`}
               type="outline"
             />
           </Link>

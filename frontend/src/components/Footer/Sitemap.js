@@ -2,18 +2,7 @@ import React from "react";
 import RouteLink from "components/RouteLink";
 import styles from "./Footer.module.scss";
 import { scrollToTop } from "./ScrollToTop";
-
-/**
- * Get current academic session
- *
- * @return {number} Last two digits of active academic session
- */
-function getCurrentSession() {
-  const date = new Date();
-  const year = date.getFullYear();
-  const session = year % 100;
-  return session;
-}
+import { getCurrentSession } from "utils";
 
 function WrappedComponent(props) {
   const routeData = [

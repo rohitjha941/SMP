@@ -272,12 +272,8 @@ const postMentorFormData = async (postData) => {
   const auth = new AuthService();
   const {
     userId,
-    name,
     year,
-    enrollno,
-    branch,
     interest,
-    email,
     mobile,
     image,
     resume,
@@ -290,11 +286,7 @@ const postMentorFormData = async (postData) => {
     career,
   } = postData;
   let formData = new FormData();
-  formData.append("name", name);
   formData.append("year", year);
-  formData.append("enrollno", enrollno);
-  formData.append("branch", branch);
-  formData.append("email", email);
   formData.append("mobile", mobile);
   // Prevent sending null data
   if (image) {

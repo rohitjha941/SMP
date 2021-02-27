@@ -66,3 +66,15 @@ export const isTokenValid = (token) => {
     return Date.now() - 5000 < exp_time * 1000; // check validity upto 5 seconds
   } else return false;
 };
+
+/**
+ * Get current academic session
+ *
+ * @return {number} Last two digits of active academic session
+ */
+export function getCurrentSession() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const session = date.getMonth() > 5 ? (year % 100) + 1 : year % 100;
+  return session;
+}
