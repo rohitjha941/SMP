@@ -100,11 +100,20 @@ class UserDashboard extends Component {
                           />
                         </Link>
                       ) : (
-                        <Button
-                          onClick={this.onClickWithdraw}
-                          className={styles.commonBtn}
-                          text="With Draw Application"
-                        />
+                        <>
+                          <Link to="/datacollection/mentors/application-preview">
+                            <Button
+                              className={styles.commonBtn}
+                              text="View your application"
+                            />
+                          </Link>
+                          <br />
+                          <Button
+                            onClick={this.onClickWithdraw}
+                            className={styles.commonBtn}
+                            text="With Draw Application"
+                          />
+                        </>
                       )}
                     </>
                   ) : (

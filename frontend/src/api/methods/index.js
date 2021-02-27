@@ -509,3 +509,25 @@ export const getMentorFormData = async (userId) => {
       });
   });
 };
+
+export const getMentorApplicationData = async (userId) => {
+  const auth = new AuthService();
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const accessToken = auth.getAccessToken();
+    axios
+      .get(MENTORS + "apply/" + userId + "/", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then(async (res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

@@ -206,6 +206,32 @@ class MentorApplicationView(APIView):
     serializer_class = MentorApplicationSerializer
     permission_classes = [IsAuthenticated]
 
+    def get(self, request, pk):
+        if request.user.id == pk:
+            student_exists = Student.objects.filter(
+                user=request.user).count() > 0
+            if student_exists:
+                student_id = Student.objects.get(user=request.user).id
+                has_applied = MentorApplication.objects.filter(
+                    student=student_id).count() > 0
+                if has_applied:
+                    application_object = MentorApplication.objects.get(
+                        student=student_id)
+                    application_serializer = MentorApplicationSerializer(
+                        application_object)
+                    student_object = Student.objects.get(
+                        id=application_serializer.data.get('student'))
+                    student_serializer = StudentSerializer(student_object)
+                    data = {**application_serializer.data,
+                            **student_serializer.data}
+                    return Response({'msg': 'Application Found', 'data': data}, status=status.HTTP_200_OK)
+                else:
+                    return Response({'msg': 'Application Not Found'}, status=status.HTTP_404_NOT_FOUND)
+            else:
+                return Response({'msg': 'User not registered'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({'msg': 'Invalid Credentials'}, status=status.HTTP_403_FORBIDDEN)
+
     def post(self, request):
         """
         Endpoint To Create new Application
