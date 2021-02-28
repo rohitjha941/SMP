@@ -1,11 +1,14 @@
 from rest_framework import serializers
 from .models import *
+from common.serializers import StudentSerializer
 
 
 class MentorGETSerializer(serializers.ModelSerializer):
+    student = StudentSerializer(read_only=True)
+
     class Meta:
         model = Mentor
-        fields = ['id', 'year', 'photo', 'interest', 'groups', 'facebook', 'linkedin', 'resume', 'mentor_intern',
+        fields = ['id', 'student', 'year', 'photo', 'interest', 'groups', 'facebook', 'linkedin', 'resume', 'mentor_intern',
                   'mentor_placement', 'mentor_achievement']
 
 
