@@ -19,8 +19,7 @@ import {
   MENTORS_ACHIEVEMENTS,
   EXHCANGE_TOKEN,
   REFRESH_TOKEN,
-  CHECK_MENTOR_HAS_APPLIED,
-  CHECK_MENTOR_IS_SELECTED,
+  USER_DETAILS,
 } from "api/constants";
 import axios from "axios";
 import AuthService from "handlers/AuthService";
@@ -232,9 +231,7 @@ const CreateInterests = async (interestData) => {
 export const postMentorApplication = async (data) => {
   const auth = new AuthService();
   const {
-    email,
-    name,
-    enrollno,
+    enroll_no,
     branch,
     year,
     motivation,
@@ -243,9 +240,7 @@ export const postMentorApplication = async (data) => {
     resume,
   } = data;
   let formData = new FormData();
-  formData.append("email", email);
-  formData.append("name", name);
-  formData.append("enrollno", enrollno);
+  formData.append("enroll_no", enroll_no);
   formData.append("branch", branch);
   formData.append("year", year);
   formData.append("motivation", motivation);
@@ -253,7 +248,6 @@ export const postMentorApplication = async (data) => {
   formData.append("mobile", mobile);
   formData.append("resume", resume);
   formData.append("g-recaptcha-response", data["g-recaptcha-response"]);
-  formData.append("user", auth.getUserId());
   return new Promise(async (resolve, reject) => {
     if (!isTokenValid(auth.getAccessToken())) {
       await getRefreshAccessToken().catch((err) => reject(err));
@@ -277,12 +271,9 @@ export const postMentorApplication = async (data) => {
 const postMentorFormData = async (postData) => {
   const auth = new AuthService();
   const {
-    name,
+    userId,
     year,
-    enrollno,
-    branch,
     interest,
-    email,
     mobile,
     image,
     resume,
@@ -295,11 +286,7 @@ const postMentorFormData = async (postData) => {
     career,
   } = postData;
   let formData = new FormData();
-  formData.append("name", name);
   formData.append("year", year);
-  formData.append("enrollno", enrollno);
-  formData.append("branch", branch);
-  formData.append("email", email);
   formData.append("mobile", mobile);
   // Prevent sending null data
   if (image) {
@@ -334,7 +321,7 @@ const postMentorFormData = async (postData) => {
     }
     const access_token = auth.getAccessToken();
     axios
-      .put(MENTORS + auth.getUserId() + "/", formData, {
+      .put(MENTORS + userId + "/", formData, {
         headers: {
           authorization: `Bearer ${access_token}`,
         },
@@ -364,8 +351,11 @@ export const createMentor = (mentorData) => {
             ...existingInterestIds,
             ...createInterestIds,
           ];
-          mentorData.interest = updatedInterestIds; // This mutation should be avoided
-          postMentorFormData(mentorData)
+          const postMentorData = {
+            ...mentorData,
+            interest: updatedInterestIds,
+          };
+          postMentorFormData(postMentorData)
             .then((response) => {
               resolve(response);
             })
@@ -440,33 +430,7 @@ export const getRefreshAccessToken = () => {
   });
 };
 
-export const checkMentorHasApplied = (userID) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(CHECK_MENTOR_HAS_APPLIED + userID + "/")
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-export const checkMentorIsSelected = (userID) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(CHECK_MENTOR_IS_SELECTED + userID + "/")
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-export const withdrawApplication = async () => {
+export const getUserDetails = async () => {
   const auth = new AuthService();
   return new Promise(async (resolve, reject) => {
     if (!isTokenValid(auth.getAccessToken())) {
@@ -474,7 +438,24 @@ export const withdrawApplication = async () => {
     }
     const access_token = auth.getAccessToken();
     axios
-      .delete(MENTOR_APPLICATION + auth.getUserId() + "/", {
+      .get(USER_DETAILS, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+};
+export const withdrawApplication = async (userId) => {
+  const auth = new AuthService();
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const access_token = auth.getAccessToken();
+    axios
+      .delete(MENTOR_APPLICATION + userId + "/", {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -484,7 +465,7 @@ export const withdrawApplication = async () => {
   });
 };
 
-export const getMentorFormData = async () => {
+export const getMentorFormData = async (userId) => {
   const auth = new AuthService();
   return new Promise(async (resolve, reject) => {
     if (!isTokenValid(auth.getAccessToken())) {
@@ -492,7 +473,7 @@ export const getMentorFormData = async () => {
     }
     const access_token = auth.getAccessToken();
     axios
-      .get(MENTORS + auth.getUserId() + "/", {
+      .get(MENTORS + userId + "/", {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -514,6 +495,28 @@ export const getMentorFormData = async () => {
           achievements: achievements,
         };
         resolve(user);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const getMentorApplicationData = async (userId) => {
+  const auth = new AuthService();
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const accessToken = auth.getAccessToken();
+    axios
+      .get(MENTORS + "apply/" + userId + "/", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then(async (res) => {
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err);

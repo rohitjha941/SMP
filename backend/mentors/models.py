@@ -1,9 +1,10 @@
 from django.db import models
 
-from pages.models import Branch, CampusGroups
+from pages.models import CampusGroup
 
-from common.rename import *
+from common.rename import FileUploader
 from common.validators import *
+from common.models import Student
 
 
 class Interest(models.Model):
@@ -17,33 +18,20 @@ class Interest(models.Model):
         return self.interest_name
 
 
-year_choices = (("3rd", "3rd Year"), ("4th", "4th Year"), ("5th", "5th Year"))
+mentor_year_choices = (("3rd", "3rd Year"),
+                       ("4th", "4th Year"), ("5th", "5th Year"))
 
 
 class Mentor(models.Model):
-    user = models.OneToOneField(
-        'auth.User',
-        related_name='mentor_user',
-        on_delete=models.CASCADE,
-    )
-
-    branch = models.ForeignKey(
-        Branch,
-        related_name="mentors",
+    student = models.ForeignKey(
+        Student,
+        related_name="mentor_student",
         on_delete=models.CASCADE
     )
-
     interest = models.ManyToManyField(
         Interest,
         related_name="interest",
         blank=True,
-
-    )
-
-    name = models.CharField(
-        max_length=1000,
-        blank=True,
-        null=True
     )
     photo = models.ImageField(
         upload_to=FileUploader("mentors/images", 'student'),
@@ -54,22 +42,12 @@ class Mentor(models.Model):
         upload_to=FileUploader("mentors/resume", 'student'),
         null=True
     )
-    email = models.EmailField(
-        max_length=200,
-        default="",
-        unique=True,
-        validators=[validate_iitr_email]
-    )
     mobile = models.CharField(
         max_length=10,
         blank=True,
         null=True,
         unique=True,
         validators=[validate_mobile]
-    )
-    enrollno = models.IntegerField(
-        unique=True,
-        validators=[validate_enroll]
     )
     facebook = models.URLField(
         max_length=1000,
@@ -85,10 +63,10 @@ class Mentor(models.Model):
         max_length=15,
         blank=True,
         null=True,
-        choices=year_choices
+        choices=mentor_year_choices
     )
     groups = models.ManyToManyField(
-        CampusGroups,
+        CampusGroup,
         related_name="campus_groups_mentor",
         blank=True
     )
@@ -157,39 +135,19 @@ class MentorPlacement(models.Model):
 
 
 class MentorApplication(models.Model):
-    user = models.OneToOneField(
-        'auth.User',
-        related_name='mentor_application',
-        on_delete=models.CASCADE,
+    student = models.ForeignKey(
+        Student,
+        related_name="mentor_application_student",
+        on_delete=models.CASCADE
     )
     is_accepted = models.BooleanField(
         default=False,
-    )
-    email = models.EmailField(
-        max_length=200,
-        default="",
-        unique=True,
-        validators=[validate_iitr_email]
-    )
-    name = models.CharField(
-        max_length=1000,
-        blank=True,
-        null=True
-    )
-    enrollno = models.IntegerField(
-        unique=True,
-        validators=[validate_enroll]
-    )
-    branch = models.ForeignKey(
-        Branch,
-        related_name="applied_mentor",
-        on_delete=models.CASCADE
     )
     year = models.CharField(
         max_length=15,
         blank=True,
         null=True,
-        choices=year_choices
+        choices=mentor_year_choices
     )
     motivation = models.TextField(
         max_length=1000,

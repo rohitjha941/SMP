@@ -5,7 +5,7 @@ import styles from "./MentorApplicationForm.module.scss";
 import Select from "react-select";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
-import { postMentorApplication, checkMentorHasApplied } from "api/methods";
+import { postMentorApplication, getUserDetails } from "api/methods";
 import { yearOptions } from "utils/constants";
 import AuthService from "handlers/AuthService";
 import Loader from "components/Loader";
@@ -19,7 +19,7 @@ class MentorApplicationForm extends Component {
     this.state = {
       email: "",
       name: "",
-      enrollno: "",
+      enroll_no: "",
       branch: "",
       year: "",
       motivation: "",
@@ -38,11 +38,13 @@ class MentorApplicationForm extends Component {
 
   async componentDidMount() {
     this.props.fetch();
-    await checkMentorHasApplied(this.Auth.getUserId())
+    await getUserDetails()
       .then((res) => {
         this.setState({
           isLoading: false,
-          hasApplied: res.data.status,
+          hasApplied: res.has_applied,
+          email: res.email,
+          name: res.name,
         });
       })
       .catch((err) => {
@@ -103,9 +105,7 @@ class MentorApplicationForm extends Component {
     if (this.state.captcha) {
       this.setState({ isLoading: true });
       const {
-        email,
-        name,
-        enrollno,
+        enroll_no,
         branch,
         year,
         motivation,
@@ -115,9 +115,7 @@ class MentorApplicationForm extends Component {
       } = this.state;
 
       const data = {
-        email: email,
-        name: name,
-        enrollno: enrollno,
+        enroll_no: enroll_no,
         branch: branch,
         year: year,
         motivation: motivation,
@@ -131,9 +129,7 @@ class MentorApplicationForm extends Component {
           if (response.status === 201) {
             window.flash("Your response has been succesfully recorded");
             this.setState({
-              email: "",
-              name: "",
-              enrollno: "",
+              enroll_no: "",
               branch: "",
               year: "",
               motivation: "",
@@ -161,8 +157,8 @@ class MentorApplicationForm extends Component {
               if (errorData.mobile) {
                 errorMsg += errorData.mobile[0] + "\n";
               }
-              if (errorData.enrollno) {
-                errorMsg += errorData.enrollno[0] + "\n";
+              if (errorData.enroll_no) {
+                errorMsg += errorData.enroll_no[0] + "\n";
               }
             } else {
               errorMsg = "Unable to Connect to Server";
@@ -220,21 +216,20 @@ class MentorApplicationForm extends Component {
                 value={this.state.name}
                 id="name"
                 placeholder="Enter your Name"
-                onChange={this.handleChange}
-                required
+                readOnly
               />
             </div>
 
             <div className={styles["form-group"]}>
-              <label htmlFor="enrollno">
+              <label htmlFor="enroll_no">
                 Enrollment Number<span className="color-red">*</span>
               </label>
               <input
                 type="number"
                 className={styles["form-control"]}
-                name="enrollno"
-                value={this.state.enrollno}
-                id="enrollno"
+                name="enroll_no"
+                value={this.state.enroll_no}
+                id="enroll_no"
                 minLength="8"
                 maxLength="8"
                 placeholder="Enter your Enrollment Number"
@@ -256,8 +251,7 @@ class MentorApplicationForm extends Component {
                 id="email"
                 name="email"
                 placeholder="Enter your Email Address"
-                onChange={this.handleChange}
-                required
+                readOnly
               />
             </div>
 

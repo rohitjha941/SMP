@@ -4,11 +4,7 @@ import styles from "./MentorRegistrationForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import {
-  checkMentorIsSelected,
-  createMentor,
-  getMentorFormData,
-} from "api/methods";
+import { getUserDetails, createMentor, getMentorFormData } from "api/methods";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
 import ImageCropper from "components/ImageCropper";
@@ -22,9 +18,10 @@ class MentorRegistrationForm extends Component {
     super();
     this.Auth = new AuthService();
     this.state = {
+      userId: 0,
       name: "",
       year: "",
-      enrollno: "",
+      enroll_no: "",
       branch: "",
       interests: [],
       achievements: [],
@@ -56,10 +53,11 @@ class MentorRegistrationForm extends Component {
   }
   async componentDidMount() {
     this.props.fetch();
-    await checkMentorIsSelected(this.Auth.getUserId())
+    await getUserDetails()
       .then((res) => {
         this.setState({
-          isSelected: res.data.status,
+          isSelected: res.is_mentor,
+          userId: res.user_id,
         });
       })
       .catch((err) => {
@@ -70,23 +68,23 @@ class MentorRegistrationForm extends Component {
         });
       });
     if (this.state.isSelected) {
-      await getMentorFormData()
+      await getMentorFormData(this.state.userId)
         .then((res) => {
           const user = res;
           if (user) {
             this.setState({
-              name: user.name ? user.name : "",
-              email: user.email ? user.email : "",
-              year: user.year ? user.year : "",
-              enrollno: user.enrollno ? user.enrollno : "",
-              career: user.career ? user.career : "",
-              facebook: user.facebook ? user.facebook : "",
-              linkedin: user.linkedin ? user.linkedin : "",
+              name: user.name || "",
+              email: user.email || "",
+              year: user.year || "",
+              enroll_no: user.enroll_no || "",
+              career: user.career || "",
+              facebook: user.facebook || "",
+              linkedin: user.linkedin || "",
               mobile: user.mobile ? parseInt(user.mobile) : "",
-              branch: user.branch ? user.branch : "",
-              groups: user.groups ? user.groups : [],
-              interests: user.interest ? user.interest : [],
-              internships: user.interns ? user.interns : [],
+              branch: user.branch || "",
+              groups: user.groups || [],
+              interests: user.interest || [],
+              internships: user.interns || [],
               placement:
                 user.placement && user.placement.length > 0
                   ? user.placement[0]
@@ -115,7 +113,7 @@ class MentorRegistrationForm extends Component {
               isLoading: false,
             });
           } else {
-            window.flash("Unable to connect to server");
+            window.flash("Unable to connect to server", "err");
             this.setState({
               redirect: true,
               isLoading: false,
@@ -167,12 +165,6 @@ class MentorRegistrationForm extends Component {
     const resume = e.target.files[0];
     this.setState({
       resume: resume,
-    });
-  };
-  handleChangeBranch = (option) => {
-    const value = option.value;
-    this.setState({
-      branch: value,
     });
   };
   handleChangeYear = (option) => {
@@ -254,12 +246,9 @@ class MentorRegistrationForm extends Component {
     e.preventDefault();
     this.setState({ isLoadingSubmission: true });
     const {
-      name,
+      userId,
       year,
-      enrollno,
-      branch,
       interests,
-      email,
       mobile,
       image,
       resume,
@@ -273,12 +262,9 @@ class MentorRegistrationForm extends Component {
     } = this.state;
 
     const data = {
-      name: name,
+      userId: userId,
       year: year,
-      enrollno: enrollno,
-      branch: branch,
       interest: interests,
-      email: email,
       mobile: mobile,
       image: image,
       resume: resume,
@@ -295,12 +281,8 @@ class MentorRegistrationForm extends Component {
         if (response.status === 201) {
           window.flash("Your response has been succesfully recorded");
           this.setState({
-            name: "",
             year: "",
-            enrollno: "",
-            branch: "",
             interest: [],
-            email: "",
             mobile: "",
             image: null,
             resume: null,
@@ -334,7 +316,7 @@ class MentorRegistrationForm extends Component {
             if (errorData.email) {
               errorMessage += "This Email is already in use.\n";
             }
-            if (errorData.enrollno) {
+            if (errorData.enroll_no) {
               errorMessage += "This Enrollment No. is already in use.\n";
             }
             if (errorData.mobile) {
@@ -355,16 +337,6 @@ class MentorRegistrationForm extends Component {
     if (this.state.redirect) return <Redirect to="/user-dashboard" />;
     if (this.state.isLoading) return <Loader />;
     if (this.state.isLoadingSubmission) return <LoadingOverlay />;
-    const branchOptions =
-      this.props.branches && this.props.branches.length > 0
-        ? this.props.branches.map((branch) => {
-            const option = {
-              value: branch.id,
-              label: branch.branch_name,
-            };
-            return option;
-          })
-        : [];
     const interestOptions =
       this.props.interests && this.props.interests.length > 0
         ? this.props.interests.map((interest) => {
@@ -385,6 +357,12 @@ class MentorRegistrationForm extends Component {
             return option;
           })
         : [];
+    const branchSearch =
+      this.props.branches && this.props.branches.length > 0
+        ? this.props.branches.filter((branch) => {
+            return branch.id === this.state.branch;
+          })
+        : "";
     return (
       <>
         <div className={styles.MainWrapper}>
@@ -399,31 +377,23 @@ class MentorRegistrationForm extends Component {
               <input
                 type="text"
                 className={styles["form-control"]}
-                name="name"
-                value={this.state.name}
+                value={this.state.name || ""}
                 id="name"
                 placeholder="Enter your Name"
-                onChange={this.handleChange}
-                required
+                readOnly
               />
             </div>
             <div className={styles["form-group"]}>
-              <label htmlFor="enrollno">
+              <label htmlFor="enroll_no">
                 Enrollment Number<span className="color-red">*</span>
               </label>
               <input
-                type="number"
+                type="text"
                 className={styles["form-control"]}
-                name="enrollno"
-                value={this.state.enrollno}
-                id="enrollno"
-                minLength="8"
-                maxLength="8"
+                value={this.state.enroll_no || ""}
+                id="enroll_no"
                 placeholder="Enter your Enrollment Number"
-                onChange={this.handleChange}
-                onKeyDown={this.checkKey}
-                onWheel={(e) => e.target.blur()}
-                required
+                readOnly
               />
             </div>
             <div className={styles["form-group"]}>
@@ -444,14 +414,15 @@ class MentorRegistrationForm extends Component {
               <label htmlFor="branch">
                 Branch<span className="color-red">*</span>
               </label>
-              <Select
+              <input
+                type="text"
+                className={styles["form-control"]}
+                value={
+                  branchSearch.length > 0 ? branchSearch[0].branch_name : ""
+                }
                 id="branch"
-                value={branchOptions.filter(
-                  (option) => option.value === this.state.branch
-                )}
-                onChange={this.handleChangeBranch}
-                options={branchOptions}
-                required
+                placeholder="Enter Your Branch"
+                readOnly
               />
             </div>
             <div className={styles["form-group"]}>
@@ -536,12 +507,10 @@ class MentorRegistrationForm extends Component {
               <input
                 type="email"
                 className={styles["form-control"]}
-                value={this.state.email}
+                value={this.state.email || ""}
                 id="email"
-                name="email"
                 placeholder="Enter your Email Address"
-                onChange={this.handleChange}
-                required
+                readOnly
               />
             </div>
             <div className={styles["form-group"]}>

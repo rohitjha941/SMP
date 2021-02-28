@@ -34,11 +34,11 @@ class MentorProfile extends Component {
       facebookURL = "#",
       linkedinURL = "#",
       resumeURL = "#";
-    if (!mentor.error) {
+    if (!mentor.error && mentor.student) {
       branch =
         this.props.branches.length > 0
           ? this.props.branches.find((branch) => {
-              return branch.id === mentor.branch;
+              return branch.id === mentor.student.branch;
             })
           : { branch_name: "" };
 
@@ -80,7 +80,7 @@ class MentorProfile extends Component {
     }
     return (
       <>
-        {!mentor.error ? (
+        {!mentor.error && mentor.student ? (
           <div className={styles.mainWrapper}>
             {/* Mentor Basic Info */}
             <div className={styles.infoWrapper}>
@@ -88,11 +88,11 @@ class MentorProfile extends Component {
                 <img
                   src={mentor.photo}
                   className={styles.mentorImage}
-                  alt={mentor.name}
+                  alt={mentor.student.name}
                 />
               </div>
               <div className={styles.infoDetail}>
-                <div className={styles.mentorName}>{mentor.name}</div>
+                <div className={styles.mentorName}>{mentor.student.name}</div>
                 <div className={styles.mentorMeta}>
                   {branch.branch_name + " • " + mentor.year + " Year"}
                 </div>
@@ -210,9 +210,12 @@ class MentorProfile extends Component {
                   <div className={styles.achievementsTitle}>Achievements</div>
                   {achievements.map((value) => {
                     return (
-                      <li key={value.id} className={styles.achievementsWrapper}>
-                        {value.achievement_name}
-                      </li>
+                      <div
+                        key={value.id}
+                        className={styles.achievementsWrapper}
+                      >
+                        {"• " + value.achievement_name}
+                      </div>
                     );
                   })}
                 </>

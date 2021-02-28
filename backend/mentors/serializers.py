@@ -1,19 +1,22 @@
 from rest_framework import serializers
 from .models import *
+from common.serializers import StudentSerializer
 
 
 class MentorGETSerializer(serializers.ModelSerializer):
+    student = StudentSerializer(read_only=True)
+
     class Meta:
         model = Mentor
-        fields = ['id', 'name', 'branch', 'year', 'photo', 'interest', 'groups', 'facebook', 'linkedin', 'resume',
-                  'mentor_intern', 'mentor_placement', 'mentor_achievement']
+        fields = ['id', 'student', 'year', 'photo', 'interest', 'groups', 'facebook', 'linkedin', 'resume', 'mentor_intern',
+                  'mentor_placement', 'mentor_achievement']
 
 
 class MentorPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mentor
-        fields = ['id', 'name', 'branch', 'year', 'photo', 'interest', 'groups', 'facebook', 'linkedin', 'resume',
-                  'email', 'career', 'mobile', 'enrollno', 'mentor_intern', 'mentor_placement', 'mentor_achievement']
+        fields = ['id', 'year', 'photo', 'interest', 'groups', 'facebook', 'linkedin', 'resume', 'career', 'mobile',
+                  'mentor_intern', 'mentor_placement', 'mentor_achievement']
 
 
 class MentorAchievementSerializer(serializers.ModelSerializer):
@@ -43,5 +46,4 @@ class InterestSerializer(serializers.ModelSerializer):
 class MentorApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MentorApplication
-        fields = ['id', 'name', 'email', 'enrollno', 'branch', 'user',
-                  'year', 'qualities', 'motivation', 'mobile', 'resume']
+        fields = "__all__"

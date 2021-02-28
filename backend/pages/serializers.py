@@ -33,12 +33,6 @@ class StudentTeamSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class BranchSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Branch
-        fields = "__all__"
-
-
 class ContactDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactDetails
@@ -51,15 +45,15 @@ class BlogCategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class BlogsSerializer(serializers.ModelSerializer):
+class BlogSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Blogs
+        model = Blog
         fields = "__all__"
 
 
-class EventsSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Events
+        model = Event
         fields = "__all__"
 
 
@@ -69,7 +63,7 @@ class RaisedQuerySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class CampusGroupsSerializer(serializers.ModelSerializer):
+class CampusGroupSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CampusGroups
+        model = CampusGroup
         fields = "__all__"

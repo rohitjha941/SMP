@@ -4,11 +4,7 @@ import { Redirect, Link } from "react-router-dom";
 import styles from "./UserDashboard.module.scss";
 import AuthService from "handlers/AuthService";
 import Button from "components/Button";
-import {
-  checkMentorHasApplied,
-  checkMentorIsSelected,
-  withdrawApplication,
-} from "api/methods";
+import { getUserDetails, withdrawApplication } from "api/methods";
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -17,6 +13,7 @@ class UserDashboard extends Component {
     this.state = {
       isAuthenticated: this.Auth.hasAccessToken(),
       username: "",
+      userId: 0,
       hasApplied: false,
       isAccepted: false,
       isServerError: true,
@@ -34,7 +31,7 @@ class UserDashboard extends Component {
       "Are you sure and want to withraw your application!"
     );
     if (r === true) {
-      withdrawApplication()
+      withdrawApplication(this.state.userId)
         .then((res) => {
           this.setState({
             hasApplied: false,
@@ -54,41 +51,23 @@ class UserDashboard extends Component {
     }
   };
   componentDidMount() {
-    this.setState({
-      username: this.Auth.getUsername(),
-    });
-    const checkPrivileges = async (userID) => {
-      await checkMentorHasApplied(userID)
-        .then((res) => {
-          this.setState({
-            hasApplied: res.data.status,
-          });
-        })
-        .catch((err) => {
-          window.flash("Unable to connect to server", "error");
-          this.setState({
-            redirect: true,
-            isLoading: false,
-            isServerError: true,
-          });
+    getUserDetails()
+      .then((res) => {
+        this.setState({
+          username: res.name,
+          userId: res.user_id,
+          hasApplied: res.has_applied,
+          isAccepted: res.is_mentor,
+          isServerError: false,
         });
-      await checkMentorIsSelected(userID)
-        .then((res) => {
-          this.setState({
-            isAccepted: res.data.status,
-            isServerError: false,
-          });
-        })
-        .catch((err) => {
-          window.flash("Unable to connect to server", "error");
-          this.setState({
-            redirect: true,
-            isLoading: false,
-            isServerError: true,
-          });
+      })
+      .catch((err) => {
+        this.setState({
+          redirect: true,
+          isLoading: false,
+          isServerError: true,
         });
-    };
-    checkPrivileges(this.Auth.getUserId());
+      });
   }
   render() {
     if (!this.state.isAuthenticated) {
@@ -121,11 +100,20 @@ class UserDashboard extends Component {
                           />
                         </Link>
                       ) : (
-                        <Button
-                          onClick={this.onClickWithdraw}
-                          className={styles.commonBtn}
-                          text="With Draw Application"
-                        />
+                        <>
+                          <Link to="/datacollection/mentors/application-preview">
+                            <Button
+                              className={styles.commonBtn}
+                              text="View your application"
+                            />
+                          </Link>
+                          <br />
+                          <Button
+                            onClick={this.onClickWithdraw}
+                            className={styles.commonBtn}
+                            text="With Draw Application"
+                          />
+                        </>
                       )}
                     </>
                   ) : (

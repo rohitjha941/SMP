@@ -173,13 +173,13 @@ class MentorShow extends Component {
               });
             });
             let branch_name = this.props.branches.find((element) => {
-              return element.id === value.branch;
+              return element.id === (value.student ? value.student.branch : 0);
             });
             return {
               id: value.id,
               image: value.photo,
-              name: value.name,
-              branch: value.branch,
+              name: value.student ? value.student.name : "",
+              branch: value.student ? value.student.branch : 0,
               branch_name: branch_name.branch_name,
               year: value.year,
               skills: interests,

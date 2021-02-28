@@ -6,6 +6,7 @@ from rest_framework import generics, status
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from common.utils import verify_recaptcha
 
@@ -13,8 +14,10 @@ from .permissions import IsOwnerOrReadOnly
 from .models import *
 from .serializers import *
 
-
+from common.models import Student, Branch
+from common.serializers import StudentSerializer
 # Create your views here.
+
 
 class MentorListView(APIView):
     """
@@ -28,7 +31,7 @@ class MentorListView(APIView):
 class MentorView (APIView):
     queryset = Mentor.objects.all()
     serializer_class = MentorPOSTSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly, ]
     """
     Endpoint for Mentor Registration Portal
     """
@@ -39,28 +42,27 @@ class MentorView (APIView):
         Method for requesting for data for prepopulation
         """
         try:
-            mentor_application = MentorApplication.objects.get(user=pk)
+            student_object = Student.objects.get(user=pk)
+            mentor_application = MentorApplication.objects.get(
+                student=student_object.id)
         except:
             return Response({'msg': 'You have not applied', 'error': True}, status=status.HTTP_404_NOT_FOUND)
 
-        if request.user != mentor_application.user:
+        if request.user != student_object.user:
             return Response({'status': 'You are not authorized', 'err': True}, status=status.HTTP_401_UNAUTHORIZED)
         if mentor_application.is_accepted:
             try:
-                mentor_object = Mentor.objects.get(user=pk)
+                mentor_object = Mentor.objects.get(student=student_object.id)
             except:
                 mentor_object = Mentor()
-                mentor_object.name = mentor_application.name
-                mentor_object.user = mentor_application.user
-                mentor_object.enrollno = mentor_application.enrollno
+                mentor_object.student = mentor_application.student
                 mentor_object.resume = mentor_application.resume
-                mentor_object.branch = mentor_application.branch
                 mentor_object.year = mentor_application.year
-                mentor_object.mobile = mentor_application.mobile
-                mentor_object.email = mentor_application.email
                 mentor_object.save()
+            student_serializer = StudentSerializer(student_object)
             mentor_serializer = MentorPOSTSerializer(mentor_object)
-            return Response({'user': mentor_serializer.data, 'err': False}, status=status.HTTP_200_OK)
+            data = {**student_serializer.data, **mentor_serializer.data}
+            return Response({'user': data, 'err': False}, status=status.HTTP_200_OK)
         else:
             return Response({'status': 'Application Not Accepted', 'err': True}, status=status.HTTP_404_NOT_FOUND)
 
@@ -74,7 +76,9 @@ class MentorView (APIView):
             # if they fail. Using atomic transaction will cause complete rollback
             # avoiding inconsistent mentor data in case of query failure.
             try:
-                mentor_application = MentorApplication.objects.get(user=pk)
+                student_object = Student.objects.get(user=pk)
+                mentor_application = MentorApplication.objects.get(
+                    student=student_object.id)
             except:
                 return Response({'msg': 'You have not applied', 'error': True}, status=status.HTTP_404_NOT_FOUND)
 
@@ -82,20 +86,16 @@ class MentorView (APIView):
                 request_data = request.data
                 if mentor_application.is_accepted:
                     try:
-                        mentor_object = Mentor.objects.get(user=pk)
+                        mentor_object = Mentor.objects.get(
+                            student=student_object.id)
                     except:
                         mentor_object = Mentor()
-                        mentor_object.name = mentor_application.name
-                        mentor_object.user = mentor_application.user
-                        mentor_object.enrollno = mentor_application.enrollno
+                        mentor_object.student = mentor_application.student
                         mentor_object.resume = mentor_application.resume
-                        mentor_object.branch = mentor_application.branch
                         mentor_object.year = mentor_application.year
-                        mentor_object.mobile = mentor_application.mobile
-                        mentor_object.email = mentor_application.email
                         mentor_object.save()
 
-                    if request.user == mentor_object.user:
+                    if request.user == student_object.user:
                         mentor_serializer = MentorPOSTSerializer(
                             mentor_object, data=request_data)
                         last_used_serializer = mentor_serializer
@@ -178,7 +178,6 @@ class InterestView (generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def create(self, request):
-        interests = []
         interest_ids = []
         try:
             interests = request.data["interests"]
@@ -202,7 +201,33 @@ class MentorApplicationView(APIView):
     """
     queryset = MentorApplication.objects.all()
     serializer_class = MentorApplicationSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        if request.user.id == pk:
+            student_exists = Student.objects.filter(
+                user=request.user).count() > 0
+            if student_exists:
+                student_id = Student.objects.get(user=request.user).id
+                has_applied = MentorApplication.objects.filter(
+                    student=student_id).count() > 0
+                if has_applied:
+                    application_object = MentorApplication.objects.get(
+                        student=student_id)
+                    application_serializer = MentorApplicationSerializer(
+                        application_object)
+                    student_object = Student.objects.get(
+                        id=application_serializer.data.get('student'))
+                    student_serializer = StudentSerializer(student_object)
+                    data = {**student_serializer.data,
+                            **application_serializer.data}
+                    return Response({'msg': 'Application Found', 'data': data}, status=status.HTTP_200_OK)
+                else:
+                    return Response({'msg': 'Application Not Found'}, status=status.HTTP_404_NOT_FOUND)
+            else:
+                return Response({'msg': 'User not registered'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({'msg': 'Invalid Credentials'}, status=status.HTTP_403_FORBIDDEN)
 
     def post(self, request):
         """
@@ -210,18 +235,66 @@ class MentorApplicationView(APIView):
         """
         # No two applications can be created for same user as there is one to one relationship between the two
 
-        # is_verified = verify_recaptcha(request)
-        is_verified = True
+        is_verified = verify_recaptcha(request)
+        # is_verified = True
         if is_verified:
-            serializer = MentorApplicationSerializer(data=request.data)
-            if serializer.is_valid():
-                if serializer.validated_data["user"] == request.user:
-                    serializer.save()
-                    return Response(status=status.HTTP_201_CREATED)
+            with transaction.atomic():
+                request_data = request.data
+                student_exists = Student.objects.filter(
+                    user=request.user).count() > 0
+                if not student_exists:
+                    try:
+                        student_data = dict(
+                            user=request.user.id,
+                            name=request.user.first_name,
+                            branch=request_data.get('branch'),
+                            email=request.user.email,
+                            enroll_no=request_data.get('enroll_no'),
+                        )
+                    except:
+                        return Response({'msg': 'Insufficient Data'}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+                    student_serializer = StudentSerializer(data=student_data)
+                    if student_serializer.is_valid():
+                        student_serializer.save()
+                        student_id = student_serializer.data.get('id')
+                    else:
+                        return Response(student_serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
                 else:
-                    return Response(status=status.HTTP_401_UNAUTHORIZED)
-            print(serializer.errors)
-            return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+                    student_obj = Student.objects.get(user=request.user.id)
+                    is_branch_valid = Branch.objects.filter(
+                        pk=int(request_data.get('branch'))).count() > 0
+                    if is_branch_valid:
+                        branch = Branch.objects.get(
+                            pk=int(request_data.get('branch')))
+                    else:
+                        return Response({'msg': 'Invalid branch name'}, status=status.HTTP_400_BAD_REQUEST)
+                    student_obj.branch = branch
+                    student_obj.save()
+                    student_id = student_obj.id
+
+                has_applied = MentorApplication.objects.filter(
+                    student=student_id).count() > 0
+                if has_applied:
+                    return Response({'msg': 'Application Already Exists'}, status=status.HTTP_409_CONFLICT)
+                try:
+                    mentor_application_data = dict(
+                        student=student_id,
+                        is_accepted=False,
+                        year=request_data.get('year'),
+                        motivation=request_data.get('motivation'),
+                        qualities=request_data.get('qualities'),
+                        mobile=request_data.get('mobile'),
+                        resume=request_data.get('resume'),
+                    )
+                except:
+                    return Response({'msg': 'Insufficient Data'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                mentor_application_serializer = MentorApplicationSerializer(
+                    data=mentor_application_data)
+                if mentor_application_serializer.is_valid():
+                    mentor_application_serializer.save()
+                    return Response({'msg': 'Application Successfully Submitted'}, status=status.HTTP_201_CREATED)
+                else:
+                    return Response(mentor_application_serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         return Response(data={'error': 'ReCAPTCHA not verified.'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
     def delete(self, request, pk):
@@ -229,9 +302,11 @@ class MentorApplicationView(APIView):
         Endpoint to withdraw application
         """
         try:
-            mentor_application = MentorApplication.objects.get(user=pk)
+            student_id = Student.objects.get(user=pk).id
+            mentor_application = MentorApplication.objects.get(
+                student=student_id)
             try:
-                if request.user == mentor_application.user:
+                if request.user.id == pk:
                     mentor_application.delete()
                     return Response({'msg': 'Deleted Successfully!', 'err': False}, status=status.HTTP_200_OK)
                 else:
@@ -285,29 +360,3 @@ class MentorAchievementView (generics.ListAPIView):
             queryset = MentorAchievement.objects.filter(id__in=ids_list)
 
         return queryset
-
-
-class CheckHasApplied(APIView):
-    """
-    Check whether a user has applied
-    """
-
-    def get(self, request, pk):
-        try:
-            num_results = MentorApplication.objects.filter(user=pk).count()
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        return Response({'status': True if num_results > 0 else False, 'err': False}, status=status.HTTP_200_OK)
-
-
-class CheckIsSelected(APIView):
-    """
-    Check whether mentor application is selected
-    """
-
-    def get(self, request, pk):
-        try:
-            mentor_application = MentorApplication.objects.get(user=pk)
-            return Response({'status': mentor_application.is_accepted, 'err': False}, status=status.HTTP_200_OK)
-        except:
-            return Response({'status': False, 'msg': 'Application not Found!', 'err': True}, status=status.HTTP_200_OK)

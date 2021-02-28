@@ -37,19 +37,14 @@ class StudentTeamView (generics.ListAPIView):
     serializer_class = StudentTeamSerializer
 
 
-class BranchView (generics.ListAPIView):
-    queryset = Branch.objects.all().order_by('branch_name')
-    serializer_class = BranchSerializer
-
-
 class ContactDetailsView(generics.ListAPIView):
     queryset = ContactDetails.objects.all()
     serializer_class = ContactDetailsSerializer
 
 
-class CampusGroupsView (generics.ListAPIView):
-    queryset = CampusGroups.objects.all().order_by('group_name')
-    serializer_class = CampusGroupsSerializer
+class CampusGroupView (generics.ListAPIView):
+    queryset = CampusGroup.objects.all().order_by('group_name')
+    serializer_class = CampusGroupSerializer
 
 
 class BlogCategoryView (generics.ListAPIView):
@@ -57,27 +52,27 @@ class BlogCategoryView (generics.ListAPIView):
     serializer_class = BlogCategorySerializer
 
 
-class BlogsView (viewsets.ReadOnlyModelViewSet):
-    queryset = Blogs.objects.all().order_by("-created_at")
-    serializer_class = BlogsSerializer
+class BlogView (viewsets.ReadOnlyModelViewSet):
+    queryset = Blog.objects.all().order_by("-created_at")
+    serializer_class = BlogSerializer
 
 
 class EventsView(APIView):
     def get(self, request):
         data = {
-            "past": EventsSerializer(
-                Events.objects.filter(date__lt=datetime.date.today()).order_by("-date"), many=True
+            "past": EventSerializer(
+                Event.objects.filter(date__lt=datetime.date.today()).order_by("-date"), many=True
             ).data,
-            "this_week": EventsSerializer(
-                Events.objects.filter(
+            "this_week": EventSerializer(
+                Event.objects.filter(
                     date__gte=datetime.date.today(),
                     date__lt=(datetime.date.today() +
                               datetime.timedelta(days=7)),
                 ).order_by("-date"),
                 many=True,
             ).data,
-            "upcoming": EventsSerializer(
-                Events.objects.filter(
+            "upcoming": EventSerializer(
+                Event.objects.filter(
                     date__gte=datetime.date.today() + datetime.timedelta(days=7)
                 ).order_by("date"),
                 many=True,
