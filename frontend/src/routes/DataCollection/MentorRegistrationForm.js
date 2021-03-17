@@ -4,15 +4,23 @@ import styles from "./MentorRegistrationForm.module.scss";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import { createMentor } from "api/methods";
+import {
+  checkMentorIsSelected,
+  createMentor,
+  getMentorFormData,
+} from "api/methods";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
 import ImageCropper from "components/ImageCropper";
 import { yearOptions } from "utils/constants";
+import AuthService from "handlers/AuthService";
+import Loader from "components/Loader";
+import { BASE_URL } from "api/constants";
 const animatedComponents = makeAnimated();
 class MentorRegistrationForm extends Component {
   constructor() {
     super();
+    this.Auth = new AuthService();
     this.state = {
       name: "",
       year: "",
@@ -34,15 +42,91 @@ class MentorRegistrationForm extends Component {
       career: "",
       groups: [],
       createdInterest: [],
-      isLoading: false,
+      isLoading: true,
+      isLoadingSubmission: false,
       redirect: false,
       src: null,
       croppedSrc: null,
       cropperToggle: false,
+      isAuthenticated: this.Auth.hasAccessToken(),
+      isSelected: false,
+      currentPhoto: null,
+      currentResume: null,
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.props.fetch();
+    await checkMentorIsSelected(this.Auth.getUserId())
+      .then((res) => {
+        this.setState({
+          isSelected: res.data.status,
+        });
+      })
+      .catch((err) => {
+        window.flash("Unable to connect to server", "err");
+        this.setState({
+          redirect: true,
+          isLoading: false,
+        });
+      });
+    if (this.state.isSelected) {
+      await getMentorFormData()
+        .then((res) => {
+          const user = res;
+          if (user) {
+            this.setState({
+              name: user.name ? user.name : "",
+              email: user.email ? user.email : "",
+              year: user.year ? user.year : "",
+              enrollno: user.enrollno ? user.enrollno : "",
+              career: user.career ? user.career : "",
+              facebook: user.facebook ? user.facebook : "",
+              linkedin: user.linkedin ? user.linkedin : "",
+              mobile: user.mobile ? parseInt(user.mobile) : "",
+              branch: user.branch ? user.branch : "",
+              groups: user.groups ? user.groups : [],
+              interests: user.interest ? user.interest : [],
+              internships: user.interns ? user.interns : [],
+              placement:
+                user.placement && user.placement.length > 0
+                  ? user.placement[0]
+                  : {
+                      company: "",
+                      job_title: "",
+                    },
+              achievements:
+                user.achievements && user.achievements.length > 0
+                  ? user.achievements.map((item) => {
+                      return item.achievement_name;
+                    })
+                  : [],
+              currentPhoto: user.photo ? BASE_URL + user.photo : null,
+              currentResume: user.resume ? BASE_URL + user.resume : null,
+              isLoading: false,
+            });
+          }
+        })
+        .catch((error) => {
+          if (error && error.logout === true) {
+            window.flash(error.msg, "error");
+            this.setState({
+              isAuthenticated: false,
+              redirect: true,
+              isLoading: false,
+            });
+          } else {
+            window.flash("Unable to connect to server");
+            this.setState({
+              redirect: true,
+              isLoading: false,
+            });
+          }
+        });
+    } else {
+      this.setState({
+        isLoading: false,
+      });
+    }
   }
   setCroppedSrc = (croppedImageURL) => {
     this.setState({ croppedSrc: croppedImageURL });
@@ -98,24 +182,34 @@ class MentorRegistrationForm extends Component {
     });
   };
   handleChangeGroups = (option) => {
-    const value = option.map((group) => {
-      return group.value;
-    });
+    const value =
+      option && option.length > 0
+        ? option.map((group) => {
+            return group.value;
+          })
+        : [];
     this.setState({
       groups: value,
     });
   };
   handleChangeInterests = (option) => {
-    const value = option
-      ? option.map((interest) => {
-          return interest.value;
-        })
-      : [];
+    const value =
+      option && option.length > 0
+        ? option.map((interest) => {
+            return interest.value;
+          })
+        : [];
+    // to accomodate created options in CreateSelect
+    const created =
+      option && option.length > 0
+        ? option.filter((i) => typeof i.value === "string")
+        : [];
+
     this.setState({
-      interest: value,
+      interests: value,
+      createdInterest: created,
     });
   };
-
   handleAddAchievement = (e) => {
     e.preventDefault();
     this.setState({
@@ -158,13 +252,13 @@ class MentorRegistrationForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ isLoading: true });
+    this.setState({ isLoadingSubmission: true });
     const {
       name,
       year,
       enrollno,
       branch,
-      interest,
+      interests,
       email,
       mobile,
       image,
@@ -183,7 +277,7 @@ class MentorRegistrationForm extends Component {
       year: year,
       enrollno: enrollno,
       branch: branch,
-      interest: interest,
+      interest: interests,
       email: email,
       mobile: mobile,
       image: image,
@@ -215,32 +309,52 @@ class MentorRegistrationForm extends Component {
             groups: [],
             achievements: [],
             internships: [],
+            createdInterest: [],
             placement: { company: "", job_title: "" },
             redirect: true,
-            isLoading: false,
+            isLoadingSubmission: false,
             career: "",
           });
         }
       })
       .catch((error) => {
-        const errorData = error.data;
-        let errorMessage = "";
-        if (errorData.email) {
-          errorMessage += "This Email is already in use.\n";
+        if (error && error.logout === true) {
+          window.flash(error.msg, "error");
+          this.setState({
+            isAuthenticated: false,
+            isLoadingSubmission: false,
+          });
+        } else {
+          this.setState({
+            croppedSrc: null,
+          });
+          let errorMessage = "";
+          if (error && error.data) {
+            const errorData = error.response.data;
+            if (errorData.email) {
+              errorMessage += "This Email is already in use.\n";
+            }
+            if (errorData.enrollno) {
+              errorMessage += "This Enrollment No. is already in use.\n";
+            }
+            if (errorData.mobile) {
+              errorMessage += "This Mobile No. is already in use.";
+            }
+          } else {
+            errorMessage = "Unable to connect to server";
+          }
+          window.flash(errorMessage, "error");
+          this.setState({
+            isLoadingSubmission: false,
+          });
         }
-        if (errorData.enrollno) {
-          errorMessage += "This Enrollment No. is already in use.\n";
-        }
-        if (errorData.mobile) {
-          errorMessage += "This Mobile No. is already in use.";
-        }
-        window.flash(errorMessage, "error");
-        this.setState({
-          isLoading: false,
-        });
       });
   };
   render() {
+    if (!this.state.isAuthenticated) return <Redirect to="/g-signin" />;
+    if (this.state.redirect) return <Redirect to="/user-dashboard" />;
+    if (this.state.isLoading) return <Loader />;
+    if (this.state.isLoadingSubmission) return <LoadingOverlay />;
     const branchOptions =
       this.props.branches && this.props.branches.length > 0
         ? this.props.branches.map((branch) => {
@@ -271,12 +385,8 @@ class MentorRegistrationForm extends Component {
             return option;
           })
         : [];
-    if (this.state.redirect) {
-      return <Redirect to="/mentors/show" />;
-    }
     return (
       <>
-        {this.state.isLoading ? <LoadingOverlay /> : null}
         <div className={styles.MainWrapper}>
           <h2 className={styles.heading}>
             Mentors' <span className="color-red">Data</span>
@@ -322,6 +432,9 @@ class MentorRegistrationForm extends Component {
               </label>
               <Select
                 id="year"
+                value={yearOptions.filter(
+                  (option) => option.value === this.state.year
+                )}
                 onChange={this.handleChangeYear}
                 options={yearOptions}
                 required
@@ -333,6 +446,9 @@ class MentorRegistrationForm extends Component {
               </label>
               <Select
                 id="branch"
+                value={branchOptions.filter(
+                  (option) => option.value === this.state.branch
+                )}
                 onChange={this.handleChangeBranch}
                 options={branchOptions}
                 required
@@ -345,6 +461,9 @@ class MentorRegistrationForm extends Component {
               </label>
               <Select
                 id="groups"
+                value={groupsOptions.filter((option) =>
+                  this.state.groups.includes(option.value)
+                )}
                 isMulti
                 components={animatedComponents}
                 onChange={this.handleChangeGroups}
@@ -375,6 +494,12 @@ class MentorRegistrationForm extends Component {
               </label>
               <CreatableSelect
                 id="interests"
+                value={[
+                  ...interestOptions.filter((option) =>
+                    this.state.interests.includes(option.value)
+                  ),
+                  ...this.state.createdInterest,
+                ]}
                 options={interestOptions}
                 closeMenuOnSelect={false}
                 isMulti
@@ -421,15 +546,31 @@ class MentorRegistrationForm extends Component {
             </div>
             <div className={styles["form-group"]}>
               <label htmlFor="photo">
-                Photograph<span className="color-red">*</span>
+                Photograph{" "}
+                {!this.state.currentPhoto ? (
+                  <span className="color-red">*</span>
+                ) : null}
               </label>
+              <br />
+              {this.state.currentPhoto ? (
+                <label>
+                  Currently :{" "}
+                  <a
+                    href={this.state.currentPhoto}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {this.state.currentPhoto}
+                  </a>
+                </label>
+              ) : null}
               <input
                 type="file"
                 className={styles["form-control-file"]}
                 name="photo"
                 id="photo"
                 accept="image/*"
-                required
+                required={this.state.currentPhoto ? false : true}
                 onChange={this.handleImage}
               />
             </div>
@@ -458,14 +599,30 @@ class MentorRegistrationForm extends Component {
             )}
             <div className={styles["form-group"]}>
               <label htmlFor="resume">
-                Resume<span className="color-red">*</span>
+                Resume
+                {!this.state.currentResume ? (
+                  <span className="color-red">*</span>
+                ) : null}
               </label>
+              <br />
+              {this.state.currentResume ? (
+                <label>
+                  Currently :{" "}
+                  <a
+                    href={this.state.currentResume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {this.state.currentResume}
+                  </a>
+                </label>
+              ) : null}
               <input
                 type="file"
                 className={styles["form-control-file"]}
                 name="resume"
                 id="resume"
-                required
+                required={this.state.currentResume ? false : true}
                 onChange={this.handleResume}
                 accept="application/pdf"
               />
@@ -617,7 +774,7 @@ class MentorRegistrationForm extends Component {
                   <input
                     type="text"
                     className={styles["form-control"]}
-                    value={this.state.placement.domain}
+                    value={this.state.placement.job_title}
                     id={"job_title"}
                     onChange={(e) => this.handleChangePlacement(e, "job_title")}
                   />

@@ -44,7 +44,7 @@ export default class Home extends Component {
             />
           </Link>
           <Link to="/about">
-            <div className={styles.learnMoreText}>Learn More ></div>
+            <div className={styles.learnMoreText}>{"Learn More >"}</div>
           </Link>
           <div onClick={this.scrollTo} className={styles.navDown}>
             <img src={navDown} className={styles.navDown} alt="down-arrow" />

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+from datetime import timedelta
 import yaml
 
 # Sentry
@@ -21,14 +21,15 @@ from sentry_sdk.integrations.django import DjangoIntegration
 with open("config.yml", "r") as ymlfile:
     cfg = yaml.safe_load(ymlfile)
 
-sentry_sdk.init(
-    dsn=cfg["sentry"]["dsn"],
-    integrations=[DjangoIntegration()],
+if cfg["env"] == "prod":
+    sentry_sdk.init(
+        dsn=cfg["sentry"]["dsn"],
+        integrations=[DjangoIntegration()],
 
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
+    )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,8 +44,7 @@ SECRET_KEY = cfg["security"]["django_secret_key"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if cfg["env"] == "dev" else False
 
-ALLOWED_HOSTS = [
-    '*'] if cfg["env"] == "dev" else cfg["security"]["allowed_hosts"].split(" ")
+ALLOWED_HOSTS = ['*'] if DEBUG else cfg["security"]["allowed_hosts"].split(" ")
 
 
 # Application definition
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'oauth',
     "common",
     "pages",
     "docs",
@@ -108,7 +109,7 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-if cfg["env"] == "dev":
+if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -140,6 +141,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
+# Rest Framework Simple JWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=int(cfg["simple_jwt"]["exp_access"]),),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(cfg["simple_jwt"]["exp_refresh"]),),
+
+    'SIGNING_KEY': cfg["simple_jwt"]["secret_signing_key"],
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -166,7 +174,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
 
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"}
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 # EMAIL_DATA
 DEFAULT_FROM_EMAIL = cfg["sendgrid"]["from_email"]
@@ -177,3 +189,6 @@ RECEIVER_NAME = cfg["sendgrid"]["receiver_name"]
 
 # ReCAPTCHA
 RECAPTCHA_SECRET_KEY = cfg["recaptcha"]["recaptcha_secret_key"]
+
+# OAuth
+GOOGLE_OAUTH_CLIENT_ID = cfg["oauth"]["google_client_id"]

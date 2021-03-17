@@ -17,8 +17,15 @@ import {
   MENTOR_INTERNS,
   MENTORS_PLACEMENTS,
   MENTORS_ACHIEVEMENTS,
+  EXHCANGE_TOKEN,
+  REFRESH_TOKEN,
+  CHECK_MENTOR_HAS_APPLIED,
+  CHECK_MENTOR_IS_SELECTED,
 } from "api/constants";
 import axios from "axios";
+import AuthService from "handlers/AuthService";
+import qs from "qs";
+import { isTokenValid } from "utils";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -203,11 +210,27 @@ export const postQuery = (data) => {
   return axios.post(RAISE_QUERY, data);
 };
 
-const CreateInterests = (interestData) => {
-  return axios.post(INTERESTS, interestData);
+const CreateInterests = async (interestData) => {
+  const auth = new AuthService();
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => {
+        reject(err);
+      });
+    }
+    axios
+      .post(INTERESTS, interestData, {
+        headers: {
+          authorization: `Bearer ${auth.getAccessToken()}`,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
 };
 
-export const postMentorApplication = (data) => {
+export const postMentorApplication = async (data) => {
+  const auth = new AuthService();
   const {
     email,
     name,
@@ -230,20 +253,29 @@ export const postMentorApplication = (data) => {
   formData.append("mobile", mobile);
   formData.append("resume", resume);
   formData.append("g-recaptcha-response", data["g-recaptcha-response"]);
-
-  return new Promise((resolve, reject) => {
+  formData.append("user", auth.getUserId());
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const access_token = auth.getAccessToken();
     axios
-      .post(MENTOR_APPLICATION, formData)
+      .post(MENTOR_APPLICATION, formData, {
+        headers: {
+          authorization: `Bearer ${access_token}`,
+        },
+      })
       .then((response) => {
         resolve(response);
       })
       .catch((error) => {
-        reject(error.response);
+        reject(error);
       });
   });
 };
 
-const postMentorFormData = (postData) => {
+const postMentorFormData = async (postData) => {
+  const auth = new AuthService();
   const {
     name,
     year,
@@ -269,8 +301,13 @@ const postMentorFormData = (postData) => {
   formData.append("branch", branch);
   formData.append("email", email);
   formData.append("mobile", mobile);
-  formData.append("photo", image);
-  formData.append("resume", resume);
+  // Prevent sending null data
+  if (image) {
+    formData.append("photo", image);
+  }
+  if (resume) {
+    formData.append("resume", resume);
+  }
   formData.append("facebook", facebook);
   formData.append("linkedin", linkedin);
   formData.append("career", career);
@@ -291,8 +328,20 @@ const postMentorFormData = (postData) => {
   formData.append("achievements", JSON.stringify(achievements));
   formData.append("interns", JSON.stringify(internships));
   formData.append("placement", JSON.stringify(placement));
-
-  return axios.post(MENTORS, formData);
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const access_token = auth.getAccessToken();
+    axios
+      .put(MENTORS + auth.getUserId() + "/", formData, {
+        headers: {
+          authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
 };
 
 export const createMentor = (mentorData) => {
@@ -321,11 +370,11 @@ export const createMentor = (mentorData) => {
               resolve(response);
             })
             .catch((error) => {
-              reject(error.response);
+              reject(error);
             });
         })
         .catch((error) => {
-          reject(error.response);
+          reject(error);
         });
     } else {
       postMentorFormData(mentorData)
@@ -333,7 +382,7 @@ export const createMentor = (mentorData) => {
           resolve(response);
         })
         .catch((error) => {
-          reject(error.response);
+          reject(error);
         });
     }
   });
@@ -344,5 +393,130 @@ export const getFreshersGuideUrl = () => {
     axios.get(FRESHERS_GUIDE).then((response) => {
       resolve(BASE_URL + response.data.document);
     });
+  });
+};
+
+export const getExchangeToken = (google_id_token) => {
+  const data = {
+    token: google_id_token,
+  };
+  return axios.post(EXHCANGE_TOKEN, qs.stringify(data), {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  });
+};
+
+export const getRefreshAccessToken = () => {
+  const auth = new AuthService();
+  return new Promise((resolve, reject) => {
+    if (!isTokenValid(auth.getRefreshToken())) {
+      auth.logout();
+      reject({
+        msg: "Please Login Again!",
+        logout: true,
+      });
+    }
+    const data = {
+      refresh: auth.getRefreshToken(),
+    };
+    axios
+      .post(REFRESH_TOKEN, qs.stringify(data), {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((res) => {
+        auth.setAccessToken(res.data.access);
+        resolve(res.data);
+      })
+      .catch((err) => {
+        auth.logout();
+        reject({
+          msg: "Please Login Again!",
+          logout: true,
+        });
+      });
+  });
+};
+
+export const checkMentorHasApplied = (userID) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(CHECK_MENTOR_HAS_APPLIED + userID + "/")
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const checkMentorIsSelected = (userID) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(CHECK_MENTOR_IS_SELECTED + userID + "/")
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const withdrawApplication = async () => {
+  const auth = new AuthService();
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const access_token = auth.getAccessToken();
+    axios
+      .delete(MENTOR_APPLICATION + auth.getUserId() + "/", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getMentorFormData = async () => {
+  const auth = new AuthService();
+  return new Promise(async (resolve, reject) => {
+    if (!isTokenValid(auth.getAccessToken())) {
+      await getRefreshAccessToken().catch((err) => reject(err));
+    }
+    const access_token = auth.getAccessToken();
+    axios
+      .get(MENTORS + auth.getUserId() + "/", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then(async (res) => {
+        const tmpUser = res.data.user;
+
+        // Load this info here instead of App.js because it needs regular updates and is only component specific data
+        const interns = await getMentorInterns(tmpUser.mentor_intern);
+        const placement = await getMentorPlacements(tmpUser.mentor_placement);
+        const achievements = await getMentorAchievements(
+          tmpUser.mentor_achievement
+        );
+
+        const user = {
+          ...tmpUser,
+          interns: interns,
+          placement: placement,
+          achievements: achievements,
+        };
+        resolve(user);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 };

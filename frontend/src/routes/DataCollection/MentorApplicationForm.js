@@ -5,14 +5,17 @@ import styles from "./MentorApplicationForm.module.scss";
 import Select from "react-select";
 import LoadingOverlay from "components/LoadingOverlay";
 import { Redirect } from "react-router-dom";
-import { postMentorApplication } from "api/methods";
+import { postMentorApplication, checkMentorHasApplied } from "api/methods";
 import { yearOptions } from "utils/constants";
+import AuthService from "handlers/AuthService";
+import Loader from "components/Loader";
 
 const recaptchaRef = React.createRef();
 
 class MentorApplicationForm extends Component {
   constructor() {
     super();
+    this.Auth = new AuthService();
     this.state = {
       email: "",
       name: "",
@@ -25,13 +28,30 @@ class MentorApplicationForm extends Component {
       resume: null,
       captcha: false,
       "g-recaptcha-response": "",
-      isLoading: false,
+      isLoading: true,
+      isLoadingSubmission: false,
       redirect: false,
+      isAuthenticated: this.Auth.hasAccessToken(),
+      hasApplied: false,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.fetch();
+    await checkMentorHasApplied(this.Auth.getUserId())
+      .then((res) => {
+        this.setState({
+          isLoading: false,
+          hasApplied: res.data.status,
+        });
+      })
+      .catch((err) => {
+        window.flash("Unable to connect to server", "error");
+        this.setState({
+          redirect: true,
+          isLoading: false,
+        });
+      });
   }
 
   checkKey = (e) => {
@@ -126,21 +146,32 @@ class MentorApplicationForm extends Component {
           }
         })
         .catch((error) => {
-          const errorData = error.data;
-          let errorMsg = "";
-          if (errorData.email) {
-            errorMsg += errorData.email[0] + "\n";
+          if (error && error.logout === true) {
+            window.flash(error.msg, "error");
+            this.setState({
+              isAuthenticated: false,
+            });
+          } else {
+            let errorMsg = "";
+            if (error && error.data) {
+              const errorData = error.response.data;
+              if (errorData.email) {
+                errorMsg += errorData.email[0] + "\n";
+              }
+              if (errorData.mobile) {
+                errorMsg += errorData.mobile[0] + "\n";
+              }
+              if (errorData.enrollno) {
+                errorMsg += errorData.enrollno[0] + "\n";
+              }
+            } else {
+              errorMsg = "Unable to Connect to Server";
+            }
+            window.flash(errorMsg, "error");
+            this.setState({
+              isLoading: false,
+            });
           }
-          if (errorData.mobile) {
-            errorMsg += errorData.mobile[0] + "\n";
-          }
-          if (errorData.enrollno) {
-            errorMsg += errorData.enrollno[0] + "\n";
-          }
-          window.flash(errorMsg, "error");
-          this.setState({
-            isLoading: false,
-          });
         });
     } else {
       window.flash("Please verify the ReCAPTCHA!", "warning");
@@ -149,6 +180,18 @@ class MentorApplicationForm extends Component {
     this.setState({ captcha: false });
   };
   render() {
+    if (!this.state.isAuthenticated) {
+      return <Redirect to="/g-signin" />;
+    }
+    if (this.state.redirect || this.state.hasApplied) {
+      return <Redirect to="/user-dashboard" />;
+    }
+    if (this.state.isLoading) {
+      return <Loader />;
+    }
+    if (this.state.isLoadingSubmission) {
+      return <LoadingOverlay />;
+    }
     const branchOptions =
       this.props.branches && this.props.branches.length > 0
         ? this.props.branches.map((branch) => {
@@ -159,12 +202,8 @@ class MentorApplicationForm extends Component {
             return option;
           })
         : [];
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
-    }
     return (
       <>
-        {this.state.isLoading ? <LoadingOverlay /> : null}
         <div className={styles.MainWrapper}>
           <h2 className={styles.heading}>
             Become a <span className="color-red">Mentor</span>

@@ -1,4 +1,5 @@
 import requests
+import re
 
 from backend.settings import RECAPTCHA_SECRET_KEY
 
@@ -24,3 +25,14 @@ def verify_recaptcha(value):
     if r.json()['success']:
         return True
     return False
+
+
+def is_iitr_email(email):
+    org = email.split('@')
+    match = None
+    if len(org) > 1:
+        domain = org[1]
+        match = re.findall('iitr.ac.in', domain)
+    if match is None or len(match) < 1:
+        return False
+    return True

@@ -21,6 +21,12 @@ year_choices = (("3rd", "3rd Year"), ("4th", "4th Year"), ("5th", "5th Year"))
 
 
 class Mentor(models.Model):
+    user = models.OneToOneField(
+        'auth.User',
+        related_name='mentor_user',
+        on_delete=models.CASCADE,
+    )
+
     branch = models.ForeignKey(
         Branch,
         related_name="mentors",
@@ -41,7 +47,8 @@ class Mentor(models.Model):
     )
     photo = models.ImageField(
         upload_to=FileUploader("mentors/images", 'student'),
-        max_length=200
+        max_length=200,
+        null=True
     )
     resume = models.FileField(
         upload_to=FileUploader("mentors/resume", 'student'),
@@ -150,6 +157,14 @@ class MentorPlacement(models.Model):
 
 
 class MentorApplication(models.Model):
+    user = models.OneToOneField(
+        'auth.User',
+        related_name='mentor_application',
+        on_delete=models.CASCADE,
+    )
+    is_accepted = models.BooleanField(
+        default=False,
+    )
     email = models.EmailField(
         max_length=200,
         default="",

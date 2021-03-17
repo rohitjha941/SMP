@@ -1,3 +1,4 @@
+import rs from "jsrsasign";
 const CHIEF_SECRETARY = "Chief Secretary";
 
 export function calculateReadingTime(text) {
@@ -54,3 +55,12 @@ export function sortTeam(team) {
   ];
   return sortedTeam;
 }
+
+export const parseJwt = (token) => {
+  return rs.jws.JWS.readSafeJSONString(rs.b64utoutf8(token.split(".")[1]));
+};
+
+export const isTokenValid = (token) => {
+  const exp_time = parseJwt(token).exp;
+  return Date.now() < exp_time * 1000;
+};

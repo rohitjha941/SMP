@@ -1,0 +1,36 @@
+@import "../../style/colors.scss";
+.head {
+  height: 92vh;
+  background-image: linear-gradient($light-blue-background, $white);
+  text-align: center;
+  &:before {
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+}
+.loginParent {
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+  margin: auto;
+}
+.greetingText {
+  font-size: 2.5rem;
+  text-align: center;
+}
+.loginBtnParent {
+  margin: 30 auto;
+  align-items: center;
+}
+.gSigninBtn {
+  margin-top: 0.5rem;
+  div {
+    margin: auto;
+    align-items: center;
+  }
+}
+.regBtnParent {
+  text-align: center;
+}

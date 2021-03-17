@@ -80,6 +80,18 @@ Official Portal of SMP IIT Roorkee
 - yarn start
 ```
 
+## Google Sigin Setup
+
+- follow the instructions to setup OAuth Credentials [https://developers.google.com/identity/sign-in/web/sign-in]
+- Set the Authorized URI as https://smp.iitr.ac.in (for prod) or http://localhost:3000 (for dev)
+- Use the client id generated here for GAPI in react and django environment files.
+
+## Recaptcha Setup
+
+- Fill this form to generate credentials for recaptcha [https://www.google.com/recaptcha/admin/create]
+- Select version recaptcha V2
+- Now add these site and secret keys in react and django environment files respectively.
+
 ## Additional development instructions
 
 ### Install pre-commit
